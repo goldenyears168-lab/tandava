@@ -19,12 +19,12 @@ interface SEOHeadProps {
 }
 
 const DEFAULTS = {
-  siteName: import.meta.env.VITE_APP_NAME || "Tandava",
+  siteName: import.meta.env.VITE_APP_NAME || "森浴光",
   siteUrl: import.meta.env.VITE_APP_URL || "https://tandava.yoga",
   defaultDescription:
     "Book yoga classes, workshops, and appointments. Track your practice, connect with teachers, and join our wellness community.",
   defaultImage: "/og-image.png",
-  twitterHandle: "@TandavaYoga",
+  twitterHandle: "@SenYuGuang",
 };
 
 export function SEOHead({

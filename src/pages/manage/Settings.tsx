@@ -362,7 +362,7 @@ export default function SettingsManage() {
                   Discovery Directory
                 </CardTitle>
                 <CardDescription>
-                  Make your studio discoverable on the Tandava directory so new students can find you
+                  Make your studio discoverable on the 森浴光 directory so new students can find you
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -602,7 +602,7 @@ export default function SettingsManage() {
                   <div>
                     <p className="text-sm font-medium">AI Assistant Discovery</p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Tandava automatically optimizes your site for AI assistants like ChatGPT and Claude.
+                      森浴光 automatically optimizes your site for AI assistants like ChatGPT and Claude.
                       Your class schedules, pricing, and studio information are structured so AI can
                       answer questions about your studio accurately.
                     </p>

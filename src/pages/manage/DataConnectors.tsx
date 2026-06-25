@@ -931,7 +931,7 @@ export default function DataConnectors() {
                     <Upload className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Switching to Tandava?</h3>
+                    <h3 className="font-semibold">Switching to 森浴光?</h3>
                     <p className="text-sm text-muted-foreground mt-1">
                       Import your existing data from another platform. We support MindBody, Walla, Momence,
                       Arketa, WellnessLiving, and generic CSV files. Every import includes:
@@ -1161,7 +1161,7 @@ export default function DataConnectors() {
                   <div>
                     <h3 className="font-semibold">Data Privacy & Compliance</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Tandava helps you comply with GDPR, CCPA, and other data privacy regulations.
+                      森浴光 helps you comply with GDPR, CCPA, and other data privacy regulations.
                       You can export, rectify, or delete individual user data on request.
                     </p>
                   </div>

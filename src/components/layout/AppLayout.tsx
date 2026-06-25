@@ -310,7 +310,7 @@ export function AppLayout({ children }: AppLayoutProps) {
               to="/"
               className="font-medium text-accent-teal transition-colors hover:text-accent-teal/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
-              Tandava
+              森浴光
             </Link>{" "}
             &mdash; {t("footer.openSourceStudio")}
           </span>

@@ -49,7 +49,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             返回應用程式
           </Link>
           <h2 className="text-lg font-bold tracking-tight">平台管理</h2>
-          <p className="text-xs text-muted-foreground">管理您的 Tandava 實例</p>
+          <p className="text-xs text-muted-foreground">管理您的 森浴光 實例</p>
         </div>
 
         <nav className="space-y-1 flex-1">
@@ -72,7 +72,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
         <div className="pt-4 border-t border-border">
           <p className="text-xs text-muted-foreground">
-            實例：{import.meta.env.VITE_APP_NAME || "Tandava"}
+            實例：{import.meta.env.VITE_APP_NAME || "森浴光"}
           </p>
         </div>
       </aside>

@@ -281,7 +281,7 @@ export default function ImportManage() {
             <Card>
               <CardHeader>
                 <CardTitle>Select Source Platform</CardTitle>
-                <CardDescription>Where is your data coming from? Tandava is not affiliated with any of these providers.</CardDescription>
+                <CardDescription>Where is your data coming from? 森浴光 is not affiliated with any of these providers.</CardDescription>
               </CardHeader>
               <CardContent className="grid sm:grid-cols-2 gap-3">
                 {sourceOptions.map((source) => (

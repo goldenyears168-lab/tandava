@@ -102,8 +102,8 @@ export default function EmbedSettings() {
             <CardTitle className="text-base">How it works</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-muted-foreground">
-            <p>The snippet loads a small script that injects a secure, auto-resizing frame showing your live schedule. Booking and payment open on your Tandava site in a new tab, so checkout and login are never trapped inside the widget.</p>
-            <p>Because it reads public data only, there are no API keys on your website. Update your classes in Tandava and the widget updates everywhere it's embedded.</p>
+            <p>The snippet loads a small script that injects a secure, auto-resizing frame showing your live schedule. Booking and payment open on your 森浴光 site in a new tab, so checkout and login are never trapped inside the widget.</p>
+            <p>Because it reads public data only, there are no API keys on your website. Update your classes in 森浴光 and the widget updates everywhere it's embedded.</p>
           </CardContent>
         </Card>
       </div>

@@ -44,7 +44,7 @@
   "admin": {
     "platformAdmin": "平台管理",
     "platformDashboard": "平台儀表板",
-    "overview": "Tandava 實例健康狀態與活動概覽。",
+    "overview": "森浴光 實例健康狀態與活動概覽。",
     "activeStudios": "活躍工作室",
     "totalUsers": "總使用者數",
     "stripeStatus": "Stripe 狀態",

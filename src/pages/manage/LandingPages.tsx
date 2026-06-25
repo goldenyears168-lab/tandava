@@ -147,7 +147,7 @@ const mockRecommendations = [
   {
     id: "r3", type: "meta_tag", priority: "medium",
     title: "Optimize your '新學員' page title",
-    description: "Your best-performing page ('新學員 Special') could rank higher with a title like 'First Yoga Class Free | Tandava Yoga SOMA' instead of the current generic title.",
+    description: "Your best-performing page ('新學員 Special') could rank higher with a title like 'First Yoga Class Free | 森浴光 SOMA' instead of the current generic title.",
     suggestedTemplate: null, suggestedSlug: null,
     targetKeywords: ["first yoga class free", "yoga trial class"],
   },

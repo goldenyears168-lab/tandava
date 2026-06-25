@@ -60,7 +60,7 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
           >
             <TandavaMark className="h-8 w-8 text-primary" />
             <span className="text-xl font-display font-bold tracking-tight">
-              Tandava{" "}
+              森浴光{" "}
               <span className="font-normal text-muted-foreground">部落格</span>
             </span>
           </Link>
@@ -101,7 +101,7 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
               <TandavaMark className="h-6 w-6 text-primary" />
-              <span className="font-display text-lg font-bold">Tandava</span>
+              <span className="font-display text-lg font-bold">森浴光</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
               專為瑜珈、皮拉提斯與運動場館打造的開源管理系統。為場館經營者、老師與營運人員提供實用見解。
@@ -122,7 +122,7 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
           </nav>
         </div>
         <div className="container mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <span>&copy; {new Date().getFullYear()} Tandava. 開源場館管理軟體。</span>
+          <span>&copy; {new Date().getFullYear()} 森浴光。開源場館管理軟體。</span>
         </div>
       </footer>
     </div>

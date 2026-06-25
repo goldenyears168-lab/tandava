@@ -22,7 +22,7 @@ const Blog = () => {
   const rest = posts.filter((p) => p.slug !== featured?.slug);
 
   const description =
-    "Practical guides, studio growth playbooks, and product updates from Tandava — open-source studio management for yoga, pilates, and movement studios.";
+    "Practical guides, studio growth playbooks, and product updates from 森浴光 — open-source studio management for yoga, pilates, and movement studios.";
 
   return (
     <BlogLayout>
@@ -50,7 +50,7 @@ const Blog = () => {
       {/* Hero */}
       <section className="mx-auto max-w-3xl text-center">
         <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
-          The Tandava Blog
+          森浴光部落格
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">{description}</p>
       </section>
@@ -128,8 +128,7 @@ const Blog = () => {
           Run your studio on software you own
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Tandava is open source. Self-host it, customize it, and never pay
-          per-member fees again.
+          森浴光採用開源架構。自行架設、自訂，並永遠不再支付按會員計費的費用。
         </p>
         <Link
           to="/demo"

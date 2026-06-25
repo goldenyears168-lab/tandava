@@ -25,7 +25,7 @@ const STEPS = [
   { key: "offerings", label: "服務項目", icon: Tag },
   { key: "schedule", label: "服務排程", icon: CalendarClock },
   { key: "pricing", label: "定價方案", icon: DollarSign },
-  { key: "staff", label: "專業團隊", icon: Users },
+  { key: "staff", label: "專業團隊 · 美容師", icon: Users },
   { key: "waivers", label: "同意書", icon: ShieldCheck },
   { key: "import", label: "匯入", icon: Upload },
   { key: "stripe", label: "金流串接", icon: CreditCard },

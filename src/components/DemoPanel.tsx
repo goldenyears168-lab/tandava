@@ -354,7 +354,7 @@ function DemoPanelInner() {
               <span className="text-sm font-bold text-primary-foreground">T</span>
             </div>
             <div>
-              <p className="text-sm font-bold">Tandava 演示</p>
+              <p className="text-sm font-bold">森浴光演示</p>
               <Badge variant="outline" className="text-[9px] mt-0.5">互動預覽</Badge>
             </div>
           </div>
@@ -471,7 +471,7 @@ function DemoPanelInner() {
           </div>
           <div className="space-y-2">
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Tandava 是開源軟體，可免費自行部署。不到一小時就能讓自己的場館平台上線。
+              森浴光是開源軟體，可免費自行部署。不到一小時就能讓自己的場館平台上線。
             </p>
 
             <div className="space-y-1.5">
@@ -483,7 +483,7 @@ function DemoPanelInner() {
             </div>
 
             <p className="text-[10px] text-muted-foreground pt-1">
-              沒有程式經驗？請參考我們的分步指南，了解如何用 AI 程式工具自訂 Tandava。
+              沒有程式經驗？請參考我們的分步指南，了解如何用 AI 程式工具自訂 森浴光。
             </p>
           </div>
         </div>

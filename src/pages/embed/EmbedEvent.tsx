@@ -26,7 +26,7 @@ export default function EmbedEvent() {
         >
           查看詳情並報名
         </button>
-        <p className="text-[10px] text-muted-foreground">由 Tandava 提供</p>
+        <p className="text-[10px] text-muted-foreground">由 森浴光 提供</p>
       </div>
     </EmbedLayout>
   );

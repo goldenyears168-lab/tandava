@@ -97,7 +97,7 @@ export default function EmbedSchedule() {
           );
         })}
 
-        <p className="pt-1 text-center text-[10px] text-muted-foreground">由 Tandava 提供</p>
+        <p className="pt-1 text-center text-[10px] text-muted-foreground">由 森浴光 提供</p>
       </div>
     </EmbedLayout>
   );

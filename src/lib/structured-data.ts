@@ -15,7 +15,7 @@ export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: import.meta.env.VITE_APP_NAME || "Tandava",
+    name: import.meta.env.VITE_APP_NAME || "森浴光",
     url: SITE_URL,
     logo: `${SITE_URL}/favicon.ico`,
     sameAs: [],
@@ -32,7 +32,7 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: import.meta.env.VITE_APP_NAME || "Tandava",
+    name: import.meta.env.VITE_APP_NAME || "森浴光",
     url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
@@ -224,7 +224,7 @@ export function blogPostingSchema(post: {
     },
     publisher: {
       "@type": "Organization",
-      name: import.meta.env.VITE_APP_NAME || "Tandava",
+      name: import.meta.env.VITE_APP_NAME || "森浴光",
       logo: {
         "@type": "ImageObject",
         url: `${SITE_URL}/favicon.ico`,

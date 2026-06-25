@@ -27,7 +27,7 @@ const BlogCategory = () => {
   return (
     <BlogLayout activeCategory={category}>
       <SEOHead
-        title={`${def.name} | Tandava 部落格`}
+        title={`${def.name} | 森浴光部落格`}
         description={def.description}
         canonical={`/blog/category/${category}`}
         ogType="website"
