@@ -286,36 +286,6 @@ export default function Demo() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* 您將獲得 */}
-      <section className="border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-14">
-          <h2 className="text-2xl font-display font-semibold mb-2">您將獲得</h2>
-          <p className="text-muted-foreground mb-8">
-            工作室所需的一切 — 服務表、付款、分析等
-          </p>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURE_HIGHLIGHTS.map((feat) => {
-              const Icon = feat.icon;
-              return (
-                <div
-                  key={feat.label}
-                  className="flex items-start gap-3 rounded-xl border bg-card p-4 shadow-sm transition-all hover:border-primary/30 hover:shadow-md"
-                >
-                  <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-medium">{feat.label}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {feat.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* 探索平台 */}
       <section
         id="explore"
@@ -323,7 +293,6 @@ export default function Demo() {
       >
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-display font-semibold mb-3">探索平台</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
               此示範載入虛構工作室{" "}
               <strong className="text-foreground">森浴光mm941</strong>， 擁有 5
@@ -370,6 +339,31 @@ export default function Demo() {
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 您將獲得 */}
+      <section className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-14">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURE_HIGHLIGHTS.map((feat) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={feat.label}
+                  className="flex items-start gap-3 rounded-xl border bg-card p-4 shadow-sm transition-all hover:border-primary/30 hover:shadow-md"
+                >
+                  <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium">{feat.label}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {feat.description}
+                    </p>
+                  </div>
+                </div>
               );
             })}
           </div>

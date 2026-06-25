@@ -15,7 +15,6 @@ const Login = lazy(() => import("@/pages/auth/Login"));
 const Register = lazy(() => import("@/pages/auth/Register"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Demo = lazy(() => import("@/pages/Demo"));
-const OpenSource = lazy(() => import("@/pages/OpenSource"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const BlogCategory = lazy(() => import("@/pages/blog/BlogCategory"));
 const BlogPost = lazy(() => import("@/pages/blog/BlogPost"));
@@ -86,7 +85,6 @@ const routes: RouteObject[] = [
   /* ---- Demo landing page (role picker) ---- */
   { path: "/", element: <Demo /> },
   { path: "/demo", element: <Demo /> },
-  { path: "/open-source", element: <OpenSource /> },
 
   /* ---- Blog ---- */
   { path: "/blog", element: <Blog /> },

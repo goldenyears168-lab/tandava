@@ -6,7 +6,7 @@ import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Select,
   SelectContent,
@@ -119,12 +119,18 @@ const Index = () => {
       />
       <div className="space-y-10">
         {/* ---- Compact Hero ---- */}
-        <section className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 via-accent/10 to-background p-6 md:p-10">
+        <section className="relative rounded-2xl overflow-hidden p-6 md:p-10">
+          <img
+            src="https://readdy.ai/api/search-image?query=Warm%20zen%20spa%20interior%20with%20soft%20amber%20lighting%2C%20wooden%20elements%2C%20diffused%20natural%20light%2C%20minimalist%20Japanese%20inspired%20wellness%20space%2C%20steam%20atmosphere%2C%20bamboo%20accents%2C%20peaceful%20healing%20sanctuary%2C%20luxurious%20yet%20earthy%20design%2C%20editorial%20interior%20photography%2C%20warm%20brown%20and%20cream%20tones&width=1600&height=900&seq=hero-spa-zen-interior&orientation=landscape"
+            alt="森浴光mm941 療癒空間"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/35 to-black/60" />
           <div className="max-w-2xl relative z-10">
-            <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-2">
+            <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight mb-2 text-white">
               {OXATL_STUDIO.name}
             </h1>
-            <p className="text-muted-foreground mb-5 leading-relaxed">
+            <p className="text-white/80 mb-5 leading-relaxed">
               {OXATL_STUDIO.description}
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -329,7 +335,16 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {featuredTeachers.map((teacher) => (
+            {featuredTeachers.map((teacher) => {
+              const teacherImages: Record<string, string> = {
+                'teacher-beyonce-pangolin': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20wellness%20practitioner%20portrait%2C%20warm%20earthy%20studio%20lighting%2C%20calm%20confident%20expression%2C%20natural%20makeup%2C%20spa%20setting%20background%2C%20soft%20focus%2C%20professional%20headshot%20style&width=200&height=200&seq=avatar-teacher-01&orientation=squarish',
+                'teacher-adele-capybara': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20spa%20therapist%20portrait%2C%20serene%20peaceful%20expression%2C%20gentle%20smile%2C%20soft%20natural%20lighting%2C%20minimalist%20wellness%20studio%20background%2C%20warm%20beige%20tones%2C%20professional%20headshot&width=200&height=200&seq=avatar-teacher-02&orientation=squarish',
+                'teacher-rihanna-quokka': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20bodywork%20specialist%20portrait%2C%20bright%20confident%20smile%2C%20warm%20studio%20lighting%2C%20clean%20minimalist%20backdrop%2C%20professional%20headshot%20style%2C%20cream%20and%20wood%20tones&width=200&height=200&seq=avatar-teacher-03&orientation=squarish',
+                'teacher-taylor-otter': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20wellness%20expert%20portrait%2C%20gentle%20warm%20expression%2C%20soft%20diffused%20lighting%2C%20zen%20studio%20background%2C%20natural%20minimalist%20aesthetic%2C%20professional%20headshot&width=200&height=200&seq=avatar-teacher-04&orientation=squarish',
+                'teacher-ariana-hedgehog': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20spa%20practitioner%20portrait%2C%20focused%20calm%20expression%2C%20warm%20golden%20lighting%2C%20modern%20wellness%20center%20background%2C%20clean%20professional%20look%2C%20headshot%20style&width=200&height=200&seq=avatar-teacher-05&orientation=squarish',
+                'teacher-dua-axolotl': 'https://readdy.ai/api/search-image?query=Professional%20Asian%20female%20bodywork%20therapist%20portrait%2C%20warm%20friendly%20smile%2C%20natural%20soft%20lighting%2C%20spa%20treatment%20room%20background%2C%20earthy%20tones%2C%20professional%20headshot%20style&width=200&height=200&seq=avatar-teacher-06&orientation=squarish',
+              };
+              return (
               <Link
                 key={teacher.profile.id}
                 to={`/instructors`}
@@ -338,6 +353,7 @@ const Index = () => {
                 <Card className="hover:border-primary/30 transition-colors h-full">
                   <CardContent className="p-4 flex items-start gap-3">
                     <Avatar className="h-10 w-10 shrink-0">
+                      <AvatarImage src={teacherImages[teacher.profile.id]} alt={teacher.profile.display_name} />
                       <AvatarFallback className="text-xs font-medium">
                         {teacher.profile.first_name?.[0]}
                         {teacher.profile.last_name?.[0]}
@@ -359,7 +375,8 @@ const Index = () => {
                   </CardContent>
                 </Card>
               </Link>
-            ))}
+            );
+            })}
           </div>
         </section>
 
@@ -411,25 +428,21 @@ const Index = () => {
           <h2 className="text-2xl font-semibold mb-4">分店資訊</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {OXATL_LOCATIONS.map((loc, idx) => {
-              // Gradient placeholders to simulate image carousel
-              const gradients = [
-                "from-accent-sage/30 to-primary/20",
-                "from-accent-coral/20 to-accent-gold/30",
-                "from-primary/25 to-accent-lilac/20",
-              ];
+              const locationImages: Record<string, string> = {
+                'loc-xizhi': 'https://readdy.ai/api/search-image?query=Modern%20spa%20treatment%20room%20near%20mountains%2C%20large%20windows%20with%20forest%20view%2C%20warm%20wooden%20interior%2C%20soft%20natural%20lighting%2C%20minimalist%20wellness%20space%2C%20healing%20atmosphere%2C%20cozy%20and%20inviting%2C%20earthy%20brown%20and%20cream%20tones%2C%20editorial%20interior%20photography&width=800&height=400&seq=location-xizhi-spa&orientation=landscape',
+                'loc-fuxing': 'https://readdy.ai/api/search-image?query=Luxury%20urban%20spa%20treatment%20room%20in%20Taipei%2C%20elegant%20minimalist%20design%2C%20soft%20warm%20lighting%2C%20marble%20and%20wood%20accents%2C%20professional%20wellness%20setting%2C%20peaceful%20city%20retreat%2C%20cream%20and%20beige%20tones%2C%20editorial%20interior%20photography&width=800&height=400&seq=location-fuxing-spa&orientation=landscape',
+                'loc-east': 'https://readdy.ai/api/search-image?query=Contemporary%20wellness%20spa%20room%20with%20infrared%20therapy%20equipment%2C%20clean%20modern%20design%2C%20warm%20indirect%20lighting%2C%20wooden%20floor%2C%20minimalist%20aesthetic%2C%20healing%20and%20relaxing%20atmosphere%2C%20cream%20and%20warm%20beige%20tones%2C%20editorial%20interior%20photography&width=800&height=400&seq=location-east-spa&orientation=landscape',
+                'loc-central': 'https://readdy.ai/api/search-image?query=Zen%20inspired%20spa%20room%20with%20indoor%20garden%20elements%2C%20bamboo%20and%20stone%20accents%2C%20soft%20diffused%20lighting%2C%20peaceful%20wellness%20sanctuary%2C%20warm%20wood%20interior%2C%20Japanese%20minimalist%20design%2C%20cream%20and%20muted%20green%20tones%2C%20editorial%20interior%20photography&width=800&height=400&seq=location-central-spa&orientation=landscape',
+                'loc-tainan': 'https://readdy.ai/api/search-image?query=Warm%20tropical%20spa%20treatment%20room%20with%20natural%20textures%2C%20rattan%20and%20wood%20elements%2C%20soft%20golden%20lighting%2C%20relaxing%20wellness%20atmosphere%2C%20airy%20and%20spacious%2C%20Southern%20Taiwan%20vibe%2C%20cream%20and%20terracotta%20tones%2C%20editorial%20interior%20photography&width=800&height=400&seq=location-tainan-spa&orientation=landscape',
+              };
               return (
                 <Card key={loc.id} className="hover:border-primary/30 transition-colors overflow-hidden">
-                  {/* Image carousel placeholder */}
-                  <div className={cn("h-32 bg-gradient-to-br relative", gradients[idx % gradients.length])}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <MapPin className="h-8 w-8 text-foreground/20" />
-                    </div>
-                    {/* Dot indicators for future carousel */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/70" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                    </div>
+                  <div className="h-40 relative overflow-hidden">
+                    <img
+                      src={locationImages[loc.id]}
+                      alt={`${loc.name} 空間環境`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <CardContent className="p-4">
                     <h3 className="font-medium text-sm mb-2">{loc.name}</h3>

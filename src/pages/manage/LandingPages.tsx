@@ -107,7 +107,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp5", title: "Valentine's Partner Yoga", slug: "valentines-partner-yoga",
     template: "workshop", status: "draft",
-    totalViews: 0, total轉換數: 0, conversionRate: 0,
+    totalViews: 0, totalConversions: 0, conversionRate: 0,
     publishedAt: null, updatedAt: "2025-02-02",
     seoScore: 65, targetKeywords: ["partner yoga", "couples yoga sf"],
     expirationDate: "2026-02-15", expiredBehavior: "show_alternatives",
@@ -115,7 +115,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp6", title: "New Year Resolution Special", slug: "new-year-2025",
     template: "seasonal_promo", status: "expired",
-    totalViews: 1567, total轉換數: 89, conversionRate: 5.7,
+    totalViews: 1567, totalConversions: 89, conversionRate: 5.7,
     publishedAt: "2024-12-20", updatedAt: "2025-01-31",
     seoScore: 72, targetKeywords: ["new year yoga", "yoga resolution"],
     expirationDate: "2025-01-31", expiredBehavior: "show_alternatives",
@@ -123,7 +123,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp7", title: "Summer Solstice Retreat 2024", slug: "solstice-retreat-2024",
     template: "retreat", status: "archived",
-    totalViews: 2341, total轉換數: 28, conversionRate: 1.2,
+    totalViews: 2341, totalConversions: 28, conversionRate: 1.2,
     publishedAt: "2024-03-01", updatedAt: "2024-07-01",
     seoScore: 80,
   },
@@ -286,7 +286,7 @@ export default function LandingPagesManage() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {[
             { label: "Total Page Views", value: totalViews.toLocaleString(), icon: Eye },
-            { label: "Total Conversions", value: total轉換數, icon: MousePointer2 },
+            { label: "Total Conversions", value: totalConversions, icon: MousePointer2 },
             { label: "Avg Conversion Rate", value: `${avgConversionRate}%`, icon: TrendingUp },
             { label: "Published", value: pages.filter((p) => p.status === "published").length, icon: CheckCircle, color: "text-accent-sage" },
             { label: "Expiring Soon", value: pages.filter((p) => isExpiringSoon(p.expirationDate)).length, icon: AlertTriangle, color: "text-accent-gold" },

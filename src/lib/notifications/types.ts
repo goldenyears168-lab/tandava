@@ -242,7 +242,7 @@ export interface NotificationProvider<TConfig = unknown> {
   /**
    * Verify webhook signature (for delivery callbacks)
    */
-  verifyWebhook?(payload: string | Buffer, signature: string): boolean;
+  verifyWebhook?(payload: string | Uint8Array, signature: string): boolean;
 
   /**
    * Parse webhook event

@@ -123,9 +123,6 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
         </div>
         <div className="container mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
           <span>&copy; {new Date().getFullYear()} Tandava. 開源場館管理軟體。</span>
-          <Link to="/open-source" className="transition-colors hover:text-foreground">
-            關於 Tandava
-          </Link>
         </div>
       </footer>
     </div>

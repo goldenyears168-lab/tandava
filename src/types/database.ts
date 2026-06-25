@@ -2653,6 +2653,21 @@ export interface PublicScheduleRow {
   studio_primary_color: string | null;
 }
 
+export interface ClassDefinition {
+  id: string;
+  studio_id: string;
+  name: string;
+  description: string | null;
+  offering_id: string | null;
+  style: string | null;
+  level: string | null;
+  duration_minutes: number;
+  capacity: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
