@@ -1,4 +1,5 @@
-import { Helmet } from "react-helmet-async";
+import { useDocumentHead, type HeadConfig } from "@/hooks/useDocumentHead";
+import { useMemo } from "react";
 
 interface SEOHeadProps {
   /** Page title — will be appended with " | Tandava" */
@@ -47,37 +48,56 @@ export function SEOHead({
     ? ogImage
     : `${DEFAULTS.siteUrl}${ogImage}`;
 
-  return (
-    <Helmet>
-      {/* Core */}
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      {fullCanonical && <link rel="canonical" href={fullCanonical} />}
-      {noindex && <meta name="robots" content="noindex, nofollow" />}
+  const headConfig: HeadConfig = useMemo(() => {
+    const meta: HeadConfig["meta"] = [
+      { name: "description", content: description },
+      { property: "og:title", content: fullTitle },
+      { property: "og:description", content: description },
+      { property: "og:type", content: ogType },
+      { property: "og:image", content: fullImage },
+      { property: "og:site_name", content: DEFAULTS.siteName },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: DEFAULTS.twitterHandle },
+      { name: "twitter:title", content: fullTitle },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: fullImage },
+    ];
 
-      {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:image" content={fullImage} />
-      {fullCanonical && <meta property="og:url" content={fullCanonical} />}
-      <meta property="og:site_name" content={DEFAULTS.siteName} />
+    if (noindex) {
+      meta.push({ name: "robots", content: "noindex, nofollow" });
+    }
 
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={DEFAULTS.twitterHandle} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImage} />
+    if (fullCanonical) {
+      meta.push({ property: "og:url", content: fullCanonical });
+    }
 
-      {/* Structured Data */}
-      {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(
-            Array.isArray(structuredData) ? structuredData : structuredData
-          )}
-        </script>
-      )}
-    </Helmet>
-  );
+    const link: HeadConfig["link"] = [];
+    if (fullCanonical) {
+      link.push({ rel: "canonical", href: fullCanonical });
+    }
+
+    const scripts: HeadConfig["scripts"] = [];
+    if (structuredData) {
+      scripts.push({
+        type: "application/ld+json",
+        text: JSON.stringify(
+          Array.isArray(structuredData) ? structuredData : structuredData,
+        ),
+      });
+    }
+
+    return { title: fullTitle, meta, link, scripts };
+  }, [
+    description,
+    fullTitle,
+    ogType,
+    fullImage,
+    fullCanonical,
+    noindex,
+    structuredData,
+  ]);
+
+  useDocumentHead(headConfig);
+
+  return null;
 }
