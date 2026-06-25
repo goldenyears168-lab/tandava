@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { PromoVisual } from "@/components/video/PromoVisual";
 import { Clock, MapPin, Users, Flame, Star, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface ClassDetailModalProps {
   open: boolean;
@@ -62,7 +62,7 @@ export function ClassDetailModal({
   classData,
   onBook,
 }: ClassDetailModalProps) {
-  const { t } = useTranslation('schedule');
+  const t = createT('schedule');
 
   if (!classData) return null;
 

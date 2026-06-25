@@ -66,7 +66,7 @@ function InfoTip({ text }: { text: string }) {
 const acquisitionSources = [
   { source: "Organic Search", students: 4, pctTotal: 33, avgFirstPurchase: 149, convToMember: 58 },
   { source: "Referral", students: 3, pctTotal: 25, avgFirstPurchase: 135, convToMember: 78 },
-  { source: "Promo Code", students: 2, pctTotal: 17, avgFirstPurchase: 95, convToMember: 55 },
+  { source: "優惠碼", students: 2, pctTotal: 17, avgFirstPurchase: 95, convToMember: 55 },
   { source: "Event / Workshop", students: 1, pctTotal: 8, avgFirstPurchase: 75, convToMember: 42 },
   { source: "Walk-in", students: 1, pctTotal: 8, avgFirstPurchase: 25, convToMember: 35 },
   { source: "Landing Page", students: 1, pctTotal: 9, avgFirstPurchase: 110, convToMember: 62 },
@@ -226,11 +226,11 @@ export default function SalesAnalytics() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="this_week">This Week</SelectItem>
-                <SelectItem value="this_month">This Month</SelectItem>
-                <SelectItem value="last_month">Last Month</SelectItem>
-                <SelectItem value="this_quarter">This Quarter</SelectItem>
-                <SelectItem value="this_year">This Year</SelectItem>
+                <SelectItem value="this_week">本週</SelectItem>
+                <SelectItem value="this_month">本月</SelectItem>
+                <SelectItem value="last_month">上月</SelectItem>
+                <SelectItem value="this_quarter">本季</SelectItem>
+                <SelectItem value="this_year">今年</SelectItem>
               </SelectContent>
             </Select>
             <Button variant="outline" size="sm">
@@ -264,7 +264,7 @@ export default function SalesAnalytics() {
                     </Badge>
                   </div>
                   <p className="text-2xl font-bold mt-2">12</p>
-                  <p className="text-xs text-muted-foreground">New Students This Month</p>
+                  <p className="text-xs text-muted-foreground">新學員s 本月</p>
                 </CardContent>
               </Card>
 
@@ -318,7 +318,7 @@ export default function SalesAnalytics() {
                 {/* Table header */}
                 <div className="hidden md:grid grid-cols-[2fr,1fr,1fr,1fr,1fr] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   <span>Source</span>
-                  <span>New Students</span>
+                  <span>新學員s</span>
                   <span>% of Total</span>
                   <span>Avg First Purchase</span>
                   <span>Conv. to Member</span>
@@ -735,7 +735,7 @@ export default function SalesAnalytics() {
                     <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage">65%</Badge>
                   </div>
                   <p className="text-2xl font-bold mt-2">22</p>
-                  <p className="text-xs text-muted-foreground">Successful Conversions</p>
+                  <p className="text-xs text-muted-foreground">Successful 轉換數</p>
                 </CardContent>
               </Card>
 
@@ -820,14 +820,14 @@ export default function SalesAnalytics() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center">
                     Referral vs Other Sources
-                    <InfoTip text="Compares average Customer Lifetime Value (CLV) across acquisition channels. Referred students tend to stay longer and spend more." />
+                    <InfoTip text="Compares average Customer 終身價值 (CLV) across acquisition channels. Referred students tend to stay longer and spend more." />
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
                     { source: "Referral", clv: 1680, best: true },
                     { source: "Organic", clv: 1120, best: false },
-                    { source: "Promo", clv: 940, best: false },
+                    { source: "優惠", clv: 940, best: false },
                   ].map((item) => (
                     <div key={item.source} className="p-4 rounded-xl bg-secondary/50">
                       <div className="flex items-center justify-between mb-2">

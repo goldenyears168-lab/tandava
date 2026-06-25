@@ -240,7 +240,7 @@ const Kiosk = () => {
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("zh-TW", {
       weekday: "long",
       month: "long",
       day: "numeric",
@@ -386,7 +386,7 @@ const Kiosk = () => {
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur">
               <Camera className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Camera Active</span>
+              <span className="text-sm text-muted-foreground">相機已啟動</span>
             </div>
           </div>
         </div>
@@ -394,9 +394,9 @@ const Kiosk = () => {
 
       {/* Instructions */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Scan your QR code to check in</h2>
+        <h2 className="text-2xl font-semibold mb-2">掃描 QR 碼報到</h2>
         <p className="text-muted-foreground">
-          Hold your phone up to the camera with your booking QR code visible
+          將手機上的預約 QR 碼對準相機
         </p>
       </div>
 
@@ -408,13 +408,13 @@ const Kiosk = () => {
         className="mb-6 gap-3"
       >
         <Sparkles className="w-5 h-5" />
-        {isScanning ? "Scanning..." : "Simulate Scan"}
+        {isScanning ? "掃描中..." : "模擬掃描"}
       </Button>
 
       {/* Manual check-in option */}
       <div className="flex items-center gap-4 text-muted-foreground">
         <div className="h-px w-20 bg-border" />
-        <span className="text-sm">or</span>
+        <span className="text-sm">或</span>
         <div className="h-px w-20 bg-border" />
       </div>
 
@@ -425,7 +425,7 @@ const Kiosk = () => {
         className="mt-4 gap-2"
       >
         <Keyboard className="w-5 h-5" />
-        Find My Booking
+        查詢我的預約
       </Button>
     </div>
   );
@@ -443,7 +443,7 @@ const Kiosk = () => {
       <div className="relative mb-6">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <Input
-          placeholder="Search by name or phone number..."
+          placeholder="以姓名或電話號碼搜尋..."
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
           className="pl-12 h-14 text-lg"
@@ -484,7 +484,7 @@ const Kiosk = () => {
                     </div>
                   ) : (
                     <Badge variant="outline" className="text-muted-foreground">
-                      No bookings
+                      尚無預約
                     </Badge>
                   )}
                   <ChevronRight className="w-5 h-5 text-muted-foreground" />
@@ -494,14 +494,14 @@ const Kiosk = () => {
           ) : searchQuery.length >= 2 ? (
             <div className="text-center py-12 text-muted-foreground">
               <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">No members found</p>
-              <p className="text-sm">Try a different name or phone number</p>
+              <p className="text-lg">找不到會員</p>
+              <p className="text-sm">請嘗試其他姓名或電話號碼</p>
             </div>
           ) : (
             <div className="text-center py-12 text-muted-foreground">
               <Keyboard className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">Start typing to search</p>
-              <p className="text-sm">Enter your name or phone number</p>
+              <p className="text-lg">開始輸入以搜尋</p>
+              <p className="text-sm">輸入您的姓名或電話號碼</p>
             </div>
           )}
         </div>
@@ -532,24 +532,24 @@ const Kiosk = () => {
           <Card className="hover:scale-100">
             <CardContent className="p-4 text-center">
               <p className="text-3xl font-bold text-primary">{selectedClass.spotsBooked}</p>
-              <p className="text-sm text-muted-foreground">Booked</p>
+              <p className="text-sm text-muted-foreground">已預約</p>
             </CardContent>
           </Card>
           <Card className="hover:scale-100">
             <CardContent className="p-4 text-center">
               <p className="text-3xl font-bold text-success">{selectedClass.checkedIn}</p>
-              <p className="text-sm text-muted-foreground">Checked In</p>
+              <p className="text-sm text-muted-foreground">已報到</p>
             </CardContent>
           </Card>
           <Card className="hover:scale-100">
             <CardContent className="p-4 text-center">
               <p className="text-3xl font-bold">{selectedClass.spotsTotal - selectedClass.spotsBooked}</p>
-              <p className="text-sm text-muted-foreground">Available</p>
+              <p className="text-sm text-muted-foreground">尚有名額</p>
             </CardContent>
           </Card>
         </div>
 
-        <h3 className="font-semibold mb-4">Attendees</h3>
+        <h3 className="font-semibold mb-4">出席學員</h3>
         <ScrollArea className="flex-1">
           <div className="space-y-2">
             {attendees.map((member) => {
@@ -579,10 +579,10 @@ const Kiosk = () => {
                   {isCheckedIn ? (
                     <Badge className="bg-success text-success-foreground">
                       <Check className="w-3 h-3 mr-1" />
-                      Checked In
+                      已報到
                     </Badge>
                   ) : (
-                    <Badge variant="outline">Pending</Badge>
+                    <Badge variant="outline">待報到</Badge>
                   )}
                 </div>
               );
@@ -590,7 +590,7 @@ const Kiosk = () => {
             {attendees.length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
                 <Users className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                <p>No attendees yet</p>
+                <p>尚無出席學員</p>
               </div>
             )}
           </div>
@@ -630,7 +630,7 @@ const Kiosk = () => {
             </AvatarFallback>
           </Avatar>
           <h2 className="text-3xl font-bold mb-2">
-            Welcome, {checkedInMember.firstName}!
+            歡迎，{checkedInMember.firstName}！
           </h2>
           {checkedInClass && (
             <div className="space-y-1">
@@ -646,13 +646,13 @@ const Kiosk = () => {
 
       {/* Message */}
       <div className="text-center">
-        <p className="text-2xl font-medium gradient-text">Enjoy your practice!</p>
+        <p className="text-2xl font-medium gradient-text">祝您練習愉快！</p>
       </div>
 
       {/* Auto-return indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <p className="text-sm text-muted-foreground animate-pulse">
-          Returning to check-in in a few seconds...
+          即將返回報到畫面...
         </p>
       </div>
     </div>
@@ -667,23 +667,23 @@ const Kiosk = () => {
     switch (errorType) {
       case "no_booking":
         icon = <Search className="w-16 h-16" />;
-        title = "No Booking Found";
-        message = "We couldn't find a booking for today. Would you like to book a class?";
+        title = "找不到預約";
+        message = "找不到您今天的預約紀錄。要預約一堂課嗎？";
         showBookNow = true;
         break;
       case "already_checked_in":
         icon = <Check className="w-16 h-16" />;
-        title = "Already Checked In";
-        message = `${selectedMember?.firstName}, you're already checked in for your class. Enjoy!`;
+        title = "已報到";
+        message = `${selectedMember?.firstName}，您已經報到完成了，祝您練習愉快！`;
         break;
       case "early_arrival":
         icon = <Clock className="w-16 h-16" />;
-        title = "You're Early!";
-        message = `${selectedMember?.firstName}, your class doesn't start for a while. Feel free to wait in the lounge.`;
+        title = "您來早了！";
+        message = `${selectedMember?.firstName}，您的課程還有一段時間才開始，可以在休息區稍候。`;
         break;
       default:
-        title = "Something Went Wrong";
-        message = "Please try again or ask staff for assistance.";
+        title = "發生錯誤";
+        message = "請重試或洽詢櫃檯人員協助。";
     }
 
     return (
@@ -711,7 +711,7 @@ const Kiosk = () => {
           {showBookNow && (
             <Button size="lg" className="gap-2">
               <CalendarPlus className="w-5 h-5" />
-              Book a Class
+              預約課程
             </Button>
           )}
           <Button
@@ -721,7 +721,7 @@ const Kiosk = () => {
             className="gap-2"
           >
             <RefreshCw className="w-5 h-5" />
-            Try Again
+            重試
           </Button>
         </div>
       </div>
@@ -731,7 +731,7 @@ const Kiosk = () => {
   const renderClassesSidebar = () => (
     <div className="w-96 border-l border-border bg-card/50 flex flex-col">
       <div className="p-6 border-b border-border">
-        <h3 className="text-lg font-semibold">Today's Classes</h3>
+        <h3 className="text-lg font-semibold">今日課程</h3>
         <p className="text-sm text-muted-foreground">{formatDate(currentTime)}</p>
       </div>
 
@@ -754,7 +754,7 @@ const Kiosk = () => {
                   </div>
                   {classItem.status === "in_progress" && (
                     <Badge className="bg-primary text-primary-foreground">
-                      In Progress
+                      進行中
                     </Badge>
                   )}
                 </div>
@@ -777,7 +777,7 @@ const Kiosk = () => {
                   </div>
                   {classItem.spotsTotal - classItem.spotsBooked <= 3 && (
                     <Badge variant="outline" className="text-warning border-warning">
-                      {classItem.spotsTotal - classItem.spotsBooked} spots left
+                      剩餘 {classItem.spotsTotal - classItem.spotsBooked} 個名額
                     </Badge>
                   )}
                 </div>
@@ -818,7 +818,7 @@ const Kiosk = () => {
           </div>
           <div>
             <h1 className="text-xl font-semibold">{mockStudio.name}</h1>
-            <p className="text-sm text-muted-foreground">Self Check-In</p>
+            <p className="text-sm text-muted-foreground">自助報到</p>
           </div>
         </div>
 
@@ -847,7 +847,7 @@ const Kiosk = () => {
       {/* Footer */}
       <footer className="h-12 border-t border-border flex items-center justify-center bg-card/30">
         <p className="text-sm text-muted-foreground">
-          Need help? Ask our front desk team
+          需要協助？請洽櫃檯人員
         </p>
       </footer>
     </div>

@@ -162,20 +162,18 @@ export default function NotificationSettings() {
       <div className="space-y-6 max-w-4xl">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Notification Settings</h1>
+          <h1 className="text-2xl font-bold tracking-tight">通知設定</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Configure automated notifications, SMS messaging, and review requests
+            設定自動通知、簡訊與評價邀請
           </p>
         </div>
 
-        {/* Provider-agnostic info banner */}
-        <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 flex items-start gap-3">
+        <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 flex items-start gap-3 dark:bg-blue-950/30 dark:border-blue-800">
           <Shield className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
-          <div className="text-sm text-blue-800">
-            <p className="font-medium">Provider-Agnostic Notifications</p>
+          <div className="text-sm text-blue-800 dark:text-blue-200">
+            <p className="font-medium">多供應商通知</p>
             <p className="text-xs mt-0.5">
-              Tandava supports multiple notification providers. You can switch providers anytime
-              without changing your application code. All credentials are encrypted at rest.
+              可隨時切換郵件／簡訊供應商，無需修改程式。所有憑證均加密儲存。
             </p>
           </div>
         </div>
@@ -184,23 +182,23 @@ export default function NotificationSettings() {
           <TabsList className="w-full justify-start overflow-x-auto">
             <TabsTrigger value="email" className="text-xs">
               <Mail className="h-3.5 w-3.5 mr-1.5" />
-              Email
+              電子郵件
             </TabsTrigger>
             <TabsTrigger value="sms" className="text-xs">
               <MessageSquare className="h-3.5 w-3.5 mr-1.5" />
-              SMS
+              簡訊
             </TabsTrigger>
             <TabsTrigger value="push" className="text-xs">
               <Bell className="h-3.5 w-3.5 mr-1.5" />
-              Push
+              推播
             </TabsTrigger>
             <TabsTrigger value="reviews" className="text-xs">
               <Star className="h-3.5 w-3.5 mr-1.5" />
-              Reviews
+              評價
             </TabsTrigger>
             <TabsTrigger value="timing" className="text-xs">
               <Clock className="h-3.5 w-3.5 mr-1.5" />
-              Timing
+              時間
             </TabsTrigger>
           </TabsList>
 
@@ -251,7 +249,7 @@ export default function NotificationSettings() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="emailApiKey">API Key</Label>
+                    <Label htmlFor="emailApiKey">API 金鑰</Label>
                     <Input
                       id="emailApiKey"
                       type="password"
@@ -268,15 +266,15 @@ export default function NotificationSettings() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label>From Name</Label>
-                      <Input placeholder="Oxatl Yoga Studio" defaultValue="Oxatl Yoga Studio" />
+                      <Input placeholder="森浴光mm941" defaultValue="森浴光mm941" />
                     </div>
                     <div className="space-y-2">
                       <Label>From Email</Label>
-                      <Input placeholder="hello@oxatlyoga.com" defaultValue="hello@oxatlyoga.com" />
+                      <Input placeholder="service@1314mm941.com.tw" defaultValue="service@1314mm941.com.tw" />
                     </div>
                     <div className="space-y-2">
                       <Label>Reply-To Email</Label>
-                      <Input placeholder="support@oxatlyoga.com" defaultValue="support@oxatlyoga.com" />
+                      <Input placeholder="support@1314mm941.com.tw" defaultValue="support@1314mm941.com.tw" />
                     </div>
                   </div>
                 </div>
@@ -552,7 +550,7 @@ export default function NotificationSettings() {
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="sid">Account SID</Label>
+                        <Label htmlFor="sid">帳戶 SID</Label>
                         <Input
                           id="sid"
                           type="password"
@@ -562,7 +560,7 @@ export default function NotificationSettings() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="token">Auth Token</Label>
+                        <Label htmlFor="token">驗證權杖</Label>
                         <Input
                           id="token"
                           type="password"
@@ -595,7 +593,7 @@ export default function NotificationSettings() {
                   </div>
 
                   <div className="flex justify-between pt-2">
-                    <Button variant="outline" onClick={() => handleTestNotification("SMS")}>
+                    <Button variant="outline" onClick={() => handleTestNotification("簡訊")}>
                       <Send className="h-4 w-4 mr-2" />
                       Send Test SMS
                     </Button>
@@ -631,7 +629,7 @@ export default function NotificationSettings() {
                           editingTemplate === template.id ? null : template.id
                         )}
                       >
-                        {editingTemplate === template.id ? "Done" : "Edit"}
+                        {editingTemplate === template.id ? "Done" : "編輯"}
                       </Button>
                     </div>
                     {editingTemplate === template.id ? (
@@ -766,7 +764,7 @@ export default function NotificationSettings() {
               <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label>Primary reminder</Label>
+                    <Label>主要提醒</Label>
                     <Select value={reminderTiming} onValueChange={setReminderTiming}>
                       <SelectTrigger>
                         <SelectValue />
@@ -788,7 +786,7 @@ export default function NotificationSettings() {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium">Second reminder</p>
+                      <p className="font-medium">第二次提醒</p>
                       <p className="text-sm text-muted-foreground">
                         Send an earlier reminder notification
                       </p>
@@ -798,7 +796,7 @@ export default function NotificationSettings() {
 
                   {secondReminder && (
                     <div className="space-y-2">
-                      <Label>Second reminder timing</Label>
+                      <Label>第二次提醒時間</Label>
                       <Select value={secondReminderTiming} onValueChange={setSecondReminderTiming}>
                         <SelectTrigger>
                           <SelectValue />
@@ -817,14 +815,14 @@ export default function NotificationSettings() {
                 <Separator />
 
                 <div className="p-4 rounded-xl border space-y-3">
-                  <h4 className="font-medium">Reminder delivery channels</h4>
+                  <h4 className="font-medium">提醒傳送管道</h4>
                   <p className="text-xs text-muted-foreground">
                     Select which channels to use for class reminders (members can opt out individually)
                   </p>
                   <div className="space-y-3">
                     {[
-                      { label: "Email", desc: "Send reminder via email", enabled: true },
-                      { label: "SMS", desc: "Send reminder via text message", enabled: true },
+                      { label: "電子郵件", desc: "Send reminder via email", enabled: true },
+                      { label: "簡訊", desc: "Send reminder via text message", enabled: true },
                       { label: "Push notification", desc: "Send browser/app push notification", enabled: true },
                     ].map((item, i) => (
                       <div key={i} className="flex items-center justify-between">

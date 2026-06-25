@@ -270,7 +270,7 @@ export default function OnDemand() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Title</Label>
-                        <Input placeholder="e.g., Morning Flow" />
+                        <Input placeholder="例如：Morning Flow" />
                       </div>
                       <div className="space-y-2">
                         <Label>Instructor</Label>
@@ -330,7 +330,7 @@ export default function OnDemand() {
                   </TabsContent>
                 </Tabs>
                 <DialogFooter className="mt-6">
-                  <Button variant="outline" onClick={() => setIsUploadOpen(false)}>Cancel</Button>
+                  <Button variant="outline" onClick={() => setIsUploadOpen(false)}>取消</Button>
                   <Button>Continue</Button>
                 </DialogFooter>
               </DialogContent>

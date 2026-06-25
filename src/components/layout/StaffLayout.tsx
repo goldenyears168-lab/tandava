@@ -8,8 +8,8 @@ interface StaffLayoutProps {
 }
 
 const navigation = [
-  { name: "Check-in", href: "/staff/checkin", icon: ClipboardCheck },
-  { name: "Waitlist", href: "/staff/waitlist", icon: ListOrdered },
+  { name: "報到", href: "/staff/checkin", icon: ClipboardCheck },
+  { name: "候補", href: "/staff/waitlist", icon: ListOrdered },
 ];
 
 export function StaffLayout({ children }: StaffLayoutProps) {
@@ -22,7 +22,7 @@ export function StaffLayout({ children }: StaffLayoutProps) {
       {/* Top bar (staff gets a simpler horizontal nav) */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur-md">
         <div className="container flex h-14 items-center gap-6">
-          <h2 className="text-sm font-bold tracking-tight">Front Desk</h2>
+          <h2 className="text-sm font-bold tracking-tight">櫃台</h2>
 
           <nav className="flex items-center gap-1 ml-4">
             {navigation.map((item) => (

@@ -68,10 +68,10 @@ const overviewKpis = [
     icon: Users,
     iconBg: "bg-primary/10",
     iconColor: "text-primary",
-    sub: "All time registered",
+    sub: "全部時間 registered",
   },
   {
-    label: "Active This Month",
+    label: "Active 本月",
     value: "163",
     icon: UserCheck,
     iconBg: "bg-accent-sage/20",
@@ -79,7 +79,7 @@ const overviewKpis = [
     sub: "Attended 1+ class",
   },
   {
-    label: "New This Month",
+    label: "New 本月",
     value: "12",
     change: "+20%",
     positive: true,
@@ -96,7 +96,7 @@ const overviewKpis = [
     iconColor: "text-destructive",
     sub: "Low engagement score",
     helpText:
-      "Students whose engagement score dropped below 30 or who haven't attended in 14+ days despite having an active membership.",
+      "Students whose engagement score dropped below 30 or who haven't attended in 14+ days despite having an 位活躍學員hip.",
   },
 ];
 
@@ -177,8 +177,8 @@ const monthlyCohorts = [
 const cohortBySource = [
   { source: "Organic", m1: 100, m2: 82, m3: 71, m4: 63 },
   { source: "Referral", m1: 100, m2: 88, m3: 79, m4: 72 },
-  { source: "Promo", m1: 100, m2: 74, m3: 58, m4: 45 },
-  { source: "Event", m1: 100, m2: 80, m3: 66, m4: 55 },
+  { source: "優惠", m1: 100, m2: 74, m3: 58, m4: 45 },
+  { source: "活動", m1: 100, m2: 80, m3: 66, m4: 55 },
   { source: "Walk-in", m1: 100, m2: 70, m3: 52, m4: 38 },
 ];
 
@@ -194,8 +194,8 @@ const clvKpis = [
 const clvBySource = [
   { source: "Referral", students: 42, avgClv: 1680, avgClasses: 84, avgMonths: 14.2 },
   { source: "Organic", students: 98, avgClv: 1340, avgClasses: 68, avgMonths: 11.8 },
-  { source: "Event", students: 28, avgClv: 1120, avgClasses: 52, avgMonths: 9.4 },
-  { source: "Promo", students: 35, avgClv: 890, avgClasses: 42, avgMonths: 7.6 },
+  { source: "活動", students: 28, avgClv: 1120, avgClasses: 52, avgMonths: 9.4 },
+  { source: "優惠", students: 35, avgClv: 890, avgClasses: 42, avgMonths: 7.6 },
   { source: "Walk-in", students: 18, avgClv: 740, avgClasses: 34, avgMonths: 6.1 },
 ];
 
@@ -261,7 +261,7 @@ export default function MemberAnalytics() {
                 Analytics
               </Link>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight">Member Analytics</h1>
+            <h1 className="text-2xl font-bold tracking-tight">學員分析</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Retention, engagement, and lifetime value insights
             </p>
@@ -272,11 +272,11 @@ export default function MemberAnalytics() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="this_week">This Week</SelectItem>
-                <SelectItem value="this_month">This Month</SelectItem>
-                <SelectItem value="last_month">Last Month</SelectItem>
-                <SelectItem value="this_quarter">This Quarter</SelectItem>
-                <SelectItem value="this_year">This Year</SelectItem>
+                <SelectItem value="this_week">本週</SelectItem>
+                <SelectItem value="this_month">本月</SelectItem>
+                <SelectItem value="last_month">上月</SelectItem>
+                <SelectItem value="this_quarter">本季</SelectItem>
+                <SelectItem value="this_year">今年</SelectItem>
               </SelectContent>
             </Select>
             <Button variant="outline" size="sm">
@@ -292,7 +292,7 @@ export default function MemberAnalytics() {
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="engagement">Engagement</TabsTrigger>
             <TabsTrigger value="cohorts">Cohorts</TabsTrigger>
-            <TabsTrigger value="ltv">Lifetime Value</TabsTrigger>
+            <TabsTrigger value="ltv">終身價值</TabsTrigger>
           </TabsList>
 
           {/* ================================================================
@@ -442,7 +442,7 @@ export default function MemberAnalytics() {
                     <thead>
                       <tr className="border-b border-border">
                         <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Name</th>
-                        <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Last Visit</th>
+                        <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">上次到訪</th>
                         <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Days Since</th>
                         <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Risk Level</th>
                         <th className="text-left py-2 pr-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">
@@ -607,7 +607,7 @@ export default function MemberAnalytics() {
                   <div className="p-4 rounded-xl bg-secondary/50 text-center">
                     <Clock className="h-5 w-5 text-primary mx-auto" />
                     <p className="text-2xl font-bold mt-2">4.2 days</p>
-                    <p className="text-xs text-muted-foreground">Avg Time to Activate</p>
+                    <p className="text-xs text-muted-foreground">平均停留 to Activate</p>
                   </div>
                   <div className="p-4 rounded-xl bg-secondary/50 text-center">
                     <UserCheck className="h-5 w-5 text-accent-sage mx-auto" />

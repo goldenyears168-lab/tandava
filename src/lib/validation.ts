@@ -7,14 +7,11 @@
  */
 
 import { z } from 'zod';
-import i18n from '@/i18n';
-
-// Helper to get current translation (resolved at call time, not import time)
-const vt = (key: string, options?: Record<string, unknown>) => i18n.t(key, { ns: 'validation', ...options });
+import { tValidation as vt } from '@/lib/strings';
 
 // ============================================================================
 // ZOD SCHEMAS (Auth & Simple Forms)
-// Use getter functions so error messages resolve in the user's current language.
+// Use getter functions so error messages stay in sync with Chinese strings.
 // ============================================================================
 
 export function getEmailSchema() {

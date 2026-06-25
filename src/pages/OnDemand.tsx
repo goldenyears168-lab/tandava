@@ -63,48 +63,48 @@ interface OnDemandClass {
 const classTypes = [
   {
     id: "vinyasa",
-    title: "Vinyasa Flow",
-    description: "Dynamic, breath-linked movement to build heat and strength",
+    title: "Vinyasa 流動",
+    description: "動態呼吸連結動作，建立熱量與力量",
     icon: Flame,
     color: "primary" as const,
     classCount: 48,
   },
   {
     id: "yin",
-    title: "Yin & Restore",
-    description: "Deep stretches and relaxation for flexibility and calm",
+    title: "陰瑜伽與修復",
+    description: "深度伸展與放鬆，提升柔軟度與平靜",
     icon: Moon,
     color: "lilac" as const,
     classCount: 32,
   },
   {
     id: "power",
-    title: "Power Yoga",
-    description: "Challenging sequences to build muscle and endurance",
+    title: "力量瑜伽",
+    description: "挑戰性序列，建立肌力與耐力",
     icon: Zap,
     color: "peach" as const,
     classCount: 24,
   },
   {
     id: "meditation",
-    title: "Meditation",
-    description: "Guided practices for mindfulness and inner peace",
+    title: "冥想",
+    description: "引導練習，培養正念與內在平靜",
     icon: Leaf,
     color: "mint" as const,
     classCount: 56,
   },
   {
     id: "breathwork",
-    title: "Breathwork",
-    description: "Pranayama techniques for energy and stress relief",
+    title: "呼吸法",
+    description: "調息技巧，提升能量與減壓",
     icon: Wind,
     color: "lilac" as const,
     classCount: 18,
   },
   {
     id: "selfcare",
-    title: "Self-Care",
-    description: "Gentle practices for recovery and self-compassion",
+    title: "自我照護",
+    description: "溫和練習，促進恢復與自我關懷",
     icon: Heart,
     color: "peach" as const,
     classCount: 28,
@@ -114,54 +114,54 @@ const classTypes = [
 const subscriptionOptions = [
   {
     type: "individual" as const,
-    title: "Single Class",
+    title: "單堂課程",
     price: 12,
-    priceUnit: "class",
-    description: "Purchase individual on-demand classes",
+    priceUnit: "堂",
+    description: "單堂購買隨選課程",
     features: [
-      "Access to one class forever",
-      "Download for offline viewing",
-      "Track your progress",
+      "永久觀看單堂課程",
+      "下載離線觀看",
+      "追蹤學習進度",
     ],
   },
   {
     type: "studio" as const,
-    title: "Studio Pass",
+    title: "工作室通行證",
     price: 19,
-    priceUnit: "month",
-    description: "Unlimited access to one studio's library",
+    priceUnit: "月",
+    description: "無限觀看單一工作室影片庫",
     features: [
-      "All classes from one studio",
-      "New classes added weekly",
-      "Exclusive studio content",
-      "Cancel anytime",
+      "單一工作室全部課程",
+      "每週新增課程",
+      "工作室獨家內容",
+      "隨時取消",
     ],
   },
   {
     type: "series" as const,
-    title: "Series Bundle",
+    title: "系列套組",
     price: 49,
-    priceUnit: "series",
-    description: "Complete multi-class programs",
+    priceUnit: "系列",
+    description: "完整多堂課程計畫",
     features: [
-      "Full program access",
-      "Structured learning path",
-      "Progress tracking",
-      "Completion certificate",
+      "完整計畫觀看權",
+      "結構化學習路徑",
+      "進度追蹤",
+      "完成證書",
     ],
   },
   {
     type: "unlimited" as const,
-    title: "Unlimited",
+    title: "無限方案",
     price: 29,
-    priceUnit: "month",
-    description: "Everything, everywhere, always",
+    priceUnit: "月",
+    description: "所有內容、隨處觀看",
     features: [
-      "All studios & instructors",
-      "Entire on-demand library",
-      "New content daily",
-      "Offline downloads",
-      "Priority support",
+      "所有工作室與老師",
+      "完整隨選影片庫",
+      "每日新增內容",
+      "離線下載",
+      "優先支援",
     ],
     isPopular: true,
   },
@@ -294,33 +294,33 @@ function getAccessCta(
   entitlements: typeof demoUserEntitlements,
 ): { label: string; variant: "default" | "outline" | "secondary"; action: "play" | "confirm_pack" | "confirm_purchase" | "subscribe" } {
   if (video.progress > 0) {
-    return { label: "Continue Watching", variant: "default", action: "play" };
+    return { label: "繼續觀看", variant: "default", action: "play" };
   }
   if (video.accessType === "free") {
-    return { label: "Play — Free", variant: "default", action: "play" };
+    return { label: "播放 — 免費", variant: "default", action: "play" };
   }
   if (video.accessType === "members_only" && entitlements.hasMembership) {
-    return { label: "Play — Included with Membership", variant: "default", action: "play" };
+    return { label: "播放 — 會員方案包含", variant: "default", action: "play" };
   }
   if (video.accessType === "members_only" && !entitlements.hasMembership) {
-    return { label: "Subscribe for Access", variant: "outline", action: "subscribe" };
+    return { label: "訂閱以取得觀看權限", variant: "outline", action: "subscribe" };
   }
   if (video.accessType === "class_pack") {
     if (entitlements.classPackRemaining > 0) {
-      return { label: `Use 1 Class Pass (${entitlements.classPackRemaining} remaining)`, variant: "outline", action: "confirm_pack" };
+      return { label: `使用 1 堂套票（剩餘 ${entitlements.classPackRemaining} 堂）`, variant: "outline", action: "confirm_pack" };
     }
-    return { label: "Purchase a Class Pack", variant: "outline", action: "subscribe" };
+    return { label: "購買套票", variant: "outline", action: "subscribe" };
   }
   if (video.accessType === "purchase") {
-    return { label: `Buy for $${video.price ?? 12}`, variant: "default", action: "confirm_purchase" };
+    return { label: `購買 $${video.price ?? 12}`, variant: "default", action: "confirm_purchase" };
   }
   if (video.accessType === "rental") {
-    return { label: `Rent for $${video.price ?? 5}`, variant: "default", action: "confirm_purchase" };
+    return { label: `租借 $${video.price ?? 5}`, variant: "default", action: "confirm_purchase" };
   }
   if (video.accessType === "subscription") {
-    return { label: "Subscribe for Access", variant: "outline", action: "subscribe" };
+    return { label: "訂閱以取得觀看權限", variant: "outline", action: "subscribe" };
   }
-  return { label: "Watch Now", variant: "default", action: "play" };
+  return { label: "立即觀看", variant: "default", action: "play" };
 }
 
 // ── Component ──────────────────────────────────────────────────────────
@@ -377,8 +377,8 @@ const OnDemand = () => {
         // Scroll to pricing section
         document.getElementById("pricing-section")?.scrollIntoView({ behavior: "smooth" });
         toast({
-          title: "Choose a plan",
-          description: "Select a membership or pass to access this class.",
+          title: "選擇方案",
+          description: "選擇會員方案或套票以觀看此課程。",
         });
         break;
     }
@@ -394,8 +394,8 @@ const OnDemand = () => {
         classPackRemaining: prev.classPackRemaining - 1,
       }));
       toast({
-        title: "Class pass used",
-        description: `1 class pass redeemed. ${entitlements.classPackRemaining - 1} remaining.`,
+        title: "套票已使用",
+        description: `已折抵 1 堂套票。剩餘 ${entitlements.classPackRemaining - 1} 堂。`,
       });
     } else if (confirmAction === "confirm_purchase") {
       setEntitlements((prev) => ({
@@ -403,8 +403,8 @@ const OnDemand = () => {
         purchasedVideoIds: [...prev.purchasedVideoIds, selectedClass.id],
       }));
       toast({
-        title: "Purchase complete",
-        description: `"${selectedClass.title}" is now in your library.`,
+        title: "購買完成",
+        description: `「${selectedClass.title}」已加入您的影片庫。`,
       });
     }
 
@@ -418,19 +418,19 @@ const OnDemand = () => {
       <div className="space-y-10">
         {/* Hero Section */}
         <div className="text-center max-w-2xl mx-auto">
-          <Badge variant="lilac" className="mb-4">On-Demand</Badge>
+          <Badge variant="lilac" className="mb-4">隨選課程</Badge>
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Practice Anytime, Anywhere
+            隨時隨地練習
           </h1>
           <p className="text-lg text-muted-foreground">
-            Hundreds of classes from world-class teachers. Your progress syncs across all your devices.
+            數百堂世界級老師的課程，進度同步於所有裝置。
           </p>
         </div>
 
         {/* Class Types Grid */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Explore by Style</h2>
+            <h2 className="text-2xl font-bold">依風格探索</h2>
             {selectedType && (
               <Button
                 variant="ghost"
@@ -438,7 +438,7 @@ const OnDemand = () => {
                 onClick={() => setSelectedType(null)}
                 className="text-muted-foreground"
               >
-                Clear filter
+                清除篩選
                 <X className="h-4 w-4 ml-1" />
               </Button>
             )}
@@ -459,16 +459,16 @@ const OnDemand = () => {
         <Tabs defaultValue="browse" className="w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <TabsList>
-              <TabsTrigger value="browse">Browse All</TabsTrigger>
-              <TabsTrigger value="continue">Continue Watching</TabsTrigger>
-              <TabsTrigger value="saved">My Library</TabsTrigger>
+              <TabsTrigger value="browse">瀏覽全部</TabsTrigger>
+              <TabsTrigger value="continue">繼續觀看</TabsTrigger>
+              <TabsTrigger value="saved">我的影片庫</TabsTrigger>
             </TabsList>
 
             {/* Search */}
             <div className="relative w-full sm:w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search classes..."
+                placeholder="搜尋課程..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -502,7 +502,7 @@ const OnDemand = () => {
             </div>
             {publishedClasses.filter((c) => c.progress > 0 && !c.isCompleted).length === 0 && (
               <div className="text-center py-12">
-                <p className="text-muted-foreground">No classes in progress</p>
+                <p className="text-muted-foreground">尚無進行中的課程</p>
               </div>
             )}
           </TabsContent>
@@ -525,10 +525,10 @@ const OnDemand = () => {
         {/* Subscription Options */}
         <section id="pricing-section" className="py-10 border-t">
           <div className="text-center mb-8">
-            <Badge variant="mint" className="mb-4">Pricing</Badge>
-            <h2 className="text-3xl font-bold mb-3">Choose Your Access</h2>
+            <Badge variant="mint" className="mb-4">價格方案</Badge>
+            <h2 className="text-3xl font-bold mb-3">選擇觀看方式</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
-              From single classes to unlimited access — find the plan that fits your practice.
+              從單堂購買到無限觀看 — 找到最適合您練習的方案。
             </p>
           </div>
 
@@ -537,7 +537,7 @@ const OnDemand = () => {
               <SubscriptionCard
                 key={option.type}
                 {...option}
-                onSelect={() => toast({ title: "Selected", description: `${option.title} selected. Redirecting to checkout...` })}
+                onSelect={() => toast({ title: "已選擇", description: `已選擇「${option.title}」，正在導向結帳...` })}
               />
             ))}
           </div>
@@ -563,7 +563,7 @@ const OnDemand = () => {
                   {/* Duration overlay */}
                   <div className="absolute bottom-3 right-3 px-2 py-1 rounded-lg bg-foreground/80 text-background text-sm font-medium flex items-center gap-1.5">
                     <Clock className="h-4 w-4" />
-                    {selectedClass.duration} min
+                    {selectedClass.duration} 分鐘
                   </div>
 
                   {/* Play teaser overlay */}
@@ -583,7 +583,7 @@ const OnDemand = () => {
                       selectedClass.level === "INTERMEDIATE" ? "peach" :
                       selectedClass.level === "ADVANCED" ? "destructive" : "lilac"
                     }>
-                      {selectedClass.level === "ALL" ? "All Levels" : selectedClass.level.charAt(0) + selectedClass.level.slice(1).toLowerCase()}
+                      {selectedClass.level === "ALL" ? "各程度適合" : selectedClass.level === "BEGINNER" ? "初階" : selectedClass.level === "INTERMEDIATE" ? "中階" : selectedClass.level === "ADVANCED" ? "進階" : selectedClass.level.charAt(0) + selectedClass.level.slice(1).toLowerCase()}
                     </Badge>
                     {selectedClass.rating && (
                       <span className="flex items-center gap-1 text-sm text-muted-foreground ml-auto">
@@ -608,7 +608,7 @@ const OnDemand = () => {
                     <span className="text-sm font-medium">{selectedClass.teacher.name}</span>
                     <span className="text-sm text-muted-foreground flex items-center gap-1 ml-auto">
                       <Eye className="h-3.5 w-3.5" />
-                      {selectedClass.viewCount.toLocaleString()} views
+                      {selectedClass.viewCount.toLocaleString()} 次觀看
                     </span>
                   </div>
                 </div>
@@ -624,8 +624,8 @@ const OnDemand = () => {
                     <>
                       <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Free to watch</p>
-                        <p className="text-xs text-muted-foreground">No membership or purchase required.</p>
+                        <p className="text-sm font-medium">免費觀看</p>
+                        <p className="text-xs text-muted-foreground">無需會員方案或購買。</p>
                       </div>
                     </>
                   )}
@@ -633,8 +633,8 @@ const OnDemand = () => {
                     <>
                       <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Included with your membership</p>
-                        <p className="text-xs text-muted-foreground">Watch as many times as you like.</p>
+                        <p className="text-sm font-medium">會員方案包含</p>
+                        <p className="text-xs text-muted-foreground">可無限次觀看。</p>
                       </div>
                     </>
                   )}
@@ -642,8 +642,8 @@ const OnDemand = () => {
                     <>
                       <Lock className="h-5 w-5 text-indigo-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Members only</p>
-                        <p className="text-xs text-muted-foreground">Subscribe to a studio pass or unlimited plan to access.</p>
+                        <p className="text-sm font-medium">僅限會員</p>
+                        <p className="text-xs text-muted-foreground">訂閱工作室通行證或無限方案以觀看。</p>
                       </div>
                     </>
                   )}
@@ -651,9 +651,9 @@ const OnDemand = () => {
                     <>
                       <Ticket className="h-5 w-5 text-violet-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Use 1 class from your pack</p>
+                        <p className="text-sm font-medium">使用套票中的 1 堂</p>
                         <p className="text-xs text-muted-foreground">
-                          You have {entitlements.classPackRemaining} of {entitlements.classPackTotal} classes remaining.
+                          您還有 {entitlements.classPackRemaining} / {entitlements.classPackTotal} 堂可用。
                         </p>
                       </div>
                     </>
@@ -662,8 +662,8 @@ const OnDemand = () => {
                     <>
                       <Ticket className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Requires a class pack</p>
-                        <p className="text-xs text-muted-foreground">Purchase a class pack to access this video.</p>
+                        <p className="text-sm font-medium">需要套票</p>
+                        <p className="text-xs text-muted-foreground">購買套票以觀看此影片。</p>
                       </div>
                     </>
                   )}
@@ -671,8 +671,8 @@ const OnDemand = () => {
                     <>
                       <CreditCard className="h-5 w-5 text-amber-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">One-time purchase — ${selectedClass.price ?? 12}</p>
-                        <p className="text-xs text-muted-foreground">Buy once and access forever. Download for offline viewing.</p>
+                        <p className="text-sm font-medium">單次購買 — ${selectedClass.price ?? 12}</p>
+                        <p className="text-xs text-muted-foreground">一次購買，永久觀看。可下載離線觀看。</p>
                       </div>
                     </>
                   )}
@@ -680,8 +680,8 @@ const OnDemand = () => {
                     <>
                       <CreditCard className="h-5 w-5 text-rose-600 flex-shrink-0" />
                       <div>
-                        <p className="text-sm font-medium">Rent for ${selectedClass.price ?? 5}</p>
-                        <p className="text-xs text-muted-foreground">Access for 48 hours after purchase.</p>
+                        <p className="text-sm font-medium">租借 ${selectedClass.price ?? 5}</p>
+                        <p className="text-xs text-muted-foreground">購買後 48 小時內可觀看。</p>
                       </div>
                     </>
                   )}
@@ -697,7 +697,7 @@ const OnDemand = () => {
                       />
                     </div>
                     <span className="text-xs text-muted-foreground font-medium">
-                      {selectedClass.progress}% complete
+                      {selectedClass.progress}% 已完成
                     </span>
                   </div>
                 )}
@@ -727,27 +727,27 @@ const OnDemand = () => {
           {selectedClass && confirmAction === "confirm_pack" && (
             <div className="space-y-6">
               <DialogHeader>
-                <DialogTitle>Use a class pass?</DialogTitle>
+                <DialogTitle>使用套票？</DialogTitle>
               </DialogHeader>
               <div className="flex items-start gap-4 p-4 rounded-xl bg-violet-50 border border-violet-200">
                 <Ticket className="h-6 w-6 text-violet-600 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium text-sm">{selectedClass.title}</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    This will use <span className="font-semibold">1 class</span> from your {entitlements.classPackTotal}-class pack.
+                    將從您的 {entitlements.classPackTotal} 堂套票中折抵 <span className="font-semibold">1 堂</span>。
                   </p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Remaining after: <span className="font-semibold">{entitlements.classPackRemaining - 1} classes</span>
+                    折抵後剩餘：<span className="font-semibold">{entitlements.classPackRemaining - 1} 堂</span>
                   </p>
                 </div>
               </div>
               <DialogFooter className="gap-2 sm:gap-0">
                 <Button variant="outline" onClick={() => setIsConfirmOpen(false)}>
-                  Cancel
+                  取消
                 </Button>
                 <Button onClick={handleConfirm}>
                   <Ticket className="h-4 w-4 mr-2" />
-                  Use Class Pass
+                  使用套票
                 </Button>
               </DialogFooter>
             </div>
@@ -756,7 +756,7 @@ const OnDemand = () => {
             <div className="space-y-6">
               <DialogHeader>
                 <DialogTitle>
-                  {selectedClass.accessType === "rental" ? "Rent this class?" : "Purchase this class?"}
+                  {selectedClass.accessType === "rental" ? "租借此課程？" : "購買此課程？"}
                 </DialogTitle>
               </DialogHeader>
               <div className="flex items-start gap-4 p-4 rounded-xl bg-amber-50 border border-amber-200">
@@ -764,26 +764,26 @@ const OnDemand = () => {
                 <div>
                   <p className="font-medium text-sm">{selectedClass.title}</p>
                   <p className="text-sm text-muted-foreground mt-1">
-                    {selectedClass.teacher.name} &middot; {selectedClass.duration} min
+                    {selectedClass.teacher.name} &middot; {selectedClass.duration} 分鐘
                   </p>
                   <div className="flex items-baseline gap-1 mt-3">
                     <span className="text-2xl font-bold">${selectedClass.price ?? 12}</span>
                     {selectedClass.accessType === "rental" && (
-                      <span className="text-sm text-muted-foreground">/ 48-hour rental</span>
+                      <span className="text-sm text-muted-foreground">/ 48 小時租借</span>
                     )}
                     {selectedClass.accessType === "purchase" && (
-                      <span className="text-sm text-muted-foreground">/ own forever</span>
+                      <span className="text-sm text-muted-foreground">/ 永久擁有</span>
                     )}
                   </div>
                 </div>
               </div>
               <DialogFooter className="gap-2 sm:gap-0">
                 <Button variant="outline" onClick={() => setIsConfirmOpen(false)}>
-                  Cancel
+                  取消
                 </Button>
                 <Button onClick={handleConfirm}>
                   <CreditCard className="h-4 w-4 mr-2" />
-                  {selectedClass.accessType === "rental" ? "Rent Now" : "Buy Now"}
+                  {selectedClass.accessType === "rental" ? "立即租借" : "立即購買"}
                 </Button>
               </DialogFooter>
             </div>
@@ -807,11 +807,11 @@ const OnDemand = () => {
               <div className="p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge variant="lilac">{selectedClass.style}</Badge>
-                  <Badge variant="mint">{selectedClass.level === "ALL" ? "All Levels" : selectedClass.level.charAt(0) + selectedClass.level.slice(1).toLowerCase()}</Badge>
+                  <Badge variant="mint">{selectedClass.level === "ALL" ? "各程度適合" : selectedClass.level === "BEGINNER" ? "初階" : selectedClass.level === "INTERMEDIATE" ? "中階" : selectedClass.level === "ADVANCED" ? "進階" : selectedClass.level.charAt(0) + selectedClass.level.slice(1).toLowerCase()}</Badge>
                 </div>
                 <h3 className="text-xl font-bold">{selectedClass.title}</h3>
                 <p className="text-muted-foreground">
-                  with {selectedClass.teacher.name} &middot; {selectedClass.duration} min
+                  與 {selectedClass.teacher.name} · {selectedClass.duration} 分鐘
                 </p>
               </div>
             </div>

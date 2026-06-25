@@ -128,7 +128,7 @@ const mockCampaigns: CampaignRow[] = [
     totalOpened: 0,
     totalClicked: 0,
     totalConverted: 0,
-    totalUnsubscribed: 0,
+    total已退訂: 0,
     totalBounced: 0,
     createdAt: "2025-02-02T11:00:00",
   },
@@ -148,7 +148,7 @@ const mockCampaigns: CampaignRow[] = [
     totalOpened: 0,
     totalClicked: 1245,
     totalConverted: 0,
-    totalUnsubscribed: 5,
+    total已退訂: 5,
     totalBounced: 44,
     createdAt: "2025-01-01T00:00:00",
   },
@@ -168,13 +168,13 @@ const mockCampaigns: CampaignRow[] = [
     totalOpened: 187,
     totalClicked: 89,
     totalConverted: 34,
-    totalUnsubscribed: 0,
+    total已退訂: 0,
     totalBounced: 6,
     createdAt: "2025-01-15T09:00:00",
   },
   {
     id: "c5",
-    name: "January Newsletter",
+    name: "January 電子報",
     description: "Monthly studio newsletter with updates and tips",
     campaignType: "email",
     status: "completed",
@@ -188,7 +188,7 @@ const mockCampaigns: CampaignRow[] = [
     totalOpened: 892,
     totalClicked: 234,
     totalConverted: 45,
-    totalUnsubscribed: 18,
+    total已退訂: 18,
     totalBounced: 53,
     createdAt: "2025-01-10T14:00:00",
   },
@@ -255,16 +255,16 @@ const mockCampaigns: CampaignRow[] = [
 ];
 
 const savedSegments = [
-  { id: "s1", name: "Active Members", count: 1245 },
+  { id: "s1", name: "活躍學員", count: 1245 },
   { id: "s2", name: "Lapsed Members (30+ days)", count: 342 },
-  { id: "s3", name: "New Members (last 30 days)", count: 89 },
+  { id: "s3", name: "新學員 (last 30 days)", count: 89 },
   { id: "s4", name: "Unlimited Membership Holders", count: 456 },
   { id: "s5", name: "Class Pack Holders", count: 234 },
   { id: "s6", name: "High Engagement (5+ classes/week)", count: 78 },
 ];
 
 const membershipTypes = [
-  { id: "m1", name: "Unlimited Monthly" },
+  { id: "m1", name: "無限月方案" },
   { id: "m2", name: "8 Classes/Month" },
   { id: "m3", name: "Drop-in" },
   { id: "m4", name: "Student Unlimited" },
@@ -480,7 +480,7 @@ export default function CampaignsManage() {
 
   const wizardSteps: { key: WizardStep; label: string }[] = [
     { key: "setup", label: "Setup" },
-    { key: "audience", label: "Audience" },
+    { key: "audience", label: "受眾" },
     { key: "content", label: "Content" },
     { key: "review", label: "Review" },
   ];
@@ -565,7 +565,7 @@ export default function CampaignsManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Avg Open Rate</p>
+                  <p className="text-xs text-muted-foreground">Avg 開信率</p>
                   <p className="text-xl font-bold mt-0.5 text-accent-sage">
                     {avgOpenRate.toFixed(1)}%
                   </p>
@@ -578,7 +578,7 @@ export default function CampaignsManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Avg Click Rate</p>
+                  <p className="text-xs text-muted-foreground">Avg 點擊率</p>
                   <p className="text-xl font-bold mt-0.5 text-primary">
                     {avgClickRate.toFixed(1)}%
                   </p>
@@ -632,7 +632,7 @@ export default function CampaignsManage() {
             <Select value={typeFilter} onValueChange={setTypeFilter}>
               <SelectTrigger className="w-36">
                 <Filter className="h-4 w-4 mr-2" />
-                <SelectValue placeholder="Type" />
+                <SelectValue placeholder="類型" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Types</SelectItem>
@@ -709,7 +709,7 @@ export default function CampaignsManage() {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-44 rounded-xl">
-                                <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "Edit mode", description: "Campaign editor opened." })}>
+                                <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "編輯模式", description: "Campaign editor opened." })}>
                                   <Edit className="h-4 w-4 mr-2" />
                                   Edit
                                 </DropdownMenuItem>
@@ -762,7 +762,7 @@ export default function CampaignsManage() {
                           {campaign.startedAt && (
                             <span className="flex items-center gap-1">
                               <Clock className="h-3 w-3" />
-                              {campaign.status === "completed" ? "Sent" : "Started"}: {formatDateTime(campaign.startedAt)}
+                              {campaign.status === "completed" ? "Sent" : "使用"}: {formatDateTime(campaign.startedAt)}
                             </span>
                           )}
                           {campaign.estimatedRecipients > 0 && campaign.status === "draft" && (
@@ -886,10 +886,10 @@ export default function CampaignsManage() {
               {wizardStep === "setup" && (
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="campaignName">Campaign Name *</Label>
+                    <Label htmlFor="campaignName">活動名稱 *</Label>
                     <Input
                       id="campaignName"
-                      placeholder="e.g. February Newsletter"
+                      placeholder="e.g. February 電子報"
                       value={newCampaign.name}
                       onChange={(e) =>
                         setNewCampaign({ ...newCampaign, name: e.target.value })
@@ -900,7 +900,7 @@ export default function CampaignsManage() {
                     <Label htmlFor="campaignDesc">Description</Label>
                     <Textarea
                       id="campaignDesc"
-                      placeholder="Brief description of this campaign..."
+                      placeholder="簡述此行銷活動..."
                       value={newCampaign.description}
                       onChange={(e) =>
                         setNewCampaign({ ...newCampaign, description: e.target.value })
@@ -1093,7 +1093,7 @@ export default function CampaignsManage() {
                         <Label htmlFor="tags">Tags (comma-separated)</Label>
                         <Input
                           id="tags"
-                          placeholder="e.g. VIP, Newsletter, Promo"
+                          placeholder="e.g. VIP, 電子報, Promo"
                           value={newCampaign.tags.join(", ")}
                           onChange={(e) =>
                             setNewCampaign({
@@ -1104,7 +1104,7 @@ export default function CampaignsManage() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastVisit">Last Visit (days ago)</Label>
+                        <Label htmlFor="lastVisit">上次到訪 (days ago)</Label>
                         <Select
                           value={newCampaign.lastVisitDays}
                           onValueChange={(v) =>
@@ -1186,8 +1186,8 @@ export default function CampaignsManage() {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="open_rate">Open Rate</SelectItem>
-                              <SelectItem value="click_rate">Click Rate</SelectItem>
+                              <SelectItem value="open_rate">開信率</SelectItem>
+                              <SelectItem value="click_rate">點擊率</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -1223,7 +1223,7 @@ export default function CampaignsManage() {
                               <Label htmlFor="varASubject">Subject Line *</Label>
                               <Input
                                 id="varASubject"
-                                placeholder="Email subject..."
+                                placeholder="電子郵件主旨..."
                                 value={newCampaign.variantASubject}
                                 onChange={(e) =>
                                   setNewCampaign({
@@ -1245,7 +1245,7 @@ export default function CampaignsManage() {
                             </Label>
                             <Textarea
                               id="varABody"
-                              placeholder="Write your message..."
+                              placeholder="撰寫訊息..."
                               value={newCampaign.variantABody}
                               onChange={(e) =>
                                 setNewCampaign({
@@ -1273,7 +1273,7 @@ export default function CampaignsManage() {
                               <Label htmlFor="varBSubject">Subject Line *</Label>
                               <Input
                                 id="varBSubject"
-                                placeholder="Email subject..."
+                                placeholder="電子郵件主旨..."
                                 value={newCampaign.variantBSubject}
                                 onChange={(e) =>
                                   setNewCampaign({
@@ -1295,7 +1295,7 @@ export default function CampaignsManage() {
                             </Label>
                             <Textarea
                               id="varBBody"
-                              placeholder="Write your message..."
+                              placeholder="撰寫訊息..."
                               value={newCampaign.variantBBody}
                               onChange={(e) =>
                                 setNewCampaign({

@@ -15,7 +15,7 @@ import { Clock, MapPin, AlertCircle, Shield, ChevronLeft, Zap, Check } from "luc
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/contexts/LocaleContext";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 // Quick book = single-tap for members with active coverage
 // Standard = payment selection → confirm (for drop-in or multiple options)
@@ -59,23 +59,23 @@ const demoPaymentSources: PaymentSource[] = [
   {
     id: "mem-1",
     type: "MEMBERSHIP",
-    name: "Unlimited Monthly",
-    description: "All classes included",
+    name: "無限月方案",
+    description: "所有課程皆含",
     covers: true,
   },
   {
     id: "pack-1",
     type: "CLASS_PACK",
-    name: "10-Class Pack",
+    name: "10 堂課程包",
     remaining: 7,
-    expiresAt: "Jan 15, 2025",
+    expiresAt: "2025年1月15日",
     covers: true,
   },
 ];
 
 export function BookingModal({ open, onOpenChange, booking, enableQuickBook = true, paymentSources, onConfirm }: BookingModalProps) {
   const { formatPrice } = useLocale();
-  const { t } = useTranslation('booking');
+  const t = createT('booking');
 
   const sources = useMemo(
     () => paymentSources ?? demoPaymentSources,
@@ -134,7 +134,7 @@ export function BookingModal({ open, onOpenChange, booking, enableQuickBook = tr
     if (onConfirm) {
       const { error } = await onConfirm({ source: selectedSource, isWaitlist: isFull });
       if (error) {
-        toast({ title: t('common:error', 'Something went wrong'), description: error, variant: "destructive" });
+        toast({ title: t('common:error', '發生錯誤'), description: error, variant: "destructive" });
         return false;
       }
       return true;

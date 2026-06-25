@@ -21,7 +21,7 @@ export default function ManageSettings() {
 
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
+          <h1 className="text-2xl font-bold tracking-tight">設定</h1>
           <p className="text-muted-foreground">Manage your studio details, policies, and integrations.</p>
         </div>
 
@@ -39,7 +39,7 @@ export default function ManageSettings() {
         {/* Feature Toggles */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Feature Settings</CardTitle>
+            <CardTitle className="text-base">功能設定</CardTitle>
             <CardDescription>Enable or disable optional features for your studio.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
@@ -160,7 +160,7 @@ export default function ManageSettings() {
         {/* Cancellation Policy */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Cancellation Policy</CardTitle>
+            <CardTitle className="text-base">取消政策</CardTitle>
             <CardDescription>Displayed to members when they book classes.</CardDescription>
           </CardHeader>
           <CardContent>

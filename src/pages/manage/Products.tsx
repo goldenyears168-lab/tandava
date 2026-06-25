@@ -222,7 +222,7 @@ const mockProducts: Product[] = [
   },
 ];
 
-const categories = ["All", "Mats", "Props", "Wellness", "Rentals", "Digital", "Apparel"];
+const categories = ["全部", "Mats", "Props", "Wellness", "Rentals", "Digital", "Apparel"];
 
 const typeIcons: Record<string, typeof Package> = {
   physical: Box,
@@ -245,7 +245,7 @@ export default function ProductsManage() {
   const { toast } = useToast();
   const [products, setProducts] = useState(mockProducts);
   const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState("全部");
   const [statusFilter, setStatusFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -259,7 +259,7 @@ export default function ProductsManage() {
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (p.barcode && p.barcode.includes(searchQuery));
-    const matchesCategory = categoryFilter === "All" || p.category === categoryFilter;
+    const matchesCategory = categoryFilter === "全部" || p.category === categoryFilter;
     const matchesStatus = statusFilter === "all" || p.status === statusFilter;
     const matchesType = typeFilter === "all" || p.type === typeFilter;
     return matchesSearch && matchesCategory && matchesStatus && matchesType;
@@ -297,7 +297,7 @@ export default function ProductsManage() {
         )
       );
       toast({
-        title: "Stock adjusted",
+        title: "庫存已調整",
         description: `${selectedProduct.name} stock updated by ${stockAdjustment > 0 ? "+" : ""}${stockAdjustment}`,
       });
       setAdjustStockOpen(false);
@@ -330,7 +330,7 @@ export default function ProductsManage() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => toast({ title: "Exported", description: "Product data exported to CSV." })}>
+            <Button variant="outline" size="sm" onClick={() => toast({ title: "已匯出", description: "商品資料已匯出為 CSV。" })}>
               <DownloadIcon className="h-4 w-4 mr-2" />
               Export
             </Button>
@@ -360,7 +360,7 @@ export default function ProductsManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Low Stock</p>
+                  <p className="text-xs text-muted-foreground">庫存不足</p>
                   <p className="text-xl font-bold mt-0.5 text-accent-gold">
                     {lowStockProducts.length}
                   </p>
@@ -373,7 +373,7 @@ export default function ProductsManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Out of Stock</p>
+                  <p className="text-xs text-muted-foreground">缺貨</p>
                   <p className="text-xl font-bold mt-0.5 text-destructive">
                     {outOfStockProducts.length}
                   </p>
@@ -408,7 +408,7 @@ export default function ProductsManage() {
           </div>
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-36">
-              <SelectValue placeholder="Category" />
+              <SelectValue placeholder="分類" />
             </SelectTrigger>
             <SelectContent>
               {categories.map((cat) => (
@@ -420,7 +420,7 @@ export default function ProductsManage() {
           </Select>
           <Select value={typeFilter} onValueChange={setTypeFilter}>
             <SelectTrigger className="w-36">
-              <SelectValue placeholder="Type" />
+              <SelectValue placeholder="類型" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
@@ -432,13 +432,13 @@ export default function ProductsManage() {
           </Select>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-36">
-              <SelectValue placeholder="Status" />
+              <SelectValue placeholder="狀態" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="inactive">Inactive</SelectItem>
-              <SelectItem value="out_of_stock">Out of Stock</SelectItem>
+              <SelectItem value="inactive">未啟用</SelectItem>
+              <SelectItem value="out_of_stock">缺貨</SelectItem>
             </SelectContent>
           </Select>
           <div className="flex border border-border rounded-lg p-0.5">
@@ -535,7 +535,7 @@ export default function ProductsManage() {
                       </div>
                     )}
                     <div className="flex gap-1 mt-3 pt-3 border-t border-border">
-                      <Button variant="outline" size="sm" className="flex-1 h-8 text-xs" onClick={() => toast({ title: "Edit mode", description: "Product editor opened." })}>
+                      <Button variant="outline" size="sm" className="flex-1 h-8 text-xs" onClick={() => toast({ title: "編輯模式", description: "已開啟商品編輯器。" })}>
                         <Edit className="h-3 w-3 mr-1" />
                         Edit
                       </Button>
@@ -555,7 +555,7 @@ export default function ProductsManage() {
                               Adjust Stock
                             </DropdownMenuItem>
                           )}
-                          <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "Edit tags", description: "Tag editor opened." })}>
+                          <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "編輯標籤", description: "已開啟標籤編輯器。" })}>
                             <Tag className="h-4 w-4 mr-2" />
                             Edit Tags
                           </DropdownMenuItem>
@@ -656,7 +656,7 @@ export default function ProductsManage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-44 rounded-xl">
-                          <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "Edit mode", description: "Product editor opened." })}>
+                          <DropdownMenuItem className="rounded-lg cursor-pointer" onClick={() => toast({ title: "編輯模式", description: "已開啟商品編輯器。" })}>
                             <Edit className="h-4 w-4 mr-2" />
                             Edit Product
                           </DropdownMenuItem>
@@ -691,7 +691,7 @@ export default function ProductsManage() {
         <Dialog open={createOpen} onOpenChange={setCreateOpen}>
           <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Add Product</DialogTitle>
+              <DialogTitle>新增商品</DialogTitle>
               <DialogDescription>
                 Create a new product for your retail inventory
               </DialogDescription>
@@ -705,13 +705,13 @@ export default function ProductsManage() {
               <TabsContent value="basic" className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <Label htmlFor="productName">Product Name</Label>
-                  <Input id="productName" placeholder="e.g. Manduka PRO Yoga Mat" />
+                  <Input id="productName" placeholder="例如 Manduka PRO 瑜伽墊" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="productDesc">Description</Label>
                   <Textarea
                     id="productDesc"
-                    placeholder="Describe the product..."
+                    placeholder="描述商品..."
                     className="min-h-[80px]"
                   />
                 </div>
@@ -724,7 +724,7 @@ export default function ProductsManage() {
                     <Label htmlFor="productBarcode">Barcode (optional)</Label>
                     <div className="relative">
                       <Barcode className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input id="productBarcode" placeholder="UPC or EAN" className="pl-10" />
+                      <Input id="productBarcode" placeholder="UPC 或 EAN" className="pl-10" />
                     </div>
                   </div>
                 </div>
@@ -762,7 +762,7 @@ export default function ProductsManage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="productTags">Tags (comma-separated)</Label>
-                  <Input id="productTags" placeholder="Premium, Best Seller, Eco-Friendly" />
+                  <Input id="productTags" placeholder="Premium、暢銷、環保" />
                 </div>
                 <div className="space-y-2">
                   <Label>Product Images</Label>
@@ -830,7 +830,7 @@ export default function ProductsManage() {
                     <Input id="initialStock" type="number" placeholder="0" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lowStockThreshold">Low Stock Threshold</Label>
+                    <Label htmlFor="lowStockThreshold">庫存不足 Threshold</Label>
                     <Input id="lowStockThreshold" type="number" placeholder="10" />
                     <p className="text-xs text-muted-foreground">
                       Alert when stock falls below this level
@@ -847,7 +847,7 @@ export default function ProductsManage() {
                 onClick={() => {
                   setCreateOpen(false);
                   toast({
-                    title: "Product created",
+                    title: "商品已建立",
                     description: "Your new product has been added to the catalog.",
                   });
                 }}
@@ -862,7 +862,7 @@ export default function ProductsManage() {
         <Dialog open={adjustStockOpen} onOpenChange={setAdjustStockOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Adjust Stock</DialogTitle>
+              <DialogTitle>調整庫存</DialogTitle>
               <DialogDescription>
                 {selectedProduct?.name}
               </DialogDescription>

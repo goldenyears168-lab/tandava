@@ -41,7 +41,7 @@ export function SubscriptionCard({
       {/* Popular badge */}
       {isPopular && (
         <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
-          Most Popular
+          最受歡迎
         </Badge>
       )}
 
@@ -73,7 +73,7 @@ export function SubscriptionCard({
         className="w-full"
         variant={type === "unlimited" ? "default" : "outline"}
       >
-        {type === "individual" ? "Purchase" : "Subscribe"}
+        {type === "individual" ? "購買" : "訂閱"}
       </Button>
     </div>
   );

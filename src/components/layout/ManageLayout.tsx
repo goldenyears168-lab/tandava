@@ -45,7 +45,7 @@ export function ManageLayout({ children }: ManageLayoutProps) {
       <aside className="w-64 border-r border-border bg-card/50 p-4 flex flex-col">
         <div className="mb-6">
           <h2 className="text-lg font-bold tracking-tight">Studio Manager</h2>
-          <p className="text-xs text-muted-foreground">Oxatl Yoga</p>
+          <p className="text-xs text-muted-foreground">森浴光mm941</p>
         </div>
 
         <nav className="space-y-1 flex-1">

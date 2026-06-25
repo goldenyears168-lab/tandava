@@ -45,7 +45,7 @@ const stats = {
     longestStreak: 21,
     topStyles: ["Vinyasa", "Yin", "Power"],
     topTeachers: ["Maya Johnson", "David Park", "Sarah Lee"],
-    peakTime: "Morning",
+    peakTime: "早上",
   },
   month: {
     classes: 12,
@@ -55,7 +55,7 @@ const stats = {
     longestStreak: 21,
     topStyles: ["Vinyasa", "Yin", "Hatha"],
     topTeachers: ["Maya Johnson", "David Park", "Emma Thompson"],
-    peakTime: "Morning",
+    peakTime: "早上",
   },
   year: {
     classes: 156,
@@ -65,7 +65,7 @@ const stats = {
     longestStreak: 21,
     topStyles: ["Vinyasa", "Yin", "Power"],
     topTeachers: ["Maya Johnson", "David Park", "Alex Rivera"],
-    peakTime: "Evening",
+    peakTime: "晚上",
   },
   allTime: {
     classes: 312,
@@ -75,7 +75,7 @@ const stats = {
     longestStreak: 21,
     topStyles: ["Vinyasa", "Yin", "Power"],
     topTeachers: ["Maya Johnson", "David Park", "Sarah Lee"],
-    peakTime: "Evening",
+    peakTime: "晚上",
   },
 };
 
@@ -90,7 +90,7 @@ const leaderboard = [
   { rank: 1, name: "Taylor S.", avatar: "", classes: 22, minutes: 1650 },
   { rank: 2, name: "Chris K.", avatar: "", classes: 20, minutes: 1500 },
   { rank: 3, name: "Emma T.", avatar: "", classes: 18, minutes: 1350 },
-  { rank: 4, name: "You", avatar: "", classes: 12, minutes: 945, isCurrentUser: true },
+  { rank: 4, name: "您", avatar: "", classes: 12, minutes: 945, isCurrentUser: true },
   { rank: 5, name: "Alex R.", avatar: "", classes: 14, minutes: 1050 },
   { rank: 6, name: "Jordan M.", avatar: "", classes: 9, minutes: 675 },
   { rank: 7, name: "Sam P.", avatar: "", classes: 8, minutes: 600 },
@@ -98,9 +98,9 @@ const leaderboard = [
 ];
 
 const timeOfDayIcon = {
-  Morning: Sunrise,
-  Afternoon: Sun,
-  Evening: Moon,
+  早上: Sunrise,
+  下午: Sun,
+  晚上: Moon,
 };
 
 const Community = () => {
@@ -125,26 +125,26 @@ const Community = () => {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Community</h1>
+          <h1 className="text-3xl font-bold tracking-tight">社群</h1>
           <p className="text-muted-foreground mt-1">
-            Track your progress, connect with friends, and see how you rank
+            追蹤練習進度、與朋友互動、查看排名
           </p>
         </div>
 
         {/* Milestone celebration — shown when user hits a milestone */}
         <MilestoneCelebration
-          milestoneName="300 Classes!"
+          milestoneName="300 堂課！"
           icon="🧘"
-          message="You've attended over 300 classes. That's real dedication to your practice."
-          reward="Unlock your Year in Review"
+          message="您已參加超過 300 堂課，展現了對練習的堅持。"
+          reward="解鎖您的年度回顧"
         />
 
         {/* Tabs */}
         <Tabs defaultValue="stats" className="w-full">
           <TabsList className="grid w-full sm:w-auto grid-cols-3 sm:inline-grid">
-            <TabsTrigger value="stats" className="px-6">Stats</TabsTrigger>
-            <TabsTrigger value="friends" className="px-6">Friends</TabsTrigger>
-            <TabsTrigger value="leaderboard" className="px-6">Leaderboard</TabsTrigger>
+            <TabsTrigger value="stats" className="px-6">統計</TabsTrigger>
+            <TabsTrigger value="friends" className="px-6">朋友</TabsTrigger>
+            <TabsTrigger value="leaderboard" className="px-6">排行榜</TabsTrigger>
           </TabsList>
 
           {/* Stats Tab */}
@@ -156,42 +156,42 @@ const Community = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="week">This Week</SelectItem>
-                  <SelectItem value="month">This Month</SelectItem>
-                  <SelectItem value="year">This Year</SelectItem>
-                  <SelectItem value="allTime">All Time</SelectItem>
+                  <SelectItem value="week">本週</SelectItem>
+                  <SelectItem value="month">本月</SelectItem>
+                  <SelectItem value="year">今年</SelectItem>
+                  <SelectItem value="allTime">全部</SelectItem>
                 </SelectContent>
               </Select>
 
-              <Button variant="outline" size="sm" onClick={() => toast({ title: "Year in Review", description: "Your practice wrapped is being generated..." })}>
+              <Button variant="outline" size="sm" onClick={() => toast({ title: "年度回顧", description: "正在產生您的練習年度回顧..." })}>
                 <Share2 className="h-4 w-4 mr-2" />
-                View My Wrapped
+                查看我的年度回顧
               </Button>
             </div>
 
             {/* Main stats grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <StatCard
-                label="Classes"
+                label="課程"
                 value={currentStats.classes}
                 icon={Calendar}
                 variant="primary"
               />
               <StatCard
-                label="Workshops"
+                label="工作坊"
                 value={currentStats.workshops}
                 icon={Activity}
               />
               <StatCard
-                label="Time Practiced"
+                label="練習時間"
                 value={formatMinutes(currentStats.minutes)}
                 icon={Clock}
               />
               <StatCard
-                label="Day Streak"
+                label="連續天數"
                 value={currentStats.streak}
                 icon={Flame}
-                trend={{ value: 0, label: `Best: ${currentStats.longestStreak}` }}
+                trend={{ value: 0, label: `最佳：${currentStats.longestStreak}` }}
               />
             </div>
 
@@ -202,7 +202,7 @@ const Community = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-primary" />
-                    Top Styles
+                    熱門風格
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -227,7 +227,7 @@ const Community = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base flex items-center gap-2">
                     <Users className="h-4 w-4 text-primary" />
-                    Top Teachers
+                    熱門老師
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -255,7 +255,7 @@ const Community = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base flex items-center gap-2">
                     <TimeIcon className="h-4 w-4 text-primary" />
-                    Peak Practice Time
+                    最常練習時段
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -263,8 +263,8 @@ const Community = () => {
                     <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent mb-3">
                       <TimeIcon className="h-8 w-8 text-accent-foreground" />
                     </div>
-                    <p className="text-2xl font-bold">{currentStats.peakTime}s</p>
-                    <p className="text-sm text-muted-foreground">Most active time</p>
+                    <p className="text-2xl font-bold">{currentStats.peakTime}</p>
+                    <p className="text-sm text-muted-foreground">最常練習時段</p>
                   </div>
                 </CardContent>
               </Card>
@@ -278,15 +278,15 @@ const Community = () => {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search by name or email..."
+                  placeholder="以姓名或電子郵件搜尋..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-9"
                 />
               </div>
-              <Button onClick={() => toast({ title: "Invite sent", description: "Friend request sent! They'll appear here once they accept." })}>
+              <Button onClick={() => toast({ title: "邀請已送出", description: "好友邀請已送出！對方接受後將顯示於此。" })}>
                 <UserPlus className="h-4 w-4 mr-2" />
-                Add Friend
+                新增朋友
               </Button>
             </div>
 
@@ -307,12 +307,12 @@ const Community = () => {
                     <div>
                       <p className="font-medium">{friend.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {friend.classesThisMonth} classes this month
+                        {friend.classesThisMonth} 堂課（本月）
                       </p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" onClick={() => toast({ title: friend.name, description: `Viewing ${friend.name}'s profile.` })}>
-                    View Profile
+                  <Button variant="ghost" size="sm" onClick={() => toast({ title: friend.name, description: `正在查看 ${friend.name} 的個人頁面。` })}>
+                    查看個人頁面
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </Button>
                 </div>
@@ -324,9 +324,9 @@ const Community = () => {
           <TabsContent value="leaderboard" className="mt-6 space-y-6">
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                Ranked by classes attended in the last 30 days
+                依過去 30 天參加課程數排名
               </p>
-              <Badge variant="secondary">Last 30 days</Badge>
+              <Badge variant="secondary">過去 30 天</Badge>
             </div>
 
             {/* Leaderboard list */}
@@ -372,7 +372,7 @@ const Community = () => {
                       <p className={cn("font-medium", entry.isCurrentUser && "text-primary")}>
                         {entry.name}
                         {entry.isCurrentUser && (
-                          <Badge variant="default" className="ml-2 text-xs">You</Badge>
+                          <Badge variant="default" className="ml-2 text-xs">您</Badge>
                         )}
                       </p>
                     </div>
@@ -382,11 +382,11 @@ const Community = () => {
                   <div className="flex items-center gap-6 text-sm">
                     <div className="text-right">
                       <p className="font-semibold">{entry.classes}</p>
-                      <p className="text-muted-foreground text-xs">classes</p>
+                      <p className="text-muted-foreground text-xs">堂課</p>
                     </div>
                     <div className="text-right">
                       <p className="font-semibold">{formatMinutes(entry.minutes)}</p>
-                      <p className="text-muted-foreground text-xs">practiced</p>
+                      <p className="text-muted-foreground text-xs">練習</p>
                     </div>
                   </div>
                 </div>
@@ -398,9 +398,9 @@ const Community = () => {
         {/* Contextual nudge — friend activity */}
         <EngagementNudge
           type="friend_activity"
-          title="Your friends are practicing"
-          message="3 friends attended classes this week. Join them on the mat!"
-          actionLabel="Browse classes"
+          title="朋友們正在練習"
+          message="本週有 3 位朋友參加了課程，一起上墊吧！"
+          actionLabel="瀏覽課程"
           actionUrl="/schedule"
           className="mt-6"
         />
@@ -409,8 +409,8 @@ const Community = () => {
         <NewsletterSignup
           variant="inline"
           source="community_page"
-          heading="Get community updates"
-          subheading="Events, challenges, and what's new at the studio."
+          heading="取得社群最新消息"
+          subheading="活動、挑戰與工作室最新動態。"
           className="mt-6"
         />
       </div>

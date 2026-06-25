@@ -14,23 +14,23 @@ interface Row {
 
 // Shown only in demo mode (no backend) so the widget renders for previews.
 const DEMO_ROWS: Row[] = [
-  { id: "d1", name: "Power Vinyasa Flow", when: "Today · 6:00 PM", location: "Main Studio", spotsLeft: 4 },
-  { id: "d2", name: "Gentle Restorative", when: "Tomorrow · 9:00 AM", location: "Meditation Room", spotsLeft: 12 },
-  { id: "d3", name: "Heated Hatha", when: "Tomorrow · 5:30 PM", location: "Hot Room", spotsLeft: 0 },
-  { id: "d4", name: "Sunrise Flow", when: "Wed · 6:30 AM", location: "Main Studio", spotsLeft: 8 },
+  { id: "d1", name: "能量流瑜珈", when: "今天 · 下午 6:00", location: "主教室", spotsLeft: 4 },
+  { id: "d2", name: "溫和修復瑜珈", when: "明天 · 上午 9:00", location: "冥想室", spotsLeft: 12 },
+  { id: "d3", name: "熱哈達瑜珈", when: "明天 · 下午 5:30", location: "熱瑜珈教室", spotsLeft: 0 },
+  { id: "d4", name: "日出流瑜珈", when: "週三 · 上午 6:30", location: "主教室", spotsLeft: 8 },
 ];
 
 // Render class times in the STUDIO's timezone, not the visitor's browser zone.
 function formatWhen(iso: string, timeZone: string): string {
   try {
-    return new Date(iso).toLocaleString(undefined, {
+    return new Date(iso).toLocaleString("zh-TW", {
       timeZone,
       weekday: "short",
       hour: "numeric",
       minute: "2-digit",
     });
   } catch {
-    return new Date(iso).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
+    return new Date(iso).toLocaleString("zh-TW", { weekday: "short", hour: "numeric", minute: "2-digit" });
   }
 }
 
@@ -51,7 +51,7 @@ export default function EmbedSchedule() {
       }))
     : DEMO_ROWS;
 
-  const title = studioName ?? "Class Schedule";
+  const title = studioName ?? "課程表";
 
   return (
     <EmbedLayout>
@@ -59,12 +59,12 @@ export default function EmbedSchedule() {
         <h2 className="text-base font-semibold mb-1">{title}</h2>
 
         {live && isLoading && (
-          <p className="py-6 text-center text-sm text-muted-foreground">Loading classes…</p>
+          <p className="py-6 text-center text-sm text-muted-foreground">載入課程中…</p>
         )}
 
         {live && !isLoading && rows.length === 0 && (
           <p className="py-6 text-center text-sm text-muted-foreground">
-            No upcoming classes right now — check back soon.
+            目前沒有即將開課的課程 — 請稍後再來。
           </p>
         )}
 
@@ -91,13 +91,13 @@ export default function EmbedSchedule() {
                 className="shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold text-white"
                 style={{ background: full ? "#9ca3af" : "var(--embed-primary, #4fd1c5)" }}
               >
-                {full ? "Waitlist" : "Book"}
+                {full ? "候補" : "預約"}
               </button>
             </div>
           );
         })}
 
-        <p className="pt-1 text-center text-[10px] text-muted-foreground">Powered by Tandava</p>
+        <p className="pt-1 text-center text-[10px] text-muted-foreground">由 Tandava 提供</p>
       </div>
     </EmbedLayout>
   );

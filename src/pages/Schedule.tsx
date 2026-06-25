@@ -30,247 +30,21 @@ import {
   Play,
 } from "lucide-react";
 import { EngagementNudge } from "@/components/EngagementNudge";
+import {
+  mockSpaClasses,
+  mockSpaWorkshops,
+  mockSpaAppointments,
+  mockSpaRetreats,
+  mockSpaOnDemand,
+  spaScheduleFilters,
+} from "@/data/demo/spa-ui-mocks";
 
-// Mock data with enhanced class descriptions
-const mockClasses = [
-  {
-    id: "1",
-    title: "Power Vinyasa Flow",
-    style: "Vinyasa",
-    level: "INTERMEDIATE" as const,
-    isHeated: true,
-    description: "A dynamic, energizing practice that links breath with movement. Expect sun salutations, standing poses, and creative sequences that build heat and strength.",
-    benefits: ["Builds strength and flexibility", "Improves cardiovascular health", "Reduces stress"],
-    whatToBring: ["Yoga mat", "Water bottle", "Towel"],
-    teacher: { id: "t1", name: "Maya Johnson", avatar: "", bio: "E-RYT 500 with 15+ years experience", rating: 4.9 },
-    studio: { id: "s1", name: "Lotus Flow Studio", location: "Downtown, SF" },
-    startTime: "Today, 6:00 PM",
-    duration: 60,
-    location: "Lotus Flow Studio",
-    spotsLeft: 4,
-    capacity: 20,
-  },
-  {
-    id: "2",
-    title: "Yin Yoga & Meditation",
-    style: "Yin",
-    level: "ALL" as const,
-    isHeated: false,
-    description: "A slow-paced style of yoga with poses held for longer periods. Perfect for deep stretching and mindfulness practice.",
-    benefits: ["Deep tissue release", "Improved flexibility", "Calming for the nervous system"],
-    whatToBring: ["Yoga mat", "Blanket or bolster"],
-    teacher: { id: "t2", name: "David Park", avatar: "", bio: "Yin yoga specialist, trained in Thailand", rating: 4.8 },
-    studio: { id: "s1", name: "Lotus Flow Studio", location: "Downtown, SF" },
-    startTime: "Today, 7:30 PM",
-    duration: 75,
-    location: "Lotus Flow Studio",
-    spotsLeft: 8,
-    capacity: 15,
-  },
-  {
-    id: "3",
-    title: "Morning Flow",
-    style: "Vinyasa",
-    level: "BEGINNER" as const,
-    isHeated: false,
-    description: "Start your day with an accessible, uplifting flow. Perfect for beginners or anyone wanting a gentler morning practice.",
-    benefits: ["Gentle wake-up for the body", "Sets positive tone for the day"],
-    whatToBring: ["Yoga mat"],
-    teacher: { id: "t3", name: "Sarah Lee", avatar: "", bio: "Beginner-friendly specialist", rating: 4.7 },
-    studio: { id: "s2", name: "Hot Yoga Collective", location: "SoMa, SF" },
-    startTime: "Tomorrow, 7:00 AM",
-    duration: 60,
-    location: "Hot Yoga Collective",
-    spotsLeft: 12,
-    capacity: 20,
-  },
-  {
-    id: "4",
-    title: "Hot Power Yoga",
-    style: "Power",
-    level: "ADVANCED" as const,
-    isHeated: true,
-    description: "An intense, athletic practice in a heated room. Expect challenging sequences, arm balances, and inversions.",
-    benefits: ["Maximum calorie burn", "Builds serious strength", "Detoxifying heat"],
-    whatToBring: ["Yoga mat", "Large towel", "Lots of water"],
-    teacher: { id: "t4", name: "Alex Rivera", avatar: "", bio: "Former athlete, power yoga specialist", rating: 4.9 },
-    studio: { id: "s2", name: "Hot Yoga Collective", location: "SoMa, SF" },
-    startTime: "Tomorrow, 12:00 PM",
-    duration: 75,
-    location: "Hot Yoga Collective",
-    spotsLeft: 0,
-    capacity: 18,
-  },
-  {
-    id: "5",
-    title: "Gentle Stretch",
-    style: "Hatha",
-    level: "BEGINNER" as const,
-    isHeated: false,
-    description: "A relaxing class focused on gentle stretches and relaxation. Perfect for stress relief and recovery days.",
-    benefits: ["Stress relief", "Gentle on joints", "Promotes relaxation"],
-    whatToBring: ["Yoga mat", "Blanket"],
-    teacher: { id: "t5", name: "Emma Thompson", avatar: "", bio: "Restorative yoga teacher", rating: 4.8 },
-    studio: { id: "s3", name: "Zen Garden Yoga", location: "Pacific Heights, SF" },
-    startTime: "Tomorrow, 5:00 PM",
-    duration: 60,
-    location: "Zen Garden Yoga",
-    spotsLeft: 10,
-    capacity: 15,
-  },
-];
-
-const mockWorkshops = [
-  {
-    id: "w1",
-    title: "Inversions Workshop: Headstand & Handstand",
-    description: "Master the foundations of inversions in this comprehensive workshop. Learn proper alignment, build strength, and overcome fear with expert guidance.",
-    teacher: { name: "Maya Johnson", avatar: "" },
-    startTime: "Saturday, Dec 7, 2:00 PM",
-    duration: 180,
-    location: "Lotus Flow Studio",
-    price: 75,
-    spotsLeft: 6,
-    capacity: 15,
-    isSeries: false,
-    tags: ["Inversions", "Advanced"],
-  },
-  {
-    id: "w2",
-    title: "Yoga for Runners: 3-Week Series",
-    description: "A comprehensive series designed specifically for runners. Focus on hip flexibility, IT band release, and recovery techniques.",
-    teacher: { name: "David Park", avatar: "" },
-    startTime: "Starts Sunday, Dec 8, 10:00 AM",
-    duration: 90,
-    location: "Zen Garden Yoga",
-    price: 120,
-    spotsLeft: 10,
-    capacity: 20,
-    isSeries: true,
-    seriesParts: 3,
-    tags: ["Athletes", "Flexibility"],
-  },
-];
-
-const mockAppointments = [
-  {
-    id: "a1",
-    type: "Private Yoga Session",
-    description: "One-on-one session tailored to your needs and goals.",
-    teacher: { name: "Maya Johnson", avatar: "" },
-    startTime: "Today, 4:00 PM",
-    duration: 60,
-    location: "Lotus Flow Studio",
-    price: 120,
-    isBooked: false,
-  },
-  {
-    id: "a2",
-    type: "Thai Yoga Massage",
-    description: "Traditional Thai bodywork combining passive stretching and pressure points.",
-    teacher: { name: "David Park", avatar: "" },
-    startTime: "Tomorrow, 2:00 PM",
-    duration: 90,
-    location: "Zen Garden Yoga",
-    price: 150,
-    isBooked: false,
-  },
-  {
-    id: "a3",
-    type: "Yoga Therapy Consultation",
-    description: "Assessment and personalized practice design for specific conditions.",
-    teacher: { name: "Emma Thompson", avatar: "" },
-    startTime: "Friday, 11:00 AM",
-    duration: 75,
-    location: "Zen Garden Yoga",
-    price: 95,
-    isBooked: true,
-  },
-];
-
-const mockRetreats = [
-  {
-    id: "r1",
-    title: "7-Day Transformation Retreat",
-    description: "Immerse yourself in daily yoga, meditation, and wellness practices surrounded by Bali's natural beauty. Includes accommodation, meals, and excursions.",
-    imageUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
-    destination: "Ubud",
-    country: "Bali, Indonesia",
-    startDate: "Mar 15",
-    endDate: "Mar 22",
-    duration: "7 nights",
-    price: 2499,
-    spotsLeft: 8,
-    capacity: 16,
-    teachers: [{ name: "Maya Johnson" }, { name: "David Park" }],
-    tags: ["Vinyasa", "Meditation", "Spa", "All-Inclusive"],
-  },
-  {
-    id: "r2",
-    title: "Jungle Wellness Escape",
-    description: "A transformative journey combining yoga, surf, and adventure in the Costa Rican rainforest. Daily practices, optional surf lessons, and jungle excursions.",
-    imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    destination: "Nosara",
-    country: "Costa Rica",
-    startDate: "Apr 5",
-    endDate: "Apr 12",
-    duration: "7 nights",
-    price: 1899,
-    spotsLeft: 4,
-    capacity: 12,
-    teachers: [{ name: "Alex Rivera" }],
-    tags: ["Vinyasa", "Surf", "Adventure", "Nature"],
-  },
-  {
-    id: "r3",
-    title: "Mediterranean Mindfulness",
-    description: "Combine ancient yoga traditions with Mediterranean culture. Practice overlooking the Aegean Sea, explore historic sites, and enjoy Greek cuisine.",
-    imageUrl: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
-    destination: "Santorini",
-    country: "Greece",
-    startDate: "May 20",
-    endDate: "May 27",
-    duration: "7 nights",
-    price: 2799,
-    spotsLeft: 10,
-    capacity: 14,
-    teachers: [{ name: "Emma Thompson" }],
-    tags: ["Hatha", "Meditation", "Culture", "Wellness"],
-  },
-];
-
-const filters = {
-  styles: ["All Styles", "Vinyasa", "Yin", "Hatha", "Power", "Restorative"],
-  levels: ["All Levels", "Beginner", "Intermediate", "Advanced"],
-  studios: ["All Studios", "Lotus Flow Studio", "Hot Yoga Collective", "Zen Garden Yoga"],
-  teachers: ["All Teachers", "Maya Johnson", "David Park", "Sarah Lee", "Alex Rivera", "Emma Thompson"],
-};
-
-// Mock on-demand classes
-const mockOnDemandClasses = [
-  {
-    id: "od1",
-    title: "Morning Energy Flow (On-Demand)",
-    style: "Vinyasa",
-    level: "ALL" as const,
-    isHeated: false,
-    isOnDemand: true,
-    teacher: { id: "t1", name: "Maya Johnson", avatar: "" },
-    duration: 30,
-    thumbnailUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
-  },
-  {
-    id: "od2",
-    title: "Deep Hip Opening (On-Demand)",
-    style: "Yin",
-    level: "BEGINNER" as const,
-    isHeated: false,
-    isOnDemand: true,
-    teacher: { id: "t2", name: "David Park", avatar: "" },
-    duration: 45,
-    thumbnailUrl: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400",
-  },
-];
+const mockClasses = mockSpaClasses;
+const mockWorkshops = mockSpaWorkshops;
+const mockAppointments = mockSpaAppointments;
+const mockRetreats = mockSpaRetreats;
+const mockOnDemandClasses = mockSpaOnDemand;
+const filters = spaScheduleFilters;
 
 const Schedule = () => {
   const [activeTab, setActiveTab] = useState("classes");
@@ -281,15 +55,15 @@ const Schedule = () => {
   const [classDetailOpen, setClassDetailOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [showOnDemand, setShowOnDemand] = useState(false);
-  const [studioFilter, setStudioFilter] = useState("all studios");
-  const [styleFilter, setStyleFilter] = useState("all styles");
-  const [levelFilter, setLevelFilter] = useState("all levels");
+  const [studioFilter, setStudioFilter] = useState("all");
+  const [styleFilter, setStyleFilter] = useState("all");
+  const [levelFilter, setLevelFilter] = useState("all");
 
   const filteredClasses = mockClasses.filter((c) => {
-    if (searchQuery && !c.title.toLowerCase().includes(searchQuery.toLowerCase()) && !c.teacher.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-    if (studioFilter !== "all studios" && c.studio.name.toLowerCase() !== studioFilter) return false;
-    if (styleFilter !== "all styles" && c.style.toLowerCase() !== styleFilter) return false;
-    if (levelFilter !== "all levels" && c.level.toLowerCase() !== levelFilter) return false;
+    if (searchQuery && !c.title.includes(searchQuery) && !c.teacher.name.includes(searchQuery)) return false;
+    if (studioFilter !== "all" && !c.location.includes(studioFilter)) return false;
+    if (styleFilter !== "all" && c.style !== styleFilter) return false;
+    if (levelFilter !== "all" && c.level !== levelFilter) return false;
     return true;
   });
 
@@ -315,9 +89,9 @@ const Schedule = () => {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Schedule</h1>
+          <h1 className="text-3xl font-bold tracking-tight">服務表</h1>
           <p className="text-muted-foreground mt-1">
-            Browse classes, workshops, appointments, and retreats across all studios
+            瀏覽各館療程、工作坊、專人預約與靜修活動
           </p>
         </div>
 
@@ -325,12 +99,12 @@ const Schedule = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <TabsList className="grid w-full sm:w-auto grid-cols-4">
-              <TabsTrigger value="classes" className="px-4">Classes</TabsTrigger>
-              <TabsTrigger value="workshops" className="px-4">Workshops</TabsTrigger>
-              <TabsTrigger value="appointments" className="px-4">Appointments</TabsTrigger>
+              <TabsTrigger value="classes" className="px-4">療程</TabsTrigger>
+              <TabsTrigger value="workshops" className="px-4">工作坊</TabsTrigger>
+              <TabsTrigger value="appointments" className="px-4">專人預約</TabsTrigger>
               <TabsTrigger value="retreats" className="px-4 gap-1">
                 <Plane className="h-3.5 w-3.5" />
-                Retreats
+                靜修
               </TabsTrigger>
             </TabsList>
 
@@ -358,7 +132,7 @@ const Schedule = () => {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search classes, teachers, studios..."
+                placeholder="搜尋療程、美容師、館別..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -368,12 +142,12 @@ const Schedule = () => {
             <div className="flex items-center gap-2">
               <Select value={studioFilter} onValueChange={setStudioFilter}>
                 <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Studio" />
+                  <SelectValue placeholder="館別" />
                 </SelectTrigger>
                 <SelectContent>
                   {filters.studios.map((studio) => (
-                    <SelectItem key={studio} value={studio.toLowerCase()}>
-                      {studio}
+                    <SelectItem key={studio.value} value={studio.value}>
+                      {studio.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -381,12 +155,12 @@ const Schedule = () => {
 
               <Select value={styleFilter} onValueChange={setStyleFilter}>
                 <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Style" />
+                  <SelectValue placeholder="項目" />
                 </SelectTrigger>
                 <SelectContent>
                   {filters.styles.map((style) => (
-                    <SelectItem key={style} value={style.toLowerCase()}>
-                      {style}
+                    <SelectItem key={style.value} value={style.value}>
+                      {style.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -394,18 +168,18 @@ const Schedule = () => {
 
               <Select value={levelFilter} onValueChange={setLevelFilter}>
                 <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Level" />
+                  <SelectValue placeholder="程度" />
                 </SelectTrigger>
                 <SelectContent>
                   {filters.levels.map((level) => (
-                    <SelectItem key={level} value={level.toLowerCase()}>
-                      {level}
+                    <SelectItem key={level.value} value={level.value}>
+                      {level.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
-              <Button variant="outline" size="icon" onClick={() => { setStudioFilter("all studios"); setStyleFilter("all styles"); setLevelFilter("all levels"); setSearchQuery(""); }}>
+              <Button variant="outline" size="icon" onClick={() => { setStudioFilter("all"); setStyleFilter("all"); setLevelFilter("all"); setSearchQuery(""); }}>
                 <SlidersHorizontal className="h-4 w-4" />
               </Button>
             </div>
@@ -419,10 +193,10 @@ const Schedule = () => {
               </div>
               <div>
                 <Label htmlFor="ondemand-toggle" className="font-semibold cursor-pointer">
-                  Include On-Demand Classes
+                  包含隨選療程
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Show recordings you can watch anytime
+                  顯示可隨時觀看的居家保養指引影片
                 </p>
               </div>
             </div>
@@ -434,7 +208,7 @@ const Schedule = () => {
               />
               <Link to="/on-demand">
                 <Button variant="outline" size="sm">
-                  Browse Library
+                  瀏覽影片庫
                 </Button>
               </Link>
             </div>
@@ -443,11 +217,11 @@ const Schedule = () => {
           {/* Contextual nudge — pack running low */}
           <EngagementNudge
             type="pack_running_low"
-            title="2 classes left on your pack"
-            message="Renew or upgrade to unlimited so you never miss a class."
-            actionLabel="View options"
+            title="套票剩餘 2 次"
+            message="續購或升級尊榮方案，不錯過任何一次療程。"
+            actionLabel="查看方案"
             actionUrl="/account"
-            context="10-Class Pack"
+            context="10 次尊榮套票"
             className="mb-4"
           />
 
@@ -471,7 +245,7 @@ const Schedule = () => {
                 className="h-6 text-xs"
                 onClick={() => setActiveFilters([])}
               >
-                Clear all
+                清除全部
               </Button>
             </div>
           )}
@@ -485,7 +259,7 @@ const Schedule = () => {
                 ))}
                 {filteredClasses.length === 0 && (
                   <div className="text-center py-8 text-muted-foreground">
-                    <p>No classes match your filters. Try adjusting your search criteria.</p>
+                    <p>沒有符合篩選條件的療程，請調整搜尋條件。</p>
                   </div>
                 )}
                 
@@ -495,10 +269,10 @@ const Schedule = () => {
                     <div className="flex items-center gap-2 pt-4 pb-2">
                       <Badge variant="lilac" className="gap-1">
                         <Play className="h-3 w-3" />
-                        On-Demand
+                        隨選療程
                       </Badge>
                       <span className="text-sm text-muted-foreground">
-                        Watch anytime, progress syncs across devices
+                        隨時觀看，進度同步於所有裝置
                       </span>
                     </div>
                     {mockOnDemandClasses.map((classItem) => (
@@ -520,12 +294,12 @@ const Schedule = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <Badge variant="lilac">On-Demand</Badge>
+                              <Badge variant="lilac">隨選</Badge>
                               <Badge variant="mint">{classItem.style}</Badge>
                             </div>
                             <h3 className="font-semibold truncate">{classItem.title}</h3>
                             <p className="text-sm text-muted-foreground">
-                              {classItem.teacher.name} • {classItem.duration} min
+                              {classItem.teacher.name} · {classItem.duration} 分鐘
                             </p>
                           </div>
                         </div>
@@ -537,7 +311,7 @@ const Schedule = () => {
             ) : (
               <div className="rounded-xl border bg-card p-8 text-center text-muted-foreground">
                 <Calendar className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                <p>Calendar view coming soon</p>
+                <p>日曆檢視即將推出</p>
               </div>
             )}
           </TabsContent>

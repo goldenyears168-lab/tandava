@@ -43,27 +43,27 @@ import {
 import { EngagementNudge } from "@/components/EngagementNudge";
 
 const mockMembershipTypes = [
-  { id: "1", name: "Unlimited Monthly", price: 14900, billing: "monthly", activeCount: 89, isActive: true },
-  { id: "2", name: "8x Monthly", price: 11900, billing: "monthly", activeCount: 34, isActive: true },
-  { id: "3", name: "4x Monthly", price: 7900, billing: "monthly", activeCount: 28, isActive: true },
-  { id: "4", name: "Annual Unlimited", price: 149900, billing: "annual", activeCount: 12, isActive: true },
+  { id: "1", name: "尊榮會員票券", price: 4560000, billing: "monthly", activeCount: 89, isActive: true },
+  { id: "2", name: "每月 8 次療程", price: 1280000, billing: "monthly", activeCount: 34, isActive: true },
+  { id: "3", name: "每月 4 次療程", price: 880000, billing: "monthly", activeCount: 28, isActive: true },
+  { id: "4", name: "年度尊榮方案", price: 45600000, billing: "annual", activeCount: 12, isActive: true },
 ];
 
 const mockClassPacks = [
-  { id: "1", name: "10-Class Pack", classes: 10, price: 22000, validity: 90, sold: 45, isActive: true },
-  { id: "2", name: "20-Class Pack", classes: 20, price: 38000, validity: 180, sold: 18, isActive: true },
-  { id: "3", name: "5-Class Intro", classes: 5, price: 7500, validity: 30, sold: 67, isActive: true },
-  { id: "4", name: "Single Drop-in", classes: 1, price: 2500, validity: 1, sold: 156, isActive: true },
+  { id: "1", name: "10 次票券", classes: 10, price: 1500000, validity: 90, sold: 45, isActive: true },
+  { id: "2", name: "20 次票券", classes: 20, price: 2800000, validity: 180, sold: 18, isActive: true },
+  { id: "3", name: "5 次體驗券", classes: 5, price: 880000, validity: 30, sold: 67, isActive: true },
+  { id: "4", name: "單次體驗", classes: 1, price: 180000, validity: 1, sold: 156, isActive: true },
 ];
 
 const mockRecentTransactions = [
-  { id: "1", student: "Mia Tanaka", type: "Membership Renewal", amount: 14900, date: "Today, 8:12 AM", status: "completed" },
-  { id: "2", student: "Noah Garcia", type: "10-Class Pack", amount: 22000, date: "Today, 7:45 AM", status: "completed" },
-  { id: "3", student: "Emma Wilson", type: "Drop-in", amount: 2500, date: "Yesterday, 6:30 PM", status: "completed" },
-  { id: "4", student: "Jordan Blake", type: "Late Cancel Fee", amount: 1500, date: "Yesterday, 2:15 PM", status: "completed" },
-  { id: "5", student: "Alex Rivera", type: "Membership Renewal", amount: 11900, date: "Yesterday, 12:00 AM", status: "failed" },
-  { id: "6", student: "Sophia Lee", type: "5-Class Intro", amount: 7500, date: "Jan 28, 9:20 AM", status: "completed" },
-  { id: "7", student: "Liam Park", type: "Drop-in", amount: 2500, date: "Jan 27, 5:45 PM", status: "refunded" },
+  { id: "1", student: "林小姐", type: "尊榮會員續約", amount: 4560000, date: "今天 08:12", status: "completed" },
+  { id: "2", student: "陳先生", type: "10 次票券", amount: 1500000, date: "今天 07:45", status: "completed" },
+  { id: "3", student: "王小姐", type: "單次體驗", amount: 180000, date: "昨天 18:30", status: "completed" },
+  { id: "4", student: "張先生", type: "逾期取消費", amount: 50000, date: "昨天 14:15", status: "completed" },
+  { id: "5", student: "李小姐", type: "尊榮會員續約", amount: 1280000, date: "昨天 00:00", status: "failed" },
+  { id: "6", student: "黃小姐", type: "5 次體驗券", amount: 880000, date: "1 月 28 日 09:20", status: "completed" },
+  { id: "7", student: "吳先生", type: "單次體驗", amount: 180000, date: "1 月 27 日 17:45", status: "refunded" },
 ];
 
 // ============================================================================
@@ -90,7 +90,7 @@ function generateCSV(transactions: typeof mockRecentTransactions, format: Export
 
   if (format === "xero") {
     // Xero CSV format
-    const headers = ["*ContactName", "*InvoiceNumber", "*InvoiceDate", "*DueDate", "Description", "*Quantity", "*UnitAmount", "*AccountCode", "TaxType"];
+    const headers = ["*ContactName", "*InvoiceNumber", "*InvoiceDate", "*DueDate", "描述", "*Quantity", "*UnitAmount", "*AccountCode", "TaxType"];
     const rows = transactions.map((tx, i) => [
       tx.student,
       `TDV-${String(i + 1).padStart(4, "0")}`,
@@ -106,14 +106,14 @@ function generateCSV(transactions: typeof mockRecentTransactions, format: Export
   }
 
   // Standard CSV
-  const headers = ["Date", "Student", "Type", "Amount", "Status", "Payment Method"];
+  const headers = ["日期", "會員", "類型", "金額", "狀態", "付款方式"];
   const rows = transactions.map((tx) => [
     tx.date,
     tx.student,
     tx.type,
-    `$${(tx.amount / 100).toFixed(2)}`,
-    tx.status,
-    "Card",
+    `NT$${(tx.amount / 100).toLocaleString()}`,
+    tx.status === "completed" ? "完成" : tx.status === "failed" ? "失敗" : tx.status === "refunded" ? "已退款" : tx.status,
+    "信用卡",
   ]);
   return [headers, ...rows].map((r) => r.join(",")).join("\n");
 }
@@ -148,8 +148,8 @@ export default function FinancialsManage() {
     downloadFile(csv, `${prefixes[exportFormat]}-${new Date().toISOString().split("T")[0]}.${extensions[exportFormat]}`);
     setExportOpen(false);
     toast({
-      title: "Export downloaded",
-      description: `${mockRecentTransactions.length} transactions exported as ${exportFormat === "quickbooks" ? "QuickBooks IIF" : exportFormat === "xero" ? "Xero CSV" : "CSV"}.`,
+      title: "匯出完成",
+      description: `已匯出 ${mockRecentTransactions.length} 筆交易（${exportFormat === "quickbooks" ? "QuickBooks IIF" : exportFormat === "xero" ? "Xero CSV" : "CSV"}）。`,
     });
   };
 
@@ -159,21 +159,21 @@ export default function FinancialsManage() {
         {/* Nudge */}
         <EngagementNudge
           type="pack_running_low"
-          title="2 failed membership renewals"
-          message="Alex Rivera and 1 other member have failed payment attempts. Follow up to prevent churn."
-          actionLabel="View Failed Payments"
-          context="$268 at risk"
+          title="2 筆會員續約失敗"
+          message="李小姐等 2 位會員付款未成功，請儘快聯繫以免流失。"
+          actionLabel="查看失敗付款"
+          context="約 NT$12,800 待挽回"
         />
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Financials</h1>
-            <p className="text-sm text-muted-foreground mt-1">Memberships, class packs, and transactions</p>
+            <h1 className="text-2xl font-bold tracking-tight">財務管理</h1>
+            <p className="text-sm text-muted-foreground mt-1">尊榮票券、次數方案與交易紀錄</p>
           </div>
           <Button variant="outline" size="sm" onClick={() => setExportOpen(true)}>
             <Download className="h-4 w-4 mr-2" />
-            Export
+            匯出
           </Button>
         </div>
 
@@ -181,14 +181,14 @@ export default function FinancialsManage() {
         <Dialog open={exportOpen} onOpenChange={setExportOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Export Transaction Data</DialogTitle>
+              <DialogTitle>匯出交易資料</DialogTitle>
               <DialogDescription>
-                Download your transaction data for accounting or analysis
+                下載交易資料供會計或分析使用
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label>Export Format</Label>
+                <Label>匯出格式</Label>
                 <Select value={exportFormat} onValueChange={(v) => setExportFormat(v as ExportFormat)}>
                   <SelectTrigger>
                     <SelectValue />
@@ -217,26 +217,26 @@ export default function FinancialsManage() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
-                  <Label>From</Label>
+                  <Label>起始日期</Label>
                   <Input type="date" value={exportDateFrom} onChange={(e) => setExportDateFrom(e.target.value)} />
                 </div>
                 <div className="space-y-2">
-                  <Label>To</Label>
+                  <Label>結束日期</Label>
                   <Input type="date" value={exportDateTo} onChange={(e) => setExportDateTo(e.target.value)} />
                 </div>
               </div>
               <p className="text-xs text-muted-foreground">
                 {exportFormat === "quickbooks"
-                  ? "Exports in IIF format compatible with QuickBooks Desktop and Online."
+                  ? "匯出 QuickBooks 相容的 IIF 格式。"
                   : exportFormat === "xero"
-                  ? "Exports as Xero-compatible CSV with invoice mapping."
-                  : "Standard CSV with all transaction fields."}
+                  ? "匯出 Xero 相容的 CSV 格式。"
+                  : "標準 CSV，包含所有交易欄位。"}
               </p>
               <div className="flex justify-end gap-2 pt-2">
-                <Button variant="outline" size="sm" onClick={() => setExportOpen(false)}>Cancel</Button>
+                <Button variant="outline" size="sm" onClick={() => setExportOpen(false)}>取消</Button>
                 <Button size="sm" onClick={handleExport}>
                   <Download className="h-4 w-4 mr-1.5" />
-                  Download {mockRecentTransactions.length} Transactions
+                  下載 {mockRecentTransactions.length} 筆交易
                 </Button>
               </div>
             </div>
@@ -245,10 +245,10 @@ export default function FinancialsManage() {
 
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="memberships">Memberships</TabsTrigger>
-            <TabsTrigger value="packs">Class Packs</TabsTrigger>
-            <TabsTrigger value="transactions">Transactions</TabsTrigger>
+            <TabsTrigger value="overview">總覽</TabsTrigger>
+            <TabsTrigger value="memberships">會員方案</TabsTrigger>
+            <TabsTrigger value="packs">次數票券</TabsTrigger>
+            <TabsTrigger value="transactions">交易紀錄</TabsTrigger>
           </TabsList>
 
           {/* Overview */}
@@ -257,29 +257,29 @@ export default function FinancialsManage() {
               <Card>
                 <CardContent className="pt-5 pb-4 px-4">
                   <DollarSign className="h-5 w-5 text-accent-gold" />
-                  <p className="text-2xl font-bold mt-2">$18,420</p>
-                  <p className="text-xs text-muted-foreground">Revenue (MTD)</p>
+                  <p className="text-2xl font-bold mt-2">NT$582,400</p>
+                  <p className="text-xs text-muted-foreground">本月營收</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-5 pb-4 px-4">
                   <Users className="h-5 w-5 text-primary" />
                   <p className="text-2xl font-bold mt-2">163</p>
-                  <p className="text-xs text-muted-foreground">Active Members</p>
+                  <p className="text-xs text-muted-foreground">活躍會員</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-5 pb-4 px-4">
                   <Package className="h-5 w-5 text-accent-coral" />
                   <p className="text-2xl font-bold mt-2">286</p>
-                  <p className="text-xs text-muted-foreground">Active Packs</p>
+                  <p className="text-xs text-muted-foreground">使用中票券</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-5 pb-4 px-4">
                   <TrendingUp className="h-5 w-5 text-accent-sage" />
-                  <p className="text-2xl font-bold mt-2">$113</p>
-                  <p className="text-xs text-muted-foreground">Avg Revenue/Student</p>
+                  <p className="text-2xl font-bold mt-2">NT$3,570</p>
+                  <p className="text-xs text-muted-foreground">平均會員貢獻</p>
                 </CardContent>
               </Card>
             </div>
@@ -287,7 +287,7 @@ export default function FinancialsManage() {
             {/* Recent Transactions */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Recent Transactions</CardTitle>
+                <CardTitle className="text-lg">近期交易</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 {mockRecentTransactions.slice(0, 5).map((tx) => (
@@ -297,7 +297,7 @@ export default function FinancialsManage() {
                       <p className="text-xs text-muted-foreground">{tx.type} — {tx.date}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold">${(tx.amount / 100).toFixed(2)}</span>
+                      <span className="text-sm font-semibold">NT${(tx.amount / 100).toLocaleString()}</span>
                       <Badge
                         className={`text-[10px] ${
                           tx.status === "completed" ? "bg-accent-sage/20 text-accent-sage" :
@@ -305,7 +305,7 @@ export default function FinancialsManage() {
                           "bg-accent-gold/20 text-accent-gold"
                         }`}
                       >
-                        {tx.status}
+                        {tx.status === "completed" ? "完成" : tx.status === "failed" ? "失敗" : tx.status === "refunded" ? "已退款" : tx.status}
                       </Badge>
                     </div>
                   </div>
@@ -317,9 +317,9 @@ export default function FinancialsManage() {
           {/* Memberships */}
           <TabsContent value="memberships" className="space-y-6">
             <div className="flex justify-end">
-              <Button size="sm" onClick={() => toast({ title: "Coming soon", description: "Membership creation will be available with backend integration." })}>
+              <Button size="sm" onClick={() => toast({ title: "即將推出", description: "會員方案建立功能將於後端串接後開放。" })}>
                 <Plus className="h-4 w-4 mr-2" />
-                New Membership Type
+                新增會員方案
               </Button>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
@@ -330,8 +330,8 @@ export default function FinancialsManage() {
                       <div>
                         <h3 className="text-sm font-semibold">{membership.name}</h3>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-lg font-bold">${(membership.price / 100).toFixed(0)}</span>
-                          <span className="text-xs text-muted-foreground">/{membership.billing === "monthly" ? "mo" : "yr"}</span>
+                          <span className="text-lg font-bold">NT${(membership.price / 100).toLocaleString()}</span>
+                          <span className="text-xs text-muted-foreground">/{membership.billing === "monthly" ? "月" : "年"}</span>
                         </div>
                       </div>
                       <DropdownMenu>
@@ -341,21 +341,21 @@ export default function FinancialsManage() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-40 rounded-xl">
-                          <DropdownMenuItem className="rounded-lg cursor-pointer">Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="rounded-lg cursor-pointer">View Members</DropdownMenuItem>
-                          <DropdownMenuItem className="rounded-lg cursor-pointer text-destructive">Deactivate</DropdownMenuItem>
+                          <DropdownMenuItem className="rounded-lg cursor-pointer">編輯</DropdownMenuItem>
+                          <DropdownMenuItem className="rounded-lg cursor-pointer">查看會員</DropdownMenuItem>
+                          <DropdownMenuItem className="rounded-lg cursor-pointer text-destructive">停用</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
                     <div className="flex items-center gap-4 mt-3 pt-3 border-t border-border">
                       <div className="flex items-center gap-1.5">
                         <Users className="h-3.5 w-3.5 text-muted-foreground" />
-                        <span className="text-sm font-medium">{membership.activeCount} active</span>
+                        <span className="text-sm font-medium">{membership.activeCount} 位有效</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
                         <span className="text-sm">
-                          ${((membership.price * membership.activeCount) / 100).toLocaleString()}/mo
+                          NT${((membership.price * membership.activeCount) / 100).toLocaleString()}/月
                         </span>
                       </div>
                     </div>
@@ -368,9 +368,9 @@ export default function FinancialsManage() {
           {/* Class Packs */}
           <TabsContent value="packs" className="space-y-6">
             <div className="flex justify-end">
-              <Button size="sm" onClick={() => toast({ title: "Coming soon", description: "Pack creation will be available with backend integration." })}>
+              <Button size="sm" onClick={() => toast({ title: "即將推出", description: "票券方案建立功能將於後端串接後開放。" })}>
                 <Plus className="h-4 w-4 mr-2" />
-                New Pack Type
+                新增票券方案
               </Button>
             </div>
             <div className="grid md:grid-cols-2 gap-4">

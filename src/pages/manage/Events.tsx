@@ -79,7 +79,7 @@ const mockEvents: EventRow[] = [
     isVirtual: false, featured: true, totalRevenue: 133500,
   },
   {
-    id: "e2", title: "200-Hour Yoga Teacher Training", type: "training",
+    id: "e2", title: "200-Hour Yoga 師資培訓", type: "training",
     status: "published", coverUrl: null,
     startsAt: "2025-03-01T08:00:00", endsAt: "2025-05-31T17:00:00",
     isMultiSession: true, sessionCount: 12, capacity: 15, registeredCount: 11, waitlistCount: 0,
@@ -111,7 +111,7 @@ const mockEvents: EventRow[] = [
     startsAt: "2025-04-11T09:00:00", endsAt: "2025-04-13T16:00:00",
     isMultiSession: true, sessionCount: 6, capacity: 50, registeredCount: 0, waitlistCount: 0,
     priceCents: 25000, earlyBirdCents: 19900, earlyBirdEndsAt: "2025-03-15", memberPriceCents: 22000,
-    teachers: ["Sarah Chen", "Luna Patel"], tags: ["Retreat", "Virtual", "Meditation"], location: "Online",
+    teachers: ["Sarah Chen", "Luna Patel"], tags: ["Retreat", "線上", "Meditation"], location: "Online",
     isVirtual: true, featured: false, totalRevenue: 0,
   },
 ];
@@ -215,7 +215,7 @@ export default function EventsManage() {
               {[
                 { type: "Workshops", icon: Sparkles, events: 24, avgFill: 82, revenue: 892500, trend: "+12%" },
                 { type: "Trainings", icon: GraduationCap, events: 3, avgFill: 73, revenue: 10947000, trend: "+8%" },
-                { type: "Events", icon: Calendar, events: 18, avgFill: 88, revenue: 441000, trend: "+22%" },
+                { type: "活動", icon: Calendar, events: 18, avgFill: 88, revenue: 441000, trend: "+22%" },
                 { type: "Retreats", icon: Tent, events: 4, avgFill: 68, revenue: 2500000, trend: "-5%" },
                 { type: "Series", icon: Layers, events: 12, avgFill: 76, revenue: 1152000, trend: "+15%" },
               ].map((item) => {
@@ -340,7 +340,7 @@ export default function EventsManage() {
                           <Button variant="ghost" size="icon" className="h-8 w-8" title="Preview" onClick={() => toast({ title: "Preview", description: "Event preview opened in new tab." })}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
-                          <Button variant="ghost" size="icon" className="h-8 w-8" title="Edit" onClick={() => toast({ title: "Edit mode", description: "Event editor opened." })}>
+                          <Button variant="ghost" size="icon" className="h-8 w-8" title="編輯" onClick={() => toast({ title: "編輯模式", description: "Event editor opened." })}>
                             <Edit className="h-3.5 w-3.5" />
                           </Button>
                           <Button variant="ghost" size="icon" className="h-8 w-8" title="Duplicate" onClick={() => toast({ title: "Duplicated", description: "Event duplicated as draft." })}>
@@ -406,13 +406,13 @@ export default function EventsManage() {
             </DialogHeader>
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label>Event Type</Label>
+                <Label>事件類型</Label>
                 <Select defaultValue="workshop">
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="workshop">Workshop (single session, 1-4 hours)</SelectItem>
                     <SelectItem value="series">Series (multi-week, same time each week)</SelectItem>
-                    <SelectItem value="training">Training / Teacher Training (multi-day certification)</SelectItem>
+                    <SelectItem value="training">Training / 師資培訓 (multi-day certification)</SelectItem>
                     <SelectItem value="retreat">Retreat (multi-day immersive)</SelectItem>
                     <SelectItem value="event">Special Event (sound bath, social, etc.)</SelectItem>
                     <SelectItem value="immersion">Immersion (weekend deep-dive)</SelectItem>
@@ -421,7 +421,7 @@ export default function EventsManage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="eventTitle">Title</Label>
-                <Input id="eventTitle" placeholder="e.g. Arm Balance Workshop with Maya" />
+                <Input id="eventTitle" placeholder="例如：與 Maya 的手臂平衡工作坊" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -452,7 +452,7 @@ export default function EventsManage() {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
+              <Button variant="outline" onClick={() => setCreateOpen(false)}>取消</Button>
               <Button onClick={() => { setCreateOpen(false); toast({ title: "Event created", description: "Continue editing to add details, pricing tiers, and publish." }); }}>
                 Create & Edit
               </Button>

@@ -41,13 +41,13 @@ const metrics: MetricDefinition[] = [
   // Financial Metrics
   {
     term: "MRR (Monthly Recurring Revenue)",
-    shortDefinition: "Predictable monthly income from active memberships",
+    shortDefinition: "Predictable monthly income from 位活躍學員hips",
     longDefinition:
-      "MRR represents the total revenue you can expect each month from active membership subscriptions. It excludes one-time purchases like class packs, drop-ins, retail, and workshops. MRR is the foundation of a sustainable studio business because it provides predictable cash flow.",
+      "MRR represents the total revenue you can expect each month from 位活躍學員hip subscriptions. It excludes one-time purchases like class packs, drop-ins, retail, and workshops. MRR is the foundation of a sustainable studio business because it provides predictable cash flow.",
     calculation: "Sum of (monthly membership price × active subscribers)",
     example:
       "If you have 50 members paying $99/month and 30 members paying $149/month, your MRR = (50 × $99) + (30 × $149) = $9,420",
-    relatedTerms: ["ARR", "Churn Rate", "Revenue Per Student"],
+    relatedTerms: ["ARR", "流失率", "Revenue Per Student"],
     category: "financial",
     importance: "primary",
   },
@@ -70,7 +70,7 @@ const metrics: MetricDefinition[] = [
     calculation: "Total Revenue ÷ Active Students",
     example:
       "If total revenue is $18,400 and you have 163 active students, RPS = $18,400 ÷ 163 = $113",
-    relatedTerms: ["CLV", "Active Members", "ARPU"],
+    relatedTerms: ["CLV", "活躍學員", "ARPU"],
     category: "financial",
     importance: "primary",
   },
@@ -87,14 +87,14 @@ const metrics: MetricDefinition[] = [
     importance: "primary",
   },
   {
-    term: "CLV (Customer Lifetime Value)",
+    term: "CLV (Customer 終身價值)",
     shortDefinition: "Total revenue expected from a student over their lifetime",
     longDefinition:
       "CLV estimates how much total revenue a student will generate from the time they join until they cancel. It helps you understand how much you can afford to spend on acquisition and how valuable retention improvements are.",
     calculation: "Average Revenue Per Month × Average Membership Length (months)",
     example:
       "If average monthly revenue per member is $110 and members stay 14 months on average, CLV = $110 × 14 = $1,540",
-    relatedTerms: ["CAC", "Retention Rate", "Churn Rate"],
+    relatedTerms: ["CAC", "留存率", "流失率"],
     category: "financial",
     importance: "primary",
   },
@@ -103,46 +103,46 @@ const metrics: MetricDefinition[] = [
     shortDefinition: "Cost to acquire one new paying student",
     longDefinition:
       "CAC includes all marketing spend, promotions, referral bonuses, and sales efforts divided by new students acquired. A healthy CLV:CAC ratio is 3:1 or higher, meaning lifetime value is at least 3x the cost to acquire.",
-    calculation: "Total Acquisition Spend ÷ New Students Acquired",
+    calculation: "Total Acquisition Spend ÷ 新學員s Acquired",
     example:
       "If you spent $800 on marketing and acquired 10 new members, CAC = $800 ÷ 10 = $80",
-    relatedTerms: ["CLV", "Marketing ROI", "Conversion Rate"],
+    relatedTerms: ["CLV", "Marketing ROI", "轉換率"],
     category: "sales",
     importance: "primary",
   },
 
   // Member Metrics
   {
-    term: "Active Members",
-    shortDefinition: "Students with current attendance or active membership",
+    term: "活躍學員",
+    shortDefinition: "Students with current attendance or 位活躍學員hip",
     longDefinition:
-      "A student is considered 'active' if they have attended at least one class in the selected period OR have an active membership/class pack with remaining credits. This distinguishes engaged students from dormant accounts.",
+      "A student is considered 'active' if they have attended at least one class in the selected period OR have an 位活躍學員hip/class pack with remaining credits. This distinguishes engaged students from dormant accounts.",
     calculation: "Count of unique students meeting activity criteria",
-    relatedTerms: ["Churn Rate", "Retention Rate", "At-Risk Members"],
+    relatedTerms: ["流失率", "留存率", "At-Risk Members"],
     category: "member",
     importance: "primary",
   },
   {
-    term: "Retention Rate",
+    term: "留存率",
     shortDefinition: "Percentage of students who remain active over time",
     longDefinition:
       "Retention rate measures how well you keep students engaged. 30-day retention tracks students who return within 30 days of their last visit. 90-day and annual retention give longer-term views. High retention reduces the need for constant new student acquisition.",
-    calculation: "(Students at End - New Students) ÷ Students at Start × 100",
+    calculation: "(Students at End - 新學員s) ÷ Students at Start × 100",
     example:
       "Started month with 150 members, ended with 158, added 12 new → (158 - 12) ÷ 150 × 100 = 97.3% retention",
-    relatedTerms: ["Churn Rate", "At-Risk Members", "Engagement Score"],
+    relatedTerms: ["流失率", "At-Risk Members", "Engagement Score"],
     category: "member",
     importance: "primary",
   },
   {
-    term: "Churn Rate",
+    term: "流失率",
     shortDefinition: "Percentage of students who stop attending or cancel",
     longDefinition:
       "Churn is the opposite of retention - the rate at which students leave. Monthly churn of 5% means losing 5% of your base each month. Reducing churn by even 1-2% has compounding benefits on long-term revenue.",
     calculation: "Lost Students ÷ Starting Students × 100",
     example:
       "If you started the month with 160 members and 8 cancelled, churn = 8 ÷ 160 × 100 = 5%",
-    relatedTerms: ["Retention Rate", "At-Risk Members", "MRR"],
+    relatedTerms: ["留存率", "At-Risk Members", "MRR"],
     category: "member",
     importance: "primary",
   },
@@ -152,7 +152,7 @@ const metrics: MetricDefinition[] = [
     longDefinition:
       "At-risk members are identified by declining engagement patterns: fewer visits than usual, longer gaps between visits, or approaching the end of a class pack without renewal. Early identification allows proactive outreach to re-engage them.",
     calculation: "Based on engagement score dropping below threshold + attendance patterns",
-    relatedTerms: ["Engagement Score", "Churn Rate", "Win-Back Campaign"],
+    relatedTerms: ["Engagement Score", "流失率", "Win-Back Campaign"],
     category: "member",
     importance: "primary",
   },
@@ -162,7 +162,7 @@ const metrics: MetricDefinition[] = [
     longDefinition:
       "The engagement score combines visit frequency, recency, class variety, and social interactions (referrals, community posts) into a single number. Scores above 70 indicate highly engaged members. Below 40 suggests intervention needed.",
     calculation: "Weighted combination of frequency, recency, variety, and social factors",
-    relatedTerms: ["At-Risk Members", "Retention Rate", "Classes Per Month"],
+    relatedTerms: ["At-Risk Members", "留存率", "Classes Per Month"],
     category: "member",
     importance: "secondary",
   },
@@ -170,22 +170,22 @@ const metrics: MetricDefinition[] = [
     term: "Classes Per Student Per Month",
     shortDefinition: "Average monthly attendance per active student",
     longDefinition:
-      "This metric shows how frequently your active members attend. Higher attendance usually correlates with better retention. If members on unlimited plans attend less than expected, they may be overpaying relative to perceived value.",
+      "This metric shows how frequently your 位活躍學員 attend. Higher attendance usually correlates with better retention. If members on unlimited plans attend less than expected, they may be overpaying relative to perceived value.",
     calculation: "Total Check-ins ÷ Active Students",
     example:
       "684 total check-ins with 163 active students = 684 ÷ 163 = 4.2 classes per student",
-    relatedTerms: ["Fill Rate", "Active Members", "Engagement Score"],
+    relatedTerms: ["Fill Rate", "活躍學員", "Engagement Score"],
     category: "member",
     importance: "secondary",
   },
 
   // Sales Metrics
   {
-    term: "Conversion Rate",
+    term: "轉換率",
     shortDefinition: "Percentage of leads or trials who become paying members",
     longDefinition:
       "Conversion rate tracks how effectively you turn interested prospects into paying customers. This can be measured at multiple stages: website visitor to signup, signup to trial, trial to paid membership. Each stage offers optimization opportunities.",
-    calculation: "Conversions ÷ Total Opportunities × 100",
+    calculation: "轉換數 ÷ Total Opportunities × 100",
     example:
       "If 50 people signed up for intro offers and 8 converted to memberships, rate = 8 ÷ 50 × 100 = 16%",
     relatedTerms: ["CAC", "Funnel", "Trial Rate"],
@@ -200,7 +200,7 @@ const metrics: MetricDefinition[] = [
     calculation: "(Revenue from Promo - Promo Cost) ÷ Promo Cost × 100",
     example:
       "If a promo brought in $2,000 revenue and cost $500 in discounts, ROI = (2,000 - 500) ÷ 500 × 100 = 300%",
-    relatedTerms: ["CAC", "Marketing ROI", "Conversion Rate"],
+    relatedTerms: ["CAC", "Marketing ROI", "轉換率"],
     category: "sales",
     importance: "secondary",
   },
@@ -217,13 +217,13 @@ const metrics: MetricDefinition[] = [
 
   // Utilization Metrics
   {
-    term: "Fill Rate (Class Utilization)",
+    term: "Fill Rate (課程使用率)",
     shortDefinition: "Percentage of available spots filled in classes",
     longDefinition:
       "Fill rate shows how well your schedule matches student demand. A class with 15 spots and 12 attendees has an 80% fill rate. Consistently low fill rates suggest schedule optimization opportunities; high fill rates may indicate need for additional classes.",
     calculation: "Actual Attendance ÷ Class Capacity × 100",
     example: "Class with 18 spots and 13 attendees: 13 ÷ 18 × 100 = 72% fill rate",
-    relatedTerms: ["Classes Per Student", "Schedule Optimization", "Waitlist"],
+    relatedTerms: ["Classes Per Student", "Schedule Optimization", "候補"],
     category: "general",
     importance: "primary",
   },
@@ -247,25 +247,25 @@ const metrics: MetricDefinition[] = [
     longDefinition:
       "A session is one visit to your site, starting when someone arrives and ending after 30 minutes of inactivity or when they leave. Multiple pageviews can occur within one session. Sessions help you understand traffic volume and patterns.",
     calculation: "Count of unique visit instances",
-    relatedTerms: ["Pageviews", "Bounce Rate", "Session Duration"],
+    relatedTerms: ["Pageviews", "跳出率", "Session Duration"],
     category: "site",
     importance: "primary",
   },
   {
-    term: "Bounce Rate",
+    term: "跳出率",
     shortDefinition: "Percentage of visitors who leave after viewing one page",
     longDefinition:
       "A high bounce rate on your schedule or pricing page may indicate confusion or friction. Some pages naturally have higher bounce rates (blog posts). Focus on reducing bounces on conversion-critical pages.",
     calculation: "Single-Page Sessions ÷ Total Sessions × 100",
-    relatedTerms: ["Sessions", "Conversion Rate", "Page Exit Rate"],
+    relatedTerms: ["Sessions", "轉換率", "Page Exit Rate"],
     category: "site",
     importance: "secondary",
   },
   {
-    term: "Attribution",
+    term: "歸因",
     shortDefinition: "Identifying which marketing channel led to a conversion",
     longDefinition:
-      "Attribution helps you understand which marketing efforts drive results. First-touch attribution credits the first interaction, last-touch credits the final one before conversion. Understanding attribution helps allocate marketing budget effectively.",
+      "歸因 helps you understand which marketing efforts drive results. First-touch attribution credits the first interaction, last-touch credits the final one before conversion. 了解歸因分析 helps allocate marketing budget effectively.",
     calculation: "Based on tracking parameters (UTM codes) and conversion events",
     relatedTerms: ["UTM Parameters", "Marketing ROI", "CAC"],
     category: "site",
@@ -283,10 +283,10 @@ export default function DataDictionary() {
 
   const categories = [
     { id: "all", label: "All Metrics", icon: BookOpen },
-    { id: "financial", label: "Financial", icon: DollarSign },
-    { id: "member", label: "Member", icon: Users },
-    { id: "sales", label: "Sales", icon: TrendingUp },
-    { id: "site", label: "Site", icon: BarChart3 },
+    { id: "financial", label: "財務", icon: DollarSign },
+    { id: "member", label: "學員", icon: Users },
+    { id: "sales", label: "銷售", icon: TrendingUp },
+    { id: "site", label: "網站", icon: BarChart3 },
     { id: "general", label: "General", icon: Calculator },
   ];
 
@@ -311,7 +311,7 @@ export default function DataDictionary() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Data Dictionary</h1>
+            <h1 className="text-2xl font-bold tracking-tight">資料字典</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Definitions and calculations for all analytics metrics
             </p>

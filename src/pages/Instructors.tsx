@@ -92,9 +92,9 @@ const Instructors = () => {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Instructors</h1>
+          <h1 className="text-3xl font-bold tracking-tight">老師</h1>
           <p className="text-muted-foreground mt-1">
-            Meet the teachers guiding your practice
+            認識引導您練習的老師
           </p>
         </div>
 
@@ -103,7 +103,7 @@ const Instructors = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search instructors..."
+              placeholder="搜尋老師..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9"
@@ -113,10 +113,10 @@ const Instructors = () => {
           <div className="flex items-center gap-2">
             <Select value={specialtyFilter} onValueChange={setSpecialtyFilter}>
               <SelectTrigger className="w-[140px]">
-                <SelectValue placeholder="Specialty" />
+                <SelectValue placeholder="專長" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Specialties</SelectItem>
+                <SelectItem value="all">全部專長</SelectItem>
                 <SelectItem value="vinyasa">Vinyasa</SelectItem>
                 <SelectItem value="yin">Yin</SelectItem>
                 <SelectItem value="hot">Hot Yoga</SelectItem>
@@ -127,10 +127,10 @@ const Instructors = () => {
 
             <Select value={studioFilter} onValueChange={setStudioFilter}>
               <SelectTrigger className="w-[160px]">
-                <SelectValue placeholder="Studio" />
+                <SelectValue placeholder="工作室" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Studios</SelectItem>
+                <SelectItem value="all">全部工作室</SelectItem>
                 <SelectItem value="lotus">Lotus Flow Studio</SelectItem>
                 <SelectItem value="hot">Hot Yoga Collective</SelectItem>
                 <SelectItem value="zen">Zen Garden Yoga</SelectItem>
@@ -150,7 +150,7 @@ const Instructors = () => {
           ))}
           {filteredInstructors.length === 0 && (
             <div className="col-span-2 text-center py-8 text-muted-foreground">
-              <p>No instructors match your filters.</p>
+              <p>沒有符合篩選條件的老師。</p>
             </div>
           )}
         </div>

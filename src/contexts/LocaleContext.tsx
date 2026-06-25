@@ -2,7 +2,7 @@
  * Locale Context
  *
  * Provides locale-aware formatting throughout the app. This context combines:
- * - Language preference (from i18next)
+ * - Fixed zh-TW locale for formatting
  * - Studio settings (timezone, currency)
  * - Formatting utilities that respect the active locale
  *
@@ -19,8 +19,7 @@
  */
 
 import { createContext, useContext, useCallback, useMemo, type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-import { getIntlLocale } from '@/i18n';
+import { INTL_LOCALE } from '@/lib/strings';
 
 // ============================================================================
 // Types
@@ -91,10 +90,10 @@ interface LocaleContextType {
 }
 
 const DEFAULT_STUDIO_SETTINGS: StudioLocaleSettings = {
-  defaultLocale: 'en',
-  supportedLocales: ['en'],
-  currency: 'USD',
-  timezone: 'America/Chicago',
+  defaultLocale: 'zh-TW',
+  supportedLocales: ['zh-TW'],
+  currency: 'TWD',
+  timezone: 'Asia/Taipei',
 };
 
 // ============================================================================
@@ -114,9 +113,8 @@ interface LocaleProviderProps {
 }
 
 export function LocaleProvider({ children, studioSettings: studioOverrides }: LocaleProviderProps) {
-  const { i18n } = useTranslation();
-  const locale = i18n.language;
-  const intlLocale = getIntlLocale(locale);
+  const locale = INTL_LOCALE;
+  const intlLocale = INTL_LOCALE;
 
   const studioSettings: StudioLocaleSettings = useMemo(() => ({
     ...DEFAULT_STUDIO_SETTINGS,

@@ -51,130 +51,130 @@ export interface TourConfig {
 
 export const OWNER_TOUR: TourConfig = {
   id: "tour-owner",
-  name: "Studio Owner Tour",
+  name: "場館經營者導覽",
   steps: [
     {
       route: "/manage",
-      title: "Owner Dashboard",
-      body: "This is your command center. Today's schedule, key metrics, recent activity, and alerts — everything you need at a glance. Revenue, attendance trends, and action items are all surfaced here.",
-      hint: "Try clicking different date ranges on the charts or review the alerts panel.",
+      title: "經營者儀表板",
+      body: "這是您的指揮中心。今日課表、關鍵指標、最新動態與提醒 — 一目了然。營收、出席趨勢與待辦事項都彙整在此。",
+      hint: "試試點擊圖表上的不同日期區間，或查看提醒面板。",
     },
     {
       route: "/manage/schedule",
-      title: "Schedule Management",
-      body: "Create and manage your class schedule with recurring rules, one-off changes, and substitutions. Each class shows enrollment, capacity, and waitlist status in real time.",
-      hint: "Try adding a new class or editing an existing one.",
+      title: "課表管理",
+      body: "以循環規則建立與管理課表，支援單次調整與代課。每堂課即時顯示報名人數、容量與候補狀態。",
+      hint: "試試新增一堂課或編輯現有課程。",
     },
     {
       route: "/manage/members",
-      title: "Member Management",
-      body: "Every member's profile, visit history, membership status, and waivers in one place. Filter by status, search by name, and click any member for their full record.",
-      hint: "Try searching for a member or filtering by membership type.",
+      title: "會員管理",
+      body: "每位會員的個人檔案、到課紀錄、會籍狀態與同意書集中管理。可依狀態篩選、搜尋姓名，點擊即可查看完整紀錄。",
+      hint: "試試搜尋會員或依會籍類型篩選。",
     },
     {
       route: "/manage/financials",
-      title: "Financial Overview",
-      body: "Memberships, class packs, transactions, and revenue tracking. See MRR, churn, and payment health. Export reports for your accountant.",
-      hint: "Try the export button or switch between membership and class pack views.",
+      title: "財務總覽",
+      body: "會籍、課程包、交易與營收追蹤。查看 MRR、流失率與收款健康度，並匯出報表供會計使用。",
+      hint: "試試匯出功能，或切換會籍與課程包檢視。",
     },
     {
       route: "/manage/analytics",
-      title: "Analytics & Reports",
-      body: "Attendance patterns, revenue trends, teacher performance, and retention metrics. Make data-driven decisions about your schedule and pricing.",
-      hint: "Explore the different analytics tabs and chart views.",
+      title: "分析與報表",
+      body: "出席模式、營收趨勢、老師表現與留存指標。以數據驅動課表與定價決策。",
+      hint: "探索不同的分析分頁與圖表檢視。",
     },
     {
       route: "/manage/settings",
-      title: "Studio Settings",
-      body: "Configure your studio: locations, policies, branding, payment processing, notification preferences, and feature toggles. Everything is customizable.",
-      hint: "Review the different settings sections to see what's configurable.",
+      title: "場館設定",
+      body: "設定場館資訊：據點、政策、品牌、金流、通知偏好與功能開關。一切皆可自訂。",
+      hint: "瀏覽各設定區塊，了解可配置項目。",
     },
   ],
 };
 
 export const TEACHER_TOUR: TourConfig = {
   id: "tour-teacher",
-  name: "Instructor Tour",
+  name: "老師導覽",
   steps: [
     {
       route: "/teach",
-      title: "Instructor Dashboard",
-      body: "Your personal teaching hub. See upcoming classes, recent activity, and key stats. Quick access to your schedule, sub requests, and earnings.",
-      hint: "Check your upcoming classes and any pending sub requests.",
+      title: "老師儀表板",
+      body: "您的專屬教學中心。查看即將開課的課程、最新動態與關鍵數據。快速進入課表、代課請求與收入。",
+      hint: "查看即將開課的課程與待處理的代課請求。",
     },
     {
       route: "/teach/schedule",
-      title: "Your Teaching Schedule",
-      body: "All your assigned classes across locations. See enrollment numbers, request substitutes when you need coverage, and manage your teaching calendar.",
-      hint: "Try requesting a sub for one of your upcoming classes.",
+      title: "您的授課課表",
+      body: "跨據點的所有排課。查看報名人數、申請代課，並管理您的教學行事曆。",
+      hint: "試試為其中一堂課申請代課。",
     },
     {
       route: "/teach/earnings",
-      title: "Earnings & Pay",
-      body: "Track your pay across classes, workshops, and tips. See breakdowns by period, with per-class and hourly rate visibility.",
-      hint: "Switch between time periods to see earnings trends.",
+      title: "收入與薪資",
+      body: "追蹤課程、工作坊與小費收入。依期間查看明細，含每堂課與時薪資訊。",
+      hint: "切換不同期間，查看收入趨勢。",
     },
     {
       route: "/teach/availability",
-      title: "Set Your Availability",
-      body: "Tell the studio when you're available to teach. Set weekly recurring availability and manage sub preferences so the right opportunities come your way.",
-      hint: "Toggle days on/off and set your preferred time ranges.",
+      title: "設定可授課時段",
+      body: "告知場館您可授課的時間。設定每週固定時段與代課偏好，讓合適的機會找上門。",
+      hint: "切換各日開關並設定偏好時段。",
     },
     {
       route: "/teach/profile",
-      title: "Your Public Profile",
-      body: "Manage what students see about you: bio, specialties, certifications, and teaching style. A strong profile helps students find and connect with you.",
-      hint: "Update your bio and add specialties.",
+      title: "您的公開檔案",
+      body: "管理學員看到的資訊：簡介、專長、證照與教學風格。完整的檔案有助學員找到並認識您。",
+      hint: "更新簡介並新增專長。",
     },
   ],
 };
 
 export const FRONTDESK_TOUR: TourConfig = {
   id: "tour-frontdesk",
-  name: "Front Desk Tour",
+  name: "櫃台導覽",
   steps: [
     {
       route: "/staff/checkin",
-      title: "Member Check-In",
-      body: "The daily check-in view. See today's classes, search for members, and process check-ins. Members can also self-check-in via kiosk mode or QR code.",
-      hint: "Try checking in a member from the roster.",
+      title: "會員報到",
+      body: "每日報到畫面。查看今日課程、搜尋會員並完成報到。會員也可透過自助報到機或 QR 碼自行報到。",
+      hint: "試試從名單中為會員完成報到。",
     },
     {
       route: "/staff/waitlist",
-      title: "Waitlist Management",
-      body: "When classes hit capacity, members join the waitlist. Promote members when spots open, configure auto-promotion rules, and track response deadlines.",
-      hint: "Try promoting a waitlisted member and see the confirmation flow.",
+      title: "候補管理",
+      body: "課程額滿時，會員可加入候補。有名額釋出時可手動或自動遞補，並追蹤回覆期限。",
+      hint: "試試遞補一位候補會員，查看確認流程。",
     },
   ],
 };
 
 export const MEMBER_TOUR: TourConfig = {
   id: "tour-member",
-  name: "Member Tour",
+  name: "會員導覽",
   steps: [
     {
       route: "/home",
-      title: "Your Home",
-      body: "Welcome to your practice hub. Quick-book your favorite classes, see upcoming sessions, track your practice streak, and stay connected with the community.",
-      hint: "Try booking a class from the quick-book section.",
+      title: "您的主頁",
+      body: "歡迎來到您的練習中心。快速預約常上課程、查看即將開課的課程、追蹤練習連續天數，並與社群保持連結。",
+      hint: "試試從快速預約區預約一堂課。",
     },
     {
       route: "/schedule",
-      title: "Browse Classes",
-      body: "Find classes by style, teacher, time, or location. Filter and search to find your perfect practice. Click any class to see details and book your spot.",
-      hint: "Try filtering by class style or searching for a teacher.",
+      title: "瀏覽課程",
+      body: "依風格、老師、時間或據點找課。篩選與搜尋，找到最適合的練習。點擊任一課程查看詳情並預約。",
+      hint: "試試依課程風格篩選或搜尋老師。",
     },
     {
       route: "/my-schedule",
-      title: "Your Schedule",
-      body: "All your upcoming and past bookings in one place. Cancel or modify bookings, see your waitlist status, and review your class history.",
-      hint: "Check your upcoming bookings and past attendance.",
+      title: "我的課表",
+      body: "所有即將與過去的預約集中一處。取消或修改預約、查看候補狀態，並回顧上課紀錄。",
+      hint: "查看即將開課的預約與過往出席紀錄。",
     },
     {
       route: "/account",
-      title: "Your Account",
-      body: "Membership details, class pack balance, billing history, and notification preferences. Everything about your account in one place.",
-      hint: "Review your membership status and billing history.",
+      title: "我的帳戶",
+      body: "會籍詳情、課程包餘額、帳單紀錄與通知偏好。帳戶相關資訊盡在此處。",
+      hint: "查看會籍狀態與帳單紀錄。",
     },
   ],
 };
@@ -252,7 +252,7 @@ export function GuidedTour({ tour, currentStep, onStepChange, onDismiss }: Guide
 
           {!isOnCorrectPage && (
             <p className="text-xs text-amber-600 mb-3">
-              Navigate to this page to explore this feature.
+              請前往此頁面以探索此功能。
             </p>
           )}
         </div>
@@ -267,12 +267,12 @@ export function GuidedTour({ tour, currentStep, onStepChange, onDismiss }: Guide
             className="text-xs"
           >
             <ChevronLeft className="w-3.5 h-3.5 mr-1" />
-            Previous
+            上一步
           </Button>
 
           {isLast ? (
             <Button size="sm" onClick={onDismiss} className="text-xs">
-              Finish Tour
+              完成導覽
             </Button>
           ) : (
             <Button
@@ -280,7 +280,7 @@ export function GuidedTour({ tour, currentStep, onStepChange, onDismiss }: Guide
               onClick={() => onStepChange(currentStep + 1)}
               className="text-xs"
             >
-              Next
+              下一步
               <ChevronRight className="w-3.5 h-3.5 ml-1" />
             </Button>
           )}
@@ -310,13 +310,13 @@ export function TourLauncher({ tour, onStart, onSkip }: TourLauncherProps) {
           </div>
           <div>
             <h2 className="font-semibold">{tour.name}</h2>
-            <p className="text-xs text-muted-foreground">{tour.steps.length} stops</p>
+            <p className="text-xs text-muted-foreground">{tour.steps.length} 個站點</p>
           </div>
         </div>
 
         <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-          Take a quick guided tour to see what's available in this view.
-          We'll highlight key features and show you where everything is.
+          快速導覽此檢視中的主要功能。
+          我們會標示重點功能並帶您熟悉各項位置。
         </p>
 
         <div className="space-y-1.5 mb-6">
@@ -332,10 +332,10 @@ export function TourLauncher({ tour, onStart, onSkip }: TourLauncherProps) {
 
         <div className="flex items-center justify-between">
           <Button variant="ghost" size="sm" onClick={onSkip}>
-            Skip tour
+            略過導覽
           </Button>
           <Button size="sm" onClick={onStart}>
-            Start tour
+            開始導覽
             <ChevronRight className="w-3.5 h-3.5 ml-1" />
           </Button>
         </div>

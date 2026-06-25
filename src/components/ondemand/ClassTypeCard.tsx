@@ -76,7 +76,7 @@ export function ClassTypeCard({
 
         {/* Class count */}
         <div className="inline-flex items-center px-3 py-1 rounded-full bg-background/80 text-sm font-medium">
-          {classCount} classes
+          {classCount} 堂課程
         </div>
       </div>
     </button>

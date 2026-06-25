@@ -151,27 +151,27 @@ const BookIcon = ({ className }: { className?: string }) => (
 const features = [
   {
     icon: ServerIcon,
-    title: "Self-Host Your Data",
+    title: "自行託管資料",
     description:
-      "Run Tandava on your own infrastructure. Your member data, your control. No vendor lock-in.",
+      "在自有基礎設施上運行 Tandava。會員資料由您掌控，無供應商鎖定。",
   },
   {
     icon: CodeIcon,
-    title: "Fully Customizable",
+    title: "完全可客製",
     description:
-      "Modify the source code to fit your exact needs. Add features, change workflows, integrate your tools.",
+      "修改原始碼以符合您的需求。新增功能、調整流程、整合自有工具。",
   },
   {
     icon: ShieldIcon,
-    title: "No Subscription Fees",
+    title: "無訂閱費用",
     description:
-      "Free to use, forever. Pay only for your hosting costs. Scale without per-member pricing.",
+      "永久免費使用，僅支付主機費用。擴展規模無需按會員計費。",
   },
   {
     icon: HeartIcon,
-    title: "Community-Driven",
+    title: "社群驅動",
     description:
-      "Built by studio owners, for studio owners. Contribute features back or benefit from others.",
+      "由工作室業者為工作室業者打造。貢獻功能或受益於他人分享。",
   },
 ];
 
@@ -180,18 +180,18 @@ const features = [
 // ============================================================================
 
 const includedFeatures = [
-  "Schedule management",
-  "Class bookings",
-  "Student roster",
-  "Teacher management",
-  "Membership & packs",
-  "Check-in system",
-  "Analytics dashboard",
-  "Multi-location support",
-  "Events & workshops",
-  "Teacher pay tracking",
-  "Kiosk mode",
-  "Mobile-responsive",
+  "課程表管理",
+  "課程預約",
+  "學員名單",
+  "老師管理",
+  "會員與套票",
+  "報到系統",
+  "分析儀表板",
+  "多場館支援",
+  "活動與工作坊",
+  "老師薪資追蹤",
+  "自助報到模式",
+  "響應式設計",
 ];
 
 // ============================================================================
@@ -205,7 +205,7 @@ export default function OpenSource() {
         href="#opensource-main"
         className="sr-only absolute left-4 top-4 z-[70] rounded-md bg-white px-3 py-2 text-sm font-medium text-slate-900 shadow-md focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2"
       >
-        Skip to main content
+        跳至主要內容
       </a>
 
       {/* Header */}
@@ -225,7 +225,7 @@ export default function OpenSource() {
               to="/demo"
               className="inline-flex min-h-10 items-center rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
             >
-              Try Demo
+              體驗示範
             </Link>
             <a
               href="https://github.com/TaylorONeal/tandava"
@@ -246,24 +246,22 @@ export default function OpenSource() {
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-sm font-medium mb-6">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-              Open Source
+              開源
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-6">
-              Studio management software
+              工作室管理軟體
               <br />
-              <span className="text-slate-500">you actually own</span>
+              <span className="text-slate-500">真正屬於您</span>
             </h1>
             <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-              Tandava is a free, open-source platform for yoga, pilates, and
-              movement studios. Self-host it, customize it, and never pay
-              per-member fees again.
+              Tandava 是專為瑜伽、皮拉提斯與運動工作室設計的免費開源平台。自行部署、自由客製，不再支付按會員人數計費。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/demo"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-slate-900 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
               >
-                Try the Demo
+                體驗示範
                 <ArrowRightIcon className="h-4 w-4" />
               </Link>
               <a
@@ -273,7 +271,7 @@ export default function OpenSource() {
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-300 px-6 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
               >
                 <GitHubIcon className="h-5 w-5" />
-                View on GitHub
+                在 GitHub 上查看
               </a>
             </div>
           </div>
@@ -283,9 +281,7 @@ export default function OpenSource() {
         <section className="max-w-6xl mx-auto px-6 pb-16">
           <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
             <p className="mx-auto max-w-3xl text-amber-800">
-              <strong>Demo Mode:</strong> This site runs with mock data from a
-              fictional studio (Oxatl Yoga). No real bookings or payments are
-              processed.
+              <strong>示範模式：</strong>本示範站參考 <a href="https://www.1314mm941.com.tw/" target="_blank" rel="noopener noreferrer" className="underline">森浴光mm941 官網</a> 文案與服務項目，使用模擬資料運行，不會處理真實預約或付款。
             </p>
           </div>
         </section>
@@ -294,11 +290,10 @@ export default function OpenSource() {
         <section className="max-w-6xl mx-auto px-6 pb-20">
           <div className="mb-8 max-w-2xl">
             <h2 className="text-2xl font-bold text-slate-900">
-              Why teams choose Tandava
+              團隊為何選擇 Tandava
             </h2>
             <p className="mt-2 text-slate-600">
-              Built around control, transparency, and long-term flexibility for
-              studio operations.
+              以掌控力、透明度與長期彈性為工作室營運而建。
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -321,7 +316,7 @@ export default function OpenSource() {
         <section className="bg-slate-50 border-y border-slate-200 py-20">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-2xl font-bold text-slate-900 text-center mb-12">
-              Everything you need to run a studio
+              營運工作室所需的一切
             </h2>
             <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {includedFeatures.map((feature) => (
@@ -341,61 +336,59 @@ export default function OpenSource() {
         <section className="max-w-6xl mx-auto px-6 py-20">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">
-              Current Status
+              目前狀態
             </h2>
             <div className="space-y-5">
               <p className="text-slate-600">
-                Tandava is in active development. The demo showcases the UI and
-                workflows, but some features require backend integration before
-                production use:
+                Tandava 正在積極開發中。示範展示 UI 與工作流程，部分功能在正式使用前需整合後端：
               </p>
               <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-6">
                 <h4 className="font-semibold text-slate-900 mb-3">
-                  Working in Demo
+                  示範中可用
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    Full UI for scheduling, bookings, roster management
+                    完整的課程表、預約、名單管理 UI
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    Role-based access (Owner, Front Desk, Teacher, Student)
+                    角色權限（館主、櫃檯、老師、會員）
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    Analytics dashboard with charts
+                    含圖表的分析儀表板
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    Multi-location support
+                    多場館支援
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                    Kiosk check-in mode
+                    自助報到模式
                   </li>
                 </ul>
               </div>
               <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
                 <h4 className="font-semibold text-slate-900 mb-3">
-                  Needs Backend Integration
+                  需整合後端
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-                    Payment processing (Stripe Connect ready, not connected)
+                    付款處理（Stripe Connect 已就緒，尚未連線）
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-                    Real authentication (currently mock users)
+                    真實身份驗證（目前為模擬使用者）
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-                    Email/SMS notifications
+                    電子郵件／簡訊通知
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
-                    Data persistence (Supabase schema ready)
+                    資料持久化（Supabase 架構已就緒）
                   </li>
                 </ul>
               </div>
@@ -408,37 +401,37 @@ export default function OpenSource() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="max-w-3xl mx-auto text-center">
               <CodeIcon className="h-12 w-12 mx-auto mb-6 text-slate-400" />
-              <h2 className="text-2xl font-bold mb-4">Built for Developers</h2>
+              <h2 className="text-2xl font-bold mb-4">為開發者打造</h2>
               <p className="text-slate-400 mb-8">
-                Modern stack, clean architecture, comprehensive documentation.
+                現代技術棧、清晰架構、完整文件。
               </p>
               <div className="mb-8 grid gap-4 text-left sm:grid-cols-3">
                 <div className="rounded-lg border border-slate-700 bg-slate-800/70 p-4">
-                  <h4 className="font-semibold mb-2">Stack</h4>
+                  <h4 className="font-semibold mb-2">技術棧</h4>
                   <p className="text-sm text-slate-400">
                     React 18 + TypeScript + Vite
                     <br />
                     Tailwind CSS + shadcn/ui
                     <br />
-                    Supabase (Postgres + Auth)
+                    Supabase（Postgres + Auth）
                   </p>
                 </div>
                 <div className="rounded-lg border border-slate-700 bg-slate-800/70 p-4">
-                  <h4 className="font-semibold mb-2">Documentation</h4>
+                  <h4 className="font-semibold mb-2">文件</h4>
                   <p className="text-sm text-slate-400">
-                    Domain model with diagrams
+                    含圖表的領域模型
                     <br />
-                    API architecture
+                    API 架構
                     <br />
-                    Design system + tokens
+                    設計系統與設計代幣
                   </p>
                 </div>
                 <div className="rounded-lg border border-slate-700 bg-slate-800/70 p-4">
-                  <h4 className="font-semibold mb-2">Quick Start</h4>
+                  <h4 className="font-semibold mb-2">快速開始</h4>
                   <p className="text-sm text-slate-400">
-                    Clone, npm install
+                    複製、npm install
                     <br />
-                    Set VITE_DEMO_MODE=true
+                    設定 VITE_DEMO_MODE=true
                     <br />
                     npm run dev
                   </p>
@@ -451,7 +444,7 @@ export default function OpenSource() {
                 className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >
                 <GitHubIcon className="h-5 w-5" />
-                Get Started on GitHub
+                在 GitHub 上開始使用
               </a>
             </div>
           </div>
@@ -460,7 +453,7 @@ export default function OpenSource() {
         {/* Who This Is For */}
         <section className="max-w-6xl mx-auto px-6 py-20">
           <h2 className="text-2xl font-bold text-slate-900 text-center mb-12">
-            Who is Tandava for?
+            Tandava 適合誰？
           </h2>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="rounded-xl border border-slate-200 bg-white p-6 text-center">
@@ -468,29 +461,28 @@ export default function OpenSource() {
                 <ServerIcon className="h-6 w-6 text-slate-700" />
               </div>
               <h3 className="font-semibold text-slate-900 mb-2">
-                Self-Hosting Studios
+                自行託管工作室
               </h3>
               <p className="text-sm text-slate-600">
-                Own your data. Avoid monthly SaaS fees. Customize everything.
+                擁有您的資料。避免每月 SaaS 費用。自由客製一切。
               </p>
             </div>
             <div className="rounded-xl border border-slate-200 bg-white p-6 text-center">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
                 <CodeIcon className="h-6 w-6 text-slate-700" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Developers</h3>
+              <h3 className="font-semibold text-slate-900 mb-2">開發者</h3>
               <p className="text-sm text-slate-600">
-                Contribute to open source. Learn modern React patterns. Build
-                integrations.
+                貢獻開源專案。學習現代 React 模式。建立整合方案。
               </p>
             </div>
             <div className="rounded-xl border border-slate-200 bg-white p-6 text-center">
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
                 <HeartIcon className="h-6 w-6 text-slate-700" />
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Community</h3>
+              <h3 className="font-semibold text-slate-900 mb-2">社群</h3>
               <p className="text-sm text-slate-600">
-                Studios helping studios. Share improvements. Build together.
+                工作室互助工作室。分享改進。共同建設。
               </p>
             </div>
           </div>
@@ -500,18 +492,17 @@ export default function OpenSource() {
         <section className="max-w-6xl mx-auto px-6 pb-20">
           <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center">
             <h2 className="text-2xl font-bold text-white mb-4">
-              Ready to explore?
+              準備探索了嗎？
             </h2>
             <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-              Try the demo to see how Tandava works, or dive into the code on
-              GitHub.
+              體驗示範了解 Tandava 的運作方式，或深入 GitHub 查看原始碼。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/demo"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >
-                Try Demo
+                體驗示範
                 <ArrowRightIcon className="h-4 w-4" />
               </Link>
               <a
@@ -521,7 +512,7 @@ export default function OpenSource() {
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-600 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >
                 <BookIcon className="h-5 w-5" />
-                Read Documentation
+                閱讀文件
               </a>
             </div>
           </div>
@@ -535,7 +526,7 @@ export default function OpenSource() {
             <div className="flex items-center gap-2">
               <LogoIcon className="h-6 w-6 text-slate-400" />
               <span className="text-slate-500 text-sm">
-                Tandava is open source software
+                Tandava 是開源軟體
               </span>
             </div>
             <div className="flex items-center gap-6 text-sm text-slate-500">
@@ -553,7 +544,7 @@ export default function OpenSource() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
               >
-                Docs
+                文件
               </a>
               <a
                 href="https://github.com/TaylorONeal/tandava/blob/main/CONTRIBUTING.md"
@@ -561,7 +552,7 @@ export default function OpenSource() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 focus-visible:ring-offset-2"
               >
-                Contribute
+                貢獻
               </a>
             </div>
           </div>

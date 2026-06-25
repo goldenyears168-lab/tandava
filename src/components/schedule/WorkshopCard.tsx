@@ -50,9 +50,9 @@ export function WorkshopCard({
       <div className="p-5">
         {/* Badges row */}
         <div className="flex flex-wrap items-center gap-2 mb-3">
-          <Badge variant="workshop">Workshop</Badge>
+          <Badge variant="workshop">工作坊</Badge>
           {isSeries && (
-            <Badge variant="peach">{seriesParts}-Part Series</Badge>
+            <Badge variant="peach">{seriesParts} 堂系列</Badge>
           )}
           {tags?.slice(0, 2).map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
@@ -82,7 +82,7 @@ export function WorkshopCard({
             <Clock className="h-4 w-4" />
             <span>{startTime}</span>
             <span className="text-muted-foreground/50">•</span>
-            <span>{duration} min</span>
+            <span>{duration} 分鐘</span>
           </div>
           <div className="flex items-center gap-1.5">
             <MapPin className="h-4 w-4" />
@@ -104,7 +104,7 @@ export function WorkshopCard({
                 "font-medium",
                 isFull ? "text-destructive" : spotsLeft <= 3 ? "text-warning" : ""
               )}>
-                {isFull ? "Full" : `${spotsLeft} spots`}
+                {isFull ? "已額滿" : `剩 ${spotsLeft} 名額`}
               </span>
             </div>
           </div>
@@ -113,7 +113,7 @@ export function WorkshopCard({
             variant={isFull ? "secondary" : "default"}
             onClick={() => onBook(id)}
           >
-            {isFull ? "Join Waitlist" : "Book Workshop"}
+            {isFull ? "加入候補" : "預約工作坊"}
           </Button>
         </div>
       </div>

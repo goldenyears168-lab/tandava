@@ -44,6 +44,16 @@ type ViewMode = "week" | "month";
 
 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+const weekDayLabels: Record<string, string> = {
+  Mon: "週一",
+  Tue: "週二",
+  Wed: "週三",
+  Thu: "週四",
+  Fri: "週五",
+  Sat: "週六",
+  Sun: "週日",
+};
+
 // Mock data for instructor's schedule
 const mockSchedule: ScheduledClass[] = [
   // This week
@@ -230,7 +240,7 @@ export default function TeachSchedule() {
       case "subbing":
         return (
           <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage border-0">
-            Subbing for {cls.originalTeacher}
+            代 {cls.originalTeacher} 的課
           </Badge>
         );
       case "pending_sub":
@@ -239,7 +249,7 @@ export default function TeachSchedule() {
             variant="outline"
             className="text-[10px] border-accent-gold/50 text-accent-gold"
           >
-            Sub Requested
+            已申請代課
           </Badge>
         );
       default:
@@ -250,8 +260,8 @@ export default function TeachSchedule() {
   const handleRequestSub = () => {
     if (!selectedClass) return;
     toast({
-      title: "Sub request sent",
-      description: `Sub request for ${selectedClass.className} has been submitted.`,
+      title: "代課申請已送出",
+      description: `已提交 ${selectedClass.name} 的代課申請。`,
     });
     setSubDialogOpen(false);
     setSelectedClass(null);
@@ -260,10 +270,10 @@ export default function TeachSchedule() {
 
   const weekLabel =
     currentWeekOffset === 0
-      ? "This Week"
+      ? "本週"
       : currentWeekOffset === 1
-      ? "Next Week"
-      : `Week of Feb ${10 + (currentWeekOffset - 1) * 7}`;
+      ? "下週"
+      : `2 月 ${10 + (currentWeekOffset - 1) * 7} 日那一週`;
 
   return (
     <TeachLayout>
@@ -271,9 +281,9 @@ export default function TeachSchedule() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">My Schedule</h1>
+            <h1 className="text-2xl font-bold tracking-tight">我的課程表</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              View and manage your teaching schedule
+              查看並管理您的授課排班
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -282,14 +292,14 @@ export default function TeachSchedule() {
               size="sm"
               onClick={() => setViewMode("week")}
             >
-              Week
+              週
             </Button>
             <Button
               variant={viewMode === "month" ? "default" : "outline"}
               size="sm"
               onClick={() => setViewMode("month")}
             >
-              Month
+              月
             </Button>
           </div>
         </div>
@@ -323,15 +333,15 @@ export default function TeachSchedule() {
         <div className="flex flex-wrap items-center gap-4 text-xs">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-primary/30 border border-primary/40" />
-            <span className="text-muted-foreground">Regular Class</span>
+            <span className="text-muted-foreground">固定課程</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-accent-sage/30 border border-accent-sage/40" />
-            <span className="text-muted-foreground">Subbing for Someone</span>
+            <span className="text-muted-foreground">代課</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-accent-gold/30 border border-accent-gold/40" />
-            <span className="text-muted-foreground">Sub Requested</span>
+            <span className="text-muted-foreground">已申請代課</span>
           </div>
         </div>
 
@@ -341,11 +351,11 @@ export default function TeachSchedule() {
             {weekDays.map((day) => (
               <div key={day} className="space-y-2">
                 <div className="text-center py-2 rounded-lg bg-secondary/50">
-                  <p className="text-sm font-semibold">{day}</p>
+                  <p className="text-sm font-semibold">{weekDayLabels[day]}</p>
                 </div>
                 {classesByDay[day].length === 0 ? (
                   <div className="p-3 text-center text-xs text-muted-foreground rounded-lg border border-dashed border-border">
-                    No classes
+                    無課程
                   </div>
                 ) : (
                   classesByDay[day].map((cls) => (
@@ -455,7 +465,7 @@ export default function TeachSchedule() {
                           }}
                         >
                           <Repeat2 className="h-3 w-3 mr-1" />
-                          Request Sub
+                          申請代課
                         </Button>
                       )}
                     </div>
@@ -470,7 +480,7 @@ export default function TeachSchedule() {
           <Card>
             <CardContent className="py-12 text-center">
               <CalendarIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">No classes scheduled</p>
+              <p className="text-muted-foreground">尚無排定課程</p>
             </CardContent>
           </Card>
         )}
@@ -480,9 +490,9 @@ export default function TeachSchedule() {
       <Dialog open={subDialogOpen} onOpenChange={setSubDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Request a Sub</DialogTitle>
+            <DialogTitle>申請代課</DialogTitle>
             <DialogDescription>
-              Submit a request for another instructor to cover this class.
+              提交代課申請，請其他老師代為授課。
             </DialogDescription>
           </DialogHeader>
           {selectedClass && (
@@ -490,20 +500,19 @@ export default function TeachSchedule() {
               <div className="p-3 rounded-xl bg-secondary/50">
                 <p className="text-sm font-semibold">{selectedClass.name}</p>
                 <p className="text-xs text-muted-foreground">
-                  {selectedClass.date} ({selectedClass.dayOfWeek}) at{" "}
-                  {selectedClass.time}
+                  {selectedClass.date}（{weekDayLabels[selectedClass.dayOfWeek]}）{selectedClass.time}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {selectedClass.room} - {selectedClass.booked} students booked
+                  {selectedClass.room} — {selectedClass.booked} 位學員已預約
                 </p>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium">
-                  Reason (optional)
+                  原因（選填）
                 </label>
                 <Textarea
-                  placeholder="Let the team know why you need coverage..."
+                  placeholder="請告知團隊您需要代課的原因..."
                   value={subReason}
                   onChange={(e) => setSubReason(e.target.value)}
                   rows={3}
@@ -512,17 +521,16 @@ export default function TeachSchedule() {
 
               <div className="p-3 rounded-xl bg-accent-gold/10 border border-accent-gold/20">
                 <p className="text-xs text-accent-gold">
-                  Your request will be sent to qualified instructors. You will
-                  be notified once someone accepts.
+                  您的申請將發送給符合資格的老師。有人接受後您會收到通知。
                 </p>
               </div>
             </div>
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setSubDialogOpen(false)}>
-              Cancel
+              取消
             </Button>
-            <Button onClick={handleRequestSub}>Submit Request</Button>
+            <Button onClick={handleRequestSub}>提交申請</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

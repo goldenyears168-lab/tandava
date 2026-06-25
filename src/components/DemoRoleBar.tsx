@@ -18,7 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface RoleOption {
   role: UserRole;
@@ -71,7 +71,7 @@ function DemoRoleBarInner() {
   const navigate = useNavigate();
   const location = useLocation();
   const { activePersona, switchPersona } = useDemo();
-  const { t } = useTranslation('common');
+  const t = createT('common');
 
   // Resolve role labels from i18n
   const roleLabelMap: Record<string, string> = {

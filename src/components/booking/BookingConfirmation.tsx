@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookingAddOns } from "./BookingAddOns";
 import { CheckCircle2, Calendar, Clock, MapPin, Share2 } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface BookingConfirmationProps {
   booking: {
@@ -26,22 +26,22 @@ interface BookingConfirmationProps {
 const mockAddOns = [
   {
     id: "1",
-    name: "Mat Towel Rental",
-    description: "Fresh, clean towel for your practice",
+    name: "瑜珈墊毛巾租借",
+    description: "乾淨清新的練習用毛巾",
     priceCents: 500,
     currency: "USD",
   },
   {
     id: "2",
-    name: "Branded Water Bottle",
-    description: "Reusable studio bottle",
+    name: "品牌水壺",
+    description: "可重複使用的館內水壺",
     priceCents: 1500,
     currency: "USD",
   },
   {
     id: "3",
-    name: "Studio T-Shirt",
-    description: "Soft cotton, limited edition",
+    name: "館內 T 恤",
+    description: "柔軟棉質，限量款",
     priceCents: 3500,
     currency: "USD",
   },
@@ -54,7 +54,7 @@ export function BookingConfirmation({
   onInviteFriend,
 }: BookingConfirmationProps) {
   const [showAddOns, setShowAddOns] = useState(true);
-  const { t } = useTranslation('booking');
+  const t = createT('booking');
 
   const typeLabels = {
     class: t('common:type.class'),

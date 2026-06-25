@@ -83,7 +83,7 @@ const mockPages: LandingPageRow[] = [
     seoScore: 85, targetKeywords: ["beginner yoga", "yoga for beginners sf"],
   },
   {
-    id: "lp2", title: "Teacher Training Spring 2026", slug: "teacher-training-spring-2026",
+    id: "lp2", title: "師資培訓 Spring 2026", slug: "teacher-training-spring-2026",
     template: "teacher_training", status: "published",
     totalViews: 834, totalConversions: 11, conversionRate: 1.3,
     publishedAt: "2025-01-15", updatedAt: "2025-02-01",
@@ -98,7 +98,7 @@ const mockPages: LandingPageRow[] = [
     seoScore: 92, targetKeywords: ["hot yoga soma", "heated yoga sf"],
   },
   {
-    id: "lp4", title: "New Student Special", slug: "welcome",
+    id: "lp4", title: "新學員 Special", slug: "welcome",
     template: "new_student", status: "published",
     totalViews: 3891, totalConversions: 423, conversionRate: 10.9,
     publishedAt: "2024-10-01", updatedAt: "2025-01-30",
@@ -107,7 +107,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp5", title: "Valentine's Partner Yoga", slug: "valentines-partner-yoga",
     template: "workshop", status: "draft",
-    totalViews: 0, totalConversions: 0, conversionRate: 0,
+    totalViews: 0, total轉換數: 0, conversionRate: 0,
     publishedAt: null, updatedAt: "2025-02-02",
     seoScore: 65, targetKeywords: ["partner yoga", "couples yoga sf"],
     expirationDate: "2026-02-15", expiredBehavior: "show_alternatives",
@@ -115,7 +115,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp6", title: "New Year Resolution Special", slug: "new-year-2025",
     template: "seasonal_promo", status: "expired",
-    totalViews: 1567, totalConversions: 89, conversionRate: 5.7,
+    totalViews: 1567, total轉換數: 89, conversionRate: 5.7,
     publishedAt: "2024-12-20", updatedAt: "2025-01-31",
     seoScore: 72, targetKeywords: ["new year yoga", "yoga resolution"],
     expirationDate: "2025-01-31", expiredBehavior: "show_alternatives",
@@ -123,7 +123,7 @@ const mockPages: LandingPageRow[] = [
   {
     id: "lp7", title: "Summer Solstice Retreat 2024", slug: "solstice-retreat-2024",
     template: "retreat", status: "archived",
-    totalViews: 2341, totalConversions: 28, conversionRate: 1.2,
+    totalViews: 2341, total轉換數: 28, conversionRate: 1.2,
     publishedAt: "2024-03-01", updatedAt: "2024-07-01",
     seoScore: 80,
   },
@@ -146,8 +146,8 @@ const mockRecommendations = [
   },
   {
     id: "r3", type: "meta_tag", priority: "medium",
-    title: "Optimize your 'New Student' page title",
-    description: "Your best-performing page ('New Student Special') could rank higher with a title like 'First Yoga Class Free | Tandava Yoga SOMA' instead of the current generic title.",
+    title: "Optimize your '新學員' page title",
+    description: "Your best-performing page ('新學員 Special') could rank higher with a title like 'First Yoga Class Free | Tandava Yoga SOMA' instead of the current generic title.",
     suggestedTemplate: null, suggestedSlug: null,
     targetKeywords: ["first yoga class free", "yoga trial class"],
   },
@@ -271,7 +271,7 @@ export default function LandingPagesManage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Landing Pages</h1>
+            <h1 className="text-2xl font-bold tracking-tight">著陸頁</h1>
             <p className="text-sm text-muted-foreground mt-1">
               SEO-optimized pages that help new students discover your studio
             </p>
@@ -286,7 +286,7 @@ export default function LandingPagesManage() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {[
             { label: "Total Page Views", value: totalViews.toLocaleString(), icon: Eye },
-            { label: "Total Conversions", value: totalConversions, icon: MousePointer2 },
+            { label: "Total Conversions", value: total轉換數, icon: MousePointer2 },
             { label: "Avg Conversion Rate", value: `${avgConversionRate}%`, icon: TrendingUp },
             { label: "Published", value: pages.filter((p) => p.status === "published").length, icon: CheckCircle, color: "text-accent-sage" },
             { label: "Expiring Soon", value: pages.filter((p) => isExpiringSoon(p.expirationDate)).length, icon: AlertTriangle, color: "text-accent-gold" },
@@ -450,7 +450,7 @@ export default function LandingPagesManage() {
                           <Button variant="ghost" size="icon" className="h-8 w-8" title="Preview">
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
-                          <Button variant="ghost" size="icon" className="h-8 w-8" title="Edit">
+                          <Button variant="ghost" size="icon" className="h-8 w-8" title="編輯">
                             <Edit className="h-3.5 w-3.5" />
                           </Button>
 

@@ -52,7 +52,7 @@ const mockConversations = [
     memberEmail: "sarah@example.com",
     avatar: "",
     lastMessage: "Thanks! See you tomorrow for the 9am class!",
-    lastMessageTime: "2 min ago",
+    lastMessageTime: "2 分鐘前",
     unread: true,
     unreadCount: 2,
     archived: false,
@@ -66,7 +66,7 @@ const mockConversations = [
     memberEmail: "james@example.com",
     avatar: "",
     lastMessage: "Is there still space in the evening vinyasa?",
-    lastMessageTime: "15 min ago",
+    lastMessageTime: "15 分鐘前",
     unread: true,
     unreadCount: 1,
     archived: false,
@@ -80,7 +80,7 @@ const mockConversations = [
     memberEmail: "emma@example.com",
     avatar: "",
     lastMessage: "Got it, I'll bring my own mat then",
-    lastMessageTime: "1 hr ago",
+    lastMessageTime: "1 小時前",
     unread: false,
     unreadCount: 0,
     archived: false,
@@ -94,7 +94,7 @@ const mockConversations = [
     memberEmail: "michael@example.com",
     avatar: "",
     lastMessage: "Thank you for the reminder!",
-    lastMessageTime: "3 hrs ago",
+    lastMessageTime: "3 小時前",
     unread: false,
     unreadCount: 0,
     archived: false,
@@ -108,7 +108,7 @@ const mockConversations = [
     memberEmail: "ava@example.com",
     avatar: "",
     lastMessage: "Can I reschedule my private session?",
-    lastMessageTime: "5 hrs ago",
+    lastMessageTime: "5 小時前",
     unread: false,
     unreadCount: 0,
     archived: false,
@@ -132,8 +132,8 @@ const mockMessages: Record<string, Array<{
     { id: "m6", content: "Thanks! See you tomorrow for the 9am class!", timestamp: "11:05 AM", isOutbound: false },
   ],
   "2": [
-    { id: "m1", content: "Hi James! Your class pack is running low - you have 2 classes remaining.", timestamp: "Yesterday", isOutbound: true, status: "read" },
-    { id: "m2", content: "Thanks for letting me know. I'll renew soon.", timestamp: "Yesterday", isOutbound: false },
+    { id: "m1", content: "Hi James! Your class pack is running low - you have 2 堂剩餘.", timestamp: "昨天", isOutbound: true, status: "read" },
+    { id: "m2", content: "Thanks for letting me know. I'll renew soon.", timestamp: "昨天", isOutbound: false },
     { id: "m3", content: "Is there still space in the evening vinyasa?", timestamp: "2:30 PM", isOutbound: false },
   ],
   "3": [
@@ -257,9 +257,9 @@ export default function SmsInbox() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All conversations</SelectItem>
-                  <SelectItem value="unread">Unread only</SelectItem>
-                  <SelectItem value="assigned">Assigned to me</SelectItem>
+                  <SelectItem value="all">全部對話</SelectItem>
+                  <SelectItem value="unread">僅未讀</SelectItem>
+                  <SelectItem value="assigned">指派給我</SelectItem>
                 </SelectContent>
               </Select>
             </CardHeader>
@@ -500,7 +500,7 @@ export default function SmsInbox() {
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                   <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold">Select a conversation</h3>
+                  <h3 className="text-lg font-semibold">選擇對話</h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     Choose a conversation from the list to view messages
                   </p>

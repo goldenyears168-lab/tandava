@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 type RegistrationStep = "info" | "complete";
 
@@ -16,7 +16,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
-  const { t } = useTranslation('auth');
+  const t = createT('auth');
   const [step, setStep] = useState<RegistrationStep>("info");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -152,7 +152,7 @@ const Register = () => {
               <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary">
                 <span className="text-lg sm:text-xl font-bold text-primary-foreground">T</span>
               </div>
-              <span className="text-xl sm:text-2xl font-semibold tracking-tight">Tandava</span>
+              <span className="text-xl sm:text-2xl font-semibold tracking-tight">森浴光 mm941</span>
             </Link>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight">{t('register.createAccount')}</h1>
             <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
@@ -241,7 +241,7 @@ const Register = () => {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground touch-manipulation"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={showPassword ? "隱藏密碼" : "顯示密碼"}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />

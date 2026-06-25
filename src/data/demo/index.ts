@@ -7,14 +7,15 @@
 
 // Demo studio data
 export * from './oxatl-yoga';
+export * from './spa-ui-mocks';
 
 // Demo bookings and transactions (2018 historical data)
 export * from './bookings-transactions';
 
 // Demo identity constants
 export const DEMO_STUDIO_SLUG = 'oxatl-yoga';
-export const DEMO_STUDIO_NAME = 'Oxatl Yoga';
-export const DEMO_LOCATION = 'Austin, Texas';
+export const DEMO_STUDIO_NAME = '森浴光mm941';
+export const DEMO_LOCATION = '台灣（汐止・台北・台中・台南）';
 
 // Demo user handles/identifiers
 export const DEMO_HANDLES = [

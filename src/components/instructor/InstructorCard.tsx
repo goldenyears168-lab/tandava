@@ -61,9 +61,9 @@ export function InstructorCard({
           </div>
 
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            <span>{classCount} classes taught</span>
+            <span>已授課 {classCount} 堂</span>
             <span>•</span>
-            <span>{studios.length} studio{studios.length !== 1 ? "s" : ""}</span>
+            <span>{studios.length} 間場館</span>
           </div>
         </div>
       </div>

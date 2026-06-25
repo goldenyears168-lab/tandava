@@ -22,8 +22,7 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("@radix-ui")) return "radix-vendor";
           if (
             id.includes("react-router") ||
-            id.includes("@tanstack/react-query") ||
-            id.includes("i18next")
+            id.includes("@tanstack/react-query")
           ) {
             return "app-vendor";
           }

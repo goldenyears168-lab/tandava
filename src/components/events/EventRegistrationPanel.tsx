@@ -79,9 +79,9 @@ interface EventRegistrationPanelProps {
 }
 
 const LABEL_BADGE: Record<ResolvedPrice["label"], string | null> = {
-  early_bird: "Early bird",
-  member: "Member price",
-  tier_member: "Member price",
+  early_bird: "早鳥優惠",
+  member: "會員價",
+  tier_member: "會員價",
   tier: null,
   regular: null,
 };
@@ -161,16 +161,16 @@ export function EventRegistrationPanel({
   const filled = capacity > 0 ? Math.round(((capacity - spotsLeft) / capacity) * 100) : 0;
 
   const ctaConfig: Record<RegistrationState, { label: string; disabled: boolean }> = {
-    open: { label: "Register Now", disabled: false },
-    waitlist: { label: "Join Waitlist", disabled: false },
+    open: { label: "立即報名", disabled: false },
+    waitlist: { label: "加入候補", disabled: false },
     not_open_yet: {
       label: registrationOpensAt
-        ? `Opens ${new Date(registrationOpensAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}`
-        : "Not open yet",
+        ? `${new Date(registrationOpensAt).toLocaleDateString("zh-TW", { month: "short", day: "numeric" })} 開放報名`
+        : "尚未開放報名",
       disabled: true,
     },
-    closed: { label: "Registration Closed", disabled: true },
-    sold_out: { label: "Sold Out", disabled: true },
+    closed: { label: "報名已截止", disabled: true },
+    sold_out: { label: "已售完", disabled: true },
   };
   const cta = ctaConfig[state];
 
@@ -191,12 +191,12 @@ export function EventRegistrationPanel({
   return (
     <Card className="sticky top-24">
       <CardContent className="p-5 space-y-4">
-        <h3 className="font-semibold">Register</h3>
+        <h3 className="font-semibold">報名</h3>
 
         {/* Member toggle (demo/public pages without auth wired) */}
         {showMemberToggle && (memberCents != null || tiers.some((t) => t.memberPriceCents != null)) && (
           <div className="flex items-center justify-between rounded-lg bg-secondary/40 px-3 py-2">
-            <Label htmlFor="member-toggle" className="text-sm">I'm a member</Label>
+            <Label htmlFor="member-toggle" className="text-sm">我是會員</Label>
             <Switch id="member-toggle" checked={memberToggle} onCheckedChange={setMemberToggle} />
           </div>
         )}
@@ -204,7 +204,7 @@ export function EventRegistrationPanel({
         {/* Pricing tiers (partial-series options) */}
         {tiers.length > 0 && (
           <div className="space-y-2">
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Options</p>
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">方案選項</p>
             <RadioGroup value={selectedTierId ?? undefined} onValueChange={setSelectedTierId} className="space-y-2">
               {tiers.map((tier) => {
                 const tierPrice = resolveTierPrice(
@@ -232,7 +232,7 @@ export function EventRegistrationPanel({
                       )}
                       {partial && (
                         <p className="text-[11px] text-muted-foreground mt-1">
-                          Includes {included.length} of {sessions.length} sessions
+                          含 {included.length} / {sessions.length} 堂
                         </p>
                       )}
                     </div>
@@ -247,7 +247,7 @@ export function EventRegistrationPanel({
         {sessions.length > 1 && (
           <div className="space-y-1.5">
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Schedule ({sessions.length} sessions)
+              課程表（{sessions.length} 堂）
             </p>
             {sessions.map((s) => {
               const included = coveredNumbers.has(s.session_number);
@@ -289,7 +289,7 @@ export function EventRegistrationPanel({
           <div className="text-right">
             <span className="text-2xl font-bold">{fmt(price.cents)}</span>
             {price.savingsCents > 0 && (
-              <p className="text-xs text-accent-sage">Save {fmt(price.savingsCents)}</p>
+              <p className="text-xs text-accent-sage">省 {fmt(price.savingsCents)}</p>
             )}
           </div>
         </div>
@@ -304,19 +304,19 @@ export function EventRegistrationPanel({
             <Label htmlFor="pay-full" className={`flex items-center justify-between gap-2 rounded-lg border p-2.5 cursor-pointer ${paymentOption === "full" ? "border-primary bg-primary/5" : "border-border"}`}>
               <span className="flex items-center gap-2 text-sm">
                 <RadioGroupItem value="full" id="pay-full" />
-                Pay in full
+                一次付清
               </span>
               <span className="text-sm font-medium">{fmt(price.cents)}</span>
             </Label>
             <Label htmlFor="pay-deposit" className={`flex items-center justify-between gap-2 rounded-lg border p-2.5 cursor-pointer ${paymentOption === "deposit" ? "border-primary bg-primary/5" : "border-border"}`}>
               <span className="flex items-center gap-2 text-sm">
                 <RadioGroupItem value="deposit" id="pay-deposit" />
-                Pay deposit
+                支付訂金
               </span>
               <span className="text-right text-sm">
                 <span className="font-medium">{fmt(deposit.dueNowCents)}</span>
                 <span className="block text-[11px] text-muted-foreground">
-                  {fmt(deposit.balanceCents)} due later
+                  餘額 {fmt(deposit.balanceCents)} 待付
                 </span>
               </span>
             </Label>
@@ -325,7 +325,7 @@ export function EventRegistrationPanel({
 
         {balance > 0 && (
           <p className="text-xs text-center text-muted-foreground">
-            You'll pay {fmt(dueNow)} now and {fmt(balance)} later.
+            現在先付 {fmt(dueNow)}，之後再付 {fmt(balance)}。
           </p>
         )}
 
@@ -334,10 +334,10 @@ export function EventRegistrationPanel({
           <div className="flex items-center justify-between text-sm">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               <Users className="h-4 w-4" />
-              Spots remaining
+              剩餘名額
             </span>
             <span className={`font-semibold ${spotsLow ? "text-accent-coral" : ""}`}>
-              {Math.max(0, spotsLeft)} of {capacity}
+              剩 {Math.max(0, spotsLeft)} / {capacity} 名
             </span>
           </div>
           <div className="w-full bg-secondary rounded-full h-2">
@@ -354,7 +354,7 @@ export function EventRegistrationPanel({
 
         {state === "waitlist" && (
           <p className="text-xs text-center text-muted-foreground">
-            This event is full — join the waitlist and we'll notify you if a spot opens.
+            活動已額滿 — 加入候補名單，有名額釋出時我們會通知您。
           </p>
         )}
       </CardContent>

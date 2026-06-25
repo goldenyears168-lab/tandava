@@ -31,19 +31,19 @@ const levelVariants = {
 } as const;
 
 const levelLabels = {
-  BEGINNER: "Beginner",
-  ALL: "All Levels",
-  INTERMEDIATE: "Intermediate",
-  ADVANCED: "Advanced",
+  BEGINNER: "初學",
+  ALL: "所有程度",
+  INTERMEDIATE: "中級",
+  ADVANCED: "進階",
 };
 
 const accessLabels: Record<VideoAccessType, { label: string; className: string }> = {
-  free: { label: "Free", className: "bg-emerald-500/10 text-emerald-700 border-emerald-300" },
-  members_only: { label: "Members", className: "bg-indigo-500/10 text-indigo-700 border-indigo-300" },
-  class_pack: { label: "Class Pack", className: "bg-violet-500/10 text-violet-700 border-violet-300" },
-  purchase: { label: "Purchase", className: "bg-amber-500/10 text-amber-700 border-amber-300" },
-  rental: { label: "Rental", className: "bg-rose-500/10 text-rose-700 border-rose-300" },
-  subscription: { label: "Subscription", className: "bg-sky-500/10 text-sky-700 border-sky-300" },
+  free: { label: "免費", className: "bg-emerald-500/10 text-emerald-700 border-emerald-300" },
+  members_only: { label: "會員專屬", className: "bg-indigo-500/10 text-indigo-700 border-indigo-300" },
+  class_pack: { label: "課程包", className: "bg-violet-500/10 text-violet-700 border-violet-300" },
+  purchase: { label: "購買", className: "bg-amber-500/10 text-amber-700 border-amber-300" },
+  rental: { label: "租借", className: "bg-rose-500/10 text-rose-700 border-rose-300" },
+  subscription: { label: "訂閱", className: "bg-sky-500/10 text-sky-700 border-sky-300" },
 };
 
 function AccessIcon({ accessType }: { accessType: VideoAccessType }) {
@@ -100,7 +100,7 @@ export function OnDemandClassCard({
         {/* Duration badge */}
         <div className="absolute bottom-2 right-2 px-2 py-1 rounded-lg bg-foreground/80 text-background text-xs font-medium flex items-center gap-1">
           <Clock className="h-3 w-3" />
-          {duration} min
+          {duration} 分鐘
         </div>
 
         {/* Access type badge - top left */}
@@ -120,7 +120,7 @@ export function OnDemandClassCard({
         {/* Free badge */}
         {accessType === "free" && (
           <div className="absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 border backdrop-blur-sm bg-emerald-500/10 text-emerald-700 border-emerald-300">
-            Free
+            免費
           </div>
         )}
 
@@ -138,7 +138,7 @@ export function OnDemandClassCard({
         {isCompleted && (
           <div className="absolute top-2 right-2 px-2 py-1 rounded-full bg-mint text-foreground text-xs font-medium flex items-center gap-1">
             <CheckCircle className="h-3 w-3" />
-            Completed
+            已完成
           </div>
         )}
       </div>

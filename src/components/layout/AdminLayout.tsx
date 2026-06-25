@@ -18,14 +18,14 @@ interface AdminLayoutProps {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { name: "Studios", href: "/admin/studios", icon: Building2 },
-  { name: "Users", href: "/admin/users", icon: Users },
-  { name: "Billing", href: "/admin/billing", icon: CreditCard },
-  { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-  { name: "Feedback", href: "/admin/feedback", icon: MessageSquare },
-  { name: "Announcements", href: "/admin/announcements", icon: Megaphone },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
+  { name: "儀表板", href: "/admin", icon: LayoutDashboard },
+  { name: "工作室", href: "/admin/studios", icon: Building2 },
+  { name: "使用者", href: "/admin/users", icon: Users },
+  { name: "帳單", href: "/admin/billing", icon: CreditCard },
+  { name: "分析", href: "/admin/analytics", icon: BarChart3 },
+  { name: "意見回饋", href: "/admin/feedback", icon: MessageSquare },
+  { name: "公告", href: "/admin/announcements", icon: Megaphone },
+  { name: "設定", href: "/admin/settings", icon: Settings },
 ];
 
 export function AdminLayout({ children }: AdminLayoutProps) {
@@ -46,10 +46,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to App
+            返回應用程式
           </Link>
-          <h2 className="text-lg font-bold tracking-tight">Platform Admin</h2>
-          <p className="text-xs text-muted-foreground">Manage your Tandava instance</p>
+          <h2 className="text-lg font-bold tracking-tight">平台管理</h2>
+          <p className="text-xs text-muted-foreground">管理您的 Tandava 實例</p>
         </div>
 
         <nav className="space-y-1 flex-1">
@@ -72,7 +72,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
         <div className="pt-4 border-t border-border">
           <p className="text-xs text-muted-foreground">
-            Instance: {import.meta.env.VITE_APP_NAME || "Tandava"}
+            實例：{import.meta.env.VITE_APP_NAME || "Tandava"}
           </p>
         </div>
       </aside>

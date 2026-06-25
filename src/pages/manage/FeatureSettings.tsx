@@ -531,7 +531,7 @@ export default function FeatureSettings() {
                 <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
                   <SparkleIcon className="w-5 h-5" />
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight">Feature Settings</h1>
+                <h1 className="text-3xl font-bold tracking-tight">功能設定</h1>
               </div>
               <p className="text-stone-300 max-w-xl">
                 Enable or disable optional features for your studio. Core features are always available.

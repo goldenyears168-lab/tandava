@@ -24,13 +24,13 @@ import { Link } from "react-router-dom";
 const member = {
   id: "3", firstName: "Mia", lastName: "Tanaka",
   email: "mia.tanaka@example.com", phone: "+1 415-555-0103",
-  joinedAt: "2023-08-10", tags: ["VIP", "Referred by Emma"],
+  joinedAt: "2023-08-10", tags: ["VIP", "Emma 推薦"],
   membership: {
-    type: "Unlimited Monthly", status: "active" as const, billing: "Monthly",
-    price: 149, renewalDate: "2026-02-15", classesUsed: 14, classesAllowed: "Unlimited",
+    type: "無限月方案", status: "active" as const, billing: "每月",
+    price: 149, renewalDate: "2026-02-15", classesUsed: 14, classesAllowed: "無限方案",
   },
   isPaused: false, totalClasses: 142, currentStreak: 12,
-  lifetimeRevenue: 4280, lastVisit: "2 days ago",
+  lifetimeRevenue: 4280, lastVisit: "2 天前",
 };
 
 const classPacks = [
@@ -39,10 +39,10 @@ const classPacks = [
 ];
 
 const purchaseHistory = [
-  { id: "1", date: "2026-02-01", item: "Unlimited Monthly Renewal", amount: 149, type: "membership" },
+  { id: "1", date: "2026-02-01", item: "無限月方案 Renewal", amount: 149, type: "membership" },
   { id: "2", date: "2026-01-10", item: "10-Class Workshop Pack", amount: 220, type: "pack" },
-  { id: "3", date: "2026-01-01", item: "Unlimited Monthly Renewal", amount: 149, type: "membership" },
-  { id: "4", date: "2025-12-01", item: "Unlimited Monthly Renewal", amount: 149, type: "membership" },
+  { id: "3", date: "2026-01-01", item: "無限月方案 Renewal", amount: 149, type: "membership" },
+  { id: "4", date: "2025-12-01", item: "無限月方案 Renewal", amount: 149, type: "membership" },
 ];
 
 const bookings = [
@@ -57,13 +57,13 @@ const bookings = [
 ];
 
 const transactions = [
-  { id: "1", date: "2026-02-01", description: "Unlimited Monthly - Feb 2026", amount: 149, status: "completed" as const },
+  { id: "1", date: "2026-02-01", description: "無限月方案 - Feb 2026", amount: 149, status: "completed" as const },
   { id: "2", date: "2026-01-10", description: "10-Class Workshop Pack", amount: 220, status: "completed" as const },
-  { id: "3", date: "2026-01-01", description: "Unlimited Monthly - Jan 2026", amount: 149, status: "completed" as const },
-  { id: "4", date: "2025-12-01", description: "Unlimited Monthly - Dec 2025", amount: 149, status: "completed" as const },
+  { id: "3", date: "2026-01-01", description: "無限月方案 - Jan 2026", amount: 149, status: "completed" as const },
+  { id: "4", date: "2025-12-01", description: "無限月方案 - Dec 2025", amount: 149, status: "completed" as const },
   { id: "5", date: "2025-11-15", description: "Late Cancellation Fee", amount: 15, status: "completed" as const },
-  { id: "6", date: "2025-11-01", description: "Unlimited Monthly - Nov 2025", amount: 149, status: "completed" as const },
-  { id: "7", date: "2025-10-01", description: "Unlimited Monthly - Oct 2025", amount: 149, status: "refunded" as const },
+  { id: "6", date: "2025-11-01", description: "無限月方案 - Nov 2025", amount: 149, status: "completed" as const },
+  { id: "7", date: "2025-10-01", description: "無限月方案 - Oct 2025", amount: 149, status: "refunded" as const },
 ];
 
 const paymentMethods = [
@@ -159,7 +159,7 @@ export default function MemberDetail() {
             <Button variant="outline" size="sm" onClick={() => toast({ title: "Email opened", description: `Composing email to ${member.email}` })}>
               <Mail className="h-4 w-4 mr-2" />Email
             </Button>
-            <Button variant="outline" size="sm" onClick={() => toast({ title: "Checked in", description: `${member.firstName} checked in successfully.` })}>
+            <Button variant="outline" size="sm" onClick={() => toast({ title: "已報到", description: `${member.firstName} checked in successfully.` })}>
               <UserCheck className="h-4 w-4 mr-2" />Check In
             </Button>
             <Button variant="outline" size="sm" onClick={() => toast({ title: "Note added" })}>
@@ -200,7 +200,7 @@ export default function MemberDetail() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Lifetime Revenue</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">累計收入</p>
                   <p className="text-2xl font-bold mt-1">${member.lifetimeRevenue.toLocaleString()}</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-accent-gold/20 flex items-center justify-center">
@@ -213,7 +213,7 @@ export default function MemberDetail() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Last Visit</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">上次到訪</p>
                   <p className="text-2xl font-bold mt-1">{member.lastVisit}</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-accent-sage/20 flex items-center justify-center">
@@ -277,7 +277,7 @@ export default function MemberDetail() {
                   ) : (
                     <Button variant="outline" size="sm" onClick={() => setPauseOpen(true)}><PauseCircle className="h-4 w-4 mr-2" />Pause Membership</Button>
                   )}
-                  <Button variant="outline" size="sm" onClick={() => setCancelOpen(true)}><XCircle className="h-4 w-4 mr-2" />Cancel Membership</Button>
+                  <Button variant="outline" size="sm" onClick={() => setCancelOpen(true)}><XCircle className="h-4 w-4 mr-2" />取消會員資格</Button>
                   <Button variant="outline" size="sm" onClick={() => toast({ title: "Change plan", description: "Plan selection would open here." })}>
                     <RefreshCw className="h-4 w-4 mr-2" />Change Plan
                   </Button>
@@ -370,7 +370,7 @@ export default function MemberDetail() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={5} placeholder="Add notes about this student..." />
-                <Button size="sm" onClick={() => toast({ title: "Notes saved", description: "Student notes updated successfully." })}>Save Notes</Button>
+                <Button size="sm" onClick={() => toast({ title: "備註已儲存", description: "會員備註已成功更新。" })}>儲存備註</Button>
               </CardContent>
             </Card>
 
@@ -416,7 +416,7 @@ export default function MemberDetail() {
           {/* ======== BILLING TAB ======== */}
           <TabsContent value="billing" className="space-y-6">
             <Card>
-              <CardHeader className="pb-3"><CardTitle className="text-lg">Transaction History</CardTitle></CardHeader>
+              <CardHeader className="pb-3"><CardTitle className="text-lg">交易紀錄</CardTitle></CardHeader>
               <CardContent className="p-0">
                 <div className="hidden md:grid grid-cols-[1fr,2fr,1fr,1fr] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   <span>Date</span><span>Description</span><span>Amount</span><span>Status</span>
@@ -435,7 +435,7 @@ export default function MemberDetail() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Payment Methods</CardTitle>
+                  <CardTitle className="text-lg">付款方式s</CardTitle>
                   <Button variant="outline" size="sm" onClick={() => toast({ title: "Add payment method", description: "Payment form would open here." })}>
                     <Plus className="h-4 w-4 mr-1" />Add
                   </Button>
@@ -528,7 +528,7 @@ export default function MemberDetail() {
       <Dialog open={cancelOpen} onOpenChange={setCancelOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Cancel Membership</DialogTitle>
+            <DialogTitle>取消會員資格</DialogTitle>
             <DialogDescription>
               Cancel {member.firstName}'s {member.membership.type} membership. This action can be reversed by creating a new membership.
             </DialogDescription>

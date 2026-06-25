@@ -125,7 +125,7 @@ const CONNECTOR_DEFINITIONS: (ConnectorDefinition & { configured?: boolean; stat
     config_schema: {},
     credentials_schema: {},
     setup_guide_url: null,
-    export_instructions: "In Momence: Go to Settings > Data & Integrations > Export Data.",
+    export_instructions: "In Momence: Go to Settings > Data & Integrations > 匯出資料.",
     is_enabled: true,
     requires_approval: false,
     created_at: "",
@@ -147,7 +147,7 @@ const CONNECTOR_DEFINITIONS: (ConnectorDefinition & { configured?: boolean; stat
     config_schema: {},
     credentials_schema: {},
     setup_guide_url: null,
-    export_instructions: "In Arketa: Go to Settings > Export Data. Choose export type and format.",
+    export_instructions: "In Arketa: Go to Settings > 匯出資料. Choose export type and format.",
     is_enabled: true,
     requires_approval: false,
     created_at: "",
@@ -499,8 +499,8 @@ const CONNECTOR_DEFINITIONS: (ConnectorDefinition & { configured?: boolean; stat
 
 // Mock recent sync operations
 const RECENT_SYNCS = [
-  { connector: "Google Calendar", direction: "outbound", status: "complete", records: 47, time: "2 min ago" },
-  { connector: "Mailchimp", direction: "outbound", status: "complete", records: 12, time: "15 min ago" },
+  { connector: "Google Calendar", direction: "outbound", status: "complete", records: 47, time: "2 分鐘前" },
+  { connector: "Mailchimp", direction: "outbound", status: "complete", records: 12, time: "15 分鐘前" },
   { connector: "Custom Webhook", direction: "outbound", status: "complete", records: 3, time: "1 hour ago" },
   { connector: "Google Calendar", direction: "inbound", status: "complete", records: 2, time: "3 hours ago" },
 ];
@@ -508,14 +508,14 @@ const RECENT_SYNCS = [
 // Mock import history
 const IMPORT_HISTORY = [
   { source: "MindBody", type: "Clients", records: 847, status: "complete", date: "Jan 15, 2025" },
-  { source: "MindBody", type: "Attendance", records: 12430, status: "complete", date: "Jan 15, 2025" },
+  { source: "MindBody", type: "出席", records: 12430, status: "complete", date: "Jan 15, 2025" },
   { source: "MindBody", type: "Transactions", records: 2841, status: "partial", date: "Jan 14, 2025" },
 ];
 
 // Mock scheduled exports
 const SCHEDULED_EXPORTS = [
-  { name: "Weekly Revenue Report", format: "CSV", frequency: "Weekly", next: "Mon 6:00 AM", delivery: "email" },
-  { name: "Monthly Payroll Export", format: "QuickBooks IIF", frequency: "Monthly", next: "Feb 1, 6:00 AM", delivery: "sftp" },
+  { name: "Weekly Revenue Report", format: "CSV", frequency: "每週", next: "Mon 6:00 AM", delivery: "email" },
+  { name: "Monthly Payroll Export", format: "QuickBooks IIF", frequency: "每月", next: "Feb 1, 6:00 AM", delivery: "sftp" },
 ];
 
 // =============================================================================
@@ -555,8 +555,8 @@ const getStatusBadge = (status?: ConnectorStatus) => {
 
 const getTypeLabel = (type: ConnectorType) => {
   switch (type) {
-    case "import": return "Import";
-    case "export": return "Export";
+    case "import": return "匯入";
+    case "export": return "匯出";
     case "sync_inbound": return "Inbound Sync";
     case "sync_outbound": return "Outbound Sync";
     case "sync_bidirectional": return "Two-Way Sync";
@@ -667,7 +667,7 @@ export default function DataConnectors() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Data Connectors</h1>
+            <h1 className="text-2xl font-bold tracking-tight">資料連接器</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Import, export, and sync your studio data with external platforms
             </p>
@@ -695,14 +695,14 @@ export default function DataConnectors() {
                 </DialogHeader>
                 <div className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Data Type</label>
+                    <label className="text-sm font-medium">資料類型</label>
                     <Select defaultValue="members">
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="members">Members / Students</SelectItem>
-                        <SelectItem value="transactions">Transactions</SelectItem>
+                        <SelectItem value="transactions">交易紀錄</SelectItem>
                         <SelectItem value="attendance">Attendance History</SelectItem>
                         <SelectItem value="payroll">Payroll Data</SelectItem>
                         <SelectItem value="full">Full Backup (All Data)</SelectItem>
@@ -724,7 +724,7 @@ export default function DataConnectors() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Date Range</label>
+                    <label className="text-sm font-medium">日期範圍</label>
                     <div className="grid grid-cols-2 gap-2">
                       <Input type="date" />
                       <Input type="date" />
@@ -1024,10 +1024,10 @@ export default function DataConnectors() {
               </div>
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="All Categories" />
+                  <SelectValue placeholder="全部分類" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="all">全部分類</SelectItem>
                   <SelectItem value="marketplace">Marketplace</SelectItem>
                   <SelectItem value="calendar">Calendar</SelectItem>
                   <SelectItem value="crm">Marketing / CRM</SelectItem>
@@ -1071,9 +1071,9 @@ export default function DataConnectors() {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { label: "Members", icon: Users, desc: "Client list with contact info" },
+                      { label: "學員", icon: Users, desc: "Client list with contact info" },
                       { label: "Transactions", icon: CreditCard, desc: "All purchases and payments" },
-                      { label: "Attendance", icon: Calendar, desc: "Class attendance history" },
+                      { label: "出席", icon: Calendar, desc: "Class attendance history" },
                       { label: "Payroll", icon: CreditCard, desc: "Teacher earnings report" },
                     ].map(item => (
                       <button
@@ -1220,7 +1220,7 @@ export default function DataConnectors() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle className="text-lg">Audit Log</CardTitle>
+                    <CardTitle className="text-lg">稽核紀錄</CardTitle>
                     <CardDescription>Track all data access and changes</CardDescription>
                   </div>
                   <Button variant="outline" size="sm">
@@ -1231,9 +1231,9 @@ export default function DataConnectors() {
                 <CardContent className="space-y-3">
                   {[
                     { action: "Member data exported", user: "Sarah Chen", time: "2 hours ago" },
-                    { action: "GDPR erasure completed", user: "System", time: "Yesterday" },
-                    { action: "Bulk export generated", user: "David Park", time: "3 days ago" },
-                    { action: "Member data rectified", user: "Sarah Chen", time: "1 week ago" },
+                    { action: "GDPR erasure completed", user: "System", time: "昨天" },
+                    { action: "Bulk export generated", user: "David Park", time: "3 天前" },
+                    { action: "Member data rectified", user: "Sarah Chen", time: "1 週前" },
                   ].map((log, i) => (
                     <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-secondary/30 text-sm">
                       <div>

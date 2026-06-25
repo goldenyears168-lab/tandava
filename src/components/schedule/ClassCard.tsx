@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, MapPin, Users, Flame, Video, Monitor, Wifi } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { DeliveryMode } from "@/types/database";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 export interface ClassCardProps {
   id: string;
@@ -70,7 +70,7 @@ export function ClassCard({
   isLive = false,
   virtualLink,
 }: ClassCardProps) {
-  const { t } = useTranslation('schedule');
+  const t = createT('schedule');
   const isFull = spotsLeft === 0;
   const spotsPercentage = ((capacity - spotsLeft) / capacity) * 100;
   const modeStyle = deliveryModeStyles[deliveryMode];

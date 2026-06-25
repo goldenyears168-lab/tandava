@@ -58,7 +58,7 @@ interface PromoCodeRow {
 
 const mockPromos: PromoCodeRow[] = [
   {
-    id: "p1", code: "WELCOME20", name: "New Student Welcome",
+    id: "p1", code: "WELCOME20", name: "新學員 Welcome",
     discountType: "percentage", discountValue: 20,
     status: "active", appliesTo: ["membership", "class_pack"],
     newStudentsOnly: true, currentUses: 47, maxUses: null,
@@ -133,7 +133,7 @@ export default function PromoCodesManage() {
   const activeCount = promos.filter((p) => p.status === "active").length;
 
   const handleCreate = () => {
-    toast({ title: "Promo code created", description: `${newCode} is now active.` });
+    toast({ title: "優惠碼已建立", description: `${newCode} 已啟用。` });
     setCreateOpen(false);
     setNewCode("");
     setNewName("");
@@ -144,7 +144,7 @@ export default function PromoCodesManage() {
 
   const handleCopyCode = (code: string) => {
     navigator.clipboard?.writeText(code);
-    toast({ title: "Copied", description: `${code} copied to clipboard.` });
+    toast({ title: "已複製", description: `${code} 已複製到剪貼簿。` });
   };
 
   return (
@@ -153,7 +153,7 @@ export default function PromoCodesManage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Promo Codes</h1>
+            <h1 className="text-2xl font-bold tracking-tight">優惠碼s</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Manage discounts, intro offers, and promotional campaigns
             </p>
@@ -168,9 +168,9 @@ export default function PromoCodesManage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: "Active Promos", value: activeCount, icon: Tag },
-            { label: "Total Redemptions", value: totalRedemptions, icon: Users },
+            { label: "Total 兌換次數", value: totalRedemptions, icon: Users },
             { label: "Revenue Attributed", value: `$${(totalRevenue / 100).toLocaleString()}`, icon: TrendingUp },
-            { label: "Avg Redemptions", value: Math.round(totalRedemptions / promos.length), icon: Percent },
+            { label: "Avg 兌換次數", value: Math.round(totalRedemptions / promos.length), icon: Percent },
           ].map((stat) => (
             <Card key={stat.label}>
               <CardContent className="p-4">
@@ -242,15 +242,15 @@ export default function PromoCodesManage() {
 
                   <div className="flex items-center gap-1">
                     {promo.status === "active" ? (
-                      <Button variant="ghost" size="icon" className="h-8 w-8" title="Disable">
+                      <Button variant="ghost" size="icon" className="h-8 w-8" title="停用">
                         <Pause className="h-3.5 w-3.5" />
                       </Button>
                     ) : promo.status === "disabled" ? (
-                      <Button variant="ghost" size="icon" className="h-8 w-8" title="Enable">
+                      <Button variant="ghost" size="icon" className="h-8 w-8" title="啟用">
                         <Play className="h-3.5 w-3.5" />
                       </Button>
                     ) : null}
-                    <Button variant="ghost" size="icon" className="h-8 w-8" title="Delete">
+                    <Button variant="ghost" size="icon" className="h-8 w-8" title="刪除">
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>
                     <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -267,7 +267,7 @@ export default function PromoCodesManage() {
         <Dialog open={createOpen} onOpenChange={setCreateOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create Promo Code</DialogTitle>
+              <DialogTitle>Create 優惠碼</DialogTitle>
               <DialogDescription>
                 Create a discount code students can apply at checkout
               </DialogDescription>
@@ -279,7 +279,7 @@ export default function PromoCodesManage() {
                   <Label htmlFor="promoCode">Code</Label>
                   <Input
                     id="promoCode"
-                    placeholder="e.g. WELCOME20"
+                    placeholder="例如 WELCOME20"
                     value={newCode}
                     onChange={(e) => setNewCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ""))}
                     className="font-mono uppercase"
@@ -289,7 +289,7 @@ export default function PromoCodesManage() {
                   <Label htmlFor="promoName">Display Name</Label>
                   <Input
                     id="promoName"
-                    placeholder="e.g. New Student Welcome"
+                    placeholder="e.g. 新學員 Welcome"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                   />
@@ -304,8 +304,8 @@ export default function PromoCodesManage() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="percentage">Percentage Off</SelectItem>
-                      <SelectItem value="fixed_amount">Fixed Amount Off</SelectItem>
+                      <SelectItem value="percentage">百分比折扣</SelectItem>
+                      <SelectItem value="fixed_amount">固定金額 Off</SelectItem>
                       <SelectItem value="free_classes">Free Classes</SelectItem>
                     </SelectContent>
                   </Select>
@@ -313,7 +313,7 @@ export default function PromoCodesManage() {
                 <div className="space-y-2">
                   <Label htmlFor="discountVal">
                     {newDiscountType === "percentage" ? "Percentage" :
-                     newDiscountType === "fixed_amount" ? "Amount ($)" : "Classes"}
+                     newDiscountType === "fixed_amount" ? "Amount ($)" : "課程"}
                   </Label>
                   <Input
                     id="discountVal"
@@ -331,7 +331,7 @@ export default function PromoCodesManage() {
                   <Input
                     id="maxUses"
                     type="number"
-                    placeholder="Unlimited"
+                    placeholder="無限方案"
                     value={newMaxUses}
                     onChange={(e) => setNewMaxUses(e.target.value)}
                   />
@@ -359,7 +359,7 @@ export default function PromoCodesManage() {
             </div>
 
             <DialogFooter>
-              <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
+              <Button variant="outline" onClick={() => setCreateOpen(false)}>取消</Button>
               <Button onClick={handleCreate} disabled={!newCode || !newName || !newDiscountValue}>
                 Create Promo Code
               </Button>

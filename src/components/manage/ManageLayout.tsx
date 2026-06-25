@@ -38,7 +38,7 @@ import {
   CheckSquare,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface ManageLayoutProps {
   children: ReactNode;
@@ -70,7 +70,7 @@ const manageNavigation = [
 export function ManageLayout({ children }: ManageLayoutProps) {
   const location = useLocation();
   const { profile } = useAuth();
-  const { t } = useTranslation('manage');
+  const t = createT('manage');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const isActive = (href: string) => {
@@ -79,7 +79,7 @@ export function ManageLayout({ children }: ManageLayoutProps) {
   };
 
   const profileName = profile?.display_name
-    || (profile ? `${profile.first_name} ${profile.last_name}` : "Studio Admin");
+    || (profile ? `${profile.first_name} ${profile.last_name}` : "館主");
 
   const initials = profileName.split(" ").map((n) => n[0]).join("").toUpperCase();
 

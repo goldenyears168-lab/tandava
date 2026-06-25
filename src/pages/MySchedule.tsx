@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import { mockMemberBookings } from "@/data/demo/spa-ui-mocks";
 
 interface BookingItem {
   id: string;
@@ -40,104 +41,26 @@ interface BookingItem {
   cancelDeadline?: string;
 }
 
-const upcomingBookings: BookingItem[] = [
-  {
-    id: "1",
-    type: "CLASS",
-    title: "Power Vinyasa Flow",
-    teacher: { name: "Maya Johnson" },
-    startTime: "Today, 6:00 PM",
-    duration: 60,
-    location: "Main Studio",
-    status: "BOOKED",
-    canCancel: true,
-    cancelDeadline: "Cancel by 4:00 PM",
-  },
-  {
-    id: "2",
-    type: "CLASS",
-    title: "Morning Flow",
-    teacher: { name: "Sarah Lee" },
-    startTime: "Tomorrow, 7:00 AM",
-    duration: 60,
-    location: "Main Studio",
-    status: "BOOKED",
-    canCancel: true,
-    cancelDeadline: "Cancel by 5:00 AM tomorrow",
-  },
-  {
-    id: "3",
-    type: "WORKSHOP",
-    title: "Inversions Workshop",
-    teacher: { name: "Maya Johnson" },
-    startTime: "Saturday, Dec 7, 2:00 PM",
-    duration: 180,
-    location: "Main Studio",
-    status: "BOOKED",
-    canCancel: true,
-    cancelDeadline: "Cancel by Dec 5",
-  },
-  {
-    id: "4",
-    type: "CLASS",
-    title: "Hot Power Yoga",
-    teacher: { name: "Alex Rivera" },
-    startTime: "Tomorrow, 12:00 PM",
-    duration: 75,
-    location: "Hot Room",
-    status: "WAITLISTED",
-    canCancel: true,
-  },
-];
+const upcomingBookings: BookingItem[] = mockMemberBookings.filter(
+  (b) => b.status === "BOOKED" || b.status === "WAITLISTED"
+);
 
-const pastBookings: BookingItem[] = [
-  {
-    id: "p1",
-    type: "CLASS",
-    title: "Yin Yoga & Meditation",
-    teacher: { name: "David Park" },
-    startTime: "Yesterday, 7:30 PM",
-    duration: 75,
-    location: "Zen Room",
-    status: "CHECKED_IN",
-    canCancel: false,
-  },
-  {
-    id: "p2",
-    type: "CLASS",
-    title: "Morning Flow",
-    teacher: { name: "Sarah Lee" },
-    startTime: "Dec 1, 7:00 AM",
-    duration: 60,
-    location: "Main Studio",
-    status: "CHECKED_IN",
-    canCancel: false,
-  },
-  {
-    id: "p3",
-    type: "APPOINTMENT",
-    title: "Private Yoga Session",
-    teacher: { name: "Maya Johnson" },
-    startTime: "Nov 30, 4:00 PM",
-    duration: 60,
-    location: "Private Room",
-    status: "CHECKED_IN",
-    canCancel: false,
-  },
-];
+const pastBookings: BookingItem[] = mockMemberBookings.filter(
+  (b) => b.status === "CHECKED_IN" || b.status === "CANCELED" || b.status === "NO_SHOW"
+);
 
 const statusConfig = {
-  BOOKED: { label: "Booked", variant: "booked" as const, icon: Check },
-  CHECKED_IN: { label: "Attended", variant: "checkedIn" as const, icon: Check },
-  CANCELED: { label: "Canceled", variant: "canceled" as const, icon: X },
-  NO_SHOW: { label: "No Show", variant: "noShow" as const, icon: X },
-  WAITLISTED: { label: "Waitlisted", variant: "waitlisted" as const, icon: Clock },
+  BOOKED: { label: "已預約", variant: "booked" as const, icon: Check },
+  CHECKED_IN: { label: "已報到", variant: "checkedIn" as const, icon: Check },
+  CANCELED: { label: "已取消", variant: "canceled" as const, icon: X },
+  NO_SHOW: { label: "未到館", variant: "noShow" as const, icon: X },
+  WAITLISTED: { label: "候補中", variant: "waitlisted" as const, icon: Clock },
 };
 
 const typeConfig = {
-  CLASS: { label: "Class", variant: "class" as const },
-  WORKSHOP: { label: "Workshop", variant: "workshop" as const },
-  APPOINTMENT: { label: "Appointment", variant: "appointment" as const },
+  CLASS: { label: "療程", variant: "class" as const },
+  WORKSHOP: { label: "工作坊", variant: "workshop" as const },
+  APPOINTMENT: { label: "專人預約", variant: "appointment" as const },
 };
 
 function BookingCard({
@@ -191,7 +114,7 @@ function BookingCard({
             </div>
             <div className="flex items-center gap-1.5">
               <Clock className="h-4 w-4" />
-              <span>{booking.duration} min</span>
+              <span>{booking.duration} 分鐘</span>
             </div>
             <div className="flex items-center gap-1.5">
               <MapPin className="h-4 w-4" />
@@ -213,7 +136,7 @@ function BookingCard({
           {isPast && booking.status === "CHECKED_IN" ? (
             <Button variant="outline" size="sm" onClick={() => onRate(booking.id)}>
               <Star className="h-4 w-4 mr-1" />
-              Rate
+              評分
             </Button>
           ) : booking.canCancel ? (
             <Button
@@ -222,7 +145,7 @@ function BookingCard({
               onClick={() => onCancel(booking.id)}
               className="text-destructive hover:text-destructive"
             >
-              Cancel
+              取消預約
             </Button>
           ) : null}
         </div>
@@ -252,8 +175,8 @@ const MySchedule = () => {
     if (!selectedBooking) return;
     setCanceledIds((prev) => new Set(prev).add(selectedBooking.id));
     toast({
-      title: "Booking canceled",
-      description: `Your ${selectedBooking.title} booking has been canceled. No fee applied.`,
+      title: "預約已取消",
+      description: `您的「${selectedBooking.title}」預約已取消，未收取費用。`,
     });
     setCancelDialogOpen(false);
     setSelectedBooking(null);
@@ -263,8 +186,8 @@ const MySchedule = () => {
     setRatedIds((prev) => new Set(prev).add(id));
     const booking = pastBookings.find((b) => b.id === id);
     toast({
-      title: "Thanks for your feedback!",
-      description: `You rated ${booking?.title ?? "this class"}. Your teacher appreciates it.`,
+      title: "感謝您的回饋！",
+      description: `您已為「${booking?.title ?? "此課程"}」評分，老師感謝您的支持。`,
     });
   };
 
@@ -273,9 +196,9 @@ const MySchedule = () => {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">My Schedule</h1>
+          <h1 className="text-3xl font-bold tracking-tight">我的課程</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your upcoming classes, workshops, and appointments
+            管理您的即將開課、工作坊與預約
           </p>
         </div>
 
@@ -283,10 +206,10 @@ const MySchedule = () => {
         <Tabs defaultValue="upcoming" className="w-full">
           <TabsList className="grid w-full sm:w-auto grid-cols-2 sm:inline-grid">
             <TabsTrigger value="upcoming" className="px-8">
-              Upcoming ({activeUpcoming.length})
+              即將開課 ({activeUpcoming.length})
             </TabsTrigger>
             <TabsTrigger value="past" className="px-8">
-              Past
+              過去
             </TabsTrigger>
           </TabsList>
 
@@ -305,12 +228,12 @@ const MySchedule = () => {
             ) : (
               <div className="rounded-xl border bg-card p-12 text-center">
                 <Calendar className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                <h3 className="text-lg font-semibold mb-2">No upcoming bookings</h3>
+                <h3 className="text-lg font-semibold mb-2">尚無即將開課的預約</h3>
                 <p className="text-muted-foreground mb-4">
-                  You don't have any classes, workshops, or appointments scheduled.
+                  您目前沒有已排定的課程、工作坊或預約。
                 </p>
                 <Button asChild>
-                  <a href="/schedule">Browse Schedule</a>
+                  <a href="/schedule">瀏覽課程表</a>
                 </Button>
               </div>
             )}
@@ -332,9 +255,9 @@ const MySchedule = () => {
             ) : (
               <div className="rounded-xl border bg-card p-12 text-center">
                 <Calendar className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                <h3 className="text-lg font-semibold mb-2">No past bookings</h3>
+                <h3 className="text-lg font-semibold mb-2">尚無過去預約</h3>
                 <p className="text-muted-foreground">
-                  Your booking history will appear here.
+                  您的預約紀錄將顯示於此。
                 </p>
               </div>
             )}
@@ -346,29 +269,29 @@ const MySchedule = () => {
       <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Cancel Booking?</DialogTitle>
+            <DialogTitle>取消預約？</DialogTitle>
             <DialogDescription>
-              Are you sure you want to cancel your booking for{" "}
+              確定要取消「
               <span className="font-medium text-foreground">
                 {selectedBooking?.title}
               </span>
-              ?
+              」的預約嗎？
             </DialogDescription>
           </DialogHeader>
           {selectedBooking?.cancelDeadline && (
             <div className="flex items-center gap-2 p-3 rounded-lg bg-warning/10 text-warning text-sm">
               <AlertTriangle className="h-4 w-4 flex-shrink-0" />
               <span>
-                {selectedBooking.cancelDeadline}. Canceling after may result in a fee.
+                {selectedBooking.cancelDeadline}。逾時取消可能產生費用。
               </span>
             </div>
           )}
           <DialogFooter className="gap-2 sm:gap-0">
             <Button variant="outline" onClick={() => setCancelDialogOpen(false)}>
-              Keep Booking
+              保留預約
             </Button>
             <Button variant="destructive" onClick={handleConfirmCancel}>
-              Cancel Booking
+              確認取消
             </Button>
           </DialogFooter>
         </DialogContent>

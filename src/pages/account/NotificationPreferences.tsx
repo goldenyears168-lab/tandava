@@ -65,57 +65,57 @@ const defaultPreferences = {
 const notificationTypes = [
   {
     id: "bookingConfirmation",
-    label: "Booking confirmations",
-    description: "When you book or cancel a class",
+    label: "預約確認",
+    description: "當您預約或取消課程時",
     icon: CalendarCheck,
     category: "classes",
   },
   {
     id: "classReminder",
-    label: "Class reminders",
-    description: "Reminders before your scheduled classes",
+    label: "課程提醒",
+    description: "您已預約課程開始前的提醒",
     icon: Bell,
     category: "classes",
   },
   {
     id: "waitlistUpdate",
-    label: "Waitlist updates",
-    description: "When a spot opens up in a full class",
+    label: "候補更新",
+    description: "已額滿課程釋出名額時",
     icon: Users,
     category: "classes",
   },
   {
     id: "classCancellation",
-    label: "Class cancellations",
-    description: "When a class you're booked for is cancelled",
+    label: "課程取消",
+    description: "您已預約的課程被取消時",
     icon: CalendarX,
     category: "classes",
   },
   {
     id: "teacherChange",
-    label: "Teacher changes",
-    description: "When a substitute teacher is assigned",
+    label: "老師異動",
+    description: "代課老師安排時",
     icon: Users,
     category: "classes",
   },
   {
     id: "membershipExpiring",
-    label: "Membership expiring",
-    description: "Reminders before your membership expires",
+    label: "會籍即將到期",
+    description: "會籍到期前的提醒",
     icon: Tag,
     category: "account",
   },
   {
     id: "packRunningLow",
-    label: "Class pack alerts",
-    description: "When your class pack is running low",
+    label: "課程包提醒",
+    description: "課程包餘額不足時",
     icon: Tag,
     category: "account",
   },
   {
     id: "newWorkshops",
-    label: "New workshops & events",
-    description: "Announcements for special workshops and events",
+    label: "新工作坊與活動",
+    description: "特別工作坊與活動的公告",
     icon: Megaphone,
     category: "promotions",
   },
@@ -148,8 +148,8 @@ export default function NotificationPreferences() {
 
   const handleSave = () => {
     toast({
-      title: "Preferences saved",
-      description: "Your notification preferences have been updated.",
+      title: "偏好設定已儲存",
+      description: "您的通知偏好已更新。",
     });
   };
 
@@ -168,9 +168,9 @@ export default function NotificationPreferences() {
             </Link>
           </Button>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Notification Preferences</h1>
+            <h1 className="text-2xl font-bold tracking-tight">通知偏好</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Choose how and when you want to be notified
+              選擇您希望如何、何時收到通知
             </p>
           </div>
         </div>
@@ -178,9 +178,9 @@ export default function NotificationPreferences() {
         {/* Channel Toggles */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Notification Channels</CardTitle>
+            <CardTitle className="text-lg">通知管道</CardTitle>
             <CardDescription>
-              Enable or disable notification channels. You can fine-tune each notification type below.
+              啟用或停用通知管道。您可在下方針對各類通知進行細部設定。
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -190,8 +190,8 @@ export default function NotificationPreferences() {
                   <Mail className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-medium">Email</p>
-                  <p className="text-sm text-muted-foreground">Receive notifications via email</p>
+                  <p className="font-medium">電子郵件</p>
+                  <p className="text-sm text-muted-foreground">透過電子郵件接收通知</p>
                 </div>
               </div>
               <Switch
@@ -206,8 +206,8 @@ export default function NotificationPreferences() {
                   <MessageSquare className="h-5 w-5 text-accent-sage" />
                 </div>
                 <div>
-                  <p className="font-medium">SMS</p>
-                  <p className="text-sm text-muted-foreground">Receive text message notifications</p>
+                  <p className="font-medium">簡訊</p>
+                  <p className="text-sm text-muted-foreground">接收簡訊通知</p>
                 </div>
               </div>
               <Switch
@@ -222,8 +222,8 @@ export default function NotificationPreferences() {
                   <Smartphone className="h-5 w-5 text-foreground" />
                 </div>
                 <div>
-                  <p className="font-medium">Push Notifications</p>
-                  <p className="text-sm text-muted-foreground">Browser and mobile push alerts</p>
+                  <p className="font-medium">推播通知</p>
+                  <p className="text-sm text-muted-foreground">瀏覽器與行動裝置推播提醒</p>
                 </div>
               </div>
               <Switch
@@ -237,9 +237,9 @@ export default function NotificationPreferences() {
         {/* Notification Type Settings */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Class Notifications</CardTitle>
+            <CardTitle className="text-lg">課程通知</CardTitle>
             <CardDescription>
-              Notifications related to your class bookings and schedule
+              與課程預約及行程相關的通知
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -257,9 +257,9 @@ export default function NotificationPreferences() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Account Notifications</CardTitle>
+            <CardTitle className="text-lg">帳戶通知</CardTitle>
             <CardDescription>
-              Updates about your membership and account status
+              會籍與帳戶狀態的更新
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -277,9 +277,9 @@ export default function NotificationPreferences() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Promotions & Events</CardTitle>
+            <CardTitle className="text-lg">促銷與活動</CardTitle>
             <CardDescription>
-              Stay updated on new workshops, events, and special offers
+              掌握新工作坊、活動與優惠資訊
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -300,15 +300,15 @@ export default function NotificationPreferences() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Clock className="h-5 w-5" />
-              Reminder Timing
+              提醒時間
             </CardTitle>
             <CardDescription>
-              Choose when you want to receive class reminders
+              選擇課程開始前多久收到提醒
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Remind me before class</Label>
+              <Label>課程開始前提醒</Label>
               <Select
                 value={preferences.reminderTiming}
                 onValueChange={(v) => setPreferences((p) => ({ ...p, reminderTiming: v }))}
@@ -317,11 +317,11 @@ export default function NotificationPreferences() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="0.5">30 minutes before</SelectItem>
-                  <SelectItem value="1">1 hour before</SelectItem>
-                  <SelectItem value="2">2 hours before</SelectItem>
-                  <SelectItem value="3">3 hours before</SelectItem>
-                  <SelectItem value="4">4 hours before</SelectItem>
+                  <SelectItem value="0.5">30 分鐘前</SelectItem>
+                  <SelectItem value="1">1 小時前</SelectItem>
+                  <SelectItem value="2">2 小時前</SelectItem>
+                  <SelectItem value="3">3 小時前</SelectItem>
+                  <SelectItem value="4">4 小時前</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -335,10 +335,10 @@ export default function NotificationPreferences() {
               <div>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Moon className="h-5 w-5" />
-                  Quiet Hours
+                  勿擾時段
                 </CardTitle>
                 <CardDescription>
-                  Pause notifications during specific hours
+                  在特定時段暫停通知
                 </CardDescription>
               </div>
               <Switch
@@ -351,7 +351,7 @@ export default function NotificationPreferences() {
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Start time</Label>
+                  <Label>開始時間</Label>
                   <Select
                     value={preferences.quietHoursStart}
                     onValueChange={(v) => setPreferences((p) => ({ ...p, quietHoursStart: v }))}
@@ -364,7 +364,7 @@ export default function NotificationPreferences() {
                         const hour = i.toString().padStart(2, "0");
                         return (
                           <SelectItem key={hour} value={`${hour}:00`}>
-                            {i === 0 ? "12:00 AM" : i < 12 ? `${i}:00 AM` : i === 12 ? "12:00 PM" : `${i - 12}:00 PM`}
+                            {i === 0 ? "凌晨 12:00" : i < 12 ? `上午 ${i}:00` : i === 12 ? "下午 12:00" : `下午 ${i - 12}:00`}
                           </SelectItem>
                         );
                       })}
@@ -372,7 +372,7 @@ export default function NotificationPreferences() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label>End time</Label>
+                  <Label>結束時間</Label>
                   <Select
                     value={preferences.quietHoursEnd}
                     onValueChange={(v) => setPreferences((p) => ({ ...p, quietHoursEnd: v }))}
@@ -385,7 +385,7 @@ export default function NotificationPreferences() {
                         const hour = i.toString().padStart(2, "0");
                         return (
                           <SelectItem key={hour} value={`${hour}:00`}>
-                            {i === 0 ? "12:00 AM" : i < 12 ? `${i}:00 AM` : i === 12 ? "12:00 PM" : `${i - 12}:00 PM`}
+                            {i === 0 ? "凌晨 12:00" : i < 12 ? `上午 ${i}:00` : i === 12 ? "下午 12:00" : `下午 ${i - 12}:00`}
                           </SelectItem>
                         );
                       })}
@@ -394,7 +394,7 @@ export default function NotificationPreferences() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                Push and SMS notifications will be held during quiet hours. Urgent notifications (like class cancellations) will still be delivered.
+                勿擾時段內將暫停推播與簡訊通知。緊急通知（如課程取消）仍會送達。
               </p>
             </CardContent>
           )}
@@ -405,18 +405,18 @@ export default function NotificationPreferences() {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Megaphone className="h-5 w-5" />
-              Marketing Preferences
+              行銷偏好
             </CardTitle>
             <CardDescription>
-              Control marketing and promotional communications
+              管理行銷與促銷訊息
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium">Newsletter</p>
+                <p className="font-medium">電子報</p>
                 <p className="text-sm text-muted-foreground">
-                  Weekly digest with studio news and wellness tips
+                  每週精選：場館消息與身心健康小知識
                 </p>
               </div>
               <Switch
@@ -427,9 +427,9 @@ export default function NotificationPreferences() {
             <Separator />
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium">Promotional offers</p>
+                <p className="font-medium">促銷優惠</p>
                 <p className="text-sm text-muted-foreground">
-                  Special discounts and promotional campaigns
+                  特別折扣與促銷活動
                 </p>
               </div>
               <Switch
@@ -444,7 +444,7 @@ export default function NotificationPreferences() {
         <div className="flex justify-end pb-6">
           <Button onClick={handleSave} size="lg">
             <Save className="h-4 w-4 mr-2" />
-            Save Preferences
+            儲存偏好
           </Button>
         </div>
       </div>
@@ -488,7 +488,7 @@ function NotificationTypeRow({
               )}
             >
               <Mail className="h-3 w-3" />
-              Email
+              電子郵件
             </button>
             <button
               onClick={() => onUpdate("sms", !settings.sms)}
@@ -502,7 +502,7 @@ function NotificationTypeRow({
               )}
             >
               <MessageSquare className="h-3 w-3" />
-              SMS
+              簡訊
             </button>
             <button
               onClick={() => onUpdate("push", !settings.push)}
@@ -516,7 +516,7 @@ function NotificationTypeRow({
               )}
             >
               <Smartphone className="h-3 w-3" />
-              Push
+              推播
             </button>
           </div>
         </div>

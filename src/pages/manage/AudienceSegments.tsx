@@ -62,7 +62,7 @@ import { cn } from "@/lib/utils";
 const mockSegments = [
   {
     id: "1",
-    name: "Active Members",
+    name: "活躍學員",
     description: "Members with active unlimited or class pack membership",
     filters: { membership_status: ["active"] },
     member_count: 847,
@@ -73,7 +73,7 @@ const mockSegments = [
   {
     id: "2",
     name: "At-Risk Members",
-    description: "Haven't visited in 14+ days with active membership",
+    description: "Haven't visited in 14+ days with 位活躍學員hip",
     filters: { membership_status: ["active"], last_visit: { operator: "more_than", days: 14 } },
     member_count: 123,
     is_dynamic: true,
@@ -92,7 +92,7 @@ const mockSegments = [
   },
   {
     id: "4",
-    name: "New This Month",
+    name: "New 本月",
     description: "Members who joined in the last 30 days",
     filters: { joined: { operator: "within", days: 30 } },
     member_count: 42,
@@ -125,9 +125,9 @@ const mockSegments = [
 const filterTypes = [
   { id: "membership_status", label: "Membership Status", icon: Tag },
   { id: "membership_type", label: "Membership Type", icon: Users },
-  { id: "last_visit", label: "Last Visit", icon: Calendar },
+  { id: "last_visit", label: "上次到訪", icon: Calendar },
   { id: "total_visits", label: "Total Visits", icon: TrendingUp },
-  { id: "lifetime_value", label: "Lifetime Value", icon: DollarSign },
+  { id: "lifetime_value", label: "終身價值", icon: DollarSign },
   { id: "tags", label: "Member Tags", icon: Tag },
   { id: "joined", label: "Join Date", icon: Clock },
 ];
@@ -155,7 +155,7 @@ export default function AudienceSegments() {
   const handleRefreshCount = (segmentId: string) => {
     toast({
       title: "Refreshing segment",
-      description: "Member count is being recalculated...",
+      description: "學員人數 is being recalculated...",
     });
   };
 
@@ -220,7 +220,7 @@ export default function AudienceSegments() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Audience Segments</h1>
+            <h1 className="text-2xl font-bold tracking-tight">受眾分群</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Create and manage member segments for targeted campaigns
             </p>
@@ -234,17 +234,17 @@ export default function AudienceSegments() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[600px]">
               <DialogHeader>
-                <DialogTitle>Create Audience Segment</DialogTitle>
+                <DialogTitle>建立受眾分群</DialogTitle>
                 <DialogDescription>
                   Define filters to create a dynamic or static member segment
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Segment Name</Label>
+                  <Label htmlFor="name">分群名稱</Label>
                   <Input
                     id="name"
-                    placeholder="e.g., VIP Members, At-Risk, New This Month"
+                    placeholder="e.g., VIP Members, At-Risk, New 本月"
                     value={newSegment.name}
                     onChange={(e) => setNewSegment((p) => ({ ...p, name: e.target.value }))}
                   />
@@ -285,8 +285,8 @@ export default function AudienceSegments() {
                   {newSegment.filters.length === 0 ? (
                     <div className="text-center py-6 text-muted-foreground border border-dashed rounded-lg">
                       <Filter className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                      <p className="text-sm">No filters added yet</p>
-                      <p className="text-xs">Click "Add Filter" to define segment criteria</p>
+                      <p className="text-sm">尚未新增篩選條件</p>
+                      <p className="text-xs">Click "新增篩選" to define segment criteria</p>
                     </div>
                   ) : (
                     <div className="space-y-2">
@@ -304,7 +304,7 @@ export default function AudienceSegments() {
                             }}
                           >
                             <SelectTrigger className="w-[160px]">
-                              <SelectValue placeholder="Filter type" />
+                              <SelectValue placeholder="篩選類型" />
                             </SelectTrigger>
                             <SelectContent>
                               {filterTypes.map((ft) => (
@@ -527,7 +527,7 @@ export default function AudienceSegments() {
         {/* Tips Card */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Segmentation Best Practices</CardTitle>
+            <CardTitle className="text-base">分群最佳實務</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm text-muted-foreground">

@@ -52,7 +52,7 @@ const mockTemplates: UtmTemplate[] = [
   {
     id: "t1",
     studio_id: "studio-1",
-    name: "Newsletter Campaign",
+    name: "電子報 Campaign",
     description: "Default template for weekly newsletters",
     utm_source: "newsletter",
     utm_medium: "email",
@@ -283,7 +283,7 @@ export default function UtmBuilder() {
 
   const handleCopyShortUrl = (url: string) => {
     navigator.clipboard?.writeText(url);
-    toast({ title: "Copied!", description: "Short URL copied to clipboard." });
+    toast({ title: "Copied!", description: "短網址 copied to clipboard." });
   };
 
   const handleApplyTemplate = (template: UtmTemplate) => {
@@ -410,7 +410,7 @@ export default function UtmBuilder() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">UTM Builder</h1>
+            <h1 className="text-2xl font-bold tracking-tight">UTM 建立工具</h1>
             <p className="text-sm text-muted-foreground mt-1">
               Create tracked links to measure your marketing campaigns
             </p>
@@ -422,8 +422,8 @@ export default function UtmBuilder() {
           {[
             { label: "Total Links Created", value: recentLinks.length, icon: Link },
             { label: "Total Clicks", value: totalClicks.toLocaleString(), icon: MousePointer },
-            { label: "Saved Templates", value: templates.length, icon: Bookmark },
-            { label: "Active Campaigns", value: new Set(recentLinks.map(l => l.utm_campaign).filter(Boolean)).size, icon: Calendar },
+            { label: "已儲存範本", value: templates.length, icon: Bookmark },
+            { label: "進行中活動", value: new Set(recentLinks.map(l => l.utm_campaign).filter(Boolean)).size, icon: Calendar },
           ].map((stat) => (
             <Card key={stat.label}>
               <CardContent className="p-4">
@@ -456,7 +456,7 @@ export default function UtmBuilder() {
               <CardContent className="space-y-4">
                 {/* Destination URL */}
                 <div className="space-y-2">
-                  <Label htmlFor="destinationUrl">Destination URL</Label>
+                  <Label htmlFor="destinationUrl">目標網址</Label>
                   <Input
                     id="destinationUrl"
                     placeholder="https://tandavayoga.com/schedule"
@@ -477,7 +477,7 @@ export default function UtmBuilder() {
                       value={utmSource}
                       onChange={(e) => setUtmSource(e.target.value.toLowerCase().replace(/\s/g, "_"))}
                     />
-                    <p className="text-[10px] text-muted-foreground">Where the traffic comes from</p>
+                    <p className="text-[10px] text-muted-foreground">流量來源</p>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="utmMedium">
@@ -489,7 +489,7 @@ export default function UtmBuilder() {
                       value={utmMedium}
                       onChange={(e) => setUtmMedium(e.target.value.toLowerCase().replace(/\s/g, "_"))}
                     />
-                    <p className="text-[10px] text-muted-foreground">Marketing channel type</p>
+                    <p className="text-[10px] text-muted-foreground">行銷管道類型</p>
                   </div>
                 </div>
 
@@ -502,7 +502,7 @@ export default function UtmBuilder() {
                     value={utmCampaign}
                     onChange={(e) => setUtmCampaign(e.target.value.toLowerCase().replace(/\s/g, "-"))}
                   />
-                  <p className="text-[10px] text-muted-foreground">Campaign name or promotion</p>
+                  <p className="text-[10px] text-muted-foreground">活動名稱或促銷</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -514,7 +514,7 @@ export default function UtmBuilder() {
                       value={utmTerm}
                       onChange={(e) => setUtmTerm(e.target.value)}
                     />
-                    <p className="text-[10px] text-muted-foreground">Paid search keywords</p>
+                    <p className="text-[10px] text-muted-foreground">付費搜尋關鍵字</p>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="utmContent">utm_content (optional)</Label>
@@ -524,14 +524,14 @@ export default function UtmBuilder() {
                       value={utmContent}
                       onChange={(e) => setUtmContent(e.target.value.toLowerCase().replace(/\s/g, "-"))}
                     />
-                    <p className="text-[10px] text-muted-foreground">A/B test or ad variation</p>
+                    <p className="text-[10px] text-muted-foreground">A/B 測試或廣告變體</p>
                   </div>
                 </div>
 
                 {/* Generated URL Preview */}
                 {generatedUrl && (
                   <div className="space-y-2 pt-2">
-                    <Label>Generated URL</Label>
+                    <Label>產生的網址</Label>
                     <div className="p-3 bg-secondary/50 rounded-lg break-all">
                       <code className="text-xs">{generatedUrl}</code>
                     </div>
@@ -570,8 +570,8 @@ export default function UtmBuilder() {
             {/* Tabs for Templates and Recent Links */}
             <Tabs defaultValue="templates" className="w-full">
               <TabsList>
-                <TabsTrigger value="templates">Saved Templates</TabsTrigger>
-                <TabsTrigger value="recent">Recent Links</TabsTrigger>
+                <TabsTrigger value="templates">已儲存範本</TabsTrigger>
+                <TabsTrigger value="recent">最近連結</TabsTrigger>
               </TabsList>
 
               {/* Saved Templates */}
@@ -579,7 +579,7 @@ export default function UtmBuilder() {
                 <Card>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">Saved Templates</CardTitle>
+                      <CardTitle className="text-base">已儲存範本</CardTitle>
                       <Button size="sm" onClick={handleOpenSaveDialog}>
                         <Plus className="h-4 w-4 mr-1" />
                         New Template
@@ -646,7 +646,7 @@ export default function UtmBuilder() {
                               size="icon"
                               variant="ghost"
                               className="h-8 w-8"
-                              title="Edit"
+                              title="編輯"
                               onClick={() => handleEditTemplate(template)}
                             >
                               <Edit className="h-3.5 w-3.5" />
@@ -655,7 +655,7 @@ export default function UtmBuilder() {
                               size="icon"
                               variant="ghost"
                               className="h-8 w-8"
-                              title="Delete"
+                              title="刪除"
                               onClick={() => handleDeleteTemplate(template.id)}
                             >
                               <Trash2 className="h-3.5 w-3.5" />
@@ -678,16 +678,16 @@ export default function UtmBuilder() {
                 <Card>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">Recent Links</CardTitle>
+                      <CardTitle className="text-base">最近連結</CardTitle>
                       <Select value={dateFilter} onValueChange={setDateFilter}>
                         <SelectTrigger className="w-32">
-                          <SelectValue placeholder="Filter" />
+                          <SelectValue placeholder="篩選" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All time</SelectItem>
-                          <SelectItem value="7d">Last 7 days</SelectItem>
-                          <SelectItem value="30d">Last 30 days</SelectItem>
-                          <SelectItem value="90d">Last 90 days</SelectItem>
+                          <SelectItem value="all">全部時間</SelectItem>
+                          <SelectItem value="7d">過去 7 天</SelectItem>
+                          <SelectItem value="30d">過去 30 天</SelectItem>
+                          <SelectItem value="90d">過去 90 天</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -699,9 +699,9 @@ export default function UtmBuilder() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Short URL</TableHead>
+                          <TableHead>短網址</TableHead>
                           <TableHead>Destination</TableHead>
-                          <TableHead>Source / Medium</TableHead>
+                          <TableHead>來源／媒介</TableHead>
                           <TableHead className="text-right">Clicks</TableHead>
                           <TableHead>Created</TableHead>
                           <TableHead></TableHead>
@@ -777,7 +777,7 @@ export default function UtmBuilder() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="text-sm font-medium mb-2">Naming Conventions</h4>
+                  <h4 className="text-sm font-medium mb-2">命名慣例</h4>
                   <ul className="space-y-1.5 text-xs text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <Check className="h-3 w-3 text-accent-sage mt-0.5 shrink-0" />
@@ -803,7 +803,7 @@ export default function UtmBuilder() {
                 </div>
 
                 <div className="border-t pt-4">
-                  <h4 className="text-sm font-medium mb-2">Common Combinations</h4>
+                  <h4 className="text-sm font-medium mb-2">常見組合</h4>
                   <div className="space-y-2">
                     {commonCombinations.map((combo, idx) => (
                       <button
@@ -835,7 +835,7 @@ export default function UtmBuilder() {
                 </div>
 
                 <div className="border-t pt-4">
-                  <h4 className="text-sm font-medium mb-2">Pro Tips</h4>
+                  <h4 className="text-sm font-medium mb-2">進階提示</h4>
                   <ul className="space-y-1.5 text-xs text-muted-foreground">
                     <li>
                       <strong>utm_source:</strong> The platform (facebook, google, newsletter)
@@ -872,16 +872,16 @@ export default function UtmBuilder() {
             </DialogHeader>
             <div className="space-y-4 py-2">
               <div className="space-y-2">
-                <Label htmlFor="templateName">Template Name</Label>
+                <Label htmlFor="templateName">範本名稱</Label>
                 <Input
                   id="templateName"
-                  placeholder="e.g. Newsletter Campaign"
+                  placeholder="e.g. 電子報 Campaign"
                   value={newTemplateName}
                   onChange={(e) => setNewTemplateName(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="templateDesc">Description (optional)</Label>
+                <Label htmlFor="templateDesc">描述（選填）</Label>
                 <Input
                   id="templateDesc"
                   placeholder="e.g. For weekly email newsletters"
@@ -938,7 +938,7 @@ export default function UtmBuilder() {
         <Dialog open={qrDialogOpen} onOpenChange={setQrDialogOpen}>
           <DialogContent className="sm:max-w-sm">
             <DialogHeader>
-              <DialogTitle>QR Code</DialogTitle>
+              <DialogTitle>QR 碼</DialogTitle>
               <DialogDescription>
                 Scan this code to open your tracked link
               </DialogDescription>
@@ -948,7 +948,7 @@ export default function UtmBuilder() {
               <div className="w-48 h-48 bg-secondary rounded-xl flex items-center justify-center border-2 border-dashed border-border">
                 <div className="text-center">
                   <QrCode className="h-12 w-12 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-xs text-muted-foreground">QR Code Preview</p>
+                  <p className="text-xs text-muted-foreground">QR 碼預覽</p>
                   <p className="text-[10px] text-muted-foreground mt-1">
                     (Integration pending)
                   </p>

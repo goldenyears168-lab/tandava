@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sparkles } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { useLocale } from "@/contexts/LocaleContext";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface AddOnItem {
   id: string;
@@ -35,7 +35,7 @@ export function BookingAddOns({ addOns, onAddOns, onSkip }: BookingAddOnsProps) 
   };
 
   const { formatPrice: localeFormatPrice } = useLocale();
-  const { t } = useTranslation('booking');
+  const t = createT('booking');
   const formatPrice = (cents: number, currency: string) => localeFormatPrice(cents, currency);
 
   const handleAddToBooking = () => {

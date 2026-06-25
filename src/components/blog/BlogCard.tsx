@@ -74,7 +74,7 @@ export function BlogCard({ post, featured = false, className }: BlogCardProps) {
             </span>
             <span className="inline-flex items-center gap-1">
               <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-              {post.readingTimeMinutes} min read
+              {post.readingTimeMinutes} 分鐘閱讀
             </span>
           </div>
         </div>

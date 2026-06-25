@@ -106,23 +106,23 @@ export function CheckInQRCode({
     await new Promise(resolve => setTimeout(resolve, 1000));
     setIsRefreshing(false);
     toast({
-      title: "QR Code Refreshed",
-      description: "Your check-in code has been updated.",
+      title: "QR 碼已更新",
+      description: "您的報到碼已更新。",
     });
   };
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText("CHECKIN-ABC123");
     toast({
-      title: "Code Copied",
-      description: "Manual check-in code copied to clipboard.",
+      title: "已複製代碼",
+      description: "手動報到代碼已複製到剪貼簿。",
     });
   };
 
   const handleAddToWallet = (wallet: "apple" | "google") => {
     toast({
-      title: `Adding to ${wallet === "apple" ? "Apple" : "Google"} Wallet`,
-      description: "This would open the wallet pass in production.",
+      title: `加入${wallet === "apple" ? "Apple" : "Google"} 錢包`,
+      description: "正式環境中將開啟錢包通行證。",
     });
   };
 
@@ -137,14 +137,14 @@ export function CheckInQRCode({
           <QRCodeDisplay data={qrData} size={80} />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-sm">Your Check-In Code</h3>
+          <h3 className="font-semibold text-sm">您的報到 QR 碼</h3>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Scan at the studio kiosk for quick check-in
+            在場館自助報到機掃描，快速完成報到
           </p>
           <div className="flex items-center gap-2 mt-2">
             <Badge variant="outline" className="text-xs">
               <Clock className="h-3 w-3 mr-1" />
-              {daysUntilExpiry}d left
+              剩 {daysUntilExpiry} 天
             </Badge>
             <Button variant="ghost" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
               <RefreshCw className={`h-3 w-3 ${isRefreshing ? "animate-spin" : ""}`} />
@@ -160,10 +160,10 @@ export function CheckInQRCode({
       <CardHeader className="text-center">
         <CardTitle className="flex items-center justify-center gap-2">
           <QrCode className="h-5 w-5" />
-          Check-In QR Code
+          報到 QR 碼
         </CardTitle>
         <CardDescription>
-          Scan this code at the {studioName} kiosk for instant check-in
+          在 {studioName} 自助報到機掃描此碼，即可立即完成報到
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -174,7 +174,7 @@ export function CheckInQRCode({
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
               <Badge className="bg-accent-sage text-white">
                 <CheckCircle2 className="h-3 w-3 mr-1" />
-                Active
+                有效
               </Badge>
             </div>
           </div>
@@ -184,7 +184,7 @@ export function CheckInQRCode({
         <div className="text-center">
           <p className="font-semibold">{memberName}</p>
           <p className="text-sm text-muted-foreground">
-            Valid for {daysUntilExpiry} more days
+            有效期限剩 {daysUntilExpiry} 天
           </p>
         </div>
 
@@ -192,11 +192,11 @@ export function CheckInQRCode({
         <div className="flex items-center justify-center gap-2">
           <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
             <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
-            Refresh
+            重新整理
           </Button>
           <Button variant="outline" size="sm" onClick={handleCopyCode}>
             <Copy className="h-4 w-4 mr-2" />
-            Copy Code
+            複製代碼
           </Button>
         </div>
 
@@ -204,7 +204,7 @@ export function CheckInQRCode({
         {showWalletOptions && (
           <div className="space-y-3 pt-4 border-t">
             <p className="text-sm text-center text-muted-foreground">
-              Add to your phone's wallet for even faster check-in
+              加入手機錢包，報到更快速
             </p>
             <div className="flex items-center justify-center gap-3">
               <Button
@@ -213,7 +213,7 @@ export function CheckInQRCode({
                 onClick={() => handleAddToWallet("apple")}
               >
                 <Wallet className="h-4 w-4 mr-2" />
-                Apple Wallet
+                Apple 錢包
               </Button>
               <Button
                 variant="outline"
@@ -221,7 +221,7 @@ export function CheckInQRCode({
                 onClick={() => handleAddToWallet("google")}
               >
                 <Smartphone className="h-4 w-4 mr-2" />
-                Google Wallet
+                Google 錢包
               </Button>
             </div>
           </div>
@@ -230,7 +230,7 @@ export function CheckInQRCode({
         {/* Manual Code Fallback */}
         <div className="p-3 rounded-lg bg-secondary/50 text-center">
           <p className="text-xs text-muted-foreground mb-1">
-            Can't scan? Use this code at the front desk:
+            無法掃描？請至櫃台使用此代碼：
           </p>
           <button
             onClick={handleCopyCode}
@@ -243,7 +243,7 @@ export function CheckInQRCode({
         {/* Help Link */}
         <p className="text-xs text-center text-muted-foreground">
           <a href="#" className="inline-flex items-center gap-1 hover:text-primary">
-            How does check-in work?
+            報到方式說明
             <ExternalLink className="h-3 w-3" />
           </a>
         </p>

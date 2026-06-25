@@ -215,7 +215,7 @@ const statusConfig: Record<string, { color: string; icon: typeof Clock; label: s
   shipped: { color: "bg-accent-coral/20 text-accent-coral", icon: Truck, label: "Shipped" },
   partial: { color: "bg-accent-gold/20 text-accent-gold", icon: Package, label: "Partial" },
   received: { color: "bg-accent-sage/20 text-accent-sage", icon: PackageCheck, label: "Received" },
-  cancelled: { color: "bg-destructive/20 text-destructive", icon: XCircle, label: "Cancelled" },
+  cancelled: { color: "bg-destructive/20 text-destructive", icon: XCircle, label: "已取消" },
 };
 
 function formatPrice(cents: number): string {
@@ -410,7 +410,7 @@ export default function PurchaseOrdersManage() {
     );
 
     toast({
-      title: "Inventory received",
+      title: "已入庫",
       description: `${totalReceiving} items received for ${selectedPO.poNumber}`,
     });
     setReceiveOpen(false);
@@ -511,7 +511,7 @@ export default function PurchaseOrdersManage() {
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-40">
               <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
-              <SelectValue placeholder="Status" />
+              <SelectValue placeholder="狀態" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
@@ -527,7 +527,7 @@ export default function PurchaseOrdersManage() {
           <Select value={vendorFilter} onValueChange={setVendorFilter}>
             <SelectTrigger className="w-48">
               <Building2 className="h-4 w-4 mr-2 text-muted-foreground" />
-              <SelectValue placeholder="Vendor" />
+              <SelectValue placeholder="供應商" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Vendors</SelectItem>
@@ -668,7 +668,7 @@ export default function PurchaseOrdersManage() {
         <Dialog open={createOpen} onOpenChange={setCreateOpen}>
           <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Create Purchase Order</DialogTitle>
+              <DialogTitle>建立採購單</DialogTitle>
               <DialogDescription>
                 Order inventory from your vendors
               </DialogDescription>
@@ -791,7 +791,7 @@ export default function PurchaseOrdersManage() {
                   <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-xl">
                     <Package className="h-8 w-8 mx-auto mb-2 opacity-50" />
                     <p className="text-sm">No items added yet</p>
-                    <p className="text-xs">Search for products above to add them</p>
+                    <p className="text-xs">在上方搜尋商品以新增</p>
                   </div>
                 )}
               </div>
@@ -1010,7 +1010,7 @@ export default function PurchaseOrdersManage() {
         <Dialog open={receiveOpen} onOpenChange={setReceiveOpen}>
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle>Receive Inventory</DialogTitle>
+              <DialogTitle>確認入庫</DialogTitle>
               <DialogDescription>
                 {selectedPO?.poNumber} from {selectedPO?.vendorName}
               </DialogDescription>

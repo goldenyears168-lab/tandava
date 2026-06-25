@@ -19,31 +19,35 @@ import {
 } from "lucide-react";
 
 const STEPS = [
-  { key: "studio", label: "Studio Info", icon: Building2 },
-  { key: "location", label: "Location", icon: MapPin },
-  { key: "branding", label: "Branding", icon: Palette },
-  { key: "offerings", label: "Offerings", icon: Tag },
-  { key: "schedule", label: "Schedule", icon: CalendarClock },
-  { key: "pricing", label: "Pricing", icon: DollarSign },
-  { key: "staff", label: "Staff", icon: Users },
-  { key: "waivers", label: "Waivers", icon: ShieldCheck },
-  { key: "import", label: "Import", icon: Upload },
-  { key: "stripe", label: "Stripe Connect", icon: CreditCard },
-  { key: "launch", label: "Launch", icon: Rocket },
+  { key: "studio", label: "場館資訊", icon: Building2 },
+  { key: "location", label: "分店地址", icon: MapPin },
+  { key: "branding", label: "品牌設定", icon: Palette },
+  { key: "offerings", label: "服務項目", icon: Tag },
+  { key: "schedule", label: "服務排程", icon: CalendarClock },
+  { key: "pricing", label: "定價方案", icon: DollarSign },
+  { key: "staff", label: "專業團隊", icon: Users },
+  { key: "waivers", label: "同意書", icon: ShieldCheck },
+  { key: "import", label: "匯入", icon: Upload },
+  { key: "stripe", label: "金流串接", icon: CreditCard },
+  { key: "launch", label: "正式上線", icon: Rocket },
 ] as const;
 
-const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 
 export default function Onboarding() {
   const { toast } = useToast();
   const [step, setStep] = useState(0);
   const [done, setDone] = useState<Set<number>>(new Set());
   const [f, setF] = useState<Record<string, string>>({
-    timezone: "America/Los_Angeles", currency: "USD", rooms: "Main Studio, Hot Room",
-    classStyle: "vinyasa", classLevel: "all", classDuration: "60", classCapacity: "25",
-    classPrice: "25", schedDay: "monday", schedTime: "09:00", memberCycle: "monthly",
+    studioName: "森浴光mm941",
+    studioDesc: "讓身體重新定義舒爽，讓靈魂再次發光。森之息、浴暖陽、光之甦——在城市森林中找回內在平衡與通透。",
+    timezone: "Asia/Taipei", currency: "TWD", rooms: "能量艙室、撥筋室、光療室、活罐室",
+    address: "新北市汐止區水源路一段115號",
+    classStyle: "energy-cabin", classLevel: "all", classDuration: "60", classCapacity: "4",
+    classPrice: "1800", schedDay: "monday", schedTime: "09:30", memberCycle: "monthly",
     packClasses: "10", teacherRole: "teacher", payType: "per_class",
-    waiverName: "Liability Waiver", primaryColor: "#4fd1c5", secondaryColor: "#f687b3",
+    waiverName: "服務同意書", primaryColor: "#4a7c59", secondaryColor: "#d4a574",
+    memberName: "尊榮會員票券",
   });
   const [memberUnlimited, setMemberUnlimited] = useState(true);
 
@@ -63,12 +67,12 @@ export default function Onboarding() {
       });
       setSaving(false);
       if (error) {
-        toast({ title: "Couldn't save", description: error.message, variant: "destructive" });
+        toast({ title: "無法儲存", description: error.message, variant: "destructive" });
         return;
       }
     }
     setDone((prev) => new Set([...prev, step]));
-    toast({ title: `${STEPS[step].label} saved`, description: "Your progress has been saved." });
+    toast({ title: `${STEPS[step].label} 已儲存`, description: "您的進度已儲存。" });
     if (step < STEPS.length - 1) setStep(step + 1);
   };
 
@@ -96,31 +100,31 @@ export default function Onboarding() {
   const renderStep = () => {
     switch (step) {
       case 0: return (
-        <StepCard title="Studio Information" desc="Tell us about your studio to get started">
-          <Field label="Studio Name" id="studioName" placeholder="e.g. Tandava Yoga" />
+        <StepCard title="場館資訊" desc="設定森浴光mm941 的基本資料">
+          <Field label="工作室名稱" id="studioName" placeholder="森浴光mm941" />
           <div className="space-y-2">
-            <Label htmlFor="studioDesc">Description</Label>
-            <Textarea id="studioDesc" placeholder="A brief description of your studio..." value={f.studioDesc ?? ""} onChange={set("studioDesc")} rows={3} />
+            <Label htmlFor="studioDesc">品牌介紹</Label>
+            <Textarea id="studioDesc" placeholder="讓身體重新定義舒爽，讓靈魂再次發光..." value={f.studioDesc ?? ""} onChange={set("studioDesc")} rows={3} />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Sel label="Timezone" id="timezone" options={[["America/New_York","Eastern (ET)"],["America/Chicago","Central (CT)"],["America/Denver","Mountain (MT)"],["America/Los_Angeles","Pacific (PT)"]]} />
-            <Sel label="Currency" id="currency" options={[["USD","USD ($)"],["EUR","EUR"],["GBP","GBP"],["CAD","CAD"]]} />
+            <Sel label="時區" id="timezone" options={[["Asia/Taipei","台北 (GMT+8)"]]} />
+            <Sel label="幣別" id="currency" options={[["TWD","新台幣 (TWD)"]]} />
           </div>
         </StepCard>
       );
       case 1: return (
-        <StepCard title="Location" desc="Where is your studio located?">
-          <Field label="Street Address" id="address" placeholder="123 Main St, San Francisco, CA 94105" />
-          <Field label="Rooms (comma-separated)" id="rooms" placeholder="Main Studio, Hot Room" />
-          <Field label="Amenities" id="amenities" placeholder="Showers, Mat Rentals, Changing Rooms, Lockers" />
+        <StepCard title="分店地址" desc="設定各館地址與設施">
+          <Field label="地址" id="address" placeholder="新北市汐止區水源路一段115號" />
+          <Field label="療程空間（以逗號分隔）" id="rooms" placeholder="能量艙室、撥筋室、光療室、活罐室" />
+          <Field label="設施" id="amenities" placeholder="預約制、專人服務、尊榮會員票券" />
         </StepCard>
       );
       case 2: return (
-        <StepCard title="Branding" desc="Customize how your studio looks to students">
+        <StepCard title="品牌設定" desc="設定森浴光mm941 對外的視覺風格">
           <div className="grid grid-cols-2 gap-4">
             {(["primaryColor", "secondaryColor"] as const).map((key) => (
               <div key={key} className="space-y-2">
-                <Label>{key === "primaryColor" ? "Primary Color" : "Secondary Color"}</Label>
+                <Label>{key === "primaryColor" ? "主色" : "輔色"}</Label>
                 <div className="flex items-center gap-2">
                   <Input type="color" value={f[key]} onChange={set(key)} className="w-12 h-10 p-1" />
                   <Input value={f[key]} onChange={set(key)} />
@@ -132,122 +136,122 @@ export default function Onboarding() {
           <div className="space-y-2">
             <Label>Logo</Label>
             <div className="border-2 border-dashed border-border rounded-xl p-8 text-center">
-              <p className="text-sm text-muted-foreground">Drag and drop your logo, or click to upload</p>
-              <p className="text-xs text-muted-foreground mt-1">PNG, SVG, or JPG (512x512px recommended)</p>
-              <Button variant="outline" size="sm" className="mt-3">Upload Logo</Button>
+              <p className="text-sm text-muted-foreground">拖曳或點擊上傳 Logo</p>
+              <p className="text-xs text-muted-foreground mt-1">建議 PNG、SVG 或 JPG（512×512px）</p>
+              <Button variant="outline" size="sm" className="mt-3">上傳 Logo</Button>
             </div>
           </div>
         </StepCard>
       );
       case 3: return (
-        <StepCard title="Create a Class Offering" desc="Define the types of classes you teach">
-          <Field label="Class Name" id="className" placeholder="e.g. Morning Vinyasa" />
+        <StepCard title="服務項目" desc="設定官網療程類型">
+          <Field label="療程名稱" id="className" placeholder="例如 活化能量艙" />
           <div className="grid grid-cols-2 gap-4">
-            <Sel label="Style" id="classStyle" options={[["vinyasa","Vinyasa"],["hatha","Hatha"],["yin","Yin"],["power","Power"],["restorative","Restorative"]]} />
-            <Sel label="Level" id="classLevel" options={[["all","All Levels"],["beginner","Beginner"],["intermediate","Intermediate"],["advanced","Advanced"]]} />
+            <Sel label="類型" id="classStyle" options={[["energy-cabin","活化能量艙"],["tuina","專業撥筋"],["light-therapy","溫感能量光療"],["cupping","負離子活罐"],["meridian","舒通筋脈"]]} />
+            <Sel label="適合對象" id="classLevel" options={[["all","全齡適用"],["beginner","初次體驗"],["member","尊榮會員"]]} />
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <Field label="Duration (min)" id="classDuration" type="number" />
-            <Field label="Capacity" id="classCapacity" type="number" />
-            <Field label="Drop-in Price ($)" id="classPrice" type="number" />
+            <Field label="時長（分鐘）" id="classDuration" type="number" />
+            <Field label="每時段名額" id="classCapacity" type="number" />
+            <Field label="單次價格（NT$）" id="classPrice" type="number" />
           </div>
         </StepCard>
       );
       case 4: return (
-        <StepCard title="Set Up a Recurring Class" desc="Add your first class to the weekly schedule">
+        <StepCard title="設定重複療程" desc="新增第一個每週服務時段">
           <div className="grid grid-cols-2 gap-4">
-            <Sel label="Offering" id="schedOffering" placeholder="Select a class" options={[["morning-vinyasa","Morning Vinyasa"],["gentle-flow","Gentle Flow"],["power-yoga","Power Yoga"]]} />
-            <Sel label="Teacher" id="schedTeacher" placeholder="Select a teacher" options={[["maya","Maya Patel"],["james","James Liu"],["sarah","Sarah Chen"]]} />
+            <Sel label="療程" id="schedOffering" placeholder="選擇療程" options={[["energy-cabin","活化能量艙"],["tuina","專業撥筋"],["combo","能量艙＋撥筋"]]} />
+            <Sel label="美容師" id="schedTeacher" placeholder="選擇美容師" options={[["lin","林美容師"],["chen","陳美容師"],["wang","王美容師"]]} />
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <Sel label="Day" id="schedDay" options={DAYS.map((d) => [d.toLowerCase(), d])} />
-            <Field label="Time" id="schedTime" type="time" />
-            <Sel label="Room" id="schedRoom" placeholder="Select room" options={[["main","Main Studio"],["hot","Hot Room"],["meditation","Meditation Room"]]} />
+            <Sel label="星期" id="schedDay" options={[["monday","星期一"],["tuesday","星期二"],["wednesday","星期三"],["thursday","星期四"],["friday","星期五"],["saturday","星期六"],["sunday","星期日"]]} />
+            <Field label="時間" id="schedTime" type="time" />
+            <Sel label="療程空間" id="schedRoom" placeholder="選擇空間" options={[["cabin","能量艙室"],["tuina","撥筋室"],["light","光療室"]]} />
           </div>
         </StepCard>
       );
       case 5: return (
-        <StepCard title="Pricing Plans" desc="Create membership types and class packs">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Membership</p>
+        <StepCard title="定價方案" desc="設定尊榮會員票券與次數方案">
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">會員方案</p>
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Membership Name" id="memberName" placeholder="e.g. Unlimited Monthly" />
-            <Sel label="Billing Cycle" id="memberCycle" options={[["monthly","Monthly"],["quarterly","Quarterly"],["annual","Annual"]]} />
+            <Field label="方案名稱" id="memberName" placeholder="例如 尊榮會員票券" />
+            <Sel label="計費週期" id="memberCycle" options={[["monthly","每月"],["quarterly","每季"],["annual","每年"]]} />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Price ($)" id="memberPrice" type="number" placeholder="149" />
+            <Field label="價格（NT$）" id="memberPrice" type="number" placeholder="45600" />
             <div className="flex items-center gap-3 pt-6">
               <Switch checked={memberUnlimited} onCheckedChange={setMemberUnlimited} />
-              <Label>Unlimited classes</Label>
+              <Label>不限次數</Label>
             </div>
           </div>
           <Separator />
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Class Pack</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">次數票券</p>
           <div className="grid grid-cols-3 gap-4">
-            <Field label="Pack Name" id="packName" placeholder="e.g. 10-Class Pack" />
-            <Field label="Classes" id="packClasses" type="number" />
-            <Field label="Price ($)" id="packPrice" type="number" placeholder="200" />
+            <Field label="方案名稱" id="packName" placeholder="例如 10 次票券" />
+            <Field label="次數" id="packClasses" type="number" />
+            <Field label="價格（NT$）" id="packPrice" type="number" placeholder="15000" />
           </div>
         </StepCard>
       );
       case 6: return (
-        <StepCard title="Invite a Teacher" desc="Add your first staff member to the platform">
+        <StepCard title="邀請美容師" desc="新增第一位專業團隊成員">
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Full Name" id="teacherName" placeholder="Maya Patel" />
-            <Field label="Email" id="teacherEmail" placeholder="maya@tandava.yoga" />
+            <Field label="姓名" id="teacherName" placeholder="林美容師" />
+            <Field label="電子郵件" id="teacherEmail" placeholder="lin@1314mm941.com.tw" />
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <Sel label="Role" id="teacherRole" options={[["teacher","Teacher"],["sub","Substitute"],["admin","Admin"]]} />
-            <Sel label="Pay Type" id="payType" options={[["per_class","Per Class"],["hourly","Hourly"],["salary","Salary"]]} />
-            <Field label="Pay Rate ($)" id="payRate" type="number" placeholder="75" />
+            <Sel label="角色" id="teacherRole" options={[["teacher","美容師"],["sub","代班"],["admin","管理員"]]} />
+            <Sel label="計酬方式" id="payType" options={[["per_class","按次"],["hourly","時薪"],["salary","月薪"]]} />
+            <Field label="計酬（NT$）" id="payRate" type="number" placeholder="4500" />
           </div>
         </StepCard>
       );
       case 7: return (
-        <StepCard title="Liability Waiver" desc="Create a waiver that students must sign before their first class">
-          <Field label="Waiver Name" id="waiverName" />
+        <StepCard title="服務同意書" desc="會員首次預約前需同意的條款">
+          <Field label="同意書名稱" id="waiverName" />
           <div className="space-y-2">
-            <Label htmlFor="waiverContent">Waiver Content</Label>
-            <Textarea id="waiverContent" rows={8} placeholder="I acknowledge that yoga involves physical activity and that I participate at my own risk..." value={f.waiverContent ?? ""} onChange={set("waiverContent")} />
-            <p className="text-xs text-muted-foreground">Students will be required to agree to this waiver before booking.</p>
+            <Label htmlFor="waiverContent">同意書內容</Label>
+            <Textarea id="waiverContent" rows={8} placeholder="本人了解養身療程涉及身體調理，並自願承擔參與風險..." value={f.waiverContent ?? ""} onChange={set("waiverContent")} />
+            <p className="text-xs text-muted-foreground">會員預約前必須同意此條款。</p>
           </div>
         </StepCard>
       );
       case 8: return (
-        <StepCard title="Import Existing Data" desc="Migrate students, schedules, and memberships from another platform">
-          <p className="text-sm text-muted-foreground">If you have existing data from Mindbody, Momoyoga, or another platform, you can import it now or come back later.</p>
+        <StepCard title="匯入既有資料" desc="從其他平台遷移會員、排程與方案">
+          <p className="text-sm text-muted-foreground">若您有 Mindbody、Momence 或其他平台的資料，可立即匯入或稍後再處理。</p>
           <Button variant="outline" asChild>
-            <Link to="/manage/import"><ExternalLink className="h-4 w-4 mr-2" />Go to Import Tool</Link>
+            <Link to="/manage/import"><ExternalLink className="h-4 w-4 mr-2" />前往匯入工具</Link>
           </Button>
         </StepCard>
       );
       case 9: return (
-        <StepCard title="Connect Stripe" desc="Enable payment processing for your studio">
+        <StepCard title="串接 Stripe" desc="啟用線上收款功能">
           <div className="p-6 rounded-xl border-2 border-dashed border-border text-center">
             <CreditCard className="h-10 w-10 text-muted-foreground mx-auto" />
-            <h3 className="text-sm font-semibold mt-3">Connect your Stripe account</h3>
-            <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">Securely process memberships, class packs, and drop-in payments with Stripe Connect.</p>
-            <Button className="mt-4">Connect with Stripe</Button>
+            <h3 className="text-sm font-semibold mt-3">連接 Stripe 帳戶</h3>
+            <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">安全處理尊榮票券、次數方案與單次體驗付款。</p>
+            <Button className="mt-4">連接 Stripe</Button>
           </div>
         </StepCard>
       );
       case 10: {
         const checklist = STEPS.slice(0, -1).map((s, i) => ({ label: s.label, ok: done.has(i) }));
         return (
-          <StepCard title="Ready to Launch" desc="Review your setup and go live when you are ready">
+          <StepCard title="準備上線" desc="確認設定完成後即可正式開放預約">
             <div className="space-y-2">
               {checklist.map((item, i) => (
                 <div key={i} className="flex items-center gap-3 p-2 rounded-lg">
                   {item.ok ? <CheckCircle2 className="h-5 w-5 text-primary shrink-0" /> : <Circle className="h-5 w-5 text-muted-foreground/40 shrink-0" />}
                   <span className={`text-sm ${item.ok ? "text-foreground" : "text-muted-foreground"}`}>{item.label}</span>
-                  {item.ok && <Badge variant="outline" className="ml-auto text-xs">Done</Badge>}
+                  {item.ok && <Badge variant="outline" className="ml-auto text-xs">完成</Badge>}
                 </div>
               ))}
             </div>
             <Separator />
             <div className="text-center pt-2">
-              <p className="text-sm text-muted-foreground mb-4">{done.size} of {STEPS.length - 1} steps completed</p>
-              <Button size="lg" className="px-8" onClick={() => toast({ title: "Studio launched!", description: "Your studio is now live. Welcome to Tandava!" })}>
-                <Rocket className="h-4 w-4 mr-2" />Launch Studio
+              <p className="text-sm text-muted-foreground mb-4">已完成 {done.size} / {STEPS.length - 1} 個步驟</p>
+              <Button size="lg" className="px-8" onClick={() => toast({ title: "工作室已上線！", description: "森浴光mm941 已準備好接受預約。" })}>
+                <Rocket className="h-4 w-4 mr-2" />正式上線
               </Button>
             </div>
           </StepCard>
@@ -261,8 +265,8 @@ export default function Onboarding() {
     <ManageLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Studio Setup</h1>
-          <p className="text-sm text-muted-foreground mt-1">Complete these steps to get your studio up and running</p>
+          <h1 className="text-2xl font-bold tracking-tight">森浴光mm941 · 初始設定</h1>
+          <p className="text-sm text-muted-foreground mt-1">完成以下步驟，開始接受預約</p>
         </div>
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Step indicator */}
@@ -285,7 +289,7 @@ export default function Onboarding() {
               </CardContent>
             </Card>
             <div className="mt-3 px-1">
-              <p className="text-xs text-muted-foreground">{done.size} of {STEPS.length - 1} completed</p>
+              <p className="text-xs text-muted-foreground">已完成 {done.size} / {STEPS.length - 1}</p>
               <div className="mt-1.5 h-1.5 rounded-full bg-secondary overflow-hidden">
                 <div className="h-full bg-primary rounded-full transition-all duration-300" style={{ width: `${(done.size / (STEPS.length - 1)) * 100}%` }} />
               </div>
@@ -294,16 +298,16 @@ export default function Onboarding() {
           {/* Step content */}
           <div className="flex-1 min-w-0 space-y-4">
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-xs">Step {step + 1} of {STEPS.length}</Badge>
-              {done.has(step) && <Badge className="text-xs bg-primary/10 text-primary border-primary/20">Completed</Badge>}
+              <Badge variant="outline" className="text-xs">步驟 {step + 1} / {STEPS.length}</Badge>
+              {done.has(step) && <Badge className="text-xs bg-primary/10 text-primary border-primary/20">已完成</Badge>}
             </div>
             {renderStep()}
             {step < STEPS.length - 1 && (
               <div className="flex items-center justify-between pt-2">
                 <Button variant="ghost" size="sm" onClick={handleSkip} className="text-muted-foreground">
-                  <SkipForward className="h-4 w-4 mr-1.5" />Skip for now
+                  <SkipForward className="h-4 w-4 mr-1.5" />稍後再說
                 </Button>
-                <Button onClick={handleSave} disabled={saving}>{saving ? "Saving…" : "Save & Continue"}<ChevronRight className="h-4 w-4 ml-1.5" /></Button>
+                <Button onClick={handleSave} disabled={saving}>{saving ? "儲存中…" : "儲存並繼續"}<ChevronRight className="h-4 w-4 ml-1.5" /></Button>
               </div>
             )}
           </div>

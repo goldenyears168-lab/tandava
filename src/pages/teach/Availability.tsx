@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Save, Calendar } from "lucide-react";
 
-const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const DAYS = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
 
 interface TimeSlot {
   start: string;
@@ -17,13 +17,13 @@ interface TimeSlot {
 }
 
 const defaultAvailability: Record<string, TimeSlot> = {
-  Monday: { start: "06:00", end: "12:00", enabled: true },
-  Tuesday: { start: "06:00", end: "14:00", enabled: true },
-  Wednesday: { start: "06:00", end: "12:00", enabled: true },
-  Thursday: { start: "06:00", end: "14:00", enabled: true },
-  Friday: { start: "07:00", end: "11:00", enabled: true },
-  Saturday: { start: "08:00", end: "13:00", enabled: true },
-  Sunday: { start: "00:00", end: "00:00", enabled: false },
+  星期一: { start: "06:00", end: "12:00", enabled: true },
+  星期二: { start: "06:00", end: "14:00", enabled: true },
+  星期三: { start: "06:00", end: "12:00", enabled: true },
+  星期四: { start: "06:00", end: "14:00", enabled: true },
+  星期五: { start: "07:00", end: "11:00", enabled: true },
+  星期六: { start: "08:00", end: "13:00", enabled: true },
+  星期日: { start: "00:00", end: "00:00", enabled: false },
 };
 
 export default function TeachAvailability() {
@@ -48,24 +48,24 @@ export default function TeachAvailability() {
 
   const handleSave = () => {
     toast({
-      title: "Availability saved",
-      description: "Your weekly availability has been updated.",
+      title: "已儲存可授課時段",
+      description: "您的每週可授課時段已更新。",
     });
   };
 
   return (
     <TeachLayout>
-      <SEOHead title="Availability" noindex />
+      <SEOHead title="可授課時段" noindex />
 
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Availability</h1>
-            <p className="text-muted-foreground">Set your weekly teaching availability</p>
+            <h1 className="text-2xl font-bold tracking-tight">可授課時段</h1>
+            <p className="text-muted-foreground">設定您的每週授課可用時段</p>
           </div>
           <Button onClick={handleSave}>
             <Save className="h-4 w-4 mr-2" />
-            Save Changes
+            儲存變更
           </Button>
         </div>
 
@@ -74,7 +74,7 @@ export default function TeachAvailability() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              Weekly Schedule
+              每週課表
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -92,7 +92,7 @@ export default function TeachAvailability() {
                         onChange={(e) => updateTime(day, "start", e.target.value)}
                         className="px-3 py-1.5 rounded-md border bg-background text-sm"
                       />
-                      <span className="text-muted-foreground">to</span>
+                      <span className="text-muted-foreground">至</span>
                       <input
                         type="time"
                         value={slot.end}
@@ -101,7 +101,7 @@ export default function TeachAvailability() {
                       />
                     </div>
                   ) : (
-                    <span className="text-sm text-muted-foreground">Unavailable</span>
+                    <span className="text-sm text-muted-foreground">不可授課</span>
                   )}
                 </div>
               );
@@ -114,15 +114,15 @@ export default function TeachAvailability() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Clock className="h-5 w-5" />
-              Sub Preferences
+              代課偏好
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium">Available for subs</p>
+                <p className="font-medium">可接受代課</p>
                 <p className="text-sm text-muted-foreground">
-                  Other teachers can see you as available for sub requests
+                  其他老師可看到您有代課意願
                 </p>
               </div>
               <Switch checked={subAvailable} onCheckedChange={setSubAvailable} />
@@ -130,7 +130,7 @@ export default function TeachAvailability() {
 
             {subAvailable && (
               <div className="space-y-2">
-                <p className="text-sm font-medium">Sub radius</p>
+                <p className="text-sm font-medium">代課範圍</p>
                 <div className="flex gap-2">
                   {["any", "same-studio", "same-style"].map((option) => (
                     <Badge
@@ -139,7 +139,7 @@ export default function TeachAvailability() {
                       className="cursor-pointer"
                       onClick={() => setSubRadius(option)}
                     >
-                      {option === "any" ? "Any class" : option === "same-studio" ? "Same studio only" : "Same style only"}
+                      {option === "any" ? "任何課程" : option === "same-studio" ? "僅限同工作室" : "僅限同風格"}
                     </Badge>
                   ))}
                 </div>

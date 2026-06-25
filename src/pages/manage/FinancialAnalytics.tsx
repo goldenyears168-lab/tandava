@@ -94,8 +94,8 @@ const netOperatingIncome = 6174;
 const operatingMargin = 35.6;
 
 const monthComparison = [
-  { label: "Gross Revenue", current: 18420, previous: 17100, delta: 1320, deltaPct: 7.7 },
-  { label: "Net Revenue", current: 17320, previous: 16200, delta: 1120, deltaPct: 6.9 },
+  { label: "總收入", current: 18420, previous: 17100, delta: 1320, deltaPct: 7.7 },
+  { label: "淨收入", current: 17320, previous: 16200, delta: 1120, deltaPct: 6.9 },
   { label: "Total Expenses", current: 11146, previous: 10890, delta: 256, deltaPct: 2.4 },
   { label: "Net Operating Income", current: 6174, previous: 5310, delta: 864, deltaPct: 16.3 },
 ];
@@ -203,7 +203,7 @@ const expansionScore = 72;
 
 const signalCards = [
   {
-    title: "Capacity",
+    title: "容量",
     icon: BarChart3,
     signal: "Strong signal",
     signalColor: "text-accent-sage",
@@ -214,7 +214,7 @@ const signalCards = [
     ],
   },
   {
-    title: "Demand",
+    title: "隨選",
     icon: TrendingUp,
     signal: "Moderate signal",
     signalColor: "text-accent-gold",
@@ -224,7 +224,7 @@ const signalCards = [
     ],
   },
   {
-    title: "Financial",
+    title: "財務",
     icon: DollarSign,
     signal: "Strong signal",
     signalColor: "text-accent-sage",
@@ -325,11 +325,11 @@ export default function FinancialAnalytics() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="this_week">This Week</SelectItem>
-                <SelectItem value="this_month">This Month</SelectItem>
-                <SelectItem value="last_month">Last Month</SelectItem>
-                <SelectItem value="this_quarter">This Quarter</SelectItem>
-                <SelectItem value="this_year">This Year</SelectItem>
+                <SelectItem value="this_week">本週</SelectItem>
+                <SelectItem value="this_month">本月</SelectItem>
+                <SelectItem value="last_month">上月</SelectItem>
+                <SelectItem value="this_quarter">本季</SelectItem>
+                <SelectItem value="this_year">今年</SelectItem>
               </SelectContent>
             </Select>
             <Button variant="outline" size="sm">
@@ -356,7 +356,7 @@ export default function FinancialAnalytics() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Profit & Loss Statement</CardTitle>
+                  <CardTitle className="text-lg">損益表 Statement</CardTitle>
                   <div className="flex items-center gap-2">
                     <Button variant="outline" size="sm">
                       <Settings className="h-4 w-4 mr-2" />
@@ -394,7 +394,7 @@ export default function FinancialAnalytics() {
                   <div className="border-t border-border my-3 mx-3" />
 
                   <div className="flex items-center justify-between px-3 py-1.5">
-                    <span className="text-sm font-semibold">Gross Revenue</span>
+                    <span className="text-sm font-semibold">總收入</span>
                     <span className="text-sm font-bold w-24 text-right">
                       ${grossRevenue.toLocaleString()}
                     </span>
@@ -412,7 +412,7 @@ export default function FinancialAnalytics() {
                   <div className="border-t border-border my-3 mx-3" />
 
                   <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-accent-sage/5">
-                    <span className="text-sm font-semibold">Net Revenue</span>
+                    <span className="text-sm font-semibold">淨收入</span>
                     <span className="text-base font-bold text-accent-sage">
                       ${netRevenue.toLocaleString()}
                     </span>
@@ -490,8 +490,8 @@ export default function FinancialAnalytics() {
               <CardContent>
                 <div className="hidden md:grid grid-cols-[2fr,1fr,1fr,1fr,1fr] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   <span>Line Item</span>
-                  <span>This Month</span>
-                  <span>Last Month</span>
+                  <span>本月</span>
+                  <span>上月</span>
                   <span>Change</span>
                   <span>% Change</span>
                 </div>
@@ -579,7 +579,7 @@ export default function FinancialAnalytics() {
                 <CardContent className="pt-5 pb-4 px-4">
                   <div className="flex items-center justify-between">
                     <DollarSign className="h-5 w-5 text-accent-gold" />
-                    <InfoTip text="Monthly Recurring Revenue from active memberships, excluding one-time purchases." />
+                    <InfoTip text="Monthly Recurring Revenue from 位活躍學員hips, excluding one-time purchases." />
                   </div>
                   <p className="text-2xl font-bold mt-2">$14,100</p>
                   <p className="text-xs text-muted-foreground">Current MRR</p>
@@ -898,7 +898,7 @@ export default function FinancialAnalytics() {
                 <div className="hidden md:grid grid-cols-[1fr,1fr,1fr,1fr] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   <span>Quarter</span>
                   <span>Last Year</span>
-                  <span>This Year</span>
+                  <span>今年</span>
                   <span>Growth</span>
                 </div>
                 {yoyComparison.map((row) => (

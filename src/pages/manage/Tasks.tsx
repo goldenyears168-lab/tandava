@@ -87,7 +87,7 @@ const mockCategories: TaskCategory[] = [
   { id: "c1", studio_id: "1", name: "Cleaning", color: "#10B981", icon: null, sort_order: 1, created_at: "" },
   { id: "c2", studio_id: "1", name: "Maintenance", color: "#F59E0B", icon: null, sort_order: 2, created_at: "" },
   { id: "c3", studio_id: "1", name: "Admin", color: "#6366F1", icon: null, sort_order: 3, created_at: "" },
-  { id: "c4", studio_id: "1", name: "Inventory", color: "#EC4899", icon: null, sort_order: 4, created_at: "" },
+  { id: "c4", studio_id: "1", name: "庫存", color: "#EC4899", icon: null, sort_order: 4, created_at: "" },
   { id: "c5", studio_id: "1", name: "Customer Service", color: "#14B8A6", icon: null, sort_order: 5, created_at: "" },
 ];
 
@@ -145,18 +145,18 @@ const mockComments = [
 
 // Priority config
 const priorityConfig: Record<TaskPriority, { label: string; color: string; bgColor: string; icon: typeof AlertCircle }> = {
-  low: { label: "Low", color: "text-gray-500", bgColor: "bg-gray-100 dark:bg-gray-800", icon: Circle },
-  medium: { label: "Medium", color: "text-blue-500", bgColor: "bg-blue-100 dark:bg-blue-900/30", icon: Clock },
-  high: { label: "High", color: "text-orange-500", bgColor: "bg-orange-100 dark:bg-orange-900/30", icon: AlertTriangle },
-  urgent: { label: "Urgent", color: "text-red-500", bgColor: "bg-red-100 dark:bg-red-900/30", icon: AlertCircle },
+  low: { label: "低", color: "text-gray-500", bgColor: "bg-gray-100 dark:bg-gray-800", icon: Circle },
+  medium: { label: "中", color: "text-blue-500", bgColor: "bg-blue-100 dark:bg-blue-900/30", icon: Clock },
+  high: { label: "高", color: "text-orange-500", bgColor: "bg-orange-100 dark:bg-orange-900/30", icon: AlertTriangle },
+  urgent: { label: "緊急", color: "text-red-500", bgColor: "bg-red-100 dark:bg-red-900/30", icon: AlertCircle },
 };
 
 // Status config
 const statusConfig: Record<TaskStatus, { label: string; color: string }> = {
-  pending: { label: "To Do", color: "bg-gray-500" },
-  in_progress: { label: "In Progress", color: "bg-blue-500" },
-  completed: { label: "Completed", color: "bg-green-500" },
-  cancelled: { label: "Cancelled", color: "bg-red-500" },
+  pending: { label: "待辦", color: "bg-gray-500" },
+  in_progress: { label: "進行中", color: "bg-blue-500" },
+  completed: { label: "已完成", color: "bg-green-500" },
+  cancelled: { label: "已取消", color: "bg-red-500" },
 };
 
 function getInitials(profile?: Profile | null): string {
@@ -167,7 +167,7 @@ function getInitials(profile?: Profile | null): string {
 }
 
 function getFullName(profile?: Profile | null): string {
-  if (!profile) return "Unassigned";
+  if (!profile) return "未指派";
   return [profile.first_name, profile.last_name].filter(Boolean).join(" ") || profile.email;
 }
 
@@ -574,7 +574,7 @@ export default function TasksManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Total Tasks</p>
+                  <p className="text-xs text-muted-foreground">任務總數</p>
                   <p className="text-xl font-bold">{stats.total}</p>
                 </div>
                 <CheckSquare className="h-5 w-5 text-muted-foreground" />
@@ -596,7 +596,7 @@ export default function TasksManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Completed Today</p>
+                  <p className="text-xs text-muted-foreground">今日完成</p>
                   <p className="text-xl font-bold text-green-500">{stats.completedToday}</p>
                 </div>
                 <CheckCircle2 className="h-5 w-5 text-green-500" />
@@ -607,7 +607,7 @@ export default function TasksManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">My Tasks</p>
+                  <p className="text-xs text-muted-foreground">我的任務</p>
                   <p className="text-xl font-bold">{stats.myTasks}</p>
                 </div>
                 <User className="h-5 w-5 text-muted-foreground" />
@@ -634,7 +634,7 @@ export default function TasksManage() {
                 <SelectValue placeholder="Assignee" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Staff</SelectItem>
+                <SelectItem value="all">全部員工</SelectItem>
                 {mockStaff.map((staff) => (
                   <SelectItem key={staff.id} value={staff.id}>
                     {getFullName(staff)}
@@ -645,10 +645,10 @@ export default function TasksManage() {
             <Select value={filterPriority} onValueChange={setFilterPriority}>
               <SelectTrigger className="w-32">
                 <AlertCircle className="h-3.5 w-3.5 mr-1.5 text-muted-foreground" />
-                <SelectValue placeholder="Priority" />
+                <SelectValue placeholder="優先級" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Priorities</SelectItem>
+                <SelectItem value="all">全部優先級</SelectItem>
                 <SelectItem value="urgent">Urgent</SelectItem>
                 <SelectItem value="high">High</SelectItem>
                 <SelectItem value="medium">Medium</SelectItem>
@@ -658,10 +658,10 @@ export default function TasksManage() {
             <Select value={filterCategory} onValueChange={setFilterCategory}>
               <SelectTrigger className="w-36">
                 <Filter className="h-3.5 w-3.5 mr-1.5 text-muted-foreground" />
-                <SelectValue placeholder="Category" />
+                <SelectValue placeholder="分類" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="all">全部分類</SelectItem>
                 {mockCategories.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     <div className="flex items-center gap-2">
@@ -731,7 +731,7 @@ export default function TasksManage() {
                   {tasksByStatus[status].length === 0 && (
                     <div className="flex flex-col items-center justify-center h-24 text-muted-foreground">
                       <CheckSquare className="h-8 w-8 mb-2 opacity-30" />
-                      <p className="text-xs">No tasks</p>
+                      <p className="text-xs">無任務</p>
                     </div>
                   )}
                 </div>
@@ -748,7 +748,7 @@ export default function TasksManage() {
               <div className="hidden md:grid grid-cols-[2fr,1fr,1fr,1fr,1fr,1fr,auto] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <span>Task</span>
                 <span>Assignee</span>
-                <span>Due Date</span>
+                <span>截止日期</span>
                 <span>Priority</span>
                 <span>Status</span>
                 <span>Category</span>
@@ -812,7 +812,7 @@ export default function TasksManage() {
                           {task.due_time && <span className="text-muted-foreground ml-1">{task.due_time}</span>}
                         </span>
                       ) : (
-                        <span className="text-sm text-muted-foreground">No due date</span>
+                        <span className="text-sm text-muted-foreground">無截止日期</span>
                       )}
                     </div>
 
@@ -834,8 +834,8 @@ export default function TasksManage() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="pending">To Do</SelectItem>
-                          <SelectItem value="in_progress">In Progress</SelectItem>
+                          <SelectItem value="pending">待辦</SelectItem>
+                          <SelectItem value="in_progress">進行中</SelectItem>
                           <SelectItem value="completed">Completed</SelectItem>
                           <SelectItem value="cancelled">Cancelled</SelectItem>
                         </SelectContent>
@@ -886,8 +886,8 @@ export default function TasksManage() {
               {filteredTasks.length === 0 && (
                 <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                   <CheckSquare className="h-12 w-12 mb-4 opacity-30" />
-                  <p className="text-sm">No tasks found</p>
-                  <p className="text-xs mt-1">Try adjusting your filters or create a new task</p>
+                  <p className="text-sm">找不到任務</p>
+                  <p className="text-xs mt-1">請調整篩選條件或建立新任務</p>
                 </div>
               )}
             </CardContent>
@@ -906,7 +906,7 @@ export default function TasksManage() {
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label htmlFor="title">Title *</Label>
+              <Label htmlFor="title">標題 *</Label>
               <Input
                 id="title"
                 value={formData.title}
@@ -984,7 +984,7 @@ export default function TasksManage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="dueDate">Due Date</Label>
+                <Label htmlFor="dueDate">截止日期</Label>
                 <Input
                   id="dueDate"
                   type="date"
@@ -994,7 +994,7 @@ export default function TasksManage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="dueTime">Due Time</Label>
+                <Label htmlFor="dueTime">截止時間</Label>
                 <Input
                   id="dueTime"
                   type="time"
@@ -1084,8 +1084,8 @@ export default function TasksManage() {
             {/* Recurrence */}
             <div className="flex items-center justify-between p-3 rounded-lg bg-secondary/50">
               <div>
-                <p className="text-sm font-medium">Recurring Task</p>
-                <p className="text-xs text-muted-foreground">Automatically create new instances</p>
+                <p className="text-sm font-medium">重複任務</p>
+                <p className="text-xs text-muted-foreground">自動建立新實例</p>
               </div>
               <Switch
                 checked={formData.isRecurring}
@@ -1119,7 +1119,7 @@ export default function TasksManage() {
               Cancel
             </Button>
             <Button onClick={handleSaveTask} disabled={!formData.title.trim()}>
-              {editingTask ? "Save Changes" : "Create Task"}
+              {editingTask ? "儲存變更" : "Create Task"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -1163,8 +1163,8 @@ export default function TasksManage() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="pending">To Do</SelectItem>
-                        <SelectItem value="in_progress">In Progress</SelectItem>
+                        <SelectItem value="pending">待辦</SelectItem>
+                        <SelectItem value="in_progress">進行中</SelectItem>
                         <SelectItem value="completed">Completed</SelectItem>
                         <SelectItem value="cancelled">Cancelled</SelectItem>
                       </SelectContent>
@@ -1192,11 +1192,11 @@ export default function TasksManage() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground mb-1.5">Due Date</p>
+                    <p className="text-xs text-muted-foreground mb-1.5">截止日期</p>
                     <div className="flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
                       <span className={`text-sm ${isOverdue(selectedTask) ? "text-red-500 font-medium" : ""}`}>
-                        {selectedTask.due_date ? formatDate(selectedTask.due_date) : "No due date"}
+                        {selectedTask.due_date ? formatDate(selectedTask.due_date) : "無截止日期"}
                         {selectedTask.due_time && ` at ${selectedTask.due_time}`}
                       </span>
                     </div>
@@ -1262,7 +1262,7 @@ export default function TasksManage() {
                       <div className="flex items-start gap-2 text-xs">
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 shrink-0" />
                         <div>
-                          <span className="font-medium">Task completed</span>
+                          <span className="font-medium">任務已完成</span>
                           <p className="text-muted-foreground">{formatDateTime(selectedTask.completed_at)}</p>
                         </div>
                       </div>

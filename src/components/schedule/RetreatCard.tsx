@@ -55,7 +55,7 @@ export function RetreatCard({
         <div className="absolute top-3 left-3 flex gap-2">
           <Badge variant="retreat" className="gap-1">
             <Plane className="h-3 w-3" />
-            Retreat
+            靜修營
           </Badge>
           <Badge variant="lilac">
             {duration}
@@ -97,7 +97,7 @@ export function RetreatCard({
             ))}
           </div>
           <span className="text-sm text-muted-foreground">
-            with {teachers.map((t) => t.name).join(" & ")}
+            與 {teachers.map((t) => t.name).join(" & ")}
           </span>
         </div>
 
@@ -110,7 +110,7 @@ export function RetreatCard({
           <div className="flex items-center gap-1.5">
             <Users className="h-4 w-4" />
             <span className={spotsLeft <= 3 ? "text-warning font-medium" : ""}>
-              {isFull ? "Sold out" : `${spotsLeft} spots left`}
+              {isFull ? "已售完" : `剩 ${spotsLeft} 名額`}
             </span>
           </div>
         </div>
@@ -118,7 +118,7 @@ export function RetreatCard({
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-border">
           <div>
-            <p className="text-xs text-muted-foreground">Starting from</p>
+            <p className="text-xs text-muted-foreground">起價</p>
             <p className="text-2xl font-bold">${price.toLocaleString()}</p>
           </div>
           <Button
@@ -126,7 +126,7 @@ export function RetreatCard({
             size="lg"
             onClick={() => onBook(id)}
           >
-            {isFull ? "Join Waitlist" : "View Details"}
+            {isFull ? "加入候補" : "查看詳情"}
           </Button>
         </div>
       </div>

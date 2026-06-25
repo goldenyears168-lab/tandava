@@ -15,18 +15,18 @@ export default function AdminSettings() {
 
   return (
     <AdminLayout>
-      <SEOHead title="Platform Settings" noindex />
+      <SEOHead title="平台設定" noindex />
 
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
-          <p className="text-muted-foreground">Instance configuration and environment status.</p>
+          <h1 className="text-2xl font-bold tracking-tight">設定</h1>
+          <p className="text-muted-foreground">實例設定與環境變數狀態。</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Environment Configuration</CardTitle>
-            <CardDescription>Status of required environment variables. Set these in your .env file.</CardDescription>
+            <CardTitle className="text-base">環境設定</CardTitle>
+            <CardDescription>必要環境變數的狀態。請在 .env 檔案中設定這些變數。</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -40,7 +40,7 @@ export default function AdminSettings() {
                       <code className="text-xs text-muted-foreground">{v.key}</code>
                     </div>
                     <Badge variant={isSet ? "default" : "secondary"}>
-                      {isSet ? "Configured" : "Not Set"}
+                      {isSet ? "已設定" : "未設定"}
                     </Badge>
                   </div>
                 );

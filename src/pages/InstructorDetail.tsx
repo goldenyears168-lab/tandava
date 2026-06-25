@@ -100,7 +100,7 @@ const InstructorDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleBook = (classId: string) => {
-    toast({ title: "Class selected", description: "Opening booking details..." });
+    toast({ title: "已選擇課程", description: "正在開啟預約詳情..." });
   };
 
   return (
@@ -112,7 +112,7 @@ const InstructorDetail = () => {
           className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
         >
           <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to instructors
+          返回老師列表
         </Link>
 
         {/* Profile Header */}
@@ -139,7 +139,7 @@ const InstructorDetail = () => {
                 >
                   <Heart className={`h-4 w-4 ${isFavorite ? "fill-destructive text-destructive" : ""}`} />
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => toast({ title: "Link copied", description: "Instructor profile link copied to clipboard." })}>
+                <Button variant="outline" size="icon" onClick={() => toast({ title: "連結已複製", description: "老師個人頁面連結已複製到剪貼簿。" })}>
                   <Share2 className="h-4 w-4" />
                 </Button>
               </div>
@@ -150,19 +150,19 @@ const InstructorDetail = () => {
               <div className="flex items-center gap-1">
                 <Star className="h-5 w-5 fill-warning text-warning" />
                 <span className="font-semibold">{instructorData.rating}</span>
-                <span className="text-muted-foreground">({instructorData.reviewCount} reviews)</span>
+                <span className="text-muted-foreground">（{instructorData.reviewCount} 則評價）</span>
               </div>
               <div className="flex items-center gap-1 text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                <span>{instructorData.classCount.toLocaleString()} classes taught</span>
+                <span>{instructorData.classCount.toLocaleString()} 堂課授課</span>
               </div>
               <div className="flex items-center gap-1 text-muted-foreground">
                 <Users className="h-4 w-4" />
-                <span>{instructorData.studentCount.toLocaleString()} students</span>
+                <span>{instructorData.studentCount.toLocaleString()} 位學員</span>
               </div>
               <div className="flex items-center gap-1 text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                <span>{instructorData.experience} experience</span>
+                <span>{instructorData.experience} 教學經驗</span>
               </div>
             </div>
 
@@ -180,7 +180,7 @@ const InstructorDetail = () => {
           <IntroVideoPlayer
             videoUrl={instructorData.introVideoUrl}
             thumbnailUrl={instructorData.introVideoThumbnail}
-            title={`Meet ${instructorData.name.split(" ")[0]} – 1 min intro`}
+            title={`認識 ${instructorData.name.split(" ")[0]} — 1 分鐘介紹`}
             className="max-w-md"
           />
         )}
@@ -188,10 +188,10 @@ const InstructorDetail = () => {
         {/* Main content */}
         <Tabs defaultValue="classes" className="w-full">
           <TabsList>
-            <TabsTrigger value="classes">Upcoming Classes</TabsTrigger>
-            <TabsTrigger value="studios">Studios</TabsTrigger>
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="reviews">Reviews</TabsTrigger>
+            <TabsTrigger value="classes">即將開課</TabsTrigger>
+            <TabsTrigger value="studios">工作室</TabsTrigger>
+            <TabsTrigger value="about">關於</TabsTrigger>
+            <TabsTrigger value="reviews">評價</TabsTrigger>
           </TabsList>
 
           <TabsContent value="classes" className="mt-6 space-y-4">
@@ -211,7 +211,7 @@ const InstructorDetail = () => {
           <TabsContent value="about" className="mt-6 space-y-6">
             <Card>
               <CardContent className="pt-6">
-                <h3 className="font-semibold mb-3">Bio</h3>
+                <h3 className="font-semibold mb-3">簡介</h3>
                 <div className="text-muted-foreground whitespace-pre-line">
                   {instructorData.bio}
                 </div>
@@ -222,7 +222,7 @@ const InstructorDetail = () => {
               <CardContent className="pt-6">
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
                   <Award className="h-4 w-4 text-primary" />
-                  Certifications
+                  認證資格
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {instructorData.certifications.map((cert) => (
@@ -235,7 +235,7 @@ const InstructorDetail = () => {
 
           <TabsContent value="reviews" className="mt-6">
             <div className="text-center py-12 text-muted-foreground">
-              <p>Reviews coming soon</p>
+              <p>評價功能即將推出</p>
             </div>
           </TabsContent>
         </Tabs>

@@ -14,46 +14,42 @@ import {
   UserPlus,
   CalendarPlus,
   CheckCircle,
-  Video,
-  Wifi,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { DeliveryMode } from "@/types/database";
 import { EngagementNudge } from "@/components/EngagementNudge";
 
-// Mock data for the dashboard
+// 今日療程（示範資料，對應森浴光mm941 服務項目）
 const todayClasses: {
   id: string;
   name: string;
   time: string;
   teacher: string;
+  branch: string;
   spotsLeft: number;
   capacity: number;
   checkedIn: number;
-  deliveryMode?: DeliveryMode;
-  isLive?: boolean;
 }[] = [
-  { id: "1", name: "Morning Vinyasa", time: "7:00 AM", teacher: "Maya Patel", spotsLeft: 3, capacity: 25, checkedIn: 18, deliveryMode: "hybrid", isLive: true },
-  { id: "2", name: "Gentle Flow", time: "9:30 AM", teacher: "James Liu", spotsLeft: 8, capacity: 20, checkedIn: 0 },
-  { id: "3", name: "Power Yoga", time: "12:00 PM", teacher: "Sarah Chen", spotsLeft: 0, capacity: 30, checkedIn: 0 },
-  { id: "4", name: "Virtual Yin", time: "4:30 PM", teacher: "Ava Kim", spotsLeft: 12, capacity: 50, checkedIn: 0, deliveryMode: "virtual" },
-  { id: "5", name: "Evening Vinyasa", time: "6:00 PM", teacher: "Maya Patel", spotsLeft: 5, capacity: 25, checkedIn: 0, deliveryMode: "hybrid" },
-  { id: "6", name: "Candlelight Yin", time: "7:30 PM", teacher: "James Liu", spotsLeft: 6, capacity: 18, checkedIn: 0 },
+  { id: "1", name: "活化能量艙", time: "09:30", teacher: "林美容師", branch: "台中北屯館", spotsLeft: 1, capacity: 4, checkedIn: 2 },
+  { id: "2", name: "專業撥筋", time: "11:00", teacher: "陳美容師", branch: "台北復興館", spotsLeft: 2, capacity: 6, checkedIn: 0 },
+  { id: "3", name: "溫感能量光療", time: "13:30", teacher: "王美容師", branch: "台中東區館", spotsLeft: 0, capacity: 6, checkedIn: 0 },
+  { id: "4", name: "負離子活罐", time: "15:00", teacher: "張美容師", branch: "汐止館", spotsLeft: 3, capacity: 6, checkedIn: 0 },
+  { id: "5", name: "能量艙＋撥筋", time: "17:00", teacher: "林美容師", branch: "台中北屯館", spotsLeft: 1, capacity: 4, checkedIn: 0 },
+  { id: "6", name: "舒通筋脈", time: "19:30", teacher: "李美容師", branch: "台南健康館", spotsLeft: 4, capacity: 6, checkedIn: 0 },
 ];
 
 const alerts = [
-  { type: "sub_needed", message: "James Liu needs a sub for Wednesday 9:30 AM Gentle Flow", urgent: true },
-  { type: "low_spots", message: "Power Yoga (12 PM) is full — 3 on waitlist", urgent: false },
-  { type: "expiring_packs", message: "12 class packs expiring this week", urgent: false },
-  { type: "payment_failed", message: "2 membership renewals failed — follow up needed", urgent: true },
+  { type: "booking", message: "台中北屯館 17:00 能量艙＋撥筋 僅剩 1 個名額", urgent: true },
+  { type: "waitlist", message: "台中東區館 13:30 溫感能量光療 已額滿——2 人候補", urgent: false },
+  { type: "membership", message: "本週有 8 張尊榮會員票券即將到期", urgent: false },
+  { type: "followup", message: "3 則官網預約詢問待回覆（復興館地址確認）", urgent: true },
 ];
 
 const recentActivity = [
-  { action: "New student registered", detail: "Emma Wilson", time: "15 min ago" },
-  { action: "Booking confirmed", detail: "Morning Vinyasa — Alex Rivera", time: "32 min ago" },
-  { action: "Late cancel", detail: "Power Yoga — Jordan Blake", time: "1 hr ago" },
-  { action: "Membership purchased", detail: "Unlimited Monthly — Mia Tanaka", time: "2 hrs ago" },
-  { action: "Class pack purchased", detail: "10-Class Pack — Noah Garcia", time: "3 hrs ago" },
+  { action: "新會員預約", detail: "活化能量艙 — 王小姐（北屯館）", time: "15 分鐘前" },
+  { action: "預約已確認", detail: "專業撥筋 — 陳先生（復興館）", time: "32 分鐘前" },
+  { action: "臨時取消", detail: "負離子活罐 — 林小姐（東區館）", time: "1 小時前" },
+  { action: "已購買票券", detail: "尊榮會員票券 — 張小姐", time: "2 小時前" },
+  { action: "療程完成", detail: "舒通筋脈 — 李小姐（台南健康館）", time: "3 小時前" },
 ];
 
 export default function ManageDashboard() {
@@ -64,17 +60,17 @@ export default function ManageDashboard() {
         <div className="space-y-2">
           <EngagementNudge
             type="pack_running_low"
-            title="12 class packs expiring this week"
-            message="Send a reminder email to encourage renewal before they lose remaining classes."
-            actionLabel="View Expiring Packs"
+            title="本週有 8 張尊榮會員票券即將到期"
+            message="可寄送提醒，邀請會員在到期前預約活化能量艙或撥筋療程。"
+            actionLabel="查看票券狀態"
             actionUrl="/manage/financials"
-            context="$2,640 in potential renewal revenue"
+            context="潛在回訪收入 NT$ 48,000"
           />
           <EngagementNudge
             type="milestone_approaching"
-            title="Attendance up 18% this month"
-            message="Your 6 PM classes are consistently filling to capacity. Consider adding a second evening session."
-            actionLabel="View Schedule"
+            title="北屯館傍晚時段預約率上升"
+            message="能量艙＋撥筋組合療程詢問增加，可考慮加開 19:00 時段。"
+            actionLabel="查看服務排程"
             actionUrl="/manage/schedule"
           />
         </div>
@@ -82,22 +78,23 @@ export default function ManageDashboard() {
         {/* Page Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+            <h1 className="text-2xl font-bold tracking-tight">森浴光mm941 · 館主儀表板</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+              {new Date().toLocaleDateString("zh-TW", { weekday: "long", month: "long", day: "numeric" })}
+              {" · "}預約制 09:30–22:00
             </p>
           </div>
           <div className="hidden sm:flex gap-2">
             <Button variant="outline" size="sm" asChild>
               <Link to="/manage/students">
                 <UserPlus className="h-4 w-4 mr-2" />
-                Add Student
+                新增會員
               </Link>
             </Button>
             <Button size="sm" asChild>
               <Link to="/manage/schedule">
                 <CalendarPlus className="h-4 w-4 mr-2" />
-                Add Class
+                新增排程
               </Link>
             </Button>
           </div>
@@ -110,28 +107,28 @@ export default function ManageDashboard() {
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-primary/10 hover:bg-primary/20 transition-colors"
           >
             <Calendar className="h-5 w-5 text-primary" />
-            <span className="text-[10px] font-medium text-center">Schedule</span>
+            <span className="text-[10px] font-medium text-center">排程</span>
           </Link>
           <Link
             to="/manage/students"
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-accent-sage/10 hover:bg-accent-sage/20 transition-colors"
           >
             <Users className="h-5 w-5 text-accent-sage" />
-            <span className="text-[10px] font-medium text-center">Students</span>
+            <span className="text-[10px] font-medium text-center">會員</span>
           </Link>
           <Link
             to="/manage/financials"
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-accent-gold/10 hover:bg-accent-gold/20 transition-colors"
           >
             <DollarSign className="h-5 w-5 text-accent-gold" />
-            <span className="text-[10px] font-medium text-center">Payments</span>
+            <span className="text-[10px] font-medium text-center">帳務</span>
           </Link>
           <Link
             to="/manage/teachers"
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-accent-lilac/10 hover:bg-accent-lilac/20 transition-colors"
           >
             <UserCheck className="h-5 w-5 text-accent-lilac" />
-            <span className="text-[10px] font-medium text-center">Teachers</span>
+            <span className="text-[10px] font-medium text-center">團隊</span>
           </Link>
         </div>
 
@@ -141,7 +138,7 @@ export default function ManageDashboard() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Today's Classes</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">今日療程</p>
                   <p className="text-2xl font-bold mt-1">{todayClasses.length}</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -149,7 +146,7 @@ export default function ManageDashboard() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                {todayClasses.reduce((acc, c) => acc + (c.capacity - c.spotsLeft), 0)} total bookings
+                {todayClasses.reduce((acc, c) => acc + (c.capacity - c.spotsLeft), 0)} 筆預約
               </p>
             </CardContent>
           </Card>
@@ -158,15 +155,15 @@ export default function ManageDashboard() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Active Students</p>
-                  <p className="text-2xl font-bold mt-1">347</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">活躍會員</p>
+                  <p className="text-2xl font-bold mt-1">286</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-accent-sage/20 flex items-center justify-center">
                   <Users className="h-5 w-5 text-accent-sage" />
                 </div>
               </div>
               <p className="text-xs text-accent-sage mt-2 flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" /> +12 this week
+                <TrendingUp className="h-3 w-3" /> 本週 +9 位
               </p>
             </CardContent>
           </Card>
@@ -175,15 +172,15 @@ export default function ManageDashboard() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Revenue (MTD)</p>
-                  <p className="text-2xl font-bold mt-1">$18,420</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">本月營收</p>
+                  <p className="text-2xl font-bold mt-1">NT$ 582,400</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-accent-gold/20 flex items-center justify-center">
                   <DollarSign className="h-5 w-5 text-accent-gold" />
                 </div>
               </div>
               <p className="text-xs text-accent-sage mt-2 flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" /> +8% vs last month
+                <TrendingUp className="h-3 w-3" /> 較上月 +12%
               </p>
             </CardContent>
           </Card>
@@ -192,14 +189,14 @@ export default function ManageDashboard() {
             <CardContent className="pt-5 pb-4 px-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Check-in Rate</p>
-                  <p className="text-2xl font-bold mt-1">87%</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">到店率</p>
+                  <p className="text-2xl font-bold mt-1">91%</p>
                 </div>
                 <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <UserCheck className="h-5 w-5 text-primary" />
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground mt-2">3% no-show rate</p>
+              <p className="text-xs text-muted-foreground mt-2">預約未到率 2%</p>
             </CardContent>
           </Card>
         </div>
@@ -210,10 +207,10 @@ export default function ManageDashboard() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Today's Schedule</CardTitle>
+                  <CardTitle className="text-lg">今日服務排程</CardTitle>
                   <Button variant="ghost" size="sm" asChild>
                     <Link to="/manage/schedule" className="text-xs">
-                      View Full Schedule <ArrowRight className="h-3 w-3 ml-1" />
+                      查看完整排程 <ArrowRight className="h-3 w-3 ml-1" />
                     </Link>
                   </Button>
                 </div>
@@ -231,25 +228,11 @@ export default function ManageDashboard() {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
                           <p className="text-sm font-medium truncate">{cls.name}</p>
-                          {cls.isLive && (
-                            <span className="flex items-center gap-1 text-[10px] font-medium text-red-600 bg-red-100 px-1.5 py-0.5 rounded animate-pulse">
-                              <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                              LIVE
-                            </span>
-                          )}
                         </div>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <span>{cls.teacher}</span>
-                          {cls.deliveryMode === 'virtual' && (
-                            <span className="flex items-center gap-0.5 text-blue-600">
-                              <Video className="h-3 w-3" /> Virtual
-                            </span>
-                          )}
-                          {cls.deliveryMode === 'hybrid' && (
-                            <span className="flex items-center gap-0.5 text-violet-600">
-                              <Wifi className="h-3 w-3" /> Hybrid
-                            </span>
-                          )}
+                          <span>·</span>
+                          <span>{cls.branch}</span>
                         </div>
                       </div>
                     </div>
@@ -261,10 +244,10 @@ export default function ManageDashboard() {
                         </Badge>
                       )}
                       {cls.spotsLeft === 0 ? (
-                        <Badge className="text-xs bg-accent-coral/20 text-accent-coral">Full</Badge>
-                      ) : cls.spotsLeft <= 3 ? (
+                        <Badge className="text-xs bg-accent-coral/20 text-accent-coral">額滿</Badge>
+                      ) : cls.spotsLeft <= 2 ? (
                         <Badge variant="outline" className="text-xs text-accent-gold border-accent-gold/30">
-                          {cls.spotsLeft} left
+                          剩 {cls.spotsLeft} 位
                         </Badge>
                       ) : (
                         <span className="text-xs text-muted-foreground">
@@ -280,7 +263,7 @@ export default function ManageDashboard() {
             {/* Recent Activity */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Recent Activity</CardTitle>
+                <CardTitle className="text-lg">近期動態</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {recentActivity.map((activity, i) => (
@@ -305,7 +288,7 @@ export default function ManageDashboard() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-accent-gold" />
-                  Action Items
+                  待處理事項
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -332,36 +315,36 @@ export default function ManageDashboard() {
             {/* Quick Stats */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">This Week</CardTitle>
+                <CardTitle className="text-lg">本週</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">Classes Taught</span>
+                    <span className="text-sm">完成療程數</span>
                   </div>
-                  <span className="text-sm font-semibold">34</span>
+                  <span className="text-sm font-semibold">128</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">Total Bookings</span>
+                    <span className="text-sm">總預約數</span>
                   </div>
-                  <span className="text-sm font-semibold">612</span>
+                  <span className="text-sm font-semibold">436</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <UserCheck className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">New Students</span>
+                    <span className="text-sm">新會員</span>
                   </div>
-                  <span className="text-sm font-semibold">12</span>
+                  <span className="text-sm font-semibold">9</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">Revenue</span>
+                    <span className="text-sm">營收</span>
                   </div>
-                  <span className="text-sm font-semibold">$4,850</span>
+                  <span className="text-sm font-semibold">NT$ 148,600</span>
                 </div>
               </CardContent>
             </Card>

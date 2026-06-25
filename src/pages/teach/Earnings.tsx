@@ -50,9 +50,9 @@ interface PayPeriod {
 const mockPayPeriods: PayPeriod[] = [
   {
     id: "current",
-    label: "Current Period",
-    startDate: "Jan 16, 2026",
-    endDate: "Jan 31, 2026",
+    label: "本期",
+    startDate: "2026年1月16日",
+    endDate: "2026年1月31日",
     totalEarnings: 1850,
     basePay: 1650,
     tips: 145,
@@ -62,9 +62,9 @@ const mockPayPeriods: PayPeriod[] = [
   },
   {
     id: "jan1-15",
-    label: "Jan 1 - Jan 15, 2026",
-    startDate: "Jan 1, 2026",
-    endDate: "Jan 15, 2026",
+    label: "2026年1月1日 - 1月15日",
+    startDate: "2026年1月1日",
+    endDate: "2026年1月15日",
     totalEarnings: 1720,
     basePay: 1500,
     tips: 120,
@@ -74,9 +74,9 @@ const mockPayPeriods: PayPeriod[] = [
   },
   {
     id: "dec16-31",
-    label: "Dec 16 - Dec 31, 2025",
-    startDate: "Dec 16, 2025",
-    endDate: "Dec 31, 2025",
+    label: "2025年12月16日 - 12月31日",
+    startDate: "2025年12月16日",
+    endDate: "2025年12月31日",
     totalEarnings: 1580,
     basePay: 1350,
     tips: 155,
@@ -208,12 +208,12 @@ export default function TeachEarnings() {
 
   const handleExportCSV = () => {
     // Generate CSV content
-    const headers = ["Date", "Time", "Class", "Type", "Base Pay", "Tips", "Total", "Attendance"];
+    const headers = ["日期", "時間", "課程", "類型", "基本薪資", "小費", "合計", "出席"];
     const rows = mockEarnings.map((e) => [
       e.date,
       e.time,
       e.className,
-      e.type,
+      e.type === "sub" ? "代課" : "固定",
       `$${e.basePay}`,
       `$${e.tips}`,
       `$${e.basePay + e.tips}`,
@@ -230,8 +230,8 @@ export default function TeachEarnings() {
     window.URL.revokeObjectURL(url);
 
     toast({
-      title: "Export complete",
-      description: "Your earnings report has been downloaded.",
+      title: "匯出完成",
+      description: "收入報表已下載。",
     });
   };
 
@@ -240,19 +240,19 @@ export default function TeachEarnings() {
       case "current":
         return (
           <Badge className="text-[10px] bg-accent-gold/20 text-accent-gold border-0">
-            In Progress
+            進行中
           </Badge>
         );
       case "paid":
         return (
           <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage border-0">
-            Paid
+            已付款
           </Badge>
         );
       default:
         return (
           <Badge variant="secondary" className="text-[10px]">
-            Pending
+            待處理
           </Badge>
         );
     }
@@ -264,14 +264,14 @@ export default function TeachEarnings() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Earnings</h1>
+            <h1 className="text-2xl font-bold tracking-tight">收入</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Track your teaching income and tips
+              追蹤授課收入與小費
             </p>
           </div>
           <Button variant="outline" size="sm" onClick={handleExportCSV}>
             <Download className="h-4 w-4 mr-2" />
-            Export CSV
+            匯出 CSV
           </Button>
         </div>
 
@@ -280,7 +280,7 @@ export default function TeachEarnings() {
           <Calendar className="h-4 w-4 text-muted-foreground" />
           <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
             <SelectTrigger className="w-[240px]">
-              <SelectValue placeholder="Select period" />
+              <SelectValue placeholder="選擇期間" />
             </SelectTrigger>
             <SelectContent>
               {mockPayPeriods.map((period) => (
@@ -289,7 +289,7 @@ export default function TeachEarnings() {
                     <span>{period.label}</span>
                     {period.status === "current" && (
                       <span className="text-[10px] text-accent-gold">
-                        (Current)
+                        （本期）
                       </span>
                     )}
                   </div>
@@ -319,7 +319,7 @@ export default function TeachEarnings() {
                 <div className="flex items-center gap-2">
                   <DollarSign className="h-5 w-5 text-accent-sage" />
                   <span className="text-sm font-medium text-muted-foreground">
-                    Total
+                    合計
                   </span>
                 </div>
                 <p className="text-3xl font-bold mt-2 text-accent-sage">
@@ -332,7 +332,7 @@ export default function TeachEarnings() {
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                   <span className="text-xs font-medium text-muted-foreground">
-                    Base Pay
+                    基本薪資
                   </span>
                 </div>
                 <p className="text-xl font-bold mt-1">
@@ -341,7 +341,7 @@ export default function TeachEarnings() {
                 <p className="text-xs text-muted-foreground mt-1">
                   {currentPeriod.classCount -
                     Math.round(currentPeriod.subs / 55)}{" "}
-                  classes
+                  堂課
                 </p>
               </div>
 
@@ -350,15 +350,14 @@ export default function TeachEarnings() {
                 <div className="flex items-center gap-2">
                   <Heart className="h-4 w-4 text-accent-coral" />
                   <span className="text-xs font-medium text-muted-foreground">
-                    Tips
+                    小費
                   </span>
                 </div>
                 <p className="text-xl font-bold mt-1">
                   ${currentPeriod.tips.toLocaleString()}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {Math.round(currentPeriod.tips / currentPeriod.classCount)}{" "}
-                  avg/class
+                  平均每堂 ${Math.round(currentPeriod.tips / currentPeriod.classCount)}
                 </p>
               </div>
 
@@ -367,14 +366,14 @@ export default function TeachEarnings() {
                 <div className="flex items-center gap-2">
                   <Repeat2 className="h-4 w-4 text-primary" />
                   <span className="text-xs font-medium text-muted-foreground">
-                    Sub Classes
+                    代課收入
                   </span>
                 </div>
                 <p className="text-xl font-bold mt-1">
                   ${currentPeriod.subs.toLocaleString()}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {Math.round(currentPeriod.subs / 55)} classes
+                  {Math.round(currentPeriod.subs / 55)} 堂
                 </p>
               </div>
 
@@ -383,17 +382,16 @@ export default function TeachEarnings() {
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <span className="text-xs font-medium text-muted-foreground">
-                    Classes
+                    課程數
                   </span>
                 </div>
                 <p className="text-xl font-bold mt-1">
                   {currentPeriod.classCount}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  ${Math.round(
+                  平均每堂 ${Math.round(
                     currentPeriod.totalEarnings / currentPeriod.classCount
-                  )}{" "}
-                  avg/class
+                  )}
                 </p>
               </div>
             </div>
@@ -403,17 +401,17 @@ export default function TeachEarnings() {
         {/* Individual Classes */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Class Breakdown</CardTitle>
+            <CardTitle className="text-lg">課程明細</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             {/* Table Header - Desktop */}
             <div className="hidden md:grid grid-cols-[1fr,100px,80px,80px,80px,100px] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              <span>Class</span>
-              <span>Date/Time</span>
-              <span>Type</span>
-              <span>Base Pay</span>
-              <span>Tips</span>
-              <span className="text-right">Attendance</span>
+              <span>課程</span>
+              <span>日期/時間</span>
+              <span>類型</span>
+              <span>基本薪資</span>
+              <span>小費</span>
+              <span className="text-right">出席</span>
             </div>
 
             {/* Class Rows */}
@@ -426,7 +424,7 @@ export default function TeachEarnings() {
                 <div>
                   <p className="text-sm font-medium">{entry.className}</p>
                   <p className="text-xs text-muted-foreground md:hidden">
-                    {entry.date} at {entry.time}
+                    {entry.date} {entry.time}
                   </p>
                 </div>
 
@@ -443,11 +441,11 @@ export default function TeachEarnings() {
                       variant="outline"
                       className="text-[10px] border-primary/50 text-primary"
                     >
-                      Sub
+                      代課
                     </Badge>
                   ) : (
                     <Badge variant="secondary" className="text-[10px]">
-                      Regular
+                      固定
                     </Badge>
                   )}
                 </div>
@@ -473,13 +471,13 @@ export default function TeachEarnings() {
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {Math.round((entry.attendance / entry.capacity) * 100)}% full
+                    {Math.round((entry.attendance / entry.capacity) * 100)}% 滿額
                   </p>
                 </div>
 
                 {/* Mobile Total */}
                 <div className="md:hidden col-span-full flex items-center justify-between pt-2 border-t border-border mt-2">
-                  <span className="text-xs text-muted-foreground">Total</span>
+                  <span className="text-xs text-muted-foreground">合計</span>
                   <span className="text-sm font-semibold">
                     ${entry.basePay + entry.tips}
                   </span>
@@ -494,7 +492,7 @@ export default function TeachEarnings() {
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-accent-sage" />
-              <CardTitle className="text-lg">Earnings Trend</CardTitle>
+              <CardTitle className="text-lg">收入趨勢</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -511,7 +509,7 @@ export default function TeachEarnings() {
                   <div>
                     <p className="text-sm font-medium">{period.label}</p>
                     <p className="text-xs text-muted-foreground">
-                      {period.classCount} classes
+                      {period.classCount} 堂課
                     </p>
                   </div>
                   <div className="text-right">

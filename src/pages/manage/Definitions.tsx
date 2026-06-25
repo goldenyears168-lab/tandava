@@ -30,7 +30,7 @@ interface GlossaryTerm {
 const glossaryTerms: GlossaryTerm[] = [
   // Membership & Pricing
   {
-    term: "Membership",
+    term: "會籍",
     definition:
       "A recurring subscription that grants a student ongoing access to classes. Memberships can be unlimited (all classes) or limited (set number per month). They auto-renew until cancelled.",
     category: "membership",
@@ -39,23 +39,23 @@ const glossaryTerms: GlossaryTerm[] = [
   {
     term: "Class Pack",
     definition:
-      "A prepaid bundle of class credits that don't auto-renew. Students use one credit per class attended. Packs typically have an expiration date (e.g., 3 or 6 months).",
+      "A prepaid bundle of class credits that don't auto-renew. Students use one credit 每堂 attended. Packs typically have an expiration date (e.g., 3 or 6 months).",
     category: "membership",
-    seeAlso: ["Membership", "Credit"],
+    seeAlso: ["會籍", "Credit"],
   },
   {
     term: "Drop-in",
     definition:
       "A single-class purchase at full price, typically for visitors or members who've used their allocation. Drop-in rates are usually higher per-class than membership or pack rates.",
     category: "membership",
-    seeAlso: ["Class Pack", "Intro Offer"],
+    seeAlso: ["Class Pack", "體驗優惠"],
   },
   {
-    term: "Intro Offer",
+    term: "體驗優惠",
     definition:
       "A discounted first-time purchase for new students, such as '2 weeks unlimited for $30' or 'First class free'. Designed to lower the barrier for trying the studio.",
     category: "membership",
-    seeAlso: ["Conversion Rate", "Trial"],
+    seeAlso: ["轉換率", "Trial"],
   },
   {
     term: "Credit",
@@ -75,7 +75,7 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       "A temporary pause on a membership, typically used for travel, injury, or other life circumstances. The billing and membership end date are extended by the freeze duration.",
     category: "membership",
-    seeAlso: ["Membership", "Churn"],
+    seeAlso: ["會籍", "Churn"],
   },
 
   // Scheduling
@@ -113,7 +113,7 @@ const glossaryTerms: GlossaryTerm[] = [
     category: "scheduling",
   },
   {
-    term: "Waitlist",
+    term: "候補",
     definition:
       "A queue for students wanting to join a full class. When a spot opens (via cancellation), the first waitlisted student is automatically or manually added. Reduces lost revenue from full classes.",
     category: "scheduling",
@@ -161,14 +161,14 @@ const glossaryTerms: GlossaryTerm[] = [
     seeAlso: ["Auto-Pay"],
   },
   {
-    term: "Promo Code",
+    term: "優惠碼",
     definition:
       "A discount code applied at checkout for percentage off, fixed amount off, or free trial periods. Can be limited by usage count, date range, or specific products.",
     category: "payments",
-    seeAlso: ["Intro Offer"],
+    seeAlso: ["體驗優惠"],
   },
   {
-    term: "Refund",
+    term: "退款",
     definition:
       "Returning payment to a member's original payment method. Policies vary but typically cover unused portions of packs or errors. Partial refunds are also possible.",
     category: "payments",
@@ -180,28 +180,28 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       "Recording a student's attendance at a class. Can be done via kiosk, instructor device, or automatically when entering with a key card/QR code.",
     category: "members",
-    seeAlso: ["Booking", "No-Show"],
+    seeAlso: ["預約", "No-Show"],
   },
   {
-    term: "Booking",
+    term: "預約",
     definition:
       "Reserving a spot in a class before attending. Bookings may be free (membership) or require payment (drop-in). Advance booking helps predict attendance.",
     category: "members",
-    seeAlso: ["Check-in", "Waitlist"],
+    seeAlso: ["Check-in", "候補"],
   },
   {
     term: "No-Show",
     definition:
       "When a booked student doesn't attend and doesn't cancel. May result in forfeited credit, fee, or membership strike depending on studio policy.",
     category: "members",
-    seeAlso: ["Late Cancel", "Waitlist"],
+    seeAlso: ["Late Cancel", "候補"],
   },
   {
     term: "Late Cancel",
     definition:
       "Cancelling a booking within the restricted window (e.g., less than 2 hours before class). May incur fees or credit forfeiture to discourage last-minute changes.",
     category: "members",
-    seeAlso: ["No-Show", "Cancellation Policy"],
+    seeAlso: ["No-Show", "取消政策"],
   },
   {
     term: "Waiver",
@@ -236,11 +236,11 @@ const glossaryTerms: GlossaryTerm[] = [
     category: "operations",
   },
   {
-    term: "Capacity",
+    term: "容量",
     definition:
       "The maximum number of students allowed in a class. Set per room or class type, accounting for space, safety, and experience quality.",
     category: "operations",
-    seeAlso: ["Fill Rate", "Waitlist"],
+    seeAlso: ["Fill Rate", "候補"],
   },
   {
     term: "Hybrid Class",
@@ -270,21 +270,21 @@ const glossaryTerms: GlossaryTerm[] = [
     definition:
       "A potential student who has shown interest but hasn't purchased yet. May have signed up for newsletter, attended a free event, or started checkout without completing.",
     category: "marketing",
-    seeAlso: ["Conversion Rate", "Funnel"],
+    seeAlso: ["轉換率", "Funnel"],
   },
   {
     term: "Funnel",
     definition:
       "The stages a prospect moves through from awareness to paying member: Awareness → Interest → Trial → Conversion → Retention. Analyzing funnel helps optimize marketing.",
     category: "marketing",
-    seeAlso: ["Lead", "Conversion Rate"],
+    seeAlso: ["Lead", "轉換率"],
   },
   {
     term: "UTM Parameters",
     definition:
       "Tags added to URLs to track marketing campaign effectiveness. Include source (where), medium (how), and campaign (what). E.g., ?utm_source=instagram&utm_medium=social",
     category: "marketing",
-    seeAlso: ["Attribution"],
+    seeAlso: ["歸因"],
   },
   {
     term: "Referral Program",

@@ -1,0 +1,133 @@
+{
+  "nav": {
+    "home": "首頁",
+    "schedule": "服務表",
+    "onDemand": "隨選療程",
+    "events": "活動",
+    "instructors": "專業團隊",
+    "mySchedule": "我的預約",
+    "community": "社群"
+  },
+  "userMenu": {
+    "account": "帳戶",
+    "studioManager": "工作室管理",
+    "frontDesk": "櫃檯",
+    "platformAdmin": "平台管理",
+    "signOut": "登出"
+  },
+  "roles": {
+    "owner": "館主",
+    "admin": "管理員",
+    "teacher": "美容師",
+    "front_desk": "櫃檯",
+    "student": "會員",
+    "platform_admin": "平台管理員"
+  },
+  "status": {
+    "active": "使用中",
+    "inactive": "已停用",
+    "pending": "待處理",
+    "cancelled": "已取消",
+    "expired": "已過期",
+    "paused": "已暫停"
+  },
+  "actions": {
+    "save": "儲存",
+    "cancel": "取消",
+    "delete": "刪除",
+    "edit": "編輯",
+    "close": "關閉",
+    "confirm": "確認",
+    "submit": "送出",
+    "search": "搜尋",
+    "filter": "篩選",
+    "reset": "重設",
+    "back": "返回",
+    "next": "下一步",
+    "loading": "載入中...",
+    "sending": "傳送中...",
+    "processing": "處理中..."
+  },
+  "levels": {
+    "beginner": "初階",
+    "allLevels": "各程度適合",
+    "intermediate": "中階",
+    "advanced": "進階"
+  },
+  "deliveryMode": {
+    "in_person": "到店服務",
+    "virtual": "線上諮詢",
+    "hybrid": "到店＋線上"
+  },
+  "paymentMethods": {
+    "card": "信用卡／金融卡",
+    "cash": "現金",
+    "venmo": "Venmo",
+    "cashapp": "Cash App",
+    "paypal": "PayPal",
+    "zelle": "Zelle",
+    "check": "支票",
+    "other": "其他"
+  },
+  "units": {
+    "min": "{{count}} 分鐘",
+    "hour_one": "{{count}} 小時",
+    "hour_other": "{{count}} 小時",
+    "day_one": "{{count}} 天",
+    "day_other": "{{count}} 天",
+    "week_one": "{{count}} 週",
+    "week_other": "{{count}} 週",
+    "class_one": "{{count}} 次療程",
+    "class_other": "{{count}} 次療程",
+    "studio_one": "{{count}} 間工作室",
+    "studio_other": "{{count}} 間工作室",
+    "spot_one": "{{count}} 個名額",
+    "spot_other": "{{count}} 個名額",
+    "remaining": "剩餘 {{count}}"
+  },
+  "language": {
+    "label": "語言",
+    "changeLanguage": "切換語言"
+  },
+  "footer": {
+    "allRightsReserved": "版權所有。",
+    "poweredBy": "技術支援",
+    "openSourceStudio": "開源工作室管理系統"
+  },
+  "type": {
+    "class": "療程",
+    "workshop": "工作坊",
+    "retreat": "靜修",
+    "appointment": "專人預約"
+  },
+  "guest": "訪客",
+  "studioManagement": "工作室管理",
+  "skipToContent": "跳至主要內容",
+  "notFound": {
+    "title": "找不到頁面",
+    "returnHome": "返回首頁"
+  },
+  "demo": {
+    "title": "專案介紹",
+    "switchRole": "切換角色：",
+    "studioOwner": "工作室館主",
+    "demoMode": "（示範模式）"
+  },
+  "contact": {
+    "yourName": "您的姓名",
+    "namePlaceholder": "王小明",
+    "email": "電子郵件",
+    "emailPlaceholder": "ming@example.com",
+    "subject": "主旨",
+    "subjectPlaceholder": "請簡述您的需求",
+    "message": "訊息",
+    "messagePlaceholder": "請告訴我們更多...",
+    "sendMessage": "送出訊息",
+    "messageSent": "訊息已送出！",
+    "thankYou": "感謝您的來信。",
+    "missingFields": "欄位未填寫",
+    "fillRequired": "請填寫主旨與訊息。",
+    "failedToSend": "傳送失敗",
+    "somethingWentWrong": "發生錯誤，請稍後再試。"
+  }
+}

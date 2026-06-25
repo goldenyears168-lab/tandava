@@ -48,7 +48,7 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
         href="#blog-main"
         className="sr-only absolute left-4 top-4 z-[70] rounded-md bg-card px-3 py-2 text-sm font-medium shadow-md focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        Skip to main content
+        跳至主要內容
       </a>
 
       {/* Header */}
@@ -61,11 +61,11 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
             <TandavaMark className="h-8 w-8 text-primary" />
             <span className="text-xl font-display font-bold tracking-tight">
               Tandava{" "}
-              <span className="font-normal text-muted-foreground">Blog</span>
+              <span className="font-normal text-muted-foreground">部落格</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Blog categories">
+          <nav className="hidden items-center gap-1 md:flex" aria-label="部落格分類">
             {categories.map((cat) => (
               <Link
                 key={cat.slug}
@@ -86,7 +86,7 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
             to="/demo"
             className="hidden shrink-0 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:inline-flex"
           >
-            Try the demo
+            試用演示版
           </Link>
         </div>
       </header>
@@ -104,13 +104,12 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
               <span className="font-display text-lg font-bold">Tandava</span>
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
-              Open-source studio management for yoga, pilates, and movement
-              studios. Insights for studio owners, teachers, and operators.
+              專為瑜珈、皮拉提斯與運動場館打造的開源管理系統。為場館經營者、老師與營運人員提供實用見解。
             </p>
           </div>
 
-          <nav aria-label="Blog footer" className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
-            <span className="col-span-2 font-semibold text-foreground">Topics</span>
+          <nav aria-label="部落格頁尾" className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
+            <span className="col-span-2 font-semibold text-foreground">主題</span>
             {categories.map((cat) => (
               <Link
                 key={cat.slug}
@@ -123,9 +122,9 @@ export function BlogLayout({ children, activeCategory }: BlogLayoutProps) {
           </nav>
         </div>
         <div className="container mt-8 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <span>&copy; {new Date().getFullYear()} Tandava. Open source studio software.</span>
+          <span>&copy; {new Date().getFullYear()} Tandava. 開源場館管理軟體。</span>
           <Link to="/open-source" className="transition-colors hover:text-foreground">
-            About Tandava
+            關於 Tandava
           </Link>
         </div>
       </footer>

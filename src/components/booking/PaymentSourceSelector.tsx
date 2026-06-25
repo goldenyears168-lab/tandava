@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Check, CreditCard, Infinity as InfinityIcon, Sparkles, Ticket } from "lucide-react";
 import { useLocale } from "@/contexts/LocaleContext";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 export type PaymentSourceType = "MEMBERSHIP" | "CLASS_PACK" | "WORKSHOP_PASS" | "DROP_IN";
 
@@ -44,7 +44,7 @@ export function PaymentSourceSelector({
   onSelect,
 }: PaymentSourceSelectorProps) {
   const { formatPrice: localeFormatPrice } = useLocale();
-  const { t } = useTranslation('booking');
+  const t = createT('booking');
   const formatPrice = (cents: number) => localeFormatPrice(cents, currency);
 
   const sourceLabels: Record<PaymentSourceType, string> = {

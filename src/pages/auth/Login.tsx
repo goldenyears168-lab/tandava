@@ -8,13 +8,13 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { signInWithEmail, signInWithGoogle } = useAuth();
-  const { t } = useTranslation('auth');
+  const t = createT('auth');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex">
-      <SEOHead title="Sign In" description="Sign in to your Tandava account to book classes, track your practice, and connect with your yoga community." canonical="/auth/login" noindex />
+      <SEOHead title="登入" description="登入森浴光 mm941 會員帳戶，預約療程、管理預約與尊榮票券。" canonical="/auth/login" noindex />
       {/* Left side - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
@@ -78,7 +78,7 @@ const Login = () => {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
                 <span className="text-xl font-bold text-primary-foreground">T</span>
               </div>
-              <span className="text-2xl font-semibold tracking-tight">Tandava</span>
+              <span className="text-2xl font-semibold tracking-tight">森浴光 mm941</span>
             </Link>
             <h1 className="text-2xl font-bold tracking-tight">{t('welcomeBack')}</h1>
             <p className="text-muted-foreground mt-2">

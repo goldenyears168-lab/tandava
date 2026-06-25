@@ -27,15 +27,15 @@ const BlogCategory = () => {
   return (
     <BlogLayout activeCategory={category}>
       <SEOHead
-        title={`${def.name} | Tandava Blog`}
+        title={`${def.name} | Tandava 部落格`}
         description={def.description}
         canonical={`/blog/category/${category}`}
         ogType="website"
         noindex={!BLOG_PUBLISHED}
         structuredData={[
           breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Blog", path: "/blog" },
+            { name: "首頁", path: "/" },
+            { name: "部落格", path: "/blog" },
             { name: def.name, path: `/blog/category/${category}` },
           ]),
           blogSchema(
@@ -50,11 +50,11 @@ const BlogCategory = () => {
 
       {/* Breadcrumb */}
       <nav
-        aria-label="Breadcrumb"
+        aria-label="麵包屑導覽"
         className="flex items-center gap-1 text-sm text-muted-foreground"
       >
         <Link to="/blog" className="transition-colors hover:text-foreground">
-          Blog
+          部落格
         </Link>
         <ChevronRight className="h-4 w-4" aria-hidden="true" />
         <span className="text-foreground">{def.name}</span>
@@ -69,7 +69,7 @@ const BlogCategory = () => {
 
       {posts.length === 0 ? (
         <div className="mt-12 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          No posts in this topic yet. Check back soon.
+          此主題尚無文章，請稍後再來。
         </div>
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

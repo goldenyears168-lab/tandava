@@ -47,15 +47,24 @@ interface Student {
 }
 
 const mockStudents: Student[] = [
-  { id: "1", firstName: "Emma", lastName: "Wilson", email: "emma@example.com", phone: "+1 415-555-0101", membershipType: "Unlimited Monthly", membershipStatus: "active", classPackRemaining: null, totalClasses: 156, lastVisit: "Today", lifetimeRevenue: 5840, tags: ["VIP", "Teacher Training"], joinedAt: "2023-03-15" },
-  { id: "2", firstName: "Alex", lastName: "Rivera", email: "alex@example.com", phone: "+1 415-555-0102", membershipType: null, membershipStatus: "none", classPackRemaining: 7, totalClasses: 42, lastVisit: "Yesterday", lifetimeRevenue: 1250, tags: [], joinedAt: "2024-01-20" },
-  { id: "3", firstName: "Mia", lastName: "Tanaka", email: "mia@example.com", phone: "+1 415-555-0103", membershipType: "Unlimited Monthly", membershipStatus: "active", classPackRemaining: null, totalClasses: 89, lastVisit: "2 days ago", lifetimeRevenue: 3420, tags: ["Referred by Emma"], joinedAt: "2023-08-10" },
-  { id: "4", firstName: "Jordan", lastName: "Blake", email: "jordan@example.com", phone: "+1 415-555-0104", membershipType: "8x Monthly", membershipStatus: "active", classPackRemaining: null, totalClasses: 64, lastVisit: "3 days ago", lifetimeRevenue: 2180, tags: [], joinedAt: "2023-11-05" },
-  { id: "5", firstName: "Noah", lastName: "Garcia", email: "noah@example.com", phone: "+1 415-555-0105", membershipType: null, membershipStatus: "none", classPackRemaining: 3, totalClasses: 18, lastVisit: "1 week ago", lifetimeRevenue: 650, tags: ["New Student"], joinedAt: "2024-10-01" },
-  { id: "6", firstName: "Sophia", lastName: "Lee", email: "sophia@example.com", phone: "+1 415-555-0106", membershipType: "Unlimited Monthly", membershipStatus: "expired", classPackRemaining: null, totalClasses: 203, lastVisit: "3 weeks ago", lifetimeRevenue: 8920, tags: ["At Risk"], joinedAt: "2022-06-12" },
-  { id: "7", firstName: "Liam", lastName: "Park", email: "liam@example.com", phone: "+1 415-555-0107", membershipType: null, membershipStatus: "none", classPackRemaining: null, totalClasses: 5, lastVisit: "2 months ago", lifetimeRevenue: 125, tags: ["Intro Offer"], joinedAt: "2024-09-15" },
-  { id: "8", firstName: "Isabella", lastName: "Chen", email: "isabella@example.com", phone: "+1 415-555-0108", membershipType: "4x Monthly", membershipStatus: "active", classPackRemaining: null, totalClasses: 31, lastVisit: "Today", lifetimeRevenue: 1560, tags: [], joinedAt: "2024-05-20" },
+  { id: "1", firstName: "王", lastName: "小姐", email: "wang@example.com", phone: "0912 345 678", membershipType: "尊榮會員票券", membershipStatus: "active", classPackRemaining: null, totalClasses: 28, lastVisit: "今天", lifetimeRevenue: 45600, tags: ["VIP", "汐止館"], joinedAt: "2023-03-15" },
+  { id: "2", firstName: "陳", lastName: "先生", email: "chen@example.com", phone: "0922 111 222", membershipType: null, membershipStatus: "none", classPackRemaining: 5, totalClasses: 12, lastVisit: "昨天", lifetimeRevenue: 12800, tags: [], joinedAt: "2024-01-20" },
+  { id: "3", firstName: "林", lastName: "小姐", email: "lin@example.com", phone: "0933 444 555", membershipType: "尊榮會員票券", membershipStatus: "active", classPackRemaining: null, totalClasses: 19, lastVisit: "2 天前", lifetimeRevenue: 32400, tags: ["復興館"], joinedAt: "2023-08-10" },
+  { id: "4", firstName: "張", lastName: "先生", email: "zhang@example.com", phone: "0910 666 777", membershipType: "單次體驗", membershipStatus: "active", classPackRemaining: null, totalClasses: 8, lastVisit: "3 天前", lifetimeRevenue: 9600, tags: [], joinedAt: "2023-11-05" },
+  { id: "5", firstName: "李", lastName: "小姐", email: "li@example.com", phone: "0988 999 000", membershipType: null, membershipStatus: "none", classPackRemaining: 2, totalClasses: 6, lastVisit: "1 週前", lifetimeRevenue: 4800, tags: ["新會員"], joinedAt: "2024-10-01" },
+  { id: "6", firstName: "黃", lastName: "小姐", email: "huang@example.com", phone: "0955 123 456", membershipType: "尊榮會員票券", membershipStatus: "expired", classPackRemaining: null, totalClasses: 35, lastVisit: "3 週前", lifetimeRevenue: 58200, tags: ["流失風險"], joinedAt: "2022-06-12" },
+  { id: "7", firstName: "吳", lastName: "先生", email: "wu@example.com", phone: "0966 789 012", membershipType: null, membershipStatus: "none", classPackRemaining: null, totalClasses: 2, lastVisit: "2 個月前", lifetimeRevenue: 2400, tags: ["體驗優惠"], joinedAt: "2024-09-15" },
+  { id: "8", firstName: "周", lastName: "小姐", email: "zhou@example.com", phone: "0977 345 678", membershipType: "尊榮會員票券", membershipStatus: "active", classPackRemaining: null, totalClasses: 14, lastVisit: "今天", lifetimeRevenue: 21600, tags: ["台南館"], joinedAt: "2024-05-20" },
 ];
+
+function membershipStatusLabel(status: Student["membershipStatus"]) {
+  const labels: Record<Student["membershipStatus"], string> = {
+    active: "有效",
+    expired: "已過期",
+    none: "無",
+  };
+  return labels[status];
+}
 
 export default function StudentsManage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,19 +88,19 @@ export default function StudentsManage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Students</h1>
+            <h1 className="text-2xl font-bold tracking-tight">會員</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              {mockStudents.length} total students — {mockStudents.filter((s) => s.membershipStatus === "active").length} active members
+              {mockStudents.length} 位會員 — {mockStudents.filter((s) => s.membershipStatus === "active").length} 位活躍會員
             </p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
-              Export
+              匯出
             </Button>
             <Button size="sm">
               <UserPlus className="h-4 w-4 mr-2" />
-              Add Student
+              新增會員
             </Button>
           </div>
         </div>
@@ -101,7 +110,7 @@ export default function StudentsManage() {
           <div className="relative flex-1 max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by name or email..."
+              placeholder="依姓名或電子郵件搜尋..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9"
@@ -117,11 +126,11 @@ export default function StudentsManage() {
           <CardContent className="p-0">
             {/* Table Header */}
             <div className="hidden md:grid grid-cols-[2fr,1fr,1fr,1fr,1fr,auto] gap-4 px-4 py-3 border-b border-border text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              <span>Student</span>
-              <span>Membership</span>
-              <span>Classes</span>
-              <span>Last Visit</span>
-              <span>Revenue</span>
+              <span>會員</span>
+              <span>會籍</span>
+              <span>服務次數</span>
+              <span>上次到訪</span>
+              <span>收入</span>
               <span></span>
             </div>
 
@@ -169,20 +178,20 @@ export default function StudentsManage() {
                             : "bg-destructive/10 text-destructive"
                         }`}
                       >
-                        {student.membershipStatus}
+                        {membershipStatusLabel(student.membershipStatus)}
                       </Badge>
                     </div>
                   ) : student.classPackRemaining ? (
-                    <p className="text-sm">{student.classPackRemaining} classes left</p>
+                    <p className="text-sm">{student.classPackRemaining} 次剩餘</p>
                   ) : (
-                    <p className="text-xs text-muted-foreground">No active plan</p>
+                    <p className="text-xs text-muted-foreground">無有效方案</p>
                   )}
                 </div>
 
                 {/* Classes */}
                 <div className="hidden md:block">
                   <p className="text-sm font-medium">{student.totalClasses}</p>
-                  <p className="text-xs text-muted-foreground">total</p>
+                  <p className="text-xs text-muted-foreground">總計</p>
                 </div>
 
                 {/* Last Visit */}
@@ -206,15 +215,15 @@ export default function StudentsManage() {
                     <DropdownMenuContent align="end" className="w-44 rounded-xl">
                       <DropdownMenuItem className="rounded-lg cursor-pointer">
                         <Mail className="h-4 w-4 mr-2" />
-                        Send Email
+                        寄送電子郵件
                       </DropdownMenuItem>
                       <DropdownMenuItem className="rounded-lg cursor-pointer">
                         <CreditCard className="h-4 w-4 mr-2" />
-                        Add Purchase
+                        新增購買
                       </DropdownMenuItem>
                       <DropdownMenuItem className="rounded-lg cursor-pointer">
                         <Tag className="h-4 w-4 mr-2" />
-                        Add Tag
+                        新增標籤
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -229,7 +238,7 @@ export default function StudentsManage() {
       <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
         <DialogContent className="sm:max-w-lg rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Student Profile</DialogTitle>
+            <DialogTitle>會員資料</DialogTitle>
           </DialogHeader>
           {selectedStudent && (
             <div className="space-y-6">
@@ -270,22 +279,22 @@ export default function StudentsManage() {
               <div className="grid grid-cols-3 gap-3">
                 <div className="text-center p-3 rounded-xl bg-secondary/50">
                   <p className="text-xl font-bold">{selectedStudent.totalClasses}</p>
-                  <p className="text-xs text-muted-foreground">Classes</p>
+                  <p className="text-xs text-muted-foreground">服務次數</p>
                 </div>
                 <div className="text-center p-3 rounded-xl bg-secondary/50">
-                  <p className="text-xl font-bold">${selectedStudent.lifetimeRevenue.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">Lifetime Revenue</p>
+                  <p className="text-xl font-bold">NT${selectedStudent.lifetimeRevenue.toLocaleString()}</p>
+                  <p className="text-xs text-muted-foreground">累計收入</p>
                 </div>
                 <div className="text-center p-3 rounded-xl bg-secondary/50">
                   <p className="text-xl font-bold">{selectedStudent.lastVisit}</p>
-                  <p className="text-xs text-muted-foreground">Last Visit</p>
+                  <p className="text-xs text-muted-foreground">上次到訪</p>
                 </div>
               </div>
 
               {/* Membership/Pack */}
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">Active Plan</CardTitle>
+                  <CardTitle className="text-sm">有效方案</CardTitle>
                 </CardHeader>
                 <CardContent>
                   {selectedStudent.membershipType ? (
@@ -299,23 +308,23 @@ export default function StudentsManage() {
                               : "bg-destructive/10 text-destructive"
                           }`}
                         >
-                          {selectedStudent.membershipStatus}
+                          {membershipStatusLabel(selectedStudent.membershipStatus)}
                         </Badge>
                       </div>
-                      <Button variant="outline" size="sm">Manage</Button>
+                      <Button variant="outline" size="sm">管理</Button>
                     </div>
                   ) : selectedStudent.classPackRemaining ? (
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium">{selectedStudent.classPackRemaining} classes remaining</p>
-                        <p className="text-xs text-muted-foreground">10-Class Pack</p>
+                        <p className="text-sm font-medium">{selectedStudent.classPackRemaining} 次剩餘</p>
+                        <p className="text-xs text-muted-foreground">10 次票券</p>
                       </div>
-                      <Button variant="outline" size="sm">Manage</Button>
+                      <Button variant="outline" size="sm">管理</Button>
                     </div>
                   ) : (
                     <div className="text-center py-2">
-                      <p className="text-sm text-muted-foreground mb-2">No active membership or pack</p>
-                      <Button size="sm">Add Membership</Button>
+                      <p className="text-sm text-muted-foreground mb-2">無有效會籍或方案</p>
+                      <Button size="sm">新增會籍</Button>
                     </div>
                   )}
                 </CardContent>
@@ -324,7 +333,7 @@ export default function StudentsManage() {
               {/* Member Since */}
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3" />
-                <span>Member since {new Date(selectedStudent.joinedAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
+                <span>加入日期 {new Date(selectedStudent.joinedAt).toLocaleDateString("zh-TW", { month: "long", year: "numeric" })}</span>
               </div>
             </div>
           )}

@@ -126,12 +126,12 @@ const deviceBreakdown = [
 ];
 
 const topPages = [
-  { page: "Schedule", views: 1200, uniqueViews: 940, avgTime: "2m 45s", bounceRate: "18%" },
+  { page: "課程表", views: 1200, uniqueViews: 940, avgTime: "2m 45s", bounceRate: "18%" },
   { page: "Home", views: 980, uniqueViews: 780, avgTime: "1m 50s", bounceRate: "42%" },
   { page: "Class Detail Pages", views: 720, uniqueViews: 580, avgTime: "3m 10s", bounceRate: "24%" },
-  { page: "Pricing", views: 540, uniqueViews: 420, avgTime: "2m 30s", bounceRate: "35%" },
+  { page: "定價", views: 540, uniqueViews: 420, avgTime: "2m 30s", bounceRate: "35%" },
   { page: "About / Teachers", views: 380, uniqueViews: 310, avgTime: "1m 40s", bounceRate: "48%" },
-  { page: "Events", views: 210, uniqueViews: 170, avgTime: "2m 05s", bounceRate: "30%" },
+  { page: "活動", views: 210, uniqueViews: 170, avgTime: "2m 05s", bounceRate: "30%" },
 ];
 
 const trafficByDay = [
@@ -156,7 +156,7 @@ const trafficSources = [
   { source: "Instagram", sessions: 180, percent: "14.5%", signups: 22, convRate: "12.2%" },
   { source: "Referral Links", sessions: 120, percent: "9.7%", signups: 18, convRate: "15.0%" },
   { source: "Google Ads", sessions: 95, percent: "7.7%", signups: 12, convRate: "12.6%" },
-  { source: "Email", sessions: 55, percent: "4.4%", signups: 8, convRate: "14.5%" },
+  { source: "電子郵件", sessions: 55, percent: "4.4%", signups: 8, convRate: "14.5%" },
   { source: "Other", sessions: 30, percent: "2.4%", signups: 2, convRate: "6.7%" },
 ];
 
@@ -164,7 +164,7 @@ const bestConversionSource = "Referral Links";
 
 const utmCampaigns = [
   { name: "january_promo", source: "Google Ads", medium: "cpc", sessions: 95, conversions: 12, convRate: "12.6%" },
-  { name: "class_launch_email", source: "Email", medium: "email", sessions: 42, conversions: 7, convRate: "16.7%" },
+  { name: "class_launch_email", source: "電子郵件", medium: "email", sessions: 42, conversions: 7, convRate: "16.7%" },
   { name: "instagram_stories", source: "Instagram", medium: "social", sessions: 68, conversions: 9, convRate: "13.2%" },
 ];
 
@@ -187,7 +187,7 @@ const referrerDomains = [
 
 const landingPages = [
   {
-    title: "New Student Special",
+    title: "新學員 Special",
     slug: "/welcome",
     status: "published",
     views: 560,
@@ -217,7 +217,7 @@ const landingPages = [
     seoScore: 72,
   },
   {
-    title: "Teacher Training 2024",
+    title: "師資培訓 2024",
     slug: "/teacher-training",
     status: "published",
     views: 180,
@@ -245,7 +245,7 @@ const topConvertingPages = landingPages
 
 const seoIssues = [
   "Missing meta description on 2 pages",
-  "Title too long on 'Teacher Training'",
+  "Title too long on '師資培訓'",
   "No alt text on hero images",
 ];
 
@@ -255,14 +255,14 @@ const seoIssues = [
 
 const newsletterKpis = [
   {
-    label: "Total Subscribers",
+    label: "Total 訂閱者",
     value: "342",
     icon: Mail,
     iconColor: "text-primary",
     helpText: "The total number of people who have signed up for your email newsletter.",
   },
   {
-    label: "Growth This Month",
+    label: "Growth 本月",
     value: "+28",
     subtext: "+8.9%",
     icon: TrendingUp,
@@ -308,7 +308,7 @@ const signupSources = [
 const subscriberStatus = [
   { label: "Confirmed", count: 321, color: "bg-accent-sage" },
   { label: "Pending confirmation", count: 12, color: "bg-accent-gold" },
-  { label: "Unsubscribed", count: 9, color: "bg-destructive" },
+  { label: "已退訂", count: 9, color: "bg-destructive" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -352,14 +352,14 @@ export default function SiteAnalytics() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Site & App Metrics</BreadcrumbPage>
+                <BreadcrumbPage>網站與 App 指標</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold tracking-tight">Site & App Metrics</h1>
+              <h1 className="text-2xl font-bold tracking-tight">網站與 App 指標</h1>
               <p className="text-sm text-muted-foreground mt-1">
                 Traffic, attribution, landing pages, and newsletter performance
               </p>
@@ -370,11 +370,11 @@ export default function SiteAnalytics() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="this_week">This Week</SelectItem>
-                  <SelectItem value="this_month">This Month</SelectItem>
-                  <SelectItem value="last_month">Last Month</SelectItem>
-                  <SelectItem value="this_quarter">This Quarter</SelectItem>
-                  <SelectItem value="this_year">This Year</SelectItem>
+                  <SelectItem value="this_week">本週</SelectItem>
+                  <SelectItem value="this_month">本月</SelectItem>
+                  <SelectItem value="last_month">上月</SelectItem>
+                  <SelectItem value="this_quarter">本季</SelectItem>
+                  <SelectItem value="this_year">今年</SelectItem>
                 </SelectContent>
               </Select>
               <Button variant="outline" size="sm">
@@ -390,7 +390,7 @@ export default function SiteAnalytics() {
           <TabsList className="w-full sm:w-auto">
             <TabsTrigger value="traffic">Traffic</TabsTrigger>
             <TabsTrigger value="attribution">Attribution</TabsTrigger>
-            <TabsTrigger value="landing-pages">Landing Pages</TabsTrigger>
+            <TabsTrigger value="landing-pages">著陸頁</TabsTrigger>
             <TabsTrigger value="newsletter">Newsletter</TabsTrigger>
           </TabsList>
 
@@ -525,7 +525,7 @@ export default function SiteAnalytics() {
             {/* Top Pages */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Top Pages</CardTitle>
+                <CardTitle className="text-lg">熱門頁面</CardTitle>
               </CardHeader>
               <CardContent>
                 <Table>
@@ -533,9 +533,9 @@ export default function SiteAnalytics() {
                     <TableRow>
                       <TableHead>Page</TableHead>
                       <TableHead className="text-right">Views</TableHead>
-                      <TableHead className="text-right hidden sm:table-cell">Unique Views</TableHead>
-                      <TableHead className="text-right hidden md:table-cell">Avg Time</TableHead>
-                      <TableHead className="text-right">Bounce Rate</TableHead>
+                      <TableHead className="text-right hidden sm:table-cell">不重複瀏覽</TableHead>
+                      <TableHead className="text-right hidden md:table-cell">平均停留</TableHead>
+                      <TableHead className="text-right">跳出率</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -611,7 +611,7 @@ export default function SiteAnalytics() {
                       <TableHead className="text-right">Sessions</TableHead>
                       <TableHead className="text-right hidden sm:table-cell">% of Total</TableHead>
                       <TableHead className="text-right hidden md:table-cell">Signups</TableHead>
-                      <TableHead className="text-right">Conv Rate</TableHead>
+                      <TableHead className="text-right">轉換率</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -653,12 +653,12 @@ export default function SiteAnalytics() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Campaign Name</TableHead>
+                      <TableHead>活動名稱</TableHead>
                       <TableHead className="hidden sm:table-cell">Source</TableHead>
                       <TableHead className="hidden md:table-cell">Medium</TableHead>
                       <TableHead className="text-right">Sessions</TableHead>
                       <TableHead className="text-right hidden sm:table-cell">Conversions</TableHead>
-                      <TableHead className="text-right">Conv Rate</TableHead>
+                      <TableHead className="text-right">轉換率</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -708,7 +708,7 @@ export default function SiteAnalytics() {
             <div className="flex items-start gap-3 p-4 rounded-xl border border-border bg-secondary/30">
               <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-medium">Understanding attribution</p>
+                <p className="text-sm font-medium">了解歸因分析</p>
                 <p className="text-xs text-muted-foreground mt-1">
                   Attribution helps you understand where students find you. Use UTM parameters on
                   links you share to track campaigns. For example, add{" "}
@@ -727,7 +727,7 @@ export default function SiteAnalytics() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Landing Page Performance</CardTitle>
+                  <CardTitle className="text-lg">著陸頁成效</CardTitle>
                   <Link to="/manage/landing-pages">
                     <Button variant="ghost" size="sm" className="text-xs">
                       Manage Landing Pages <ArrowRight className="h-3 w-3 ml-1" />
@@ -739,13 +739,13 @@ export default function SiteAnalytics() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Page Title</TableHead>
+                      <TableHead>頁面標題</TableHead>
                       <TableHead className="hidden sm:table-cell">Slug</TableHead>
                       <TableHead className="hidden md:table-cell">Status</TableHead>
                       <TableHead className="text-right">Views</TableHead>
                       <TableHead className="text-right hidden sm:table-cell">Unique</TableHead>
                       <TableHead className="text-right hidden md:table-cell">Conv</TableHead>
-                      <TableHead className="text-right">Conv Rate</TableHead>
+                      <TableHead className="text-right">轉換率</TableHead>
                       <TableHead className="text-right hidden lg:table-cell">SEO</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -790,7 +790,7 @@ export default function SiteAnalytics() {
               {/* Top Converting Pages */}
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">Top Converting Pages</CardTitle>
+                  <CardTitle className="text-lg">轉換最佳頁面</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {topConvertingPages.map((page, i) => (
@@ -826,11 +826,11 @@ export default function SiteAnalytics() {
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-3 rounded-xl bg-secondary/50 text-center">
                       <p className="text-2xl font-bold text-accent-gold">2</p>
-                      <p className="text-xs text-muted-foreground">Pages need attention</p>
+                      <p className="text-xs text-muted-foreground">頁面需要關注</p>
                     </div>
                     <div className="p-3 rounded-xl bg-secondary/50 text-center">
                       <p className="text-2xl font-bold text-primary">3</p>
-                      <p className="text-xs text-muted-foreground">Recommendations open</p>
+                      <p className="text-xs text-muted-foreground">待處理建議</p>
                     </div>
                   </div>
 
@@ -934,7 +934,7 @@ export default function SiteAnalytics() {
               {/* Subscriber Status Breakdown */}
               <Card>
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">Subscriber Status</CardTitle>
+                  <CardTitle className="text-lg">訂閱者狀態</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {subscriberStatus.map((status) => {
@@ -965,7 +965,7 @@ export default function SiteAnalytics() {
             {/* Signup Sources */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Signup Sources</CardTitle>
+                <CardTitle className="text-lg">註冊來源</CardTitle>
               </CardHeader>
               <CardContent>
                 <Table>

@@ -64,7 +64,7 @@ const sourceOptions = Object.entries(CONNECTOR_PROVIDERS).map(([id, info]) => ({
 const importTypes = [
   { value: "clients", label: "Clients / Students", icon: Users, description: "Names, emails, phone numbers, emergency contacts" },
   { value: "attendance", label: "Class History / Attendance", icon: Calendar, description: "Past class bookings and attendance records" },
-  { value: "transactions", label: "Transaction History", icon: CreditCard, description: "Purchase history, payments, and refunds" },
+  { value: "transactions", label: "交易紀錄", icon: CreditCard, description: "Purchase history, payments, and refunds" },
 ];
 
 // Target fields for a client/student import, with header aliases used for
@@ -72,11 +72,11 @@ const importTypes = [
 const CLIENT_TARGETS: TargetField[] = [
   { value: "first_name", label: "First Name", required: true, aliases: ["FirstName", "given name", "first"] },
   { value: "last_name", label: "Last Name", required: true, aliases: ["LastName", "surname", "last"] },
-  { value: "email", label: "Email", required: true, aliases: ["email address", "e-mail"] },
-  { value: "phone", label: "Phone", aliases: ["Mobile Phone", "cell", "mobile", "phone number"] },
+  { value: "email", label: "電子郵件", required: true, aliases: ["email address", "e-mail"] },
+  { value: "phone", label: "電話", aliases: ["Mobile Phone", "cell", "mobile", "phone number"] },
   { value: "date_of_birth", label: "Date of Birth", aliases: ["Birth Date", "dob", "birthday"] },
   { value: "emergency_contact_name", label: "Emergency Contact Name", aliases: ["emergency name"] },
-  { value: "emergency_contact_phone", label: "Emergency Contact Phone", aliases: ["emergency phone"] },
+  { value: "emergency_contact_phone", label: "Emergency 聯絡電話", aliases: ["emergency phone"] },
   { value: "notes", label: "Notes", aliases: ["note", "comments"] },
   { value: "tags", label: "Tags", aliases: ["tag", "labels"] },
   { value: "pronouns", label: "Pronouns" },
@@ -222,7 +222,7 @@ export default function ImportManage() {
       <div className="space-y-6 max-w-3xl">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Import Data</h1>
+          <h1 className="text-2xl font-bold tracking-tight">匯入資料</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Migrate your studio data from another platform or any CSV export
           </p>
@@ -232,10 +232,10 @@ export default function ImportManage() {
         <div className="flex items-center gap-2 text-xs">
           {[
             { key: "source", label: "Source" },
-            { key: "upload", label: "Upload" },
-            { key: "mapping", label: "Map Columns" },
+            { key: "upload", label: "上傳" },
+            { key: "mapping", label: "對應欄位" },
             { key: "preview", label: "Preview" },
-            { key: "processing", label: "Import" },
+            { key: "processing", label: "匯入" },
             { key: "complete", label: "Done" },
           ].map((s, i, arr) => {
             const steps: ImportStep[] = ["source", "upload", "mapping", "preview", "processing", "complete"];
@@ -355,7 +355,7 @@ export default function ImportManage() {
                 <CardHeader>
                   <CardTitle className="text-base flex items-center gap-2">
                     <Info className="h-4 w-4 text-muted-foreground" />
-                    How to export from {sourceOptions.find(s => s.value === selectedSource)?.label.replace(' Import', '')}
+                    How to export from {sourceOptions.find(s => s.value === selectedSource)?.label.replace(' 匯入', '')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -371,7 +371,7 @@ export default function ImportManage() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Upload CSV File</CardTitle>
+                <CardTitle>上傳 CSV File</CardTitle>
                 <CardDescription>
                   {selectedSource === "generic_csv"
                     ? "Upload any CSV file with your studio data"
@@ -419,7 +419,7 @@ export default function ImportManage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Map Columns</CardTitle>
+                    <CardTitle>對應欄位</CardTitle>
                     <CardDescription>
                       We auto-detected {columnMappings.filter((m) => m.autoMatched).length} of {columnMappings.length} columns. Review and adjust mappings below.
                     </CardDescription>
@@ -593,7 +593,7 @@ export default function ImportManage() {
               <CardContent className="py-12 text-center space-y-4">
                 <CheckCircle2 className="h-16 w-16 text-accent-sage mx-auto" />
                 <div>
-                  <h3 className="text-xl font-semibold">Import Complete</h3>
+                  <h3 className="text-xl font-semibold">匯入完成</h3>
                   <p className="text-sm text-muted-foreground mt-1">Your data has been successfully imported</p>
                 </div>
 
@@ -662,7 +662,7 @@ export default function ImportManage() {
             <CardContent className="space-y-3">
               {[
                 { date: "Jan 15, 2025", source: "CSV Migration", type: "Clients", total: 347, status: "completed" },
-                { date: "Jan 15, 2025", source: "CSV Migration", type: "Attendance", total: 12430, status: "completed" },
+                { date: "Jan 15, 2025", source: "CSV Migration", type: "出席", total: 12430, status: "completed" },
                 { date: "Jan 14, 2025", source: "CSV Migration", type: "Transactions", total: 2841, status: "partial" },
               ].map((job, i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-secondary/30">

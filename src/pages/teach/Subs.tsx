@@ -35,6 +35,16 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+const weekDayLabels: Record<string, string> = {
+  Mon: "週一",
+  Tue: "週二",
+  Wed: "週三",
+  Thu: "週四",
+  Fri: "週五",
+  Sat: "週六",
+  Sun: "週日",
+};
+
 interface SubOpportunity {
   id: string;
   className: string;
@@ -84,7 +94,7 @@ const mockOpportunities: SubOpportunity[] = [
     capacity: 20,
     booked: 14,
     pay: 75,
-    postedAt: "2 hours ago",
+    postedAt: "2 小時前",
     matchesQualification: true,
   },
   {
@@ -101,7 +111,7 @@ const mockOpportunities: SubOpportunity[] = [
     capacity: 20,
     booked: 8,
     pay: 65,
-    postedAt: "1 day ago",
+    postedAt: "1 天前",
     matchesQualification: false,
   },
   {
@@ -118,7 +128,7 @@ const mockOpportunities: SubOpportunity[] = [
     capacity: 25,
     booked: 19,
     pay: 75,
-    postedAt: "3 days ago",
+    postedAt: "3 天前",
     matchesQualification: true,
   },
   {
@@ -135,7 +145,7 @@ const mockOpportunities: SubOpportunity[] = [
     capacity: 30,
     booked: 22,
     pay: 85,
-    postedAt: "5 hours ago",
+    postedAt: "5 小時前",
     matchesQualification: true,
   },
 ];
@@ -153,7 +163,7 @@ const mockRequests: SubRequest[] = [
     booked: 19,
     status: "pending",
     requestedAt: "Feb 1",
-    reason: "Doctor appointment",
+    reason: "醫生預約",
   },
   {
     id: "2",
@@ -181,7 +191,7 @@ const mockRequests: SubRequest[] = [
     booked: 20,
     status: "cancelled",
     requestedAt: "Jan 20",
-    reason: "Personal emergency",
+    reason: "個人緊急狀況",
   },
 ];
 
@@ -201,8 +211,8 @@ export default function TeachSubs() {
   const handleClaimSub = () => {
     if (!selectedOpportunity) return;
     toast({
-      title: "Sub claimed!",
-      description: `You are now teaching ${selectedOpportunity.className} on ${selectedOpportunity.date} at ${selectedOpportunity.time}.`,
+      title: "已認領代課！",
+      description: `您將於 ${selectedOpportunity.date} ${selectedOpportunity.time} 教授 ${selectedOpportunity.className}。`,
     });
     setClaimDialogOpen(false);
     setSelectedOpportunity(null);
@@ -211,8 +221,8 @@ export default function TeachSubs() {
   const handleCancelRequest = () => {
     if (!selectedRequest) return;
     toast({
-      title: "Request cancelled",
-      description: `Your sub request for ${selectedRequest.className} has been cancelled.`,
+      title: "申請已取消",
+      description: `您對 ${selectedRequest.className} 的代課申請已取消。`,
     });
     setCancelDialogOpen(false);
     setSelectedRequest(null);
@@ -226,19 +236,19 @@ export default function TeachSubs() {
             variant="outline"
             className="text-[10px] border-accent-gold/50 text-accent-gold"
           >
-            Pending
+            待處理
           </Badge>
         );
       case "claimed":
         return (
           <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage border-0">
-            Covered
+            已安排
           </Badge>
         );
       case "cancelled":
         return (
           <Badge variant="secondary" className="text-[10px]">
-            Cancelled
+            已取消
           </Badge>
         );
       default:
@@ -251,9 +261,9 @@ export default function TeachSubs() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Subs</h1>
+          <h1 className="text-2xl font-bold tracking-tight">排班</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Find coverage or pick up extra classes
+            尋找代課或認領額外課程
           </p>
         </div>
 
@@ -261,14 +271,14 @@ export default function TeachSubs() {
           <TabsList>
             <TabsTrigger value="opportunities" className="gap-2">
               <Repeat2 className="h-4 w-4" />
-              Open Opportunities
+              開放機會
               <Badge variant="secondary" className="ml-1 text-[10px]">
                 {mockOpportunities.length}
               </Badge>
             </TabsTrigger>
             <TabsTrigger value="requests" className="gap-2">
               <Clock className="h-4 w-4" />
-              My Requests
+              我的申請
               {pendingRequests.length > 0 && (
                 <Badge className="ml-1 text-[10px] bg-accent-gold/20 text-accent-gold border-0">
                   {pendingRequests.length}
@@ -281,7 +291,7 @@ export default function TeachSubs() {
           <TabsContent value="opportunities" className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                Classes that need coverage matching your qualifications
+                符合您資格的待代課課程
               </p>
             </div>
 
@@ -290,10 +300,10 @@ export default function TeachSubs() {
                 <CardContent className="py-12 text-center">
                   <Repeat2 className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
-                    No open sub opportunities right now
+                    目前沒有開放的代課機會
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Check back later for new requests
+                    請稍後再查看新的代課需求
                   </p>
                 </CardContent>
               </Card>
@@ -314,7 +324,7 @@ export default function TeachSubs() {
                           {/* Date & Time */}
                           <div className="shrink-0 w-24 text-center p-3 rounded-xl bg-secondary/50">
                             <p className="text-xs text-muted-foreground">
-                              {opp.dayOfWeek}
+                              {weekDayLabels[opp.dayOfWeek]}
                             </p>
                             <p className="text-sm font-bold">{opp.date}</p>
                             <p className="text-xs font-medium mt-1">{opp.time}</p>
@@ -334,15 +344,12 @@ export default function TeachSubs() {
                                   variant="secondary"
                                   className="text-[10px]"
                                 >
-                                  Outside Qualifications
+                                  超出資格範圍
                                 </Badge>
                               )}
                             </div>
                             <p className="text-sm text-muted-foreground mt-1">
-                              Covering for{" "}
-                              <span className="font-medium">
-                                {opp.originalTeacher}
-                              </span>
+                              代 <span className="font-medium">{opp.originalTeacher}</span> 的課
                             </p>
                             <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
                               <span className="flex items-center gap-1">
@@ -355,11 +362,11 @@ export default function TeachSubs() {
                               </span>
                               <span className="flex items-center gap-1">
                                 <Users className="h-3 w-3" />
-                                {opp.booked}/{opp.capacity} booked
+                                {opp.booked}/{opp.capacity} 已預約
                               </span>
                             </div>
                             <p className="text-xs text-muted-foreground mt-2">
-                              Posted {opp.postedAt}
+                              發布於 {opp.postedAt}
                             </p>
                           </div>
                         </div>
@@ -379,7 +386,7 @@ export default function TeachSubs() {
                             }}
                           >
                             <Check className="h-3 w-3 mr-1" />
-                            Claim
+                            認領
                           </Button>
                         </div>
                       </div>
@@ -396,7 +403,7 @@ export default function TeachSubs() {
             {pendingRequests.length > 0 && (
               <div className="space-y-3">
                 <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                  Pending Requests
+                  待處理申請
                 </h2>
                 {pendingRequests.map((req) => (
                   <Card
@@ -409,7 +416,7 @@ export default function TeachSubs() {
                           {/* Date & Time */}
                           <div className="shrink-0 w-24 text-center p-3 rounded-xl bg-accent-gold/10">
                             <p className="text-xs text-muted-foreground">
-                              {req.dayOfWeek}
+                              {weekDayLabels[req.dayOfWeek]}
                             </p>
                             <p className="text-sm font-bold">{req.date}</p>
                             <p className="text-xs font-medium mt-1">{req.time}</p>
@@ -430,16 +437,16 @@ export default function TeachSubs() {
                               </span>
                               <span className="flex items-center gap-1">
                                 <Users className="h-3 w-3" />
-                                {req.booked} booked
+                                {req.booked} 已預約
                               </span>
                             </div>
                             {req.reason && (
                               <p className="text-xs text-muted-foreground mt-2">
-                                Reason: {req.reason}
+                                原因：{req.reason}
                               </p>
                             )}
                             <p className="text-xs text-muted-foreground mt-1">
-                              Requested {req.requestedAt}
+                              申請於 {req.requestedAt}
                             </p>
                           </div>
                         </div>
@@ -455,7 +462,7 @@ export default function TeachSubs() {
                           }}
                         >
                           <X className="h-3 w-3 mr-1" />
-                          Cancel
+                          取消
                         </Button>
                       </div>
                     </CardContent>
@@ -468,7 +475,7 @@ export default function TeachSubs() {
             {pastRequests.length > 0 && (
               <div className="space-y-3">
                 <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                  Past Requests
+                  過往申請
                 </h2>
                 {pastRequests.map((req) => (
                   <Card key={req.id} className="bg-secondary/30">
@@ -478,7 +485,7 @@ export default function TeachSubs() {
                           {/* Date & Time */}
                           <div className="shrink-0 w-24 text-center p-3 rounded-xl bg-secondary/50">
                             <p className="text-xs text-muted-foreground">
-                              {req.dayOfWeek}
+                              {weekDayLabels[req.dayOfWeek]}
                             </p>
                             <p className="text-sm font-bold">{req.date}</p>
                             <p className="text-xs font-medium mt-1">{req.time}</p>
@@ -499,16 +506,16 @@ export default function TeachSubs() {
                               </span>
                               <span className="flex items-center gap-1">
                                 <Users className="h-3 w-3" />
-                                {req.booked} booked
+                                {req.booked} 已預約
                               </span>
                             </div>
                             {req.claimedBy && (
                               <p className="text-xs text-accent-sage mt-2">
-                                Covered by {req.claimedBy}
+                                由 {req.claimedBy} 代課
                               </p>
                             )}
                             <p className="text-xs text-muted-foreground mt-1">
-                              Requested {req.requestedAt}
+                              申請於 {req.requestedAt}
                             </p>
                           </div>
                         </div>
@@ -523,9 +530,9 @@ export default function TeachSubs() {
               <Card>
                 <CardContent className="py-12 text-center">
                   <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground">No sub requests yet</p>
+                  <p className="text-muted-foreground">尚無代課申請</p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Request a sub from your schedule when you need coverage
+                    需要代課時，可從課程表提交申請
                   </p>
                 </CardContent>
               </Card>
@@ -538,9 +545,9 @@ export default function TeachSubs() {
       <Dialog open={claimDialogOpen} onOpenChange={setClaimDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Claim This Sub</DialogTitle>
+            <DialogTitle>認領此代課</DialogTitle>
             <DialogDescription>
-              Confirm that you want to teach this class.
+              確認您要教授此堂課程。
             </DialogDescription>
           </DialogHeader>
           {selectedOpportunity && (
@@ -550,13 +557,13 @@ export default function TeachSubs() {
                   {selectedOpportunity.className}
                 </h3>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Covering for {selectedOpportunity.originalTeacher}
+                  代 {selectedOpportunity.originalTeacher} 的課
                 </p>
                 <div className="grid grid-cols-2 gap-3 mt-3">
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm">
-                      {selectedOpportunity.dayOfWeek}, {selectedOpportunity.date}
+                      {weekDayLabels[selectedOpportunity.dayOfWeek]}，{selectedOpportunity.date}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -570,14 +577,14 @@ export default function TeachSubs() {
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm">
-                      {selectedOpportunity.booked} booked
+                      {selectedOpportunity.booked} 已預約
                     </span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center justify-between p-4 rounded-xl bg-accent-sage/10 border border-accent-sage/20">
-                <span className="text-sm font-medium">Compensation</span>
+                <span className="text-sm font-medium">酬勞</span>
                 <span className="text-lg font-bold text-accent-sage">
                   ${selectedOpportunity.pay}
                 </span>
@@ -586,11 +593,11 @@ export default function TeachSubs() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setClaimDialogOpen(false)}>
-              Cancel
+              取消
             </Button>
             <Button onClick={handleClaimSub}>
               <Check className="h-4 w-4 mr-2" />
-              Confirm Claim
+              確認認領
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -600,20 +607,18 @@ export default function TeachSubs() {
       <AlertDialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
         <AlertDialogContent className="rounded-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle>Cancel Sub Request?</AlertDialogTitle>
+            <AlertDialogTitle>取消代課申請？</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to cancel your sub request for{" "}
-              {selectedRequest?.className} on {selectedRequest?.date}? You will
-              need to teach this class yourself.
+              確定要取消 {selectedRequest?.className}（{selectedRequest?.date}）的代課申請嗎？您將需自行授課。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Keep Request</AlertDialogCancel>
+            <AlertDialogCancel>保留申請</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleCancelRequest}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Cancel Request
+              取消申請
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

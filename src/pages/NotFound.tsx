@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 const NotFound = () => {
   const location = useLocation();
-  const { t } = useTranslation('common');
+  const t = createT('common');
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);

@@ -28,18 +28,18 @@ const BlogPost = () => {
   if (!post) {
     return (
       <BlogLayout>
-        <SEOHead title="Post not found" canonical={`/blog/${slug}`} noindex />
+        <SEOHead title="找不到文章" canonical={`/blog/${slug}`} noindex />
         <div className="mx-auto max-w-md py-16 text-center">
-          <h1 className="font-display text-3xl font-bold">Post not found</h1>
+          <h1 className="font-display text-3xl font-bold">找不到文章</h1>
           <p className="mt-3 text-muted-foreground">
-            This article may have moved or isn't published yet.
+            這篇文章可能已移動或尚未發布。
           </p>
           <Link
             to="/blog"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to the blog
+            返回部落格
           </Link>
         </div>
       </BlogLayout>
@@ -72,8 +72,8 @@ const BlogPost = () => {
             categoryName: post.categoryName,
           }),
           breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Blog", path: "/blog" },
+            { name: "首頁", path: "/" },
+            { name: "部落格", path: "/blog" },
             ...(category
               ? [{ name: category.name, path: `/blog/category/${category.slug}` }]
               : []),
@@ -85,11 +85,11 @@ const BlogPost = () => {
       <article className="mx-auto max-w-3xl">
         {/* Breadcrumb */}
         <nav
-          aria-label="Breadcrumb"
+          aria-label="麵包屑導覽"
           className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground"
         >
           <Link to="/blog" className="transition-colors hover:text-foreground">
-            Blog
+            部落格
           </Link>
           {category && (
             <>
@@ -131,12 +131,12 @@ const BlogPost = () => {
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-4 w-4" aria-hidden="true" />
-              {post.readingTimeMinutes} min read
+              {post.readingTimeMinutes} 分鐘閱讀
             </span>
           </div>
           {showUpdated && (
             <p className="mt-1 text-xs text-muted-foreground">
-              Updated <time dateTime={post.updated}>{formatBlogDate(post.updated)}</time>
+              更新於 <time dateTime={post.updated}>{formatBlogDate(post.updated)}</time>
             </p>
           )}
         </header>
@@ -162,7 +162,7 @@ const BlogPost = () => {
         {/* Tags */}
         {post.tags.length > 0 && (
           <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-border pt-6">
-            <span className="text-sm text-muted-foreground">Tags:</span>
+            <span className="text-sm text-muted-foreground">標籤：</span>
             {post.tags.map((tag) => (
               <Badge key={tag} variant="outline" className="font-normal">
                 {tag}
@@ -176,7 +176,7 @@ const BlogPost = () => {
       {related.length > 0 && (
         <section className="mx-auto mt-16 max-w-5xl" aria-labelledby="related-heading">
           <h2 id="related-heading" className="font-display text-2xl font-semibold">
-            Keep reading
+            延伸閱讀
           </h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((p) => (

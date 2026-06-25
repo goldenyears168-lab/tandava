@@ -1,0 +1,12 @@
+{
+  "title": "服務表",
+  "classDetail": "療程",
+  "benefits": "療程效益",
+  "whatToBring": "請攜帶物品",
+  "classesTaught": "服務次數",
+  "heated": "能量艙／光療",
+  "joinOnline": "線上加入",
+  "locationPlusOnline": "{{location}} + 線上",
+  "live": "進行中",
+  "spotsLeft": "剩 {{count}} 個名額"
+}

@@ -170,11 +170,11 @@ export function MilestoneCelebration({
         <div className="flex justify-center gap-2 mt-4">
           {onShare && (
             <Button size="sm" variant="outline" onClick={onShare}>
-              Share
+              分享
             </Button>
           )}
           <Button size="sm" onClick={() => { setDismissed(true); onDismiss?.(); }}>
-            Continue
+            繼續
           </Button>
         </div>
       </div>

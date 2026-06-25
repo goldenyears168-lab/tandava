@@ -21,8 +21,8 @@ export function NewsletterSignup({
   source,
   variant = "inline",
   className,
-  heading = "Stay in the loop",
-  description = "Class updates, workshops, and community news. No spam.",
+  heading = "掌握最新動態",
+  description = "課程更新、工作坊與社群消息。絕不濫發。",
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -58,13 +58,13 @@ export function NewsletterSignup({
         {status === "success" ? (
           <div className="flex items-center gap-2 p-3 rounded-xl bg-accent-sage/10 text-accent-sage">
             <CheckCircle2 className="h-4 w-4" />
-            <span className="text-sm font-medium">You're subscribed! Check your email to confirm.</span>
+            <span className="text-sm font-medium">訂閱成功！請至電子信箱確認。</span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
               type="email"
-              placeholder="your@email.com"
+              placeholder="請輸入電子郵件"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -75,7 +75,7 @@ export function NewsletterSignup({
               {status === "loading" ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
-                "Subscribe"
+                "訂閱"
               )}
             </Button>
           </form>
@@ -90,14 +90,14 @@ export function NewsletterSignup({
       {status === "success" ? (
         <div className="flex items-center gap-2 text-accent-sage text-sm">
           <CheckCircle2 className="h-4 w-4" />
-          <span>Subscribed! Check your email.</span>
+          <span>已訂閱！請至電子信箱確認。</span>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
           <Input
             type="email"
-            placeholder="Email for updates"
+            placeholder="接收更新的電子郵件"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -105,7 +105,7 @@ export function NewsletterSignup({
             className="h-8 text-sm max-w-[200px]"
           />
           <Button type="submit" size="sm" variant="outline" disabled={status === "loading"} className="h-8 text-xs">
-            {status === "loading" ? <Loader2 className="h-3 w-3 animate-spin" /> : "Subscribe"}
+            {status === "loading" ? <Loader2 className="h-3 w-3 animate-spin" /> : "訂閱"}
           </Button>
         </form>
       )}

@@ -42,7 +42,7 @@ export function AppointmentCard({
           <div className="flex-1 min-w-0">
             {/* Badges row */}
             <div className="flex items-center gap-2 mb-3">
-              <Badge variant="appointment">Appointment</Badge>
+              <Badge variant="appointment">私人預約</Badge>
             </div>
 
             {/* Type and description */}
@@ -66,7 +66,7 @@ export function AppointmentCard({
                 <Clock className="h-4 w-4" />
                 <span>{startTime}</span>
                 <span className="text-muted-foreground/50">•</span>
-                <span>{duration} min</span>
+                <span>{duration} 分鐘</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <MapPin className="h-4 w-4" />
@@ -90,7 +90,7 @@ export function AppointmentCard({
               disabled={isBooked}
               className="min-w-[120px]"
             >
-              {isBooked ? "Booked" : "Book"}
+              {isBooked ? "已預約" : "預約"}
             </Button>
           </div>
         </div>

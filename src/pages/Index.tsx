@@ -45,10 +45,7 @@ const today = DAYS[new Date().getDay()];
 
 function formatTime(time: string) {
   const [h, m] = time.split(":");
-  const hour = parseInt(h);
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const h12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-  return `${h12}:${m} ${ampm}`;
+  return `${h}:${m}`;
 }
 
 function timeToMinutes(time: string): number {
@@ -115,7 +112,7 @@ const Index = () => {
   return (
     <AppLayout>
       <SEOHead
-        title={`${OXATL_STUDIO.name} | Yoga, Pilates & Meditation in Austin`}
+        title={`${OXATL_STUDIO.name} | 活化能量艙・專業撥筋・溫感光療`}
         description={OXATL_STUDIO.description}
         canonical="/"
         structuredData={[organizationSchema(), websiteSchema()]}
@@ -134,13 +131,13 @@ const Index = () => {
               <Button asChild size="lg">
                 <Link to="/schedule">
                   <Calendar className="h-5 w-5 mr-2" />
-                  Book a Class
+                  預約服務
                 </Link>
               </Button>
               {!isLoggedIn && (
                 <Button asChild variant="outline" size="lg">
                   <Link to="/auth/register">
-                    Get Started
+                    立即開始
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Link>
                 </Button>
@@ -148,10 +145,10 @@ const Index = () => {
               {isLoggedIn && (
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-sage/15 text-accent-sage text-sm font-medium">
                   <Flame className="h-4 w-4" />
-                  <span>8 class streak</span>
+                  <span>連續 8 次造訪</span>
                   <span className="text-muted-foreground">·</span>
                   <Link to="/community" className="hover:underline">
-                    #4 this month
+                    本月第 4 名
                   </Link>
                 </div>
               )}
@@ -163,18 +160,18 @@ const Index = () => {
         <section>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-2xl font-semibold">Today's Classes</h2>
+              <h2 className="text-2xl font-semibold">今日服務</h2>
               <p className="text-sm text-muted-foreground mt-0.5">
-                {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+                {new Date().toLocaleDateString("zh-TW", { weekday: "long", month: "long", day: "numeric" })}
                 {" · "}
-                {todaysClasses.length} upcoming
+                {todaysClasses.length} 項即將開始
               </p>
             </div>
             <Link
               to="/schedule"
               className="text-sm text-primary hover:underline flex items-center gap-1"
             >
-              Full schedule
+              完整服務表
               <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -195,7 +192,7 @@ const Index = () => {
                       : "bg-secondary/50 text-muted-foreground border-border hover:bg-secondary hover:text-foreground"
                   )}
                 >
-                  {loc.name.replace("Oxatl ", "")}
+                  {loc.name}
                 </button>
               ))}
             </div>
@@ -206,10 +203,10 @@ const Index = () => {
             <Select value={selectedStyle} onValueChange={setSelectedStyle}>
               <SelectTrigger className="w-[140px] h-8 text-xs">
                 <Filter className="h-3 w-3 mr-1" />
-                <SelectValue placeholder="Style" />
+                <SelectValue placeholder="風格" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Styles</SelectItem>
+                <SelectItem value="all">全部風格</SelectItem>
                 {allStyles.map((style) => (
                   <SelectItem key={style} value={style}>{style}</SelectItem>
                 ))}
@@ -230,7 +227,7 @@ const Index = () => {
                   )}
                 >
                   {mode === "virtual" && <Monitor className="h-3 w-3 inline mr-1" />}
-                  {mode === "all" ? "All" : mode === "in-person" ? "In-Person" : "Virtual"}
+                  {mode === "all" ? "全部" : mode === "in-person" ? "實體課程" : "線上課程"}
                 </button>
               ))}
             </div>
@@ -246,7 +243,7 @@ const Index = () => {
                       <div className="text-center min-w-[52px] sm:min-w-[60px]">
                         <p className="text-sm font-semibold">{formatTime(cls.time)}</p>
                         <p className="text-[10px] text-muted-foreground">
-                          {cls.classType?.duration_minutes}min
+                          {cls.classType?.duration_minutes} 分鐘
                         </p>
                       </div>
                       <div
@@ -273,7 +270,7 @@ const Index = () => {
                       </div>
                     </div>
                     <Button variant="outline" size="sm" asChild className="shrink-0 ml-2">
-                      <Link to="/schedule">Book</Link>
+                      <Link to="/schedule">預約</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -283,8 +280,8 @@ const Index = () => {
             <Card>
               <CardContent className="p-6 text-center text-muted-foreground">
                 {selectedLocations.length > 0 || selectedStyle !== "all" || classMode !== "all"
-                  ? "No classes match your filters. Try adjusting your selection."
-                  : "No more classes today. Check the full schedule for upcoming classes."}
+                  ? "沒有符合篩選條件的服務，請調整篩選項目。"
+                  : "今日已無更多可預約時段，請查看完整服務表。"}
               </CardContent>
             </Card>
           )}
@@ -292,7 +289,7 @@ const Index = () => {
 
         {/* ---- What We Offer ---- */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Class Styles</h2>
+          <h2 className="text-2xl font-semibold mb-4">服務項目</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {OXATL_CLASS_TYPES.map((ct) => (
               <Link
@@ -310,7 +307,7 @@ const Index = () => {
                     <p className="text-xs text-muted-foreground line-clamp-2 mt-1">{ct.description}</p>
                     <p className="text-[10px] text-muted-foreground mt-1.5 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
-                      {ct.duration_minutes} min
+                      {ct.duration_minutes} 分鐘
                     </p>
                   </CardContent>
                 </Card>
@@ -322,12 +319,12 @@ const Index = () => {
         {/* ---- Our Teachers ---- */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-semibold">Our Teachers</h2>
+            <h2 className="text-2xl font-semibold">專業團隊</h2>
             <Link
               to="/instructors"
               className="text-sm text-primary hover:underline flex items-center gap-1"
             >
-              Meet the team
+              認識團隊
               <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
@@ -368,39 +365,40 @@ const Index = () => {
 
         {/* ---- Pricing ---- */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Pricing</h2>
+          <h2 className="text-2xl font-semibold mb-4">價目與方案</h2>
+          <p className="text-sm text-muted-foreground mb-4">預約制 · 每日 09:30–22:00 · 詳細價目請參考<a href="https://www.1314mm941.com.tw/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">官網價目表</a></p>
           <div className="grid sm:grid-cols-3 gap-3">
             <Card className="hover:border-primary/30 transition-colors">
               <CardContent className="p-5 text-center">
-                <p className="text-sm text-muted-foreground mb-1">Drop-in</p>
-                <p className="text-3xl font-bold">$25</p>
-                <p className="text-xs text-muted-foreground mt-1">per class</p>
+                <p className="text-sm text-muted-foreground mb-1">單次療程</p>
+                <p className="text-3xl font-bold">預約諮詢</p>
+                <p className="text-xs text-muted-foreground mt-1">依項目計價</p>
                 <Button variant="outline" className="mt-3 w-full" size="sm" asChild>
-                  <Link to="/schedule">Book a Class</Link>
+                  <Link to="/schedule">預約服務</Link>
                 </Button>
               </CardContent>
             </Card>
             <Card className="border-primary/50 hover:border-primary transition-colors relative">
-              <Badge className="absolute -top-2.5 left-1/2 -translate-x-1/2">Most Popular</Badge>
+              <Badge className="absolute -top-2.5 left-1/2 -translate-x-1/2">最受歡迎</Badge>
               <CardContent className="p-5 text-center">
-                <p className="text-sm text-muted-foreground mb-1">Unlimited Monthly</p>
-                <p className="text-3xl font-bold">$149</p>
-                <p className="text-xs text-muted-foreground mt-1">per month</p>
+                <p className="text-sm text-muted-foreground mb-1">尊榮會員票券</p>
+                <p className="text-3xl font-bold">熱銷中</p>
+                <p className="text-xs text-muted-foreground mt-1">多館通用</p>
                 <Button className="mt-3 w-full" size="sm" asChild>
                   <Link to={isLoggedIn ? "/account" : "/auth/register"}>
-                    {isLoggedIn ? "Manage Membership" : "Start Membership"}
+                    {isLoggedIn ? "管理會員方案" : "開始會員方案"}
                   </Link>
                 </Button>
               </CardContent>
             </Card>
             <Card className="hover:border-primary/30 transition-colors">
               <CardContent className="p-5 text-center">
-                <p className="text-sm text-muted-foreground mb-1">10-Class Pack</p>
-                <p className="text-3xl font-bold">$200</p>
-                <p className="text-xs text-muted-foreground mt-1">$20 per class</p>
+                <p className="text-sm text-muted-foreground mb-1">療程組合</p>
+                <p className="text-3xl font-bold">能量加乘</p>
+                <p className="text-xs text-muted-foreground mt-1">艙＋撥筋 / 光療＋活罐</p>
                 <Button variant="outline" className="mt-3 w-full" size="sm" asChild>
                   <Link to={isLoggedIn ? "/account" : "/auth/register"}>
-                    {isLoggedIn ? "Buy Pack" : "Get Started"}
+                    {isLoggedIn ? "購買套票" : "立即開始"}
                   </Link>
                 </Button>
               </CardContent>
@@ -410,8 +408,8 @@ const Index = () => {
 
         {/* ---- Locations with Image Placeholders ---- */}
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Our Locations</h2>
-          <div className="grid sm:grid-cols-3 gap-3">
+          <h2 className="text-2xl font-semibold mb-4">分店資訊</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {OXATL_LOCATIONS.map((loc, idx) => {
               // Gradient placeholders to simulate image carousel
               const gradients = [
@@ -440,9 +438,14 @@ const Index = () => {
                         <MapPin className="h-3.5 w-3.5 mt-0.5 shrink-0" />
                         <span>
                           {loc.address_line1}
-                          {loc.address_line2 ? `, ${loc.address_line2}` : ""}
+                          {loc.address_line2 ? (
+                            <>
+                              <br />
+                              <span className="text-muted-foreground/80">{loc.address_line2}</span>
+                            </>
+                          ) : null}
                           <br />
-                          {loc.city}, {loc.state} {loc.postal_code}
+                          預約專線 {loc.phone}
                         </span>
                       </p>
                       <p className="flex items-center gap-2">
@@ -464,21 +467,21 @@ const Index = () => {
         {/* ---- CTA (only if not logged in) ---- */}
         {!isLoggedIn && (
           <section className="rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 p-8 md:p-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Ready to start your practice?</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">準備預約您的療程了嗎？</h2>
             <p className="text-muted-foreground mb-5 max-w-lg mx-auto">
-              Join our community of practitioners. Your first class is on us.
+              讓身體重新定義舒爽，讓靈魂再次發光。預約制，每日 09:30–22:00 為您服務。
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild size="lg">
                 <Link to="/schedule">
                   <Calendar className="h-5 w-5 mr-2" />
-                  Browse Classes
+                  瀏覽服務
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <a href={`mailto:${OXATL_STUDIO.email}`}>
                   <Mail className="h-5 w-5 mr-2" />
-                  Contact Us
+                  聯絡我們
                 </a>
               </Button>
             </div>
@@ -489,12 +492,12 @@ const Index = () => {
         {isLoggedIn && (
           <section className="rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 p-6 text-center">
             <p className="text-muted-foreground mb-3">
-              Questions? We'd love to hear from you.
+              有任何問題？我們期待您的來信。
             </p>
             <Button asChild variant="outline">
               <a href={`mailto:${OXATL_STUDIO.email}`}>
                 <Mail className="h-4 w-4 mr-2" />
-                Contact {OXATL_STUDIO.name}
+                聯絡 {OXATL_STUDIO.name}
               </a>
             </Button>
           </section>

@@ -17,11 +17,11 @@ export default function TeachProfile() {
   const { profile } = useAuth();
 
   const profileName = profile?.display_name
-    || (profile ? `${profile.first_name} ${profile.last_name}` : "Instructor");
+    || (profile ? `${profile.first_name} ${profile.last_name}` : "老師");
   const initials = profileName.split(" ").map((n: string) => n[0]).join("").toUpperCase();
 
   const [bio, setBio] = useState(
-    "E-RYT 500 certified yoga instructor with a passion for dynamic vinyasa and restorative practices. Teaching for 8+ years across multiple studios."
+    "E-RYT 500 認證瑜伽老師，專精動態流瑜伽與修復式練習。擁有 8 年以上跨工作室授課經驗。"
   );
   const [specialties, setSpecialties] = useState(["Vinyasa", "Power Yoga", "Yin"]);
   const [newSpecialty, setNewSpecialty] = useState("");
@@ -33,8 +33,8 @@ export default function TeachProfile() {
 
   const handleSave = () => {
     toast({
-      title: "Profile updated",
-      description: "Your instructor profile has been saved.",
+      title: "個人資料已更新",
+      description: "您的老師個人資料已儲存。",
     });
   };
 
@@ -51,17 +51,17 @@ export default function TeachProfile() {
 
   return (
     <TeachLayout>
-      <SEOHead title="My Profile" noindex />
+      <SEOHead title="我的個人資料" noindex />
 
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">My Profile</h1>
-            <p className="text-muted-foreground">Manage your public instructor profile</p>
+            <h1 className="text-2xl font-bold tracking-tight">我的個人資料</h1>
+            <p className="text-muted-foreground">管理您的公開老師個人檔案</p>
           </div>
           <Button onClick={handleSave}>
             <Save className="h-4 w-4 mr-2" />
-            Save Profile
+            儲存個人資料
           </Button>
         </div>
 
@@ -78,8 +78,8 @@ export default function TeachProfile() {
                 <h3 className="text-lg font-semibold">{profileName}</h3>
                 <div className="flex items-center gap-2 mt-1">
                   <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                  <span className="text-sm">4.9 rating</span>
-                  <span className="text-sm text-muted-foreground">• 1,240 classes taught</span>
+                  <span className="text-sm">4.9 評分</span>
+                  <span className="text-sm text-muted-foreground">• 已授課 1,240 堂</span>
                 </div>
               </div>
             </div>
@@ -91,26 +91,26 @@ export default function TeachProfile() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5" />
-              About Me
+              關於我
             </CardTitle>
-            <CardDescription>This appears on your public profile</CardDescription>
+            <CardDescription>此內容會顯示在您的公開個人檔案</CardDescription>
           </CardHeader>
           <CardContent>
             <Textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={4}
-              placeholder="Tell students about yourself, your teaching style, and what to expect..."
+              placeholder="向學員介紹自己、教學風格，以及課程中可以期待什麼..."
             />
-            <p className="text-xs text-muted-foreground mt-2">{bio.length}/500 characters</p>
+            <p className="text-xs text-muted-foreground mt-2">{bio.length}/500 字</p>
           </CardContent>
         </Card>
 
         {/* Specialties */}
         <Card>
           <CardHeader>
-            <CardTitle>Specialties</CardTitle>
-            <CardDescription>Styles and focus areas you teach</CardDescription>
+            <CardTitle>專長領域</CardTitle>
+            <CardDescription>您教授的風格與重點方向</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex flex-wrap gap-2">
@@ -130,10 +130,10 @@ export default function TeachProfile() {
               <Input
                 value={newSpecialty}
                 onChange={(e) => setNewSpecialty(e.target.value)}
-                placeholder="Add specialty..."
+                placeholder="新增專長..."
                 onKeyDown={(e) => e.key === "Enter" && addSpecialty()}
               />
-              <Button variant="outline" onClick={addSpecialty}>Add</Button>
+              <Button variant="outline" onClick={addSpecialty}>新增</Button>
             </div>
           </CardContent>
         </Card>
@@ -143,7 +143,7 @@ export default function TeachProfile() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Award className="h-5 w-5" />
-              Certifications
+              認證資格
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -154,7 +154,7 @@ export default function TeachProfile() {
                     <p className="font-medium">{cert.name}</p>
                     <p className="text-sm text-muted-foreground">{cert.issuer} • {cert.year}</p>
                   </div>
-                  <Badge variant="outline">Verified</Badge>
+                  <Badge variant="outline">已驗證</Badge>
                 </div>
               ))}
             </div>

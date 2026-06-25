@@ -2,14 +2,14 @@ import { AdminLayout } from "@/components/layout/AdminLayout";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2, Users, CreditCard, AlertTriangle } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 export default function AdminDashboard() {
-  const { t } = useTranslation('manage');
+  const t = createT('manage');
 
   return (
     <AdminLayout>
-      <SEOHead title="Platform Admin" noindex />
+      <SEOHead title="平台管理" noindex />
 
       <div className="space-y-8">
         <div>

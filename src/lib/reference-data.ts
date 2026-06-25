@@ -194,14 +194,14 @@ export function analyzeBookingUrl(url: string): BookingUrlAnalysis {
 // ============================================================================
 
 export const PAYMENT_METHODS = [
-  { value: 'card', label: 'Credit/Debit Card' },
-  { value: 'cash', label: 'Cash' },
+  { value: 'card', label: '信用卡／金融卡' },
+  { value: 'cash', label: '現金' },
   { value: 'venmo', label: 'Venmo' },
   { value: 'cashapp', label: 'Cash App' },
   { value: 'paypal', label: 'PayPal' },
   { value: 'zelle', label: 'Zelle' },
-  { value: 'check', label: 'Check' },
-  { value: 'other', label: 'Other' },
+  { value: 'check', label: '支票' },
+  { value: 'other', label: '其他' },
 ] as const;
 
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]['value'];
@@ -231,11 +231,11 @@ export const CTA_SUGGESTIONS = [
  * For UI rendering, prefer `useLocale().getDayName()` instead.
  */
 export const DAYS_OF_WEEK = [
-  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+  '星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六',
 ] as const;
 
 export const DAYS_OF_WEEK_SHORT = [
-  'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+  '日', '一', '二', '三', '四', '五', '六',
 ] as const;
 
 export function getDayName(dayOfWeek: number, short = false): string {
@@ -249,7 +249,7 @@ export function getDayName(dayOfWeek: number, short = false): string {
  * @param locale - BCP 47 locale code (default: 'en-US'). For locale-aware
  *   rendering in React components, prefer `useLocale().formatTime()` instead.
  */
-export function formatTime(time: string, locale = 'en-US'): string {
+export function formatTime(time: string, locale = 'zh-TW'): string {
   const [hours, minutes] = time.split(':').map(Number);
   const date = new Date(2000, 0, 1, hours, minutes);
   return new Intl.DateTimeFormat(locale, {
@@ -267,7 +267,7 @@ export function formatTime(time: string, locale = 'en-US'): string {
  * @param locale - BCP 47 locale code (default: 'en-US'). For locale-aware
  *   rendering in React components, prefer `useLocale().formatPrice()` instead.
  */
-export function formatPrice(cents: number, currency = 'USD', locale = 'en-US'): string {
+export function formatPrice(cents: number, currency = 'TWD', locale = 'zh-TW'): string {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
@@ -284,7 +284,7 @@ export function formatPrice(cents: number, currency = 'USD', locale = 'en-US'): 
  * @param locale - BCP 47 locale code (default: 'en-US'). For locale-aware
  *   rendering in React components, prefer `useLocale().formatDate()` instead.
  */
-export function formatDate(dateString: string, options?: Intl.DateTimeFormatOptions, locale = 'en-US'): string {
+export function formatDate(dateString: string, options?: Intl.DateTimeFormatOptions, locale = 'zh-TW'): string {
   const date = new Date(dateString);
   return new Intl.DateTimeFormat(locale, options ?? {
     weekday: 'short',

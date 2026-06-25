@@ -31,12 +31,12 @@ interface TeachLayoutProps {
 }
 
 const teachNavigation = [
-  { name: "Dashboard", href: "/teach", icon: LayoutDashboard },
-  { name: "My Schedule", href: "/teach/schedule", icon: Calendar },
-  { name: "Availability", href: "/teach/availability", icon: Clock },
-  { name: "Subs", href: "/teach/subs", icon: Repeat2 },
-  { name: "Earnings", href: "/teach/earnings", icon: DollarSign },
-  { name: "Profile", href: "/teach/profile", icon: User },
+  { name: "儀表板", href: "/teach", icon: LayoutDashboard },
+  { name: "我的服務表", href: "/teach/schedule", icon: Calendar },
+  { name: "可服務時段", href: "/teach/availability", icon: Clock },
+  { name: "代班", href: "/teach/subs", icon: Repeat2 },
+  { name: "收入", href: "/teach/earnings", icon: DollarSign },
+  { name: "個人資料", href: "/teach/profile", icon: User },
 ];
 
 export function TeachLayout({ children }: TeachLayoutProps) {
@@ -50,7 +50,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
   };
 
   const profileName = profile?.display_name
-    || (profile ? `${profile.first_name} ${profile.last_name}` : "Instructor");
+    || (profile ? `${profile.first_name} ${profile.last_name}` : "美容師");
 
   const initials = profileName
     .split(" ")
@@ -82,10 +82,10 @@ export function TeachLayout({ children }: TeachLayoutProps) {
               </div>
               <div className="hidden sm:block">
                 <p className="text-sm font-semibold leading-none">
-                  Teacher Portal
+                  美容師入口
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Oxatl Yoga
+                  森浴光mm941
                 </p>
               </div>
             </Link>
@@ -114,7 +114,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
                 <div className="flex items-center gap-2 p-2 mb-1">
                   <div className="flex flex-col">
                     <p className="text-sm font-semibold">{profileName}</p>
-                    <p className="text-xs text-muted-foreground">Instructor</p>
+                    <p className="text-xs text-muted-foreground">美容師</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />
@@ -124,7 +124,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
                     className="flex items-center gap-2 cursor-pointer"
                   >
                     <User className="h-4 w-4" />
-                    My Profile
+                    我的個人資料
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="rounded-lg">
@@ -133,7 +133,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
                     className="flex items-center gap-2 cursor-pointer"
                   >
                     <Settings className="h-4 w-4" />
-                    Account Settings
+                    帳戶設定
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -143,7 +143,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
                     className="flex items-center gap-2 cursor-pointer text-destructive"
                   >
                     <LogOut className="h-4 w-4" />
-                    Sign out
+                    登出
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -172,7 +172,7 @@ export function TeachLayout({ children }: TeachLayoutProps) {
                 </Avatar>
                 <div className="min-w-0">
                   <p className="text-sm font-semibold truncate">{profileName}</p>
-                  <p className="text-xs text-muted-foreground">E-RYT 500</p>
+                  <p className="text-xs text-muted-foreground">資深美容師</p>
                 </div>
               </div>
             </div>

@@ -31,8 +31,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -52,7 +51,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { profile, permissions, signOut } = useAuth();
-  const { t } = useTranslation("common");
+  const t = createT("common");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const user = profile
@@ -82,58 +81,64 @@ export function AppLayout({ children }: AppLayoutProps) {
         href="#main-content"
         className="sr-only absolute left-4 top-4 z-[70] rounded-md bg-background px-3 py-2 text-sm font-medium shadow-md focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        Skip to main content
+        {t("skipToContent")}
       </a>
 
       {/* Desktop Header */}
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur-md">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:h-16 lg:gap-4">
           {/* Studio Brand */}
           <Link
             to="/home"
-            className="mr-4 flex items-center gap-2.5 rounded-xl px-1 py-1 transition-colors hover:bg-secondary/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            className="flex shrink-0 items-center gap-2.5 rounded-xl py-1 pr-2 transition-colors hover:bg-secondary/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-accent-teal to-accent-sage shadow-md">
-              <span className="text-lg font-bold text-white">O</span>
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-teal to-accent-sage shadow-sm lg:h-10 lg:w-10">
+              <span className="text-base font-bold text-white lg:text-lg">森</span>
             </div>
-            <span className="text-xl font-display font-bold tracking-tight">
-              Oxatl Yoga
+            <span className="whitespace-nowrap text-base font-semibold tracking-tight text-foreground lg:text-lg">
+              森浴光
+              <span className="ml-1 font-normal text-muted-foreground">mm941</span>
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.nameKey}
-                to={item.href}
-                className={cn(
-                  "flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                  isActive(item.href)
-                    ? "border border-primary/20 bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary",
-                )}
-              >
-                <item.icon className="h-4 w-4" />
-                {t(`nav.${item.nameKey}`)}
-              </Link>
-            ))}
+          {/* Desktop Navigation — horizontal scroll when space is tight */}
+          <nav
+            aria-label={t("nav.main", { defaultValue: "主要導覽" })}
+            className="hidden min-w-0 flex-1 lg:flex"
+          >
+            <div className="flex w-full items-center gap-0.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {navigation.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.nameKey}
+                    to={item.href}
+                    className={cn(
+                      "inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground",
+                    )}
+                  >
+                    <item.icon className="h-4 w-4 shrink-0" aria-hidden />
+                    {t(`nav.${item.nameKey}`)}
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            {/* Language Switcher */}
-            <LanguageSwitcher compact />
-
+          <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-1">
             {/* Notifications */}
             <Button
               variant="ghost"
               size="icon"
-              aria-label="View notifications"
-              className="relative h-10 w-10 rounded-full focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              aria-label="查看通知"
+              className="relative h-9 w-9 rounded-full focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:h-10 lg:w-10"
             >
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center shadow-sm">
+              <Bell className="h-[18px] w-[18px] lg:h-5 lg:w-5" />
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground shadow-sm lg:h-[18px] lg:w-[18px] lg:text-[10px]">
                 3
               </span>
             </Button>
@@ -143,10 +148,10 @@ export function AppLayout({ children }: AppLayoutProps) {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  aria-label="Open user menu"
-                  className="relative h-10 w-10 rounded-full focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                  aria-label="開啟使用者選單"
+                  className="relative h-9 w-9 rounded-full p-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 lg:h-10 lg:w-10"
                 >
-                  <Avatar className="h-10 w-10 border-2 border-primary/20">
+                  <Avatar className="h-9 w-9 border-2 border-primary/20 lg:h-10 lg:w-10">
                     <AvatarImage src={user.avatar} alt={user.name} />
                     <AvatarFallback className="bg-accent-lilac text-foreground font-semibold">
                       {user.name
@@ -243,8 +248,8 @@ export function AppLayout({ children }: AppLayoutProps) {
               size="icon"
               aria-label={
                 mobileMenuOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
+                  ? "關閉導覽選單"
+                  : "開啟導覽選單"
               }
               aria-expanded={mobileMenuOpen}
               className="h-10 w-10 rounded-full lg:hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -262,38 +267,41 @@ export function AppLayout({ children }: AppLayoutProps) {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="border-t border-border bg-card shadow-sm animate-fade-in lg:hidden">
-            <nav className="container py-4 space-y-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.nameKey}
-                  to={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={cn(
-                    "flex min-h-12 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                    isActive(item.href)
-                      ? "border border-primary/20 bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary",
-                  )}
-                >
-                  <item.icon className="h-5 w-5" />
-                  {t(`nav.${item.nameKey}`)}
-                </Link>
-              ))}
+            <nav className="mx-auto max-w-7xl space-y-0.5 px-4 py-3 sm:px-6">
+              {navigation.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.nameKey}
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                      active
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                    )}
+                  >
+                    <item.icon className="h-[18px] w-[18px] shrink-0" />
+                    {t(`nav.${item.nameKey}`)}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         )}
       </header>
 
       {/* Main Content */}
-      <main id="main-content" className="container py-8 md:py-10">
+      <main id="main-content" className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-10">
         {children}
       </main>
 
       {/* Footer */}
       <footer className="border-t border-border bg-card/50 py-6 mt-auto">
-        <div className="container flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 text-xs text-muted-foreground sm:flex-row sm:px-6">
           <span>
-            &copy; {new Date().getFullYear()} Oxatl Yoga.{" "}
+            &copy; {new Date().getFullYear()} 森浴光mm941。{" "}
             {t("footer.allRightsReserved")}
           </span>
           <span>

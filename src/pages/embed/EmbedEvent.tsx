@@ -18,15 +18,15 @@ export default function EmbedEvent() {
         >
           <CalendarDays className="h-5 w-5" />
         </div>
-        <p className="text-sm font-medium">Register for this event</p>
+        <p className="text-sm font-medium">報名此活動</p>
         <button
           onClick={() => openHosted(`/events/${id ?? ""}`)}
           className="w-full rounded-md px-3 py-2 text-sm font-semibold text-white"
           style={{ background: "var(--embed-primary, #4fd1c5)" }}
         >
-          View details & register
+          查看詳情並報名
         </button>
-        <p className="text-[10px] text-muted-foreground">Powered by Tandava</p>
+        <p className="text-[10px] text-muted-foreground">由 Tandava 提供</p>
       </div>
     </EmbedLayout>
   );

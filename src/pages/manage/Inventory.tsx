@@ -212,7 +212,7 @@ export default function InventoryManage() {
         )
       );
       toast({
-        title: "Stock adjusted",
+        title: "庫存已調整",
         description: `${selectedItem.productName} at ${selectedItem.locationName} adjusted by ${adjustmentAmount > 0 ? "+" : ""}${adjustmentAmount}`,
       });
       setAdjustOpen(false);
@@ -357,7 +357,7 @@ export default function InventoryManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Low Stock Items</p>
+                  <p className="text-xs text-muted-foreground">庫存不足 Items</p>
                   <p className="text-xl font-bold mt-0.5 text-accent-gold">
                     {lowStockItems.length}
                   </p>
@@ -370,7 +370,7 @@ export default function InventoryManage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-muted-foreground">Out of Stock</p>
+                  <p className="text-xs text-muted-foreground">缺貨</p>
                   <p className="text-xl font-bold mt-0.5 text-destructive">
                     {outOfStockItems.length}
                   </p>
@@ -413,8 +413,8 @@ export default function InventoryManage() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Stock Levels</SelectItem>
-              <SelectItem value="low">Low Stock Only</SelectItem>
-              <SelectItem value="out">Out of Stock Only</SelectItem>
+              <SelectItem value="low">庫存不足 Only</SelectItem>
+              <SelectItem value="out">缺貨 Only</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -616,7 +616,7 @@ export default function InventoryManage() {
         <Dialog open={adjustOpen} onOpenChange={setAdjustOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Adjust Stock</DialogTitle>
+              <DialogTitle>調整庫存</DialogTitle>
               <DialogDescription>
                 {selectedItem?.productName} at {selectedItem?.locationName}
               </DialogDescription>
@@ -689,7 +689,7 @@ export default function InventoryManage() {
         <Dialog open={transferOpen} onOpenChange={setTransferOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Transfer Stock</DialogTitle>
+              <DialogTitle>調撥庫存</DialogTitle>
               <DialogDescription>
                 Move {selectedItem?.productName} from {selectedItem?.locationName}
               </DialogDescription>
@@ -737,7 +737,7 @@ export default function InventoryManage() {
                 </p>
               </div>
               <div className="space-y-2">
-                <Label>Destination Location</Label>
+                <Label>目標頁面 Location</Label>
                 <Select value={transferDestination} onValueChange={setTransferDestination}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select destination..." />

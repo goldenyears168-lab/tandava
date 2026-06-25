@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import type { DeliveryMode } from "@/types/database";
 import { Link } from "react-router-dom";
+import { teachUpcomingSessions, teachMockMembers } from "@/data/demo/spa-ui-mocks";
 
 // Mock data for instructor dashboard
 interface UpcomingClass {
@@ -54,139 +55,38 @@ interface BookedStudent {
   checkedIn: boolean;
 }
 
-const upcomingClasses: UpcomingClass[] = [
-  {
-    id: "1",
-    name: "Morning Vinyasa",
-    date: "Today",
-    time: "7:00 AM",
-    room: "Main Studio",
-    booked: 22,
-    capacity: 25,
-    isToday: true,
-    deliveryMode: "hybrid",
-    isStartingSoon: true,
-    checkedIn: 18,
-  },
-  {
-    id: "2",
-    name: "Evening Vinyasa",
-    date: "Today",
-    time: "6:00 PM",
-    room: "Main Studio",
-    booked: 18,
-    capacity: 25,
-    isToday: true,
-  },
-  {
-    id: "3",
-    name: "Morning Vinyasa",
-    date: "Wednesday",
-    time: "7:00 AM",
-    room: "Main Studio",
-    booked: 19,
-    capacity: 25,
-    isToday: false,
-    deliveryMode: "hybrid",
-  },
-  {
-    id: "4",
-    name: "Virtual Flow",
-    date: "Wednesday",
-    time: "6:00 PM",
-    room: "Online",
-    booked: 35,
-    capacity: 50,
-    isToday: false,
-    deliveryMode: "virtual",
-  },
-  {
-    id: "5",
-    name: "Community Flow",
-    date: "Saturday",
-    time: "11:00 AM",
-    room: "Main Studio",
-    booked: 20,
-    capacity: 25,
-    isToday: false,
-  },
-];
+const upcomingClasses: UpcomingClass[] = teachUpcomingSessions;
 
-// Mock students for check-in
-const mockStudents: Record<string, BookedStudent[]> = {
-  "1": [
-    { id: "s1", name: "Emma Watson", membershipType: "Unlimited", checkedIn: true },
-    { id: "s2", name: "Alex Rivera", membershipType: "Unlimited", checkedIn: true },
-    { id: "s3", name: "Priya Sharma", membershipType: "10-Pack", checkedIn: true },
-    { id: "s4", name: "Michael Chen", membershipType: "Unlimited", checkedIn: true },
-    { id: "s5", name: "Sofia Rossi", membershipType: "Drop-in", checkedIn: true },
-    { id: "s6", name: "James Liu", membershipType: "Unlimited", checkedIn: true },
-    { id: "s7", name: "Ava Kim", membershipType: "Unlimited", checkedIn: true },
-    { id: "s8", name: "Devika Nair", membershipType: "10-Pack", checkedIn: true },
-    { id: "s9", name: "Marcus Johnson", membershipType: "Unlimited", checkedIn: true },
-    { id: "s10", name: "Luna Morales", membershipType: "Drop-in", checkedIn: true },
-    { id: "s11", name: "Oliver Grant", membershipType: "Unlimited", checkedIn: true },
-    { id: "s12", name: "Zara Ahmed", membershipType: "10-Pack", checkedIn: true },
-    { id: "s13", name: "Kai Tanaka", membershipType: "Unlimited", checkedIn: true },
-    { id: "s14", name: "Rachel Green", membershipType: "Unlimited", checkedIn: true },
-    { id: "s15", name: "David Park", membershipType: "Unlimited", checkedIn: true },
-    { id: "s16", name: "Nina Patel", membershipType: "Drop-in", checkedIn: true },
-    { id: "s17", name: "Leo Martinez", membershipType: "Unlimited", checkedIn: true },
-    { id: "s18", name: "Iris Chen", membershipType: "10-Pack", checkedIn: true },
-    { id: "s19", name: "Tyler Brooks", membershipType: "Unlimited", checkedIn: false },
-    { id: "s20", name: "Maya Singh", membershipType: "Unlimited", checkedIn: false },
-    { id: "s21", name: "Noah Williams", membershipType: "10-Pack", checkedIn: false },
-    { id: "s22", name: "Camille Dubois", membershipType: "Drop-in", checkedIn: false },
-  ],
-  "2": [
-    { id: "s30", name: "Elena Voss", membershipType: "Unlimited", checkedIn: false },
-    { id: "s31", name: "Ryan Cooper", membershipType: "10-Pack", checkedIn: false },
-    { id: "s32", name: "Aisha Mohammed", membershipType: "Unlimited", checkedIn: false },
-    { id: "s33", name: "Ben Taylor", membershipType: "Unlimited", checkedIn: false },
-    { id: "s34", name: "Clara Fontaine", membershipType: "Drop-in", checkedIn: false },
-    { id: "s35", name: "Daniel Kim", membershipType: "Unlimited", checkedIn: false },
-    { id: "s36", name: "Fiona O'Brien", membershipType: "10-Pack", checkedIn: false },
-    { id: "s37", name: "Grace Lee", membershipType: "Unlimited", checkedIn: false },
-    { id: "s38", name: "Henry Yang", membershipType: "Unlimited", checkedIn: false },
-    { id: "s39", name: "Isabella Cruz", membershipType: "Drop-in", checkedIn: false },
-    { id: "s40", name: "Jack Morrison", membershipType: "Unlimited", checkedIn: false },
-    { id: "s41", name: "Karen Nguyen", membershipType: "10-Pack", checkedIn: false },
-    { id: "s42", name: "Liam Foster", membershipType: "Unlimited", checkedIn: false },
-    { id: "s43", name: "Mia Rodriguez", membershipType: "Unlimited", checkedIn: false },
-    { id: "s44", name: "Oscar Bennett", membershipType: "10-Pack", checkedIn: false },
-    { id: "s45", name: "Penny Lane", membershipType: "Drop-in", checkedIn: false },
-    { id: "s46", name: "Quinn Hayes", membershipType: "Unlimited", checkedIn: false },
-    { id: "s47", name: "Rosa Gutierrez", membershipType: "Unlimited", checkedIn: false },
-  ],
-};
+// Mock members for check-in
+const mockStudents = teachMockMembers;
 
 const pendingSubRequests = [
   {
     id: "1",
-    className: "Morning Vinyasa",
-    date: "Feb 12",
-    time: "7:00 AM",
+    className: "活化能量艙",
+    date: "2/12",
+    time: "09:30",
     status: "pending",
-    requestedAt: "2 days ago",
+    requestedAt: "2 天前",
   },
 ];
 
 const openSubOpportunities = [
   {
     id: "1",
-    className: "Gentle Flow",
-    teacher: "James Liu",
-    date: "Feb 10",
-    time: "9:30 AM",
-    pay: 75,
+    className: "專業撥筋",
+    teacher: "陳雅婷",
+    date: "2/10",
+    time: "09:30",
+    pay: 750,
   },
   {
     id: "2",
-    className: "Yin Restore",
-    teacher: "Ava Kim",
-    date: "Feb 14",
-    time: "4:30 PM",
-    pay: 65,
+    className: "溫感能量光療",
+    teacher: "王美玲",
+    date: "2/14",
+    time: "16:30",
+    pay: 650,
   },
 ];
 
@@ -232,7 +132,7 @@ export default function TeachDashboard() {
       ...prev,
       [checkInClassId]: (prev[checkInClassId] ?? []).map((s) => ({ ...s, checkedIn: true })),
     }));
-    toast({ title: "All students checked in" });
+    toast({ title: "全部學員已報到" });
   };
 
   return (
@@ -241,9 +141,9 @@ export default function TeachDashboard() {
         {/* Page Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+            <h1 className="text-2xl font-bold tracking-tight">儀表板</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              {new Date().toLocaleDateString("en-US", {
+              {new Date().toLocaleDateString("zh-TW", {
                 weekday: "long",
                 month: "long",
                 day: "numeric",
@@ -258,7 +158,7 @@ export default function TeachDashboard() {
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center gap-2">
                 <ClipboardCheck className="h-5 w-5 text-accent-sage" />
-                Today's Classes
+                今日課程
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -279,13 +179,13 @@ export default function TeachDashboard() {
                         <span className="text-lg font-bold">{cls.time}</span>
                         {cls.isStartingSoon && (
                           <Badge className="bg-accent-sage text-white text-[10px] animate-pulse">
-                            Starting Soon
+                            即將開始
                           </Badge>
                         )}
                       </div>
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Users className="h-4 w-4" />
-                        <span>{clsCheckedIn}/{cls.booked} checked in</span>
+                        <span>{clsCheckedIn}/{cls.booked} 已報到</span>
                       </div>
                     </div>
                     <p className="font-medium">{cls.name}</p>
@@ -293,12 +193,12 @@ export default function TeachDashboard() {
                       <span>{cls.room}</span>
                       {cls.deliveryMode === 'hybrid' && (
                         <span className="flex items-center gap-1 text-violet-400">
-                          <Wifi className="h-3 w-3" /> + Online
+                          <Wifi className="h-3 w-3" /> + 線上
                         </span>
                       )}
                       {cls.deliveryMode === 'virtual' && (
                         <span className="flex items-center gap-1 text-blue-400">
-                          <Video className="h-3 w-3" /> Virtual
+                          <Video className="h-3 w-3" /> 線上諮詢
                         </span>
                       )}
                     </div>
@@ -312,12 +212,12 @@ export default function TeachDashboard() {
                         }}
                       >
                         <ClipboardCheck className="h-4 w-4 mr-2" />
-                        Check-in Students ({clsCheckedIn}/{cls.booked})
+                        學員報到 ({clsCheckedIn}/{cls.booked})
                       </Button>
                       {(cls.deliveryMode === 'virtual' || cls.deliveryMode === 'hybrid') && (
-                        <Button size="sm" variant="outline" onClick={() => toast({ title: "Stream starting", description: "Virtual class stream is being prepared..." })}>
+                        <Button size="sm" variant="outline" onClick={() => toast({ title: "正在啟動直播", description: "線上課程直播正在準備中..." })}>
                           <Video className="h-4 w-4 mr-2" />
-                          Start Stream
+                          開始直播
                         </Button>
                       )}
                     </div>
@@ -334,10 +234,10 @@ export default function TeachDashboard() {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <ClipboardCheck className="h-5 w-5 text-accent-sage" />
-                Check-in: {checkInClass?.name}
+                報到：{checkInClass?.name}
               </DialogTitle>
               <p className="text-sm text-muted-foreground">
-                {checkInClass?.time} · {checkInClass?.room} · {checkedInCount}/{classStudents.length} checked in
+                {checkInClass?.time} · {checkInClass?.room} · {checkedInCount}/{classStudents.length} 已報到
               </p>
             </DialogHeader>
 
@@ -345,7 +245,7 @@ export default function TeachDashboard() {
               <div className="relative flex-1">
                 <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search students..."
+                  placeholder="搜尋學員..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-9 h-9"
@@ -353,7 +253,7 @@ export default function TeachDashboard() {
               </div>
               <Button variant="outline" size="sm" onClick={checkInAll}>
                 <UserCheck className="h-4 w-4 mr-1" />
-                All
+                全部
               </Button>
             </div>
 
@@ -383,14 +283,14 @@ export default function TeachDashboard() {
                   </div>
                   {student.checkedIn && (
                     <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage border-0 shrink-0">
-                      Checked In
+                      已報到
                     </Badge>
                   )}
                 </button>
               ))}
               {filteredStudents.length === 0 && (
                 <p className="text-sm text-muted-foreground text-center py-4">
-                  No students match your search.
+                  找不到符合搜尋條件的學員。
                 </p>
               )}
             </div>
@@ -402,19 +302,19 @@ export default function TeachDashboard() {
           <Button variant="outline" size="sm" asChild>
             <Link to="/teach/schedule">
               <Calendar className="h-4 w-4 mr-2" />
-              View Schedule
+              查看課程表
             </Link>
           </Button>
           <Button variant="outline" size="sm" asChild>
             <Link to="/teach/subs">
               <Repeat2 className="h-4 w-4 mr-2" />
-              Request Sub
+              申請代課
             </Link>
           </Button>
           <Button variant="outline" size="sm" asChild>
             <Link to="/teach/earnings">
               <DollarSign className="h-4 w-4 mr-2" />
-              View Earnings
+              查看收入
             </Link>
           </Button>
         </div>
@@ -426,21 +326,21 @@ export default function TeachDashboard() {
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-primary/10 hover:bg-primary/20 transition-colors"
           >
             <Calendar className="h-5 w-5 text-primary" />
-            <span className="text-[10px] font-medium">Schedule</span>
+            <span className="text-[10px] font-medium">課程表</span>
           </Link>
           <Link
             to="/teach/subs"
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-accent-gold/10 hover:bg-accent-gold/20 transition-colors"
           >
             <Repeat2 className="h-5 w-5 text-accent-gold" />
-            <span className="text-[10px] font-medium">Subs</span>
+            <span className="text-[10px] font-medium">排班</span>
           </Link>
           <Link
             to="/teach/earnings"
             className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-accent-sage/10 hover:bg-accent-sage/20 transition-colors"
           >
             <DollarSign className="h-5 w-5 text-accent-sage" />
-            <span className="text-[10px] font-medium">Earnings</span>
+            <span className="text-[10px] font-medium">收入</span>
           </Link>
         </div>
 
@@ -451,7 +351,7 @@ export default function TeachDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    Classes This Week
+                    本週課程
                   </p>
                   <p className="text-2xl font-bold mt-1">5</p>
                 </div>
@@ -460,7 +360,7 @@ export default function TeachDashboard() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                {upcomingClasses.filter((c) => c.isToday).length} today
+                {upcomingClasses.filter((c) => c.isToday).length} 堂今日
               </p>
             </CardContent>
           </Card>
@@ -470,7 +370,7 @@ export default function TeachDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    Period Earnings
+                    本期收入
                   </p>
                   <p className="text-2xl font-bold mt-1">
                     ${earningsSummary.total.toLocaleString()}
@@ -481,7 +381,7 @@ export default function TeachDashboard() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                {earningsSummary.classesThisPeriod} classes
+                {earningsSummary.classesThisPeriod} 堂課
               </p>
             </CardContent>
           </Card>
@@ -491,7 +391,7 @@ export default function TeachDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                    Open Sub Opps
+                    代課機會
                   </p>
                   <p className="text-2xl font-bold mt-1">
                     {openSubOpportunities.length}
@@ -501,7 +401,7 @@ export default function TeachDashboard() {
                   <Repeat2 className="h-5 w-5 text-accent-gold" />
                 </div>
               </div>
-              <p className="text-xs text-accent-gold mt-2">Available to claim</p>
+              <p className="text-xs text-accent-gold mt-2">可認領</p>
             </CardContent>
           </Card>
 
@@ -511,7 +411,7 @@ export default function TeachDashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                      Tips This Period
+                      本期小費
                     </p>
                     <p className="text-2xl font-bold mt-1">
                       ${earningsSummary.tips}
@@ -522,7 +422,7 @@ export default function TeachDashboard() {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  3 tips received
+                  收到 3 筆小費
                 </p>
               </CardContent>
             </Card>
@@ -535,10 +435,10 @@ export default function TeachDashboard() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg">Upcoming Classes</CardTitle>
+                  <CardTitle className="text-lg">即將開課</CardTitle>
                   <Button variant="ghost" size="sm" asChild>
                     <Link to="/teach/schedule" className="text-xs">
-                      View Full Schedule <ArrowRight className="h-3 w-3 ml-1" />
+                      查看完整課程表 <ArrowRight className="h-3 w-3 ml-1" />
                     </Link>
                   </Button>
                 </div>
@@ -572,7 +472,7 @@ export default function TeachDashboard() {
                       </div>
                       {cls.isToday && (
                         <Badge className="text-[10px] bg-accent-sage/20 text-accent-sage border-0">
-                          Today
+                          今天
                         </Badge>
                       )}
                     </div>
@@ -587,13 +487,13 @@ export default function TeachDashboard() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Heart className="h-4 w-4 text-accent-coral" />
-                    Recent Tips
+                    近期小費
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {[
-                    { id: "1", from: "Anonymous", amount: 20, className: "Morning Vinyasa", date: "Today" },
-                    { id: "2", from: "Emma W.", amount: 15, className: "Evening Vinyasa", date: "Yesterday" },
+                    { id: "1", from: "匿名", amount: 20, className: "Morning Vinyasa", date: "今天" },
+                    { id: "2", from: "Emma W.", amount: 15, className: "Evening Vinyasa", date: "昨天" },
                     { id: "3", from: "Alex R.", amount: 10, className: "Community Flow", date: "Jan 28" },
                   ].map((tip) => (
                     <div
@@ -624,7 +524,7 @@ export default function TeachDashboard() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Clock className="h-4 w-4 text-accent-gold" />
-                    Pending Sub Requests
+                    待處理代課申請
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
@@ -639,14 +539,14 @@ export default function TeachDashboard() {
                           variant="outline"
                           className="text-[10px] border-accent-gold/50 text-accent-gold"
                         >
-                          Pending
+                          待處理
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
-                        {req.date} at {req.time}
+                        {req.date} {req.time}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        Requested {req.requestedAt}
+                        申請於 {req.requestedAt}
                       </p>
                     </div>
                   ))}
@@ -657,7 +557,7 @@ export default function TeachDashboard() {
                     asChild
                   >
                     <Link to="/teach/subs">
-                      Manage Requests <ChevronRight className="h-3 w-3 ml-1" />
+                      管理申請 <ChevronRight className="h-3 w-3 ml-1" />
                     </Link>
                   </Button>
                 </CardContent>
@@ -669,7 +569,7 @@ export default function TeachDashboard() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Repeat2 className="h-4 w-4 text-primary" />
-                  Sub Opportunities
+                  代課機會
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
@@ -685,10 +585,10 @@ export default function TeachDashboard() {
                       </span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      For {opp.teacher}
+                      代 {opp.teacher} 的課
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {opp.date} at {opp.time}
+                      {opp.date} {opp.time}
                     </p>
                   </div>
                 ))}
@@ -699,7 +599,7 @@ export default function TeachDashboard() {
                   asChild
                 >
                   <Link to="/teach/subs">
-                    View All <ChevronRight className="h-3 w-3 ml-1" />
+                    查看全部 <ChevronRight className="h-3 w-3 ml-1" />
                   </Link>
                 </Button>
               </CardContent>
@@ -708,35 +608,35 @@ export default function TeachDashboard() {
             {/* Earnings Summary */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Current Period</CardTitle>
+                <CardTitle className="text-lg">本期</CardTitle>
                 <p className="text-xs text-muted-foreground">
                   {earningsSummary.periodStart} - {earningsSummary.periodEnd}
                 </p>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Base Pay</span>
+                  <span className="text-sm text-muted-foreground">基本薪資</span>
                   <span className="text-sm font-medium">
                     ${earningsSummary.basePay.toLocaleString()}
                   </span>
                 </div>
                 {TIPS_ENABLED && (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Tips</span>
+                    <span className="text-sm text-muted-foreground">小費</span>
                     <span className="text-sm font-medium">
                       ${earningsSummary.tips}
                     </span>
                   </div>
                 )}
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Sub Classes</span>
+                  <span className="text-sm text-muted-foreground">代課收入</span>
                   <span className="text-sm font-medium">
                     ${earningsSummary.subs}
                   </span>
                 </div>
                 <div className="pt-3 border-t border-border">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold">Total</span>
+                    <span className="text-sm font-semibold">合計</span>
                     <span className="text-lg font-bold">
                       ${(TIPS_ENABLED ? earningsSummary.total : earningsSummary.total - earningsSummary.tips).toLocaleString()}
                     </span>
@@ -749,7 +649,7 @@ export default function TeachDashboard() {
                   asChild
                 >
                   <Link to="/teach/earnings">
-                    View Details <ChevronRight className="h-3 w-3 ml-1" />
+                    查看詳情 <ChevronRight className="h-3 w-3 ml-1" />
                   </Link>
                 </Button>
               </CardContent>

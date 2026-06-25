@@ -8,7 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { data, isBackendConfigured } from "@/lib/backend";
 import type { FeedbackType } from "@/types/database";
 import { Send } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { createT } from "@/lib/strings";
 
 interface ContactFormProps {
   /** The type of message being sent */
@@ -32,7 +32,7 @@ export function ContactForm({
 }: ContactFormProps) {
   const { profile } = useAuth();
   const { toast } = useToast();
-  const { t } = useTranslation('common');
+  const t = createT('common');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: profile ? `${profile.first_name} ${profile.last_name}` : "",

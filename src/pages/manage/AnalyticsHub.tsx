@@ -37,142 +37,138 @@ import {
 
 const kpiCards = [
   {
-    label: "MRR",
-    value: "$14,100",
+    label: "每月定期收入",
+    value: "NT$456,000",
     change: "+3%",
-    changeLabel: "vs last month",
+    changeLabel: "較上月",
     positive: true,
     icon: DollarSign,
     iconColor: "text-accent-gold",
-    helpText:
-      "Monthly Recurring Revenue -- the predictable income from active memberships this month, excluding one-time purchases like class packs or drop-ins.",
+    helpText: "來自尊榮會員等定期方案的穩定月收入，不含單次票券與體驗價。",
   },
   {
-    label: "Active Members",
+    label: "活躍會員",
     value: "163",
-    change: "+8 net",
-    changeLabel: "this month",
+    change: "+8 淨增",
+    changeLabel: "本月",
     positive: true,
     icon: Users,
     iconColor: "text-primary",
-    helpText:
-      "Students who attended at least one class or have an active membership during the selected period.",
+    helpText: "本期有到館或持有有效會員方案／票券的會員。",
   },
   {
-    label: "Avg Class Fill Rate",
+    label: "平均滿位率",
     value: "72%",
     change: "+4%",
-    changeLabel: "vs last month",
+    changeLabel: "較上月",
     positive: true,
     icon: Percent,
     iconColor: "text-accent-coral",
-    helpText:
-      "The average percentage of spots filled across all classes. Higher fill rates mean your schedule matches student demand well.",
+    helpText: "各療程時段平均預約比例，反映排程與需求的匹配度。",
   },
   {
-    label: "Revenue Per Student",
-    value: "$113",
-    change: "+$7",
-    changeLabel: "vs last month",
+    label: "會員平均貢獻",
+    value: "NT$3,570",
+    change: "+NT$280",
+    changeLabel: "較上月",
     positive: true,
     icon: DollarSign,
     iconColor: "text-accent-sage",
-    helpText:
-      "Total revenue divided by active students. Rising values mean students are purchasing higher-value plans or attending more often.",
+    helpText: "總營收除以活躍會員數，數值上升代表高價方案或回訪率提升。",
   },
 ];
 
 const navCards = [
   {
-    title: "Member Analytics",
-    description: "Understand your students",
+    title: "會員分析",
+    description: "了解會員組成與留存",
     icon: Users,
     href: "/manage/analytics/members",
     highlights: [
-      { label: "New this month", value: "12" },
-      { label: "At-risk", value: "3" },
-      { label: "30-day retention", value: "87%" },
+      { label: "本月新增", value: "12" },
+      { label: "流失風險", value: "3" },
+      { label: "30 日留存", value: "87%" },
     ],
   },
   {
-    title: "Sales & Conversion",
-    description: "Track acquisition and growth",
+    title: "銷售與轉換",
+    description: "追蹤獲客與成長",
     icon: TrendingUp,
     href: "/manage/analytics/sales",
     highlights: [
-      { label: "Conversion rate", value: "8.2%" },
-      { label: "Promo ROI", value: "$320" },
-      { label: "Referral signups", value: "5" },
+      { label: "轉換率", value: "8.2%" },
+      { label: "優惠 ROI", value: "NT$9,600" },
+      { label: "轉介紹", value: "5" },
     ],
   },
   {
-    title: "Financial Performance",
-    description: "Revenue, expenses, and forecasting",
+    title: "財務表現",
+    description: "營收、成本與預測",
     icon: DollarSign,
     href: "/manage/analytics/financials",
     highlights: [
-      { label: "Revenue", value: "$18.4K" },
-      { label: "Margin", value: "68%" },
-      { label: "Projected growth", value: "$2.1K" },
+      { label: "收入", value: "NT$58.2 萬" },
+      { label: "毛利率", value: "68%" },
+      { label: "預估成長", value: "NT$6.7 萬" },
     ],
   },
   {
-    title: "Site & App Metrics",
-    description: "Traffic, attribution, and engagement",
+    title: "網站與 App 指標",
+    description: "流量、來源與互動",
     icon: BarChart3,
     href: "/manage/analytics/site",
     highlights: [
-      { label: "Sessions", value: "1,240" },
-      { label: "From Google", value: "34%" },
-      { label: "Signup rate", value: "3.2%" },
+      { label: "工作階段", value: "1,240" },
+      { label: "來自 Google", value: "34%" },
+      { label: "註冊率", value: "3.2%" },
     ],
   },
 ];
 
 const healthScore = {
   overall: 78,
-  label: "Your studio is performing well",
+  label: "整體營運狀況良好",
   subscores: [
     {
-      name: "Revenue Health",
+      name: "營收健康度",
       score: 82,
-      explanation: "Recurring revenue is growing steadily with low churn impact.",
+      explanation: "定期收入穩定成長，流失影響有限。",
     },
     {
-      name: "Student Retention",
+      name: "會員留存",
       score: 75,
-      explanation: "Most students return within 30 days; a few long-term members are slipping.",
+      explanation: "多數會員 30 日內會再次預約，少數長期會員需關心。",
     },
     {
-      name: "Class Utilization",
+      name: "療程滿位率",
       score: 71,
-      explanation: "Average fill rate is solid but some off-peak classes run below 50%.",
+      explanation: "整體滿位率不錯，部分離峰時段仍可優化。",
     },
     {
-      name: "Growth Trajectory",
+      name: "成長動能",
       score: 84,
-      explanation: "New signups outpace cancellations and referrals are trending up.",
+      explanation: "新會員多於取消，轉介紹呈上升趨勢。",
     },
   ],
 };
 
 const benchmarks = [
-  { metric: "Revenue / Student", yours: 113, median: 110, unit: "$", max: 150 },
-  { metric: "Fill Rate", yours: 72, median: 60, unit: "%", max: 100 },
-  { metric: "Churn Rate", yours: 5, median: 5, unit: "%", max: 15, lowerIsBetter: true },
-  { metric: "Classes / Student / Mo", yours: 4.2, median: 4.0, unit: "", max: 8 },
+  { metric: "會員平均貢獻", yours: 3570, median: 3200, unit: "NT$", max: 5000 },
+  { metric: "滿位率", yours: 72, median: 60, unit: "%", max: 100 },
+  { metric: "流失率", yours: 5, median: 5, unit: "%", max: 15, lowerIsBetter: true },
+  { metric: "每月人均次數", yours: 4.2, median: 4.0, unit: "次", max: 8 },
 ];
 
 const scheduledReports = [
   {
-    name: "Weekly Summary",
-    schedule: "Every Monday at 8:00 AM",
-    recipients: "you@studio.com",
+    name: "每週摘要",
+    schedule: "每週一 08:00",
+    recipients: "service@1314mm941.com.tw",
   },
   {
-    name: "Monthly Financials",
-    schedule: "1st of each month",
-    recipients: "you@studio.com, manager@studio.com",
+    name: "每月財務報表",
+    schedule: "每月 1 日",
+    recipients: "service@1314mm941.com.tw, manager@1314mm941.com.tw",
   },
 ];
 
@@ -230,9 +226,9 @@ export default function AnalyticsHub() {
         {/* ---- Header ---- */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Analytics</h1>
+            <h1 className="text-2xl font-bold tracking-tight">數據分析</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Understand your studio's performance
+              掌握森浴光mm941 營運表現
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -241,16 +237,16 @@ export default function AnalyticsHub() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="this_week">This Week</SelectItem>
-                <SelectItem value="this_month">This Month</SelectItem>
-                <SelectItem value="last_month">Last Month</SelectItem>
-                <SelectItem value="this_quarter">This Quarter</SelectItem>
-                <SelectItem value="this_year">This Year</SelectItem>
+                <SelectItem value="this_week">本週</SelectItem>
+                <SelectItem value="this_month">本月</SelectItem>
+                <SelectItem value="last_month">上月</SelectItem>
+                <SelectItem value="this_quarter">本季</SelectItem>
+                <SelectItem value="this_year">今年</SelectItem>
               </SelectContent>
             </Select>
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
-              Export
+              匯出
             </Button>
           </div>
         </div>
@@ -321,8 +317,8 @@ export default function AnalyticsHub() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">Studio Health Score</CardTitle>
-              <InfoTip text="A composite score (0-100) summarizing revenue stability, student retention, class utilization, and growth. Updated daily." />
+              <CardTitle className="text-lg">營運健康分數</CardTitle>
+              <InfoTip text="綜合營收穩定度、會員留存、療程滿位率與成長動能的 0–100 分，每日更新。" />
             </div>
           </CardHeader>
           <CardContent className="space-y-5">
@@ -367,37 +363,31 @@ export default function AnalyticsHub() {
               <CollapsibleTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-xs text-muted-foreground">
                   <HelpCircle className="h-3.5 w-3.5 mr-1.5" />
-                  How is this calculated?
+                  分數如何計算？
                   <ChevronDown className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <div className="mt-2 p-4 rounded-xl bg-secondary/30 text-sm text-muted-foreground space-y-2">
                   <p>
-                    The Studio Health Score is a weighted average of four factors that together
-                    reflect how sustainably your studio is operating:
+                    營運健康分數由四項指標加權平均，反映工作室可持續經營程度：
                   </p>
                   <ul className="list-disc list-inside space-y-1 text-xs">
                     <li>
-                      <span className="font-medium text-foreground">Revenue Health (30%)</span> --
-                      looks at MRR growth, churn-related revenue loss, and revenue diversity.
+                      <span className="font-medium text-foreground">營收健康度（30%）</span> — 定期收入成長、流失影響與收入結構。
                     </li>
                     <li>
-                      <span className="font-medium text-foreground">Student Retention (30%)</span> --
-                      measures 30-day return rate, churn rate, and engagement score distribution.
+                      <span className="font-medium text-foreground">會員留存（30%）</span> — 30 日回訪率、流失率與參與度分布。
                     </li>
                     <li>
-                      <span className="font-medium text-foreground">Class Utilization (20%)</span> --
-                      average fill rate across all scheduled classes, weighted by time slot.
+                      <span className="font-medium text-foreground">療程滿位率（20%）</span> — 各時段平均預約比例。
                     </li>
                     <li>
-                      <span className="font-medium text-foreground">Growth Trajectory (20%)</span> --
-                      net new members, referral rate, and trial-to-member conversion.
+                      <span className="font-medium text-foreground">成長動能（20%）</span> — 淨增會員、轉介紹與體驗轉換率。
                     </li>
                   </ul>
                   <p className="text-xs">
-                    Scores above 75 indicate a healthy studio. Between 50-75 suggests areas for
-                    improvement. Below 50 signals that action is needed soon.
+                    75 分以上代表營運健康；50–75 分有改善空間；50 分以下建議儘快調整。
                   </p>
                 </div>
               </CollapsibleContent>
@@ -409,8 +399,8 @@ export default function AnalyticsHub() {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">How Do You Compare?</CardTitle>
-              <InfoTip text="We compare your metrics to the median for small yoga studios with 100-300 active members." />
+              <CardTitle className="text-lg">同業基準比較</CardTitle>
+              <InfoTip text="與同規模養身／美容工作室（約 100–300 位活躍會員）的中位數比較。" />
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -425,10 +415,10 @@ export default function AnalyticsHub() {
                     <p className="text-sm font-medium">{b.metric}</p>
                     <div className="flex items-center gap-3 text-xs">
                       <span className={isBetter ? "text-accent-sage font-semibold" : "text-foreground font-semibold"}>
-                        You: {b.unit}{b.yours}
+                        本館：{b.unit}{b.yours}
                       </span>
                       <span className="text-muted-foreground">
-                        Median: {b.unit}{b.median}
+                        中位數：{b.unit}{b.median}
                       </span>
                     </div>
                   </div>
@@ -448,8 +438,7 @@ export default function AnalyticsHub() {
               );
             })}
             <p className="text-xs text-muted-foreground pt-1">
-              Benchmarks based on industry data for small yoga studios. The vertical line marks the
-              median.
+              基準資料來自同規模養身／美容工作室。垂直線為中位數。
             </p>
           </CardContent>
         </Card>
@@ -460,11 +449,11 @@ export default function AnalyticsHub() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                Scheduled Reports
+                定期報表
               </CardTitle>
               <Button variant="outline" size="sm">
                 <Plus className="h-4 w-4 mr-1.5" />
-                Schedule a Report
+                排程報表
               </Button>
             </div>
           </CardHeader>

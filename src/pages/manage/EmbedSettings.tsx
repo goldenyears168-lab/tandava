@@ -36,7 +36,7 @@ export default function EmbedSettings() {
 
   const copy = (code: string) => {
     navigator.clipboard?.writeText(code);
-    toast({ title: "Copied", description: "Paste it into your website's HTML." });
+    toast({ title: "已複製", description: "Paste it into your website's HTML." });
   };
 
   const cards = [
@@ -50,26 +50,26 @@ export default function EmbedSettings() {
       <div className="max-w-3xl space-y-6">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight">
-            <Code2 className="h-6 w-6" /> Website Embed
+            <Code2 className="h-6 w-6" /> 網站嵌入
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Put your booking on your own website — Squarespace, Wix, WordPress, or plain HTML.
-            Paste one line; it stays in sync and matches your brand. No iframe wrangling.
+            將預約功能嵌入您的網站——Squarespace、Wix、WordPress 或純 HTML。
+            貼上一行程式碼即可同步更新並符合品牌風格，無需處理 iframe。
           </p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">1. Configure</CardTitle>
-            <CardDescription>Your studio must be set to “discoverable” for the public schedule to show.</CardDescription>
+            <CardTitle className="text-base">1. 設定</CardTitle>
+            <CardDescription>工作室需設為「可公開搜尋」才會顯示公開服務表。</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="slug">Studio slug</Label>
+              <Label htmlFor="slug">工作室代稱</Label>
               <Input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="primary">Brand color (hex)</Label>
+              <Label htmlFor="primary">品牌色（十六進位）</Label>
               <div className="flex items-center gap-2">
                 <Input type="color" value={`#${p}`} onChange={(e) => setPrimary(e.target.value)} className="h-10 w-12 p-1" />
                 <Input id="primary" value={p} onChange={(e) => setPrimary(e.target.value)} />

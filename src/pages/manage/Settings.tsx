@@ -38,13 +38,13 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function SettingsManage() {
   const { toast } = useToast();
-  const [studioName, setStudioName] = useState("Tandava Yoga");
-  const [studioSlug, setStudioSlug] = useState("tandava-yoga");
-  const [studioEmail, setStudioEmail] = useState("hello@tandava.yoga");
-  const [studioPhone, setStudioPhone] = useState("+1 (415) 555-0100");
-  const [studioWebsite, setStudioWebsite] = useState("https://tandava.yoga");
-  const [timezone, setTimezone] = useState("America/Los_Angeles");
-  const [currency, setCurrency] = useState("USD");
+  const [studioName, setStudioName] = useState("森浴光mm941");
+  const [studioSlug, setStudioSlug] = useState("mm941");
+  const [studioEmail, setStudioEmail] = useState("service@1314mm941.com.tw");
+  const [studioPhone, setStudioPhone] = useState("0910 257 767");
+  const [studioWebsite, setStudioWebsite] = useState("https://www.1314mm941.com.tw/");
+  const [timezone, setTimezone] = useState("Asia/Taipei");
+  const [currency, setCurrency] = useState("TWD");
 
   const [cancelMinutes, setCancelMinutes] = useState("120");
   const [lateCancelFee, setLateCancelFee] = useState("15");
@@ -57,7 +57,9 @@ export default function SettingsManage() {
   const [discoverable, setDiscoverable] = useState(false);
 
   // SEO Settings
-  const [metaDescription, setMetaDescription] = useState("Hot yoga, vinyasa, and meditation classes in San Francisco's SOMA neighborhood. New students get their first week free.");
+  const [metaDescription, setMetaDescription] = useState(
+    "森浴光mm941——活化能量艙、專業撥筋、溫感能量光療、負離子活罐、舒通筋脈。預約制，北中南多館服務，讓身體重新定義舒爽，讓靈魂再次發光。"
+  );
   const [googleVerification, setGoogleVerification] = useState("");
   const [googleAnalyticsId, setGoogleAnalyticsId] = useState("");
   const [facebookPixelId, setFacebookPixelId] = useState("");
@@ -131,7 +133,7 @@ export default function SettingsManage() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="studioName">Studio Name</Label>
+                    <Label htmlFor="studioName">工作室名稱</Label>
                     <Input id="studioName" value={studioName} onChange={(e) => setStudioName(e.target.value)} />
                   </div>
                   <div className="space-y-2">
@@ -141,7 +143,7 @@ export default function SettingsManage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Contact Email</Label>
+                    <Label htmlFor="email">聯絡電子郵件</Label>
                     <Input id="email" type="email" value={studioEmail} onChange={(e) => setStudioEmail(e.target.value)} />
                   </div>
                   <div className="space-y-2">
@@ -339,7 +341,7 @@ export default function SettingsManage() {
                   <div className="border-2 border-dashed border-border rounded-xl p-8 text-center">
                     <p className="text-sm text-muted-foreground">Drag and drop your logo, or click to upload</p>
                     <p className="text-xs text-muted-foreground mt-1">PNG, SVG, or JPG (512x512px recommended)</p>
-                    <Button variant="outline" size="sm" className="mt-3" onClick={() => toast({ title: "Upload", description: "Logo upload requires Supabase Storage connection." })}>Upload Logo</Button>
+                    <Button variant="outline" size="sm" className="mt-3" onClick={() => toast({ title: "上傳", description: "Logo upload requires Supabase Storage connection." })}>Upload Logo</Button>
                   </div>
                 </div>
 
@@ -413,7 +415,7 @@ export default function SettingsManage() {
                   { label: "Sub notification", desc: "Notify students when a teacher is subbed", enabled: true },
                   { label: "Waitlist promotion", desc: "Notify students when promoted from waitlist", enabled: true },
                   { label: "Membership expiring", desc: "Warn students 7 days before membership expires", enabled: false },
-                  { label: "Pack running low", desc: "Notify students when they have 2 or fewer classes left", enabled: false },
+                  { label: "Pack running low", desc: "Notify students when they have 2 or fewer 堂剩餘", enabled: false },
                 ].map((pref, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div>
@@ -470,12 +472,12 @@ export default function SettingsManage() {
             {/* Meta Settings */}
             <Card>
               <CardHeader>
-                <CardTitle>Search Engine Optimization</CardTitle>
+                <CardTitle>搜尋引擎最佳化（SEO）</CardTitle>
                 <CardDescription>Help search engines and AI assistants understand your studio</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="metaDesc">Meta Description</Label>
+                  <Label htmlFor="metaDesc">Meta 描述</Label>
                   <Textarea
                     id="metaDesc"
                     value={metaDescription}

@@ -42,13 +42,6 @@ import { useToast } from "@/hooks/use-toast";
 
 type InstructorRole = 'lead' | 'assistant' | 'staff_instructor' | 'teacher_in_training';
 
-const instructorRoleLabels: Record<InstructorRole, string> = {
-  lead: "Lead Instructor",
-  assistant: "Assistant",
-  staff_instructor: "Staff Instructor",
-  teacher_in_training: "Teacher in Training",
-};
-
 interface ClassOccurrence {
   id: string;
   name: string;
@@ -68,48 +61,56 @@ interface ClassOccurrence {
   originalTeacher?: string;
 }
 
-const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const instructorRoleLabels: Record<InstructorRole, string> = {
+  lead: "主責美容師",
+  assistant: "協助美容師",
+  staff_instructor: "駐館美容師",
+  teacher_in_training: "培訓中美容師",
+};
+
+const weekDays = ["週一", "週二", "週三", "週四", "週五", "週六", "週日"];
+const weekDayKeys = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const mockSchedule: Record<string, ClassOccurrence[]> = {
   Mon: [
-    { id: "1", name: "Morning Vinyasa", style: "Vinyasa", teacher: "Maya Patel", instructorRole: "lead", time: "7:00 AM", endTime: "8:15 AM", room: "Main Studio", location: "SOMA", capacity: 25, booked: 22, waitlisted: 2, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "2", name: "Gentle Flow", style: "Hatha", teacher: "James Liu", instructorRole: "lead", time: "9:30 AM", endTime: "10:30 AM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 12, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "3", name: "Power Yoga", style: "Power", teacher: "Sarah Chen", instructorRole: "lead", time: "12:00 PM", endTime: "1:00 PM", room: "Hot Room", location: "SOMA", capacity: 30, booked: 30, waitlisted: 3, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "4", name: "Yin Restore", style: "Yin", teacher: "Ava Kim", instructorRole: "staff_instructor", time: "4:30 PM", endTime: "5:45 PM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 8, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "5", name: "Evening Vinyasa", style: "Vinyasa", teacher: "Maya Patel", instructorRole: "lead", time: "6:00 PM", endTime: "7:15 PM", room: "Main Studio", location: "SOMA", capacity: 25, booked: 20, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "1", name: "活化能量艙", style: "能量艙", teacher: "林美容師", instructorRole: "lead", time: "09:30", endTime: "10:30", room: "能量艙室", location: "汐止館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "2", name: "專業撥筋", style: "撥筋", teacher: "陳美容師", instructorRole: "lead", time: "11:00", endTime: "12:00", room: "撥筋室", location: "汐止館", capacity: 4, booked: 4, waitlisted: 1, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "3", name: "溫感能量光療", style: "光療", teacher: "王美容師", instructorRole: "lead", time: "13:30", endTime: "14:30", room: "光療室", location: "汐止館", capacity: 3, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "4", name: "負離子活罐", style: "活罐", teacher: "張美容師", instructorRole: "staff_instructor", time: "15:00", endTime: "16:00", room: "活罐室", location: "汐止館", capacity: 4, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "5", name: "能量艙＋撥筋", style: "組合療程", teacher: "林美容師", instructorRole: "lead", time: "17:00", endTime: "18:30", room: "能量艙室", location: "汐止館", capacity: 3, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
   ],
   Tue: [
-    { id: "6", name: "Sunrise Meditation", style: "Meditation", teacher: "Ava Kim", instructorRole: "lead", time: "6:30 AM", endTime: "7:15 AM", room: "Meditation Room", location: "SOMA", capacity: 15, booked: 10, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "7", name: "Hot Vinyasa", style: "Vinyasa", teacher: "Sarah Chen", instructorRole: "lead", time: "9:00 AM", endTime: "10:15 AM", room: "Hot Room", location: "SOMA", capacity: 30, booked: 28, waitlisted: 1, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "8", name: "Ashtanga Primary", style: "Ashtanga", teacher: "James Liu", instructorRole: "lead", time: "12:00 PM", endTime: "1:30 PM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 15, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: true, originalTeacher: "David Park" },
+    { id: "6", name: "舒通筋脈", style: "筋脈", teacher: "陳美容師", instructorRole: "lead", time: "09:30", endTime: "10:30", room: "撥筋室", location: "台北復興館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "7", name: "活化能量艙", style: "能量艙", teacher: "林美容師", instructorRole: "lead", time: "11:00", endTime: "12:00", room: "能量艙室", location: "台北復興館", capacity: 4, booked: 4, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "8", name: "光療＋活罐", style: "組合療程", teacher: "王美容師", instructorRole: "lead", time: "14:00", endTime: "15:30", room: "光療室", location: "台北復興館", capacity: 3, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: true, isSubbed: false },
   ],
   Wed: [
-    { id: "9", name: "Morning Vinyasa", style: "Vinyasa", teacher: "Maya Patel", instructorRole: "lead", time: "7:00 AM", endTime: "8:15 AM", room: "Main Studio", location: "SOMA", capacity: 25, booked: 19, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "10", name: "Gentle Flow", style: "Hatha", teacher: "James Liu", instructorRole: "teacher_in_training", time: "9:30 AM", endTime: "10:30 AM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 14, waitlisted: 0, checkedIn: 0, isCancelled: true, isSubbed: false },
+    { id: "9", name: "專業撥筋", style: "撥筋", teacher: "陳美容師", instructorRole: "lead", time: "09:30", endTime: "10:30", room: "撥筋室", location: "台中東區館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "10", name: "溫感能量光療", style: "光療", teacher: "王美容師", instructorRole: "teacher_in_training", time: "13:30", endTime: "14:30", room: "光療室", location: "台中東區館", capacity: 3, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
   ],
   Thu: [
-    { id: "11", name: "Hot Vinyasa", style: "Vinyasa", teacher: "Sarah Chen", instructorRole: "lead", time: "9:00 AM", endTime: "10:15 AM", room: "Hot Room", location: "SOMA", capacity: 30, booked: 25, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "12", name: "Restorative", style: "Restorative", teacher: "Ava Kim", instructorRole: "lead", time: "5:30 PM", endTime: "7:00 PM", room: "Main Studio", location: "SOMA", capacity: 18, booked: 16, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "11", name: "活化能量艙", style: "能量艙", teacher: "林美容師", instructorRole: "lead", time: "10:00", endTime: "11:00", room: "能量艙室", location: "台中北屯館", capacity: 4, booked: 4, waitlisted: 1, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "12", name: "舒通筋脈", style: "筋脈", teacher: "李美容師", instructorRole: "lead", time: "15:00", endTime: "16:00", room: "撥筋室", location: "台中北屯館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
   ],
   Fri: [
-    { id: "13", name: "Morning Vinyasa", style: "Vinyasa", teacher: "Maya Patel", instructorRole: "lead", time: "7:00 AM", endTime: "8:15 AM", room: "Main Studio", location: "SOMA", capacity: 25, booked: 17, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "14", name: "Slow Flow", style: "Hatha", teacher: "James Liu", instructorRole: "lead", time: "10:00 AM", endTime: "11:15 AM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 11, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "13", name: "負離子活罐", style: "活罐", teacher: "張美容師", instructorRole: "lead", time: "09:30", endTime: "10:30", room: "活罐室", location: "汐止館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "14", name: "能量艙＋撥筋", style: "組合療程", teacher: "林美容師", instructorRole: "lead", time: "17:00", endTime: "18:30", room: "能量艙室", location: "汐止館", capacity: 3, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: true, originalTeacher: "陳美容師" },
   ],
   Sat: [
-    { id: "15", name: "Weekend Power", style: "Power", teacher: "Sarah Chen", instructorRole: "lead", time: "9:00 AM", endTime: "10:15 AM", room: "Hot Room", location: "SOMA", capacity: 30, booked: 28, waitlisted: 2, checkedIn: 0, isCancelled: false, isSubbed: false },
-    { id: "16", name: "Community Flow", style: "Vinyasa", teacher: "Maya Patel", instructorRole: "lead", time: "11:00 AM", endTime: "12:15 PM", room: "Main Studio", location: "SOMA", capacity: 25, booked: 23, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "15", name: "專業撥筋", style: "撥筋", teacher: "陳美容師", instructorRole: "lead", time: "10:00", endTime: "11:00", room: "撥筋室", location: "台南健康館", capacity: 4, booked: 4, waitlisted: 2, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "16", name: "活化能量艙", style: "能量艙", teacher: "李美容師", instructorRole: "lead", time: "14:00", endTime: "15:00", room: "能量艙室", location: "台南健康館", capacity: 4, booked: 3, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
   ],
   Sun: [
-    { id: "17", name: "Sunday Slow", style: "Yin", teacher: "Ava Kim", instructorRole: "lead", time: "10:00 AM", endTime: "11:30 AM", room: "Main Studio", location: "SOMA", capacity: 20, booked: 18, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
+    { id: "17", name: "光療＋活罐", style: "組合療程", teacher: "王美容師", instructorRole: "lead", time: "10:00", endTime: "11:30", room: "光療室", location: "台北復興館", capacity: 3, booked: 2, waitlisted: 0, checkedIn: 0, isCancelled: false, isSubbed: false },
   ],
 };
 
 const availableSubs = [
-  { id: "t1", name: "Maya Patel", specialties: ["Vinyasa", "Power"] },
-  { id: "t2", name: "James Liu", specialties: ["Hatha", "Ashtanga", "Yin"] },
-  { id: "t3", name: "Ava Kim", specialties: ["Yin", "Meditation", "Restorative"] },
-  { id: "t4", name: "Sarah Chen", specialties: ["Vinyasa", "Power", "Hot"] },
-  { id: "t5", name: "David Park", specialties: ["Ashtanga", "Vinyasa"] },
+  { id: "t1", name: "林美容師", specialties: ["活化能量艙", "能量艙＋撥筋"] },
+  { id: "t2", name: "陳美容師", specialties: ["專業撥筋", "舒通筋脈"] },
+  { id: "t3", name: "王美容師", specialties: ["溫感能量光療", "光療＋活罐"] },
+  { id: "t4", name: "張美容師", specialties: ["負離子活罐"] },
+  { id: "t5", name: "李美容師", specialties: ["舒通筋脈", "專業撥筋"] },
 ];
 
 export default function ScheduleManage() {
@@ -143,8 +144,8 @@ export default function ScheduleManage() {
     const subTeacher = availableSubs.find((t) => t.id === selectedSub);
     const roleLabel = instructorRoleLabels[subInstructorRole];
     toast({
-      title: "Sub confirmed",
-      description: `${subTeacher?.name} (${roleLabel}) will teach ${selectedClass.name} at ${selectedClass.time}. ${notifyStudents ? "Students have been notified." : ""}`,
+      title: "代課已確認",
+      description: `${subTeacher?.name}（${roleLabel}）將代班 ${selectedClass.name}（${selectedClass.time}）。${notifyStudents ? "已通知預約會員。" : ""}`,
     });
     setSubDialogOpen(false);
     setSelectedClass(null);
@@ -162,8 +163,8 @@ export default function ScheduleManage() {
       ),
     }));
     toast({
-      title: "Class cancelled",
-      description: `${selectedClass.name} at ${selectedClass.time} has been cancelled. ${notifyStudents ? `${selectedClass.booked} students notified.` : ""}`,
+      title: "療程已取消",
+      description: `${selectedClass.name} ${selectedClass.time} 已取消。${notifyStudents ? `已通知 ${selectedClass.booked} 位預約會員。` : ""}`,
     });
     setCancelDialogOpen(false);
     setSelectedClass(null);
@@ -185,7 +186,7 @@ export default function ScheduleManage() {
     const newClass: ClassOccurrence = {
       id: newId,
       name: newClassName,
-      style: newClassStyle || "Vinyasa",
+      style: newClassStyle || "能量艙",
       teacher: teacher?.name || "TBD",
       instructorRole: newClassInstructorRole,
       time: newClassTime,
@@ -207,8 +208,8 @@ export default function ScheduleManage() {
     }));
     const roleLabel = instructorRoleLabels[newClassInstructorRole];
     toast({
-      title: "Class added",
-      description: `${newClassName} at ${newClassTime} with ${teacher?.name || "TBD"} (${roleLabel})${newClassRecurring ? " — recurring weekly on " + selectedDay : ""}`,
+      title: "療程已新增",
+      description: `${newClassName} ${newClassTime} — ${teacher?.name || "待指定"}（${roleLabel}）${newClassRecurring ? `，每週${weekDays[weekDayKeys.indexOf(selectedDay)]}重複` : ""}`,
     });
     setAddClassDialogOpen(false);
     setNewClassName("");
@@ -225,12 +226,12 @@ export default function ScheduleManage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Schedule</h1>
-            <p className="text-sm text-muted-foreground mt-1">Manage classes, subs, and cancellations</p>
+            <h1 className="text-2xl font-bold tracking-tight">服務排程</h1>
+            <p className="text-sm text-muted-foreground mt-1">管理療程時段、代班與取消（預約制 09:30–22:00）</p>
           </div>
           <Button size="sm" onClick={() => setAddClassDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Add Class
+            新增療程
           </Button>
         </div>
 
@@ -240,12 +241,12 @@ export default function ScheduleManage() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <div className="flex gap-1 overflow-x-auto">
-            {weekDays.map((day) => (
+            {weekDays.map((day, i) => (
               <Button
-                key={day}
-                variant={selectedDay === day ? "default" : "ghost"}
+                key={weekDayKeys[i]}
+                variant={selectedDay === weekDayKeys[i] ? "default" : "ghost"}
                 size="sm"
-                onClick={() => setSelectedDay(day)}
+                onClick={() => setSelectedDay(weekDayKeys[i])}
                 className="min-w-[52px]"
               >
                 {day}
@@ -261,7 +262,7 @@ export default function ScheduleManage() {
         <div className="relative max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search classes or teachers..."
+            placeholder="搜尋療程或美容師..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
@@ -273,7 +274,7 @@ export default function ScheduleManage() {
           {filteredClasses.length === 0 ? (
             <Card>
               <CardContent className="py-12 text-center">
-                <p className="text-muted-foreground">No classes scheduled for {selectedDay}</p>
+                <p className="text-muted-foreground">{weekDays[weekDayKeys.indexOf(selectedDay)]}尚無排程療程</p>
               </CardContent>
             </Card>
           ) : (
@@ -367,7 +368,7 @@ export default function ScheduleManage() {
                             </DropdownMenuItem>
                             <DropdownMenuItem className="rounded-lg cursor-pointer">
                               <Bell className="h-4 w-4 mr-2" />
-                              Notify Students
+                              通知會員
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -396,7 +397,7 @@ export default function ScheduleManage() {
       <Dialog open={subDialogOpen} onOpenChange={setSubDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Find a Sub</DialogTitle>
+            <DialogTitle>尋找代課</DialogTitle>
           </DialogHeader>
           {selectedClass && (
             <div className="space-y-4">
@@ -408,10 +409,10 @@ export default function ScheduleManage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Select Substitute Teacher</label>
+                <label className="text-sm font-medium">選擇代班美容師</label>
                 <Select value={selectedSub} onValueChange={setSelectedSub}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Choose a teacher..." />
+                    <SelectValue placeholder="選擇美容師..." />
                   </SelectTrigger>
                   <SelectContent>
                     {availableSubs
@@ -429,16 +430,16 @@ export default function ScheduleManage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Instructor Role</label>
+                <label className="text-sm font-medium">美容師角色</label>
                 <Select value={subInstructorRole} onValueChange={(v) => setSubInstructorRole(v as InstructorRole)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="lead">Lead Instructor</SelectItem>
-                    <SelectItem value="assistant">Assistant</SelectItem>
-                    <SelectItem value="staff_instructor">Staff Instructor</SelectItem>
-                    <SelectItem value="teacher_in_training">Teacher in Training</SelectItem>
+                    <SelectItem value="lead">主責美容師</SelectItem>
+                    <SelectItem value="assistant">協助美容師</SelectItem>
+                    <SelectItem value="staff_instructor">駐館美容師</SelectItem>
+                    <SelectItem value="teacher_in_training">培訓中美容師</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -469,17 +470,17 @@ export default function ScheduleManage() {
       <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Cancel Class</DialogTitle>
+            <DialogTitle>取消療程</DialogTitle>
           </DialogHeader>
           {selectedClass && (
             <div className="space-y-4">
               <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/20">
                 <p className="text-sm font-semibold">{selectedClass.name}</p>
                 <p className="text-xs text-muted-foreground">
-                  {selectedDay} {selectedClass.time} — {selectedClass.teacher}
+                  {weekDays[weekDayKeys.indexOf(selectedDay)]} {selectedClass.time} — {selectedClass.teacher}
                 </p>
                 <p className="text-xs text-destructive mt-1">
-                  {selectedClass.booked} students will be affected
+                  將影響 {selectedClass.booked} 位預約會員
                 </p>
               </div>
 
@@ -509,18 +510,18 @@ export default function ScheduleManage() {
       <Dialog open={addClassDialogOpen} onOpenChange={setAddClassDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Add Class to Schedule</DialogTitle>
+            <DialogTitle>新增療程至排程</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="p-3 rounded-xl bg-primary/5 border border-primary/20">
-              <p className="text-sm font-medium">Adding to: <span className="font-semibold">{selectedDay}</span></p>
-              <p className="text-xs text-muted-foreground mt-0.5">This class will appear in the weekly schedule</p>
+              <p className="text-sm font-medium">新增至：<span className="font-semibold">{weekDays[weekDayKeys.indexOf(selectedDay)]}</span></p>
+              <p className="text-xs text-muted-foreground mt-0.5">此療程將顯示在每週服務排程中</p>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Class Name</label>
+              <label className="text-sm font-medium">療程名稱</label>
               <Input
-                placeholder="e.g. Morning Vinyasa"
+                placeholder="例如 Morning Vinyasa"
                 value={newClassName}
                 onChange={(e) => setNewClassName(e.target.value)}
               />
@@ -530,7 +531,7 @@ export default function ScheduleManage() {
               <label className="text-sm font-medium">Time</label>
               <Select value={newClassTime} onValueChange={setNewClassTime}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select time..." />
+                  <SelectValue placeholder="選擇時間..." />
                 </SelectTrigger>
                 <SelectContent>
                   {["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "9:30 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "7:00 PM", "7:30 PM"].map((t) => (
@@ -541,10 +542,10 @@ export default function ScheduleManage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Teacher</label>
+              <label className="text-sm font-medium">美容師</label>
               <Select value={newClassTeacher} onValueChange={setNewClassTeacher}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Choose a teacher..." />
+                  <SelectValue placeholder="選擇美容師..." />
                 </SelectTrigger>
                 <SelectContent>
                   {availableSubs.map((teacher) => (
@@ -557,16 +558,16 @@ export default function ScheduleManage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Instructor Role</label>
+              <label className="text-sm font-medium">美容師角色</label>
               <Select value={newClassInstructorRole} onValueChange={(v) => setNewClassInstructorRole(v as InstructorRole)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="lead">Lead Instructor</SelectItem>
-                  <SelectItem value="assistant">Assistant</SelectItem>
-                  <SelectItem value="staff_instructor">Staff Instructor</SelectItem>
-                  <SelectItem value="teacher_in_training">Teacher in Training</SelectItem>
+                  <SelectItem value="lead">主責美容師</SelectItem>
+                  <SelectItem value="assistant">協助美容師</SelectItem>
+                  <SelectItem value="staff_instructor">駐館美容師</SelectItem>
+                  <SelectItem value="teacher_in_training">培訓中美容師</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -575,7 +576,7 @@ export default function ScheduleManage() {
               <label className="text-sm font-medium">Style</label>
               <Select value={newClassStyle} onValueChange={setNewClassStyle}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select style..." />
+                  <SelectValue placeholder="選擇風格..." />
                 </SelectTrigger>
                 <SelectContent>
                   {["Vinyasa", "Hatha", "Power", "Yin", "Restorative", "Ashtanga", "Meditation", "Hot"].map((s) => (
@@ -600,7 +601,7 @@ export default function ScheduleManage() {
               Cancel
             </Button>
             <Button onClick={handleAddClass} disabled={!newClassName || !newClassTime || !newClassTeacher}>
-              Add Class
+              新增療程
             </Button>
           </DialogFooter>
         </DialogContent>

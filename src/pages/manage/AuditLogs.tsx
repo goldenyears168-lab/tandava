@@ -258,14 +258,14 @@ const XIcon = ({ className }: { className?: string }) => (
 
 const CATEGORY_LABELS: Record<AuditCategory, string> = {
   auth: 'Authentication',
-  data: 'Data',
-  settings: 'Settings',
+  data: '資料',
+  settings: '設定',
   access: 'Access Control',
-  financial: 'Financial',
-  member: 'Member',
+  financial: '財務',
+  member: '會員',
   staff: 'Staff',
   integration: 'Integration',
-  export: 'Export',
+  export: '匯出',
   admin: 'Admin',
   system: 'System',
 };
@@ -285,9 +285,9 @@ const CATEGORY_COLORS: Record<AuditCategory, string> = {
 };
 
 const SEVERITY_CONFIG: Record<AuditSeverity, { label: string; color: string; dotColor: string }> = {
-  info: { label: 'Info', color: 'text-stone-600', dotColor: 'bg-stone-400' },
+  info: { label: '資訊', color: 'text-stone-600', dotColor: 'bg-stone-400' },
   notice: { label: 'Notice', color: 'text-blue-600', dotColor: 'bg-blue-500' },
-  warning: { label: 'Warning', color: 'text-amber-600', dotColor: 'bg-amber-500' },
+  warning: { label: '警告', color: 'text-amber-600', dotColor: 'bg-amber-500' },
   critical: { label: 'Critical', color: 'text-red-600', dotColor: 'bg-red-500' },
 };
 
@@ -368,7 +368,7 @@ function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
         onChange={(e) => onFilterChange({ ...filters, category: e.target.value as AuditCategory | '' })}
         className="px-3 py-2 bg-white border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-stone-500"
       >
-        <option value="">All Categories</option>
+        <option value="">全部分類</option>
         {Object.entries(CATEGORY_LABELS).map(([value, label]) => (
           <option key={value} value={value}>{label}</option>
         ))}
@@ -391,10 +391,10 @@ function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
         className="px-3 py-2 bg-white border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-stone-500"
       >
         <option value="24h">Last 24 hours</option>
-        <option value="7d">Last 7 days</option>
-        <option value="30d">Last 30 days</option>
-        <option value="90d">Last 90 days</option>
-        <option value="all">All time</option>
+        <option value="7d">過去 7 天</option>
+        <option value="30d">過去 30 天</option>
+        <option value="90d">過去 90 天</option>
+        <option value="all">全部時間</option>
       </select>
     </div>
   );
@@ -725,7 +725,7 @@ export default function AuditLogs() {
   }, [searchQuery, filters]);
 
   const handleExport = () => {
-    toast({ title: "Exported", description: "Audit log data exported to CSV." });
+    toast({ title: "已匯出", description: "Audit log data exported to CSV." });
   };
 
   return (
@@ -739,7 +739,7 @@ export default function AuditLogs() {
                 <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
                   <ShieldIcon className="w-5 h-5" />
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight">Audit Logs</h1>
+                <h1 className="text-3xl font-bold tracking-tight">稽核紀錄s</h1>
               </div>
               <p className="text-stone-300 max-w-xl">
                 Track all activity across your studio. Monitor changes, access attempts,

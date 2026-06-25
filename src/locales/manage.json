@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "dashboard": "儀表板",
+    "schedule": "服務排程",
+    "events": "活動",
+    "students": "會員",
+    "teachers": "專業團隊",
+    "offerings": "服務項目",
+    "promoCodes": "優惠碼",
+    "financials": "財務",
+    "products": "商品",
+    "inventory": "庫存",
+    "purchaseOrders": "採購單",
+    "landingPages": "登陸頁",
+    "utmBuilder": "UTM 產生器",
+    "campaigns": "行銷活動",
+    "tasks": "任務",
+    "reports": "報表",
+    "importData": "匯入資料",
+    "smsInbox": "簡訊收件匣",
+    "notifications": "通知設定",
+    "settings": "設定"
+  },
+  "title": "森浴光mm941 · 館主後台",
+  "studentView": "會員預覽",
+  "myAccount": "我的帳戶",
+  "studioSettings": "工作室設定",
+  "signOut": "登出",
+
+  "schedule": {
+    "title": "服務排程",
+    "subtitle": "建立與管理各館療程時段（預約制 09:30–22:00）。",
+    "addClass": "新增療程",
+    "emptyState": "尚無排程療程。建立第一個時段即可開始接受預約。"
+  },
+  "offerings": {
+    "title": "服務項目",
+    "subtitle": "官網療程設定 — {{count}} 項使用中",
+    "newOffering": "新增療程",
+    "searchPlaceholder": "搜尋療程...",
+    "activeOfferings": "使用中的療程"
+  },
+
+  "admin": {
+    "platformAdmin": "平台管理",
+    "platformDashboard": "平台儀表板",
+    "overview": "Tandava 實例健康狀態與活動概覽。",
+    "activeStudios": "活躍工作室",
+    "totalUsers": "總使用者數",
+    "stripeStatus": "Stripe 狀態",
+    "errorRate": "錯誤率",
+    "connectSupabase": "連接 Supabase 以查看即時資料",
+    "acrossAllStudios": "所有工作室合計",
+    "webhookHealth": "Webhook 健康狀態",
+    "connectSentry": "連接 Sentry 以進行監控",
+    "setupChecklist": "設定檢查清單",
+    "supabaseConnected": "Supabase 已連接",
+    "stripeConfigured": "Stripe 已設定",
+    "emailConfigured": "郵件服務已設定",
+    "sentryConfigured": "Sentry 錯誤監控",
+    "setEnvVar": "請在 .env 中設定 {{key}}"
+  },
+
+  "studioManagement": "館主後台",
+  "owner": "館主"
+}
